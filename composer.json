@@ -1,0 +1,25 @@
+{
+    "name": "petervandam/homepage",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "webstylecenter",
+            "email": "petervandam24@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "twig/twig": "~1.0",
+        "pimple/pimple": "~3.0",
+        "doctrine/dbal": "^2.5",
+        "zendframework/zend-feed": "^2.7",
+        "zendframework/zend-http": "^2.5",
+        "nikic/fast-route": "^1.0"
+    }
+}

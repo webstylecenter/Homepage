@@ -8,9 +8,15 @@
 
 class UpdateFeeds
 {
-	public $feeds = array();
+	/**
+	 * @var array
+	 */
+	public $feeds = [];
 
-	public function __construct($feeds)
+	/**
+	 * @param array $feeds
+	 */
+	public function __construct(array $feeds)
 	{
 		$this->feeds = $feeds;
 	}

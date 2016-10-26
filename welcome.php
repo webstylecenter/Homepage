@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<title>Welcome</title>
-		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/weather.css">
+		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="assets/css/weather.css">
 		<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 		<script src='scripts/main.js'></script>
 		<!-- <meta http-equiv="refresh" content="1"> -->

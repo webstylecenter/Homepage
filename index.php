@@ -1,55 +1,43 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Homepage</title>
-		<link rel="stylesheet" href="/css/style.css">
-		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-		<script src='scripts/main.js'></script>
-		<!-- <meta http-equiv="refresh" content="1"> -->
-	</head>
-	<body>
-		<div class="topbar">
-			Peter van Dam's homepage
-		</div>
+<?php
 
-		<div class="mainContent">
-			<div class="list">
-				<div class="listItem" data-url="https://www.neowin.net/news/microsoft-has-run-out-of-lumia-950-stock-in-the-uk">
-					<p class="listTitle">Title of newsitem that has been imported from a feed</p>
-					<p class="listContent">A small description for around a few lines that shortly explains the content of the item for the user to make up it's mind if the article is interesting enough to click</p>
-				</div>
-				<div class="listItem" data-url="https://www.neowin.net/news/opera-41-introduces-faster-tab-startup-more-efficient-video-processing">
-					<p class="listTitle">Title of newsitem that has been imported from a feed</p>
-					<p class="listContent">A small description for around a few lines that shortly explains the content of the item for the user to make up it's mind if the article is interesting enough to click</p>
-				</div>
-				<div class="listItem" data-url="http://www.geenstijl.nl/mt/archieven/2016/10/mh17_live_kabinet_reageert_op.html">
-					<p class="listTitle">Title of newsitem that has been imported from a feed</p>
-					<p class="listContent">A small description for around a few lines that shortly explains the content of the item for the user to make up it's mind if the article is interesting enough to click</p>
-				</div>
-				<div class="listItem visited" data-url="">
-					<p class="listTitle">Title of newsitem that has been imported from a feed</p>
-					<p class="listContent">A small description for around a few lines that shortly explains the content of the item for the user to make up it's mind if the article is interesting enough to click</p>
-				</div>
-				<div class="listItem visited" data-url="">
-					<p class="listTitle">Title of newsitem that has been imported from a feed</p>
-					<p class="listContent">A small description for around a few lines that shortly explains the content of the item for the user to make up it's mind if the article is interesting enough to click</p>
-				</div>
-				<div class="listItem visited" data-url="">
-					<p class="listTitle">Title of newsitem that has been imported from a feed</p>
-					<p class="listContent">A small description for around a few lines that shortly explains the content of the item for the user to make up it's mind if the article is interesting enough to click</p>
-				</div>
-				<div class="listItem" data-url="">
-					<p class="listTitle">Title of newsitem that has been imported from a feed</p>
-					<p class="listContent">A small description for around a few lines that shortly explains the content of the item for the user to make up it's mind if the article is interesting enough to click</p>
-				</div>
-				<div class="listItem visited" data-url="">
-					<p class="listTitle">Title of newsitem that has been imported from a feed</p>
-					<p class="listContent">A small description for around a few lines that shortly explains the content of the item for the user to make up it's mind if the article is interesting enough to click</p>
-				</div>
-			</div>
-			<div class="contentContainer">
-				<iframe src="welcome.php" sandbox="allow-scripts allow-same-origin"></iframe>
-			</div>
-		</div>
-	</body>
-</html>
+require_once __DIR__ . '/vendor/autoload.php';
+
+$container = new \Pimple\Container();
+
+require_once __DIR__ . '/app/config.php';
+require_once __DIR__ . '/app/services.php';
+
+$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $routeCollector) use ($container) {
+    $routeCollector->addRoute('GET', '/', 'Home::index');
+});
+
+$httpMethod = $_SERVER['REQUEST_METHOD'];
+$uri = $_SERVER['REQUEST_URI'];
+
+if (false !== $pos = strpos($uri, '?')) {
+    $uri = substr($uri, 0, $pos);
+}
+
+$uri = rawurldecode($uri);
+
+$routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        // ... 404 Not Found
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $controllerAction = explode('::', $routeInfo[1]);
+        $controllerName = '\\Controller\\' . ucfirst($controllerAction[0]) . 'Controller';
+        $controller = new $controllerName;
+
+        $action = lcfirst($controllerAction[0]) . 'Action';
+
+        if ($controller instanceof \Controller\ContainerAwareInterface) {
+            $controller->setContainer($container);
+            $response = call_user_func_array(array($controller, $action), $routeInfo[2]);
+        }
+
+        break;
+}
+
+echo $response;

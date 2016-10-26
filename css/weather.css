@@ -9,7 +9,6 @@ html *:after { box-sizing: inherit; }
     margin: 0 auto;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    background-color: white;
     color:white;
 }
 
@@ -120,7 +119,6 @@ html *:after { box-sizing: inherit; }
     width: 3.75em;
     height: 3.75em;
     margin: 0.375em 0 0 -2em;
-    background: currentColor;
 }
 
 .rain:after {

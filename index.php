@@ -22,7 +22,7 @@
 					<p class="listTitle">Title of newsitem that has been imported from a feed</p>
 					<p class="listContent">A small description for around a few lines that shortly explains the content of the item for the user to make up it's mind if the article is interesting enough to click</p>
 				</div>
-				<div class="listItem" data-url="">
+				<div class="listItem" data-url="http://www.geenstijl.nl/mt/archieven/2016/10/mh17_live_kabinet_reageert_op.html">
 					<p class="listTitle">Title of newsitem that has been imported from a feed</p>
 					<p class="listContent">A small description for around a few lines that shortly explains the content of the item for the user to make up it's mind if the article is interesting enough to click</p>
 				</div>
@@ -48,7 +48,7 @@
 				</div>
 			</div>
 			<div class="contentContainer">
-				<iframe src="welcome.php"></iframe>
+				<iframe src="welcome.php" sandbox="allow-scripts allow-same-origin"></iframe>
 			</div>
 		</div>
 	</body>

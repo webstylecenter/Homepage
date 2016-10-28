@@ -14,7 +14,19 @@ class HomeController implements ContainerAwareInterface
     public function homeAction()
     {
         return $this->getTwig()->render('home/index.html.twig', [
-           'name' => 'Hello World!'
+            'title' => 'Homepage',
+            'subtitle'=> 'Peter van Dam\'s homepage',
+            'feeditems'=> [
+                [
+                    'title' => 'Test',
+                    'description' => 'Omschrijving',
+                    'url' => 'http://neowin.net'
+                ],[
+                    'title' => 'Test 2',
+                    'description' => 'Omschrijving 2',
+                    'url' => 'http://neowin.net'
+                ],
+            ]
         ]);
     }
 

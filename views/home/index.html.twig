@@ -1,6 +1,18 @@
 {% extends "base.html.twig" %}
 
-{% block content %}
-    {{ name }}
-{% endblock %}
+{% block body %}
+<div class="topbar">
+    {{ subtitle }}
+</div>
 
+<div class="mainContent">
+    {% block content %}
+    {% endblock %}
+
+    {% include 'home/newsfeed.html.twig' %}
+
+    <div class="contentContainer">
+        <iframe src="welcome.php" sandbox="allow-scripts allow-same-origin"></iframe>
+    </div>
+</div>
+{% endblock %}

@@ -17,8 +17,12 @@ $container['database'] = function($container) {
 $container['twig'] = function ($container) {
     $loader = new Twig_Loader_Filesystem($container['config']['twig']['viewPath']);
 
-    return new Twig_Environment($loader, array(
+    $twig = new Twig_Environment($loader, array(
         'cache' => $container['config']['twig']['cachePath'],
         'debug' => $container['debug']
     ));
+
+    $twig->addExtension(new Twig_Extension_Debug());
+    return $twig;
+
 };

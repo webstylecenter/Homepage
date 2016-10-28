@@ -1,18 +1,19 @@
 {% extends "base.html.twig" %}
 
+{% block title %}Homepage{% endblock %}
+
 {% block body %}
-<div class="topbar">
-    {{ subtitle }}
-</div>
+<div class="topbar">Peter van Dam's Homepage</div>
 
 <div class="mainContent">
     {% block content %}
     {% endblock %}
 
-    {% include 'home/newsfeed.html.twig' %}
-
+    {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems} %}
     <div class="contentContainer">
-        <iframe src="welcome.php" sandbox="allow-scripts allow-same-origin"></iframe>
+        <iframe src="/welcome" sandbox="allow-scripts allow-same-origin"></iframe>
     </div>
 </div>
 {% endblock %}
+
+

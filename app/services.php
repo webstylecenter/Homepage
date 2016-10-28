@@ -1,28 +1,40 @@
 <?php
 
-$container['database'] = function($container) {
-    $config = new \Doctrine\DBAL\Configuration();
 
-    $connectionParams = [
-        'dbname' => $container['config']['database']['database'],
-        'user' => $container['config']['database']['username'],
-        'password' => $container['config']['database']['password'],
-        'host' => $container['config']['database']['host'],
-        'driver' => $container['config']['database']['driver'],
-    ];
+$app->register(new Silex\Provider\DoctrineServiceProvider(), [
+    'dbs.options' => array(
+        'main' => array(
+            'dbname'   => $app['config']['database']['database'],
+            'user'     => $app['config']['database']['username'],
+            'password' => $app['config']['database']['password'],
+            'host'     => $app['config']['database']['host'],
+            'driver'   => $app['config']['database']['driver'],
+            'charset'  => 'utf8mb4',
+        ),
+    ),
+]);
 
-    return \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
-};
+$app->register(new Silex\Provider\TwigServiceProvider(), [
+    'twig.path' => __DIR__ . '/../views',
+]);
 
-$container['twig'] = function ($container) {
-    $loader = new Twig_Loader_Filesystem($container['config']['twig']['viewPath']);
-
-    $twig = new Twig_Environment($loader, array(
-        'cache' => $container['config']['twig']['cachePath'],
-        'debug' => $container['debug']
-    ));
-
-    $twig->addExtension(new Twig_Extension_Debug());
+$app['twig'] = $app->extend('twig', function(\Twig_Environment $twig, $app) {
+    $twig->addExtension(new Twig_Extensions_Extension_Text());
     return $twig;
+});
 
-};
+$app->register(new \ServiceProvider\FeedServiceProvider());
+
+//
+//$container['twig'] = function ($container) {
+//    $loader = new Twig_Loader_Filesystem($container['config']['twig']['viewPath']);
+//
+//    $twig = new Twig_Environment($loader, array(
+//        'cache' => $container['config']['twig']['cachePath'],
+//        'debug' => $container['debug']
+//    ));
+//
+//    $twig->addExtension(new Twig_Extension_Debug());
+//    return $twig;
+//
+//};

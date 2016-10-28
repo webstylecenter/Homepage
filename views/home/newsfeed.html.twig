@@ -1,14 +1,9 @@
 <div class="list">
 
-    {{ dump(feeditems) }}
-
-    {% for item in feeditems %}
-
-        <div class="listItem" data-url="{{ item.url }}">
+    {% for item in feedItems %}
+        <div class="listItem {{ item.viewed ? 'used' : '' }}" data-url="{{ item.url }}">
             <p class="listTitle">{{ item.title }}</p>
-            <p class="listContent">{{ item.description }}</p>
+            <p class="listContent">{{ item.description|truncate(120, true) }}</p>
         </div>
-
     {% endfor %}
-
 </div>

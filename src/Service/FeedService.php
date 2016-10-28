@@ -4,11 +4,14 @@ namespace Service;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDOException;
+use Entity\FeedItem;
 use Service\Adapter\FeedAdapterInterface;
+use Zend\Feed\Reader\Extension\Atom\Feed;
 use Zend\Feed\Reader\Reader;
 
 class FeedService
 {
+    const DEFAULT_ITEM_LIMIT = 50;
     /**
      * @var FeedAdapterInterface[]
      */
@@ -66,4 +69,33 @@ class FeedService
             }
         }
     }
+
+    /**
+     * @param int $limit
+     *
+     * @return FeedItem[]
+     */
+    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT)
+    {
+        $feedItems = $this->database->fetchAll(
+            'SELECT * FROM feed_data ORDER BY dateAdded DESC LIMIT ?',
+            [$limit],
+            [\PDO::PARAM_INT]
+        );
+
+        return array_map(function($feedItem) {
+            $feedItemInstance = new FeedItem(
+                $feedItem['id'],
+                $feedItem['title'],
+                $feedItem['description'],
+                $feedItem['url']
+            );
+
+            $feedItemInstance->setViewed($feedItem['viewed']);
+            $feedItemInstance->setDateAdded(new \DateTime($feedItem['dateAdded']));
+            return $feedItemInstance;
+
+        }, $feedItems);
+    }
+
 }

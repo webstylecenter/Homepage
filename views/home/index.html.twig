@@ -11,7 +11,7 @@
 
     {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems} %}
     <div class="contentContainer">
-        <iframe src="/welcome" sandbox="allow-scripts allow-same-origin"></iframe>
+        <iframe src="/welcome" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock"></iframe>
     </div>
 </div>
 {% endblock %}

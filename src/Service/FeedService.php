@@ -106,7 +106,7 @@ class FeedService
             [\PDO::PARAM_INT]
         );
 
-        return array_map(function($feedItem) {
+        $feed = array_map(function($feedItem) {
             $feedItemInstance = new FeedItem(
                 $feedItem['id'],
                 $feedItem['title'],
@@ -119,6 +119,13 @@ class FeedService
             return $feedItemInstance;
 
         }, $feedItems);
+
+        $this->markAllViewed();
+        return $feed;
     }
 
+    public function markAllViewed()
+    {
+        $this->database->update('feed_data', ['viewed' => 1], ['viewed' => 0]);
+    }
 }

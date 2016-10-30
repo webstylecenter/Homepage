@@ -1,6 +1,5 @@
 <?php
 
-
 $app->register(new Silex\Provider\DoctrineServiceProvider(), [
     'dbs.options' => array(
         'main' => array(
@@ -24,17 +23,3 @@ $app['twig'] = $app->extend('twig', function(\Twig_Environment $twig, $app) {
 });
 
 $app->register(new \ServiceProvider\FeedServiceProvider());
-
-//
-//$container['twig'] = function ($container) {
-//    $loader = new Twig_Loader_Filesystem($container['config']['twig']['viewPath']);
-//
-//    $twig = new Twig_Environment($loader, array(
-//        'cache' => $container['config']['twig']['cachePath'],
-//        'debug' => $container['debug']
-//    ));
-//
-//    $twig->addExtension(new Twig_Extension_Debug());
-//    return $twig;
-//
-//};

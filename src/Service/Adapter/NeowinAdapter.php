@@ -9,6 +9,7 @@ use Zend\Feed\Reader\ReaderImportInterface;
 class NeowinAdapter implements FeedAdapterInterface
 {
     const FEED_URL = 'http://feeds.feedburner.com/neowin-main';
+    const NAME = 'Neowin';
 
     /**
      * @var ReaderImportInterface $reader
@@ -40,11 +41,17 @@ class NeowinAdapter implements FeedAdapterInterface
             $map[] = new FeedItem(
                 $entry->getId(),
                 $entry->getTitle(),
-                $content
+                $content,
+                $entry->getLink()
             );
         }
 
         return $map;
 	}
+
+	public function getName()
+    {
+        return self::NAME;
+    }
 }
 

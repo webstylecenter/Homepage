@@ -58,16 +58,39 @@ class FeedService
             $feedItemList = $adapter->read();
 
             foreach ($feedItemList as $feedItem) {
-                try {
-                    $this->database->insert('feedItem', [
-                        'id' => $feedItem->getId(),
-                        //..
-                    ]);
-                } catch(PDOException $e) {
-                    // do nothing.
+                if ($this->feedItemExists($feedItem)) {
+                    try {
+                        $this->database->insert('feed_data  ', [
+                            'guid' => $feedItem->getId(),
+                            'site' => $adapter->getName(),
+                            'title' => $feedItem->getTitle(),
+                            'description' => $feedItem->getDescription(),
+                            'url' => $feedItem->getUrl(),
+                            'dateAdded' => date('Y-m-d H:i:s'),
+                            'viewed' => 0
+                        ]);
+                    } catch(PDOException $e) {
+                        // do nothing.
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * @param $feedItem
+     *
+     * @return bool
+     */
+    public function feedItemExists($feedItem)
+    {
+        $results = $this->database->fetchAll(
+            'SELECT * FROM feed_data WHERE guid = ?',
+            [$feedItem->getId()],
+            [\PDO::PARAM_STR]
+        );
+
+        return (count($results) == 0 ? true : false);
     }
 
     /**

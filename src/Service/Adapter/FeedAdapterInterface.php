@@ -16,4 +16,9 @@ interface FeedAdapterInterface
 	 * @return FeedItem[]
 	 */
 	public function read();
+
+    /**
+     * @return string
+     */
+    public function getName();
 }

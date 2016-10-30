@@ -38,7 +38,7 @@ class GamersnetAdapter implements FeedAdapterInterface
 
             'sslverifypeer' => false,
             'sslallowselfsigned' => true,
-            'sslusecontext'=>true,
+            'sslusecontext'=>false,
 
             'ssl' => array(
                 'verify_peer' => false,

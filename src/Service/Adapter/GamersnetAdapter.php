@@ -5,10 +5,12 @@ namespace Service\Adapter;
 use Entity\FeedItem;
 use Zend\Feed\Reader\Feed\FeedInterface;
 use Zend\Feed\Reader\ReaderImportInterface;
+use Zend\Feed\Reader\Reader as ZendFeedReader;
+use Zend\Http\Client as ZendHttpClient;
 
 class GamersnetAdapter implements FeedAdapterInterface
 {
-    const FEED_URL = 'http://www.gamersnet.nl/rssnews.xml';
+    const FEED_URL = 'https://www.gamersnet.nl/rssnews.xml';
     const NAME = 'Gamersnet';
 
     /**
@@ -29,6 +31,26 @@ class GamersnetAdapter implements FeedAdapterInterface
      */
     public function read()
     {
+
+        $httpClientOptions = array(
+            'adapter'      => 'Zend\Http\Client\Adapter\Socket',
+            'persistent'=>false,
+
+            'sslverifypeer' => false,
+            'sslallowselfsigned' => true,
+            'sslusecontext'=>true,
+
+            'ssl' => array(
+                'verify_peer' => false,
+                'allow_self_signed' => true,
+                'capture_peer_cert' => true,
+            ),
+
+            'useragent' => 'Feed Reader',
+        );
+
+        ZendFeedReader::setHttpClient(new ZendHttpClient(null, $httpClientOptions));
+
         $feed = $this->reader->import(self::FEED_URL);
 
         $map = [];

@@ -31,26 +31,8 @@ class IdownloadblogAdapter implements FeedAdapterInterface
      */
     public function read()
     {
-        $httpClientOptions = array(
-            'adapter'      => 'Zend\Http\Client\Adapter\Socket',
-            'persistent'=>false,
-
-            'sslverifypeer' => false,
-            'sslallowselfsigned' => true,
-            'sslusecontext'=>false,
-
-            'ssl' => array(
-                'verify_peer' => false,
-                'allow_self_signed' => true,
-                'capture_peer_cert' => true,
-            ),
-
-            'useragent' => 'Feed Reader',
-        );
-
-        ZendFeedReader::setHttpClient(new ZendHttpClient(null, $httpClientOptions));
-
-        $feed = $this->reader->import(self::FEED_URL);
+        $feedSrc = file_get_contents(self::FEED_URL);
+        $feed = $this->reader->importString($feedSrc);
 
         $map = [];
         foreach ($feed as $entry) {

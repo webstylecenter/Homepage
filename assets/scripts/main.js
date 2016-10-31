@@ -18,6 +18,4 @@ $( document ).ready(function() {
         $('.pageLinkToUrl').attr('href', url);
     });
 
-
-
 });

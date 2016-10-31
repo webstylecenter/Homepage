@@ -69,7 +69,7 @@ body {
     background: linear-gradient(to right, #eeeeee 0%,#aad3e0 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 .used .listTitle, .used .listContent {
-    color: #b6b6b6;
+    color: #8a8a8a;
 }
 .selected .listTitle, .selected .listContent {
     color: #000;

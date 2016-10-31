@@ -1,7 +1,6 @@
 <div class="list">
-
     {% for item in feedItems %}
-        <div class="listItem {{ item.viewed ? 'used' : '' }}" data-url="{{ item.url }}">
+        <div class="listItem {{ item.viewed ? 'used ' : '' }}{{ item.site }}" data-url="{{ item.url }}">
             <p class="listTitle">{{ item.title|striptags }}</p>
             <p class="listContent">{{ item.description|truncate(120, true) }}</p>
         </div>

@@ -35,18 +35,24 @@ class FeedItem
     protected $viewed = false;
 
     /**
+     * @var string
+     */
+    protected $site;
+
+    /**
      * @param int $id
      * @param string $title
      * @param string $description
      * @param string $url
      */
-    public function __construct($id, $title, $description, $url)
+    public function __construct($id, $title, $description, $url, $site)
     {
         $this->id          = $id;
         $this->title       = $title;
         $this->description = $description;
         $this->url         = $url;
         $this->dateAdded   = new \DateTime;
+        $this->site        = $site;
     }
 
     /**
@@ -143,5 +149,21 @@ class FeedItem
     public function setViewed($viewed)
     {
         $this->viewed = $viewed;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    /**
+     * @param string $site
+     */
+    public function setSite($site)
+    {
+        $this->site = $site;
     }
 }

@@ -60,6 +60,7 @@ body {
 .listItem {
     border-bottom:1px solid gray;
     padding:10px;
+    border-left:5px solid black;
 }
 .visited .listTitle, .visited .listContent {
     color: #b6b6b6;
@@ -92,6 +93,14 @@ iframe {
     height:100%;
 }
 
+/* Colors */
+.iDownloadBlog { border-color:gray; }
+.GeenStijl { border-left-color: #f09; }
+.RTLnieuws { border-left-color: #4c9ac1; }
+.Gamersnet { border-left-color: #0d265e; }
+.MajorNelson { border-left-color: #118411; }
+.NuTech { border-left-color: darkgoldenrod; }
+.Neowin { border-left-color: #1e5078;}
 
 /* Error Page */
 .errorPage {

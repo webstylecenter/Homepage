@@ -111,7 +111,8 @@ class FeedService
                 $feedItem['id'],
                 $feedItem['title'],
                 $feedItem['description'],
-                $feedItem['url']
+                $feedItem['url'],
+                $feedItem['site']
             );
 
             $feedItemInstance->setViewed($feedItem['viewed']);

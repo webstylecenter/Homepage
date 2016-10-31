@@ -42,7 +42,8 @@ class NeowinAdapter implements FeedAdapterInterface
                 $entry->getId(),
                 $entry->getTitle(),
                 $content,
-                $entry->getLink()
+                $entry->getLink(),
+                self::NAME
             );
         }
 

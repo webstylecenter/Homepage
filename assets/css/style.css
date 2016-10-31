@@ -11,6 +11,23 @@ body {
     background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 
 }
+.title {
+    display:inline-block;
+}
+.navbar {
+    display:inline-block;
+    margin-left:280px;
+    font-style:italic;
+    color:gray;
+}
+.navbar a {
+    color:gray;
+    text-decoration: none;
+}
+.navbar a:hover {
+    color:black;
+    text-decoration: black;
+}
 .mainContent {
     position: absolute;
     top:37px;

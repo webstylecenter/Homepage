@@ -14,6 +14,10 @@ $( document ).ready(function() {
 
         console.log('Going to: ' + url);
         $('iframe').attr('src', url);
+        $('.pageLinkToUrl').text(url);
+        $('.pageLinkToUrl').attr('href', url);
     });
+
+
 
 });

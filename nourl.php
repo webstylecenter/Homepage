@@ -2,9 +2,9 @@
 <html>
 	<head>
 		<title>No url</title>
-		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="assets/css/style.css">
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-		<script src='scripts/main.js'></script>
+		<script src='assets/scripts/main.js'></script>
 		<!-- <meta http-equiv="refresh" content="1"> -->
 	</head>
 	<body>

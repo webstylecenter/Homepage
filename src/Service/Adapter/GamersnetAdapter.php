@@ -3,10 +3,9 @@
 namespace Service\Adapter;
 
 use Entity\FeedItem;
+use Guzzle\GuzzleClient;
 use Zend\Feed\Reader\Feed\FeedInterface;
 use Zend\Feed\Reader\ReaderImportInterface;
-use Zend\Feed\Reader\Reader as ZendFeedReader;
-use Zend\Http\Client as ZendHttpClient;
 
 class GamersnetAdapter implements FeedAdapterInterface
 {
@@ -32,8 +31,8 @@ class GamersnetAdapter implements FeedAdapterInterface
     public function read()
     {
 
-        $feedSrc = file_get_contents(self::FEED_URL);
-        $feed = $this->reader->importString($feedSrc);
+        $client = new GuzzleClient();
+        $feed = $this->reader->importRemoteFeed(self::FEED_URL, $client);
 
         $map = [];
         foreach ($feed as $entry) {

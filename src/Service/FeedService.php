@@ -59,19 +59,21 @@ class FeedService
 
             foreach ($feedItemList as $feedItem) {
                 if ($this->feedItemExists($feedItem)) {
-                    try {
-                        $this->database->insert('feed_data  ', [
-                            'guid' => $feedItem->getId(),
-                            'site' => $adapter->getName(),
-                            'title' => $feedItem->getTitle(),
-                            'description' => $feedItem->getDescription(),
-                            'url' => $feedItem->getUrl(),
-                            'dateAdded' => date('Y-m-d H:i:s'),
-                            'viewed' => 0
-                        ]);
-                    } catch(PDOException $e) {
-                        // do nothing.
-                    }
+                    continue;
+                }
+
+                try {
+                    $this->database->insert('feed_data  ', [
+                        'guid' => $feedItem->getId(),
+                        'site' => $adapter->getName(),
+                        'title' => $feedItem->getTitle(),
+                        'description' => $feedItem->getDescription(),
+                        'url' => $feedItem->getUrl(),
+                        'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),
+                        'viewed' => 0
+                    ]);
+                } catch(PDOException $e) {
+                    // do nothing.
                 }
             }
         }
@@ -84,13 +86,12 @@ class FeedService
      */
     public function feedItemExists($feedItem)
     {
-        $results = $this->database->fetchAll(
-            'SELECT * FROM feed_data WHERE guid = ?',
+        return !!$this->database->fetchColumn(
+            'SELECT COUNT(*) FROM feed_data WHERE guid = ? LIMIT 1',
             [$feedItem->getId()],
+            0,
             [\PDO::PARAM_STR]
         );
-
-        return (count($results) == 0 ? true : false);
     }
 
     /**

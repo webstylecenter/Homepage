@@ -11,7 +11,7 @@ use Zend\Feed\Reader\Reader;
 
 class FeedService
 {
-    const DEFAULT_ITEM_LIMIT = 50;
+    const DEFAULT_ITEM_LIMIT = 100;
     /**
      * @var FeedAdapterInterface[]
      */

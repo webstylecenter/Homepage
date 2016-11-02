@@ -1,0 +1,33 @@
+<?php
+
+$app['debug'] = true;
+
+$app['config'] = [
+    'database' => [
+        'driver' => 'pdo_mysql',
+        'host' => 'localhost',
+        'username' => '',
+        'password' => '',
+        'database' => 'homepage'
+    ],
+    'twig' => [
+        'viewPath' => __DIR__ . '/../views',
+        'cachePath' => __DIR__ . '/../var/cache/twig'
+    ]
+];
+
+$app['users'] = [
+    'peter' => 'plex8432'
+];
+
+$app['feed.adapters'] = [
+    'neowin' => \Service\Adapter\NeowinAdapter::class,
+    'nuTech' => \Service\Adapter\NuTechAdapter::class,
+    'Artiestennieuws' => \Service\Adapter\ArtiestennieuwsAdapter::class,
+    'Geenstijl' => \Service\Adapter\GeenstijlAdapter::class,
+    'Gamersnet' => \Service\Adapter\GamersnetAdapter::class,
+    'iDownloadBlog' => \Service\Adapter\IdownloadblogAdapter::class,
+    'MajorNelson' => \Service\Adapter\MajorNelsonAdapter::class,
+    'RTLnieuws' => \Service\Adapter\RTLnieuwsAdapter::class,
+    'Dumpert' => \Service\Adapter\DumpertAdapter::class,
+];

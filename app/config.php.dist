@@ -13,7 +13,12 @@ $app['config'] = [
     'twig' => [
         'viewPath' => __DIR__ . '/../views',
         'cachePath' => __DIR__ . '/../var/cache/twig'
-    ]
+    ],
+    'weatherApi' => [
+        'key' => '',
+        'location' => 'Eindhoven,NL',
+        'units' => 'metric',
+    ],
 ];
 
 $app['users'] = [

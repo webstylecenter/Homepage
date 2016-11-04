@@ -13,6 +13,12 @@
                 <div class="rain"></div>
             </div>
         </div>
-        <p>Het word 4 graden</p>
+
+        <p>The weather currently is {{ forecast.today.type }}, with a tempature of {{ forecast.temp }}&deg;C.<br />
+        The maximum will be {{ forecast.temp_max }}&deg;C with a low of: {{ forecast.temp_min }}&deg;C</p>
+
+        {% if forecast.tomorrow.type != 0 %}
+            <p>Tomorrow the weather will be: {{ forecast.tomorrow.description }}</p>
+        {% endif %}
     </div>
 {% endblock %}

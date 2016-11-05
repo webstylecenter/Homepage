@@ -5,13 +5,58 @@
     <div class="welcomePage">
         <h1>Welkom</h1>
         <div id="weatherIcon">
-            <div class="icon sun-shower">
-                <div class="cloud"></div>
-                <div class="sun">
-                    <div class="rays"></div>
+
+            {% if 'drizzle' in forecast.today.type|lower %}
+                <div class="icon sun-shower">
+                    <div class="cloud"></div>
+                    <div class="sun">
+                        <div class="rays"></div>
+                    </div>
+                    <div class="rain"></div>
                 </div>
-                <div class="rain"></div>
-            </div>
+            {% endif %}
+
+            {% if 'thunderstorm' in forecast.today.type|lower %}
+                <div class="icon thunder-storm">
+                    <div class="cloud"></div>
+                    <div class="lightning">
+                        <div class="bolt"></div>
+                        <div class="bolt"></div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if 'rain' in forecast.today.type|lower %}
+                <div class="icon rainy">
+                    <div class="cloud"></div>
+                    <div class="rain"></div>
+                </div>
+            {% endif %}
+
+            {% if 'snow' in forecast.today.type|lower %}
+                <div class="icon flurries">
+                    <div class="cloud"></div>
+                    <div class="snow">
+                        <div class="flake"></div>
+                        <div class="flake"></div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if 'clear' in forecast.today.type|lower %}
+                <div class="icon sunny">
+                    <div class="sun">
+                        <div class="rays"></div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if 'clouds' in forecast.today.type|lower or 'mist' in forecast.today.type|lower %}
+                <div class="icon cloudy">
+                    <div class="cloud"></div>
+                    <div class="cloud"></div>
+                </div>
+            {% endif %}
         </div>
 
         <p>The weather currently is {{ forecast.today.type }}, with a tempature of {{ forecast.temp }}&deg;C.<br />

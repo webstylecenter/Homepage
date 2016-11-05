@@ -10,7 +10,7 @@
                 <div class="icon sun-shower">
                     <div class="cloud"></div>
                     <div class="sun">
-                        <div class="rays"></div>
+                        {% if "now"|date("H") < 20 and "now"|date("H") > 6 %}<div class="rays"></div>{% endif %}
                     </div>
                     <div class="rain"></div>
                 </div>
@@ -46,7 +46,7 @@
             {% if 'clear' in forecast.today.type|lower %}
                 <div class="icon sunny">
                     <div class="sun">
-                        <div class="rays"></div>
+                        {% if "now"|date("H") < 20 and "now"|date("H") > 6 %}<div class="rays"></div>{% endif %}
                     </div>
                 </div>
             {% endif %}

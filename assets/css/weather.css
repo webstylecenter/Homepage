@@ -11,6 +11,13 @@ html *:after { box-sizing: inherit; }
     text-align: center;
     color:white;
 }
+.tempLarge {
+    margin:auto;
+    font-size:24pt;
+    border-bottom:1px solid black;
+    width:400px;
+    padding-bottom:10px;
+}
 
 .icon {
     position: relative;

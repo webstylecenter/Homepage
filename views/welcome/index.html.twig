@@ -3,7 +3,7 @@
 {% block body %}
     <link rel="stylesheet" href="/assets/css/weather.css">
     <div class="welcomePage">
-        <h1>Welkom</h1>
+        <h1>Welcome!</h1>
         <div id="weatherIcon">
 
             {% if 'drizzle' in forecast.today.type|lower %}
@@ -57,6 +57,10 @@
                     <div class="cloud"></div>
                 </div>
             {% endif %}
+        </div>
+
+        <div class="tempLarge">
+            {{ forecast.temp }}&deg;C
         </div>
 
         <p>The weather currently is {{ forecast.today.type }}, with a tempature of {{ forecast.temp }}&deg;C.<br />

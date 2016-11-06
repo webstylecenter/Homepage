@@ -4,8 +4,15 @@
 
 {% block body %}
 <div class="topbar">
-    <div class="title">Peter van Dam's Homepage</div>
+    <div class="title"><a href="#">Peter van Dam's Homepage</a></div>
     <div class="navbar"><a href="#" class="pageLinkToUrl" target="_blank"></a></div>
+    <div class="totalbar">
+        <div class="feedCounter">
+            {% for item in feedItemTotals %}
+                <div class="feedCounterItem">{{ item.site }}: <span class="itemCount">{{ item.count }}</span></div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
 <div class="mainContent">
@@ -14,9 +21,8 @@
 
     {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems} %}
     <div class="contentContainer">
-        <iframe src="/welcome" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock"></iframe>
+        <iframe src="/welcome" sandbox="allow-scripts allow-same-origin allow-forms allow-popups
+        allow-pointer-lock"></iframe>
     </div>
 </div>
 {% endblock %}
-
-

@@ -18,4 +18,9 @@ $( document ).ready(function() {
         $('.pageLinkToUrl').attr('href', url);
     });
 
+    $('.title a').click(function() {
+        $('iframe').attr('src', '/welcome/');
+        $('.pageLinkToUrl').text('');
+    });
+
 });

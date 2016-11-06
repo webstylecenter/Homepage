@@ -5,6 +5,7 @@ $app->match('/', function() use($app) {
     $feedService = $app['feedService'];
 
     return $app['twig']->render('home/index.html.twig', [
-        'feedItems'=> $feedService->getFeedItems()
+        'feedItems'=> $feedService->getFeedItems(),
+        'feedItemTotals'=> $feedService->getFeedItemTotals(),
     ]);
 });

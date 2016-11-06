@@ -125,6 +125,11 @@ class FeedService
         return $feed;
     }
 
+    public function getFeedItemTotals()
+    {
+        return $this->database->fetchAll('SELECT site,COUNT(*) as count FROM feed_data GROUP BY site ORDER BY count DESC;');
+    }
+
     public function markAllViewed()
     {
         $this->database->update('feed_data', ['viewed' => 1], ['viewed' => 0]);

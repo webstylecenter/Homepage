@@ -14,10 +14,9 @@ $app['config'] = [
         'viewPath' => __DIR__ . '/../views',
         'cachePath' => __DIR__ . '/../var/cache/twig'
     ],
-    'weatherApi' => [
-        'key' => '',
+    'openWeatherMap' => [
+        'key' => '1136b45e2af4fde1cd9cd208ef17cb37',
         'location' => 'Eindhoven,NL',
-        'units' => 'metric',
     ],
 ];
 
@@ -26,13 +25,15 @@ $app['users'] = [
 ];
 
 $app['feed.adapters'] = [
-    'neowin' => \Service\Adapter\NeowinAdapter::class,
-    'nuTech' => \Service\Adapter\NuTechAdapter::class,
-    'Artiestennieuws' => \Service\Adapter\ArtiestennieuwsAdapter::class,
-    'Geenstijl' => \Service\Adapter\GeenstijlAdapter::class,
-    'Gamersnet' => \Service\Adapter\GamersnetAdapter::class,
-    'iDownloadBlog' => \Service\Adapter\IdownloadblogAdapter::class,
-    'MajorNelson' => \Service\Adapter\MajorNelsonAdapter::class,
-    'RTLnieuws' => \Service\Adapter\RTLnieuwsAdapter::class,
-    'Dumpert' => \Service\Adapter\DumpertAdapter::class,
+    'neowin' => \Service\Adapter\Feed\NeowinAdapter::class,
+    'nuTech' => \Service\Adapter\Feed\NuTechAdapter::class,
+    'Artiestennieuws' => \Service\Adapter\Feed\ArtiestennieuwsAdapter::class,
+    'Geenstijl' => \Service\Adapter\Feed\GeenstijlAdapter::class,
+    'Gamersnet' => \Service\Adapter\Feed\GamersnetAdapter::class,
+    'iDownloadBlog' => \Service\Adapter\Feed\IdownloadblogAdapter::class,
+    'MajorNelson' => \Service\Adapter\Feed\MajorNelsonAdapter::class,
+    'RTLnieuws' => \Service\Adapter\Feed\RTLnieuwsAdapter::class,
+    'Dumpert' => \Service\Adapter\Feed\DumpertAdapter::class,
 ];
+
+$app['weather.adapter'] = \Service\Adapter\Weather\OpenWeatherMap::class;

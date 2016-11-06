@@ -3,8 +3,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    {{ forecast.current.type }}
     <link rel="stylesheet" href="/assets/css/weather.css">
     <div class="welcomePage">
         <h1>Welcome!</h1>
@@ -67,14 +65,16 @@
             {{ forecast.current.temperature }}&deg;C
         </div>
 
-        <p>The weather currently is {{ forecast.current.type }}, with a tempature of {{ forecast.current.temperature }}&deg;C
-            .<br />
-        The maximum will be {{ forecast.current.maxTemperature }}&deg;C with a low of: {{ forecast.current.minTemperature }}&deg;
-            C</p>
+        <p>The weather currently is {{ forecast.current.type }}, with a tempature of {{ forecast.current.temperature }}&deg;C<br />
+        The maximum will be {{ forecast.current.maxTemperature }}&deg;C with a low of: {{ forecast.current.minTemperature }}&deg;C</p>
 
-        {% set tomorrow = forecast.upcoming|first %}
-
-        <p>Tomorrow the weather will be: {{ tomorrow.type }}, with a max temperature of: {{ tomorrow.maxTemperature }}&deg;C</p>
-
+        <div class="weekForecast">
+            {% for weatherDay in  forecast.upcoming %}
+                <div class="weatherDay">
+                    <div class="weatherIcon icon_{{ weatherDay.type }}"></div>
+                    <div class="weatherDayMax">{{ weatherDay.maxTemperature }}&deg;C</div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -231,6 +231,47 @@ html *:after { box-sizing: inherit; }
     opacity: 0.4;
     animation: spin 16s linear infinite reverse;
 }
+.weatherDay {
+    display:inline-block;
+    border-right:1px solid black;
+    padding-right:10px;
+    width:150px;
+    box-sizing: border-box;
+    height:100px;
+    margin-top: 50px;
+}
+.weekForecast > .weatherDay:last-child {
+    border-right:0;
+    padding-right:0;
+}
+.weatherDayMax {
+    margin-top:10px;
+    font-size:14pt;
+    font-weight:lighter;
+}
+.weatherIcon {
+    height:64px;
+    width:64px;
+    margin:auto;
+}
+.icon_rain {
+    background-image:url('../images/rain.png');
+}
+.icon_cloud {
+    background-image:url('../images/cloud.png');
+}
+.icon_partly_cloud {
+    background-image:url('../images/partly_cloud.png');
+}
+.icon_snow {
+    background-image:url('../images/snow.png');
+}
+.icon_sun {
+    background-image:url('../images/sun.png');
+}
+.icon_thunder {
+    background-image:url('../images/thunder.png');
+}
 
 
 /* Animations */

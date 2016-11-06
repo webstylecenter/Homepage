@@ -37,16 +37,16 @@ class OpenWeatherMap implements WeatherAdapterInterface
     {
         $weather = json_decode(file_get_contents($this->weatherUrl), true);
         $forecast = json_decode(file_get_contents($this->forecastUrl), true);
-        $now = new \DateTime();
+        //$now = new \DateTime();
 
         $weatherForecastList = new WeatherForecastList();
         $weatherForecastList->setCurrent($this->mapForecast($weather));
 
         foreach ($forecast['list'] as $item) {
             $date = new \DateTime($item['dt_txt']);
-            if ($date->format('Y-m-d') === $now->format('Y-m-d')) {
-                continue;
-            }
+            //if ($date->format('Y-m-d') === $now->format('Y-m-d')) {
+            //    continue;
+            //}
 
             if ($date->format('H') !== '15') {
                 continue;

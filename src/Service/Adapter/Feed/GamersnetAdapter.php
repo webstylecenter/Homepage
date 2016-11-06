@@ -1,15 +1,16 @@
 <?php
 
-namespace Service\Adapter;
+namespace Service\Adapter\Feed;
 
 use Entity\FeedItem;
+use Guzzle\GuzzleClient;
 use Zend\Feed\Reader\Feed\FeedInterface;
 use Zend\Feed\Reader\ReaderImportInterface;
 
-class NuTechAdapter implements FeedAdapterInterface
+class GamersnetAdapter implements FeedAdapterInterface
 {
-    const FEED_URL = 'http://www.nu.nl/rss/tech';
-    const NAME = 'NuTech';
+    const FEED_URL = 'https://www.gamersnet.nl/rssnews.xml';
+    const NAME = 'Gamersnet';
 
     /**
      * @var ReaderImportInterface $reader
@@ -29,7 +30,9 @@ class NuTechAdapter implements FeedAdapterInterface
      */
     public function read()
     {
-        $feed = $this->reader->import(self::FEED_URL);
+
+        $client = new GuzzleClient();
+        $feed = $this->reader->importRemoteFeed(self::FEED_URL, $client);
 
         $map = [];
         foreach ($feed as $entry) {

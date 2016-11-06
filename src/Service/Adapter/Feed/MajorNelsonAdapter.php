@@ -1,17 +1,15 @@
 <?php
 
-namespace Service\Adapter;
+namespace Service\Adapter\Feed;
 
 use Entity\FeedItem;
 use Zend\Feed\Reader\Feed\FeedInterface;
 use Zend\Feed\Reader\ReaderImportInterface;
-use Zend\Feed\Reader\Http\Client;
 
-
-class ArtiestennieuwsAdapter implements FeedAdapterInterface
+class MajorNelsonAdapter implements FeedAdapterInterface
 {
-    const FEED_URL = 'http://www.artiestennieuws.nl/feed/';
-    const NAME = 'Artiesten Nieuws';
+    const FEED_URL = 'http://feeds.feedburner.com/MajorNelson';
+    const NAME = 'MajorNelson';
 
     /**
      * @var ReaderImportInterface $reader
@@ -31,9 +29,7 @@ class ArtiestennieuwsAdapter implements FeedAdapterInterface
      */
     public function read()
     {
-        // TODO: Use ClientInterface to parse feed the usual way
-        $feedSrc = file_get_contents(self::FEED_URL);
-        $feed = $this->reader->importString($feedSrc);
+        $feed = $this->reader->import(self::FEED_URL);
 
         $map = [];
         foreach ($feed as $entry) {

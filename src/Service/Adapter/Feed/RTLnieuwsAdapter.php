@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\Adapter;
+namespace Service\Adapter\Feed;
 
 use Entity\FeedItem;
 use Zend\Feed\Reader\Feed\FeedInterface;

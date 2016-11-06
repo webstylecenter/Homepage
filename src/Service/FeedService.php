@@ -5,7 +5,7 @@ namespace Service;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDOException;
 use Entity\FeedItem;
-use Service\Adapter\FeedAdapterInterface;
+use Service\Adapter\Feed\FeedAdapterInterface;
 use Zend\Feed\Reader\Reader;
 
 class FeedService

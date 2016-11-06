@@ -4,7 +4,7 @@ namespace ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Service\weatherService;
+use Service\WeatherService;
 
 class WeatherServiceProvider implements ServiceProviderInterface
 {
@@ -15,8 +15,7 @@ class WeatherServiceProvider implements ServiceProviderInterface
     public function register(Container $app)
     {
         $app['weatherService'] = function() use ($app) {
-            $weatherService = new weatherService($app['config']['weatherApi']);
-            return $weatherService;
+            return new WeatherService(new $app['weather.adapter']($app['config']));
         };
     }
 }

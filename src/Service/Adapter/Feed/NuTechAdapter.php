@@ -1,15 +1,15 @@
 <?php
 
-namespace Service\Adapter;
+namespace Service\Adapter\Feed;
 
 use Entity\FeedItem;
 use Zend\Feed\Reader\Feed\FeedInterface;
 use Zend\Feed\Reader\ReaderImportInterface;
 
-class MajorNelsonAdapter implements FeedAdapterInterface
+class NuTechAdapter implements FeedAdapterInterface
 {
-    const FEED_URL = 'http://feeds.feedburner.com/MajorNelson';
-    const NAME = 'MajorNelson';
+    const FEED_URL = 'http://www.nu.nl/rss/tech';
+    const NAME = 'NuTech';
 
     /**
      * @var ReaderImportInterface $reader

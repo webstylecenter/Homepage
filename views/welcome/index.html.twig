@@ -1,12 +1,16 @@
+{# @var forecast \Entity\WeatherForecastList #}
+
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    {{ forecast.current.type }}
     <link rel="stylesheet" href="/assets/css/weather.css">
     <div class="welcomePage">
         <h1>Welcome!</h1>
         <div id="weatherIcon">
 
-            {% if 'drizzle' in forecast.today.type|lower %}
+            {% if 'drizzle' == forecast.current.type %}
                 <div class="icon sun-shower">
                     <div class="cloud"></div>
                     <div class="sun">
@@ -16,7 +20,7 @@
                 </div>
             {% endif %}
 
-            {% if 'thunderstorm' in forecast.today.type|lower %}
+            {% if 'thunderstorm' == forecast.current.type %}
                 <div class="icon thunder-storm">
                     <div class="cloud"></div>
                     <div class="lightning">
@@ -26,14 +30,14 @@
                 </div>
             {% endif %}
 
-            {% if 'rain' in forecast.today.type|lower %}
+            {% if 'rain' == forecast.current.type %}
                 <div class="icon rainy">
                     <div class="cloud"></div>
                     <div class="rain"></div>
                 </div>
             {% endif %}
 
-            {% if 'snow' in forecast.today.type|lower %}
+            {% if 'snow' == forecast.current.type %}
                 <div class="icon flurries">
                     <div class="cloud"></div>
                     <div class="snow">
@@ -43,7 +47,7 @@
                 </div>
             {% endif %}
 
-            {% if 'clear' in forecast.today.type|lower %}
+            {% if 'clear' == forecast.current.type %}
                 <div class="icon sunny">
                     <div class="sun">
                         {% if "now"|date("H") < 20 and "now"|date("H") > 6 %}<div class="rays"></div>{% endif %}
@@ -51,7 +55,7 @@
                 </div>
             {% endif %}
 
-            {% if 'clouds' in forecast.today.type|lower or 'mist' in forecast.today.type|lower %}
+            {% if 'cloud' == forecast.current.type %}
                 <div class="icon cloudy">
                     <div class="cloud"></div>
                     <div class="cloud"></div>
@@ -60,14 +64,17 @@
         </div>
 
         <div class="tempLarge">
-            {{ forecast.temp }}&deg;C
+            {{ forecast.current.temperature }}&deg;C
         </div>
 
-        <p>The weather currently is {{ forecast.today.type }}, with a tempature of {{ forecast.temp }}&deg;C.<br />
-        The maximum will be {{ forecast.temp_max }}&deg;C with a low of: {{ forecast.temp_min }}&deg;C</p>
+        <p>The weather currently is {{ forecast.current.type }}, with a tempature of {{ forecast.current.temperature }}&deg;C
+            .<br />
+        The maximum will be {{ forecast.current.maxTemperature }}&deg;C with a low of: {{ forecast.current.minTemperature }}&deg;
+            C</p>
 
-        {% if forecast.tomorrow.type != 0 %}
-            <p>Tomorrow the weather will be: {{ forecast.tomorrow.description }}</p>
-        {% endif %}
+        {% set tomorrow = forecast.upcoming|first %}
+
+        <p>Tomorrow the weather will be: {{ tomorrow.type }}, with a max temperature of: {{ tomorrow.maxTemperature }}&deg;C</p>
+
     </div>
 {% endblock %}

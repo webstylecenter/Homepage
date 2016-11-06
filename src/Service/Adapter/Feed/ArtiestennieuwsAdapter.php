@@ -1,16 +1,17 @@
 <?php
 
-namespace Service\Adapter;
+namespace Service\Adapter\Feed;
 
 use Entity\FeedItem;
-use Guzzle\GuzzleClient;
 use Zend\Feed\Reader\Feed\FeedInterface;
 use Zend\Feed\Reader\ReaderImportInterface;
+use Zend\Feed\Reader\Http\Client;
 
-class IdownloadblogAdapter implements FeedAdapterInterface
+
+class ArtiestennieuwsAdapter implements FeedAdapterInterface
 {
-    const FEED_URL = 'https://www.idownloadblog.com/feed/';
-    const NAME = 'iDownloadBlog';
+    const FEED_URL = 'http://www.artiestennieuws.nl/feed/';
+    const NAME = 'Artiesten Nieuws';
 
     /**
      * @var ReaderImportInterface $reader
@@ -30,9 +31,9 @@ class IdownloadblogAdapter implements FeedAdapterInterface
      */
     public function read()
     {
-
-        $client = new GuzzleClient();
-        $feed = $this->reader->importRemoteFeed(self::FEED_URL, $client);
+        // TODO: Use ClientInterface to parse feed the usual way
+        $feedSrc = file_get_contents(self::FEED_URL);
+        $feed = $this->reader->importString($feedSrc);
 
         $map = [];
         foreach ($feed as $entry) {

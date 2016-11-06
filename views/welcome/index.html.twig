@@ -10,7 +10,7 @@
         <h1>Welcome!</h1>
         <div id="weatherIcon">
 
-            {% if 'drizzle' == forecast.current.type %}
+            {% if 'partly_cloud' == forecast.current.type %}
                 <div class="icon sun-shower">
                     <div class="cloud"></div>
                     <div class="sun">
@@ -47,7 +47,7 @@
                 </div>
             {% endif %}
 
-            {% if 'clear' == forecast.current.type %}
+            {% if 'sun' == forecast.current.type %}
                 <div class="icon sunny">
                     <div class="sun">
                         {% if "now"|date("H") < 20 and "now"|date("H") > 6 %}<div class="rays"></div>{% endif %}

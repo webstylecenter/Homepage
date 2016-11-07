@@ -40,6 +40,8 @@
     margin-left:0;
     max-height:20px;
 }
-.RTLnieuws {
+
+/* Hide incompatible entries, Apple can't create decent software that works */
+.RTLnieuws, .Dumpert {
     display:none;
 }

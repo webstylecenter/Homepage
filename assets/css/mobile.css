@@ -1,5 +1,7 @@
 .topbar {
     right:0;
+    left:0;
+    position:fixed;
 }
 .list {
     width:100%;
@@ -36,4 +38,8 @@
     float:right;
     width:230px;
     margin-left:0;
+    max-height:20px;
+}
+.RTLnieuws {
+    display:none;
 }

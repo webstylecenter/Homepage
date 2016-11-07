@@ -24,6 +24,7 @@
         "silex/silex": "~2.0",
         "symfony/twig-bridge": "^3.1",
         "twig/extensions": "^1.4",
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "mobiledetect/mobiledetectlib": "^2.8"
     }
 }

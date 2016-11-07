@@ -1,0 +1,39 @@
+.topbar {
+    right:0;
+}
+.list {
+    width:100%;
+}
+.listTitle {
+    font-size:10pt;
+}
+.listContent {
+    font-size:8pt;
+}
+.contentContainer {
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    display:none;
+}
+.backButton {
+    display:none;
+    width:100px;
+}
+.shareButton {
+    display:none;
+    max-width:100px;
+    overflow:hidden;
+}
+.pageLinkToUrl {
+    display:none;
+
+}
+.navbar {
+    max-width:230px;
+    overflow:hidden;
+    float:right;
+    width:230px;
+    margin-left:0;
+}

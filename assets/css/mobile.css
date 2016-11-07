@@ -13,12 +13,11 @@
     font-size:8pt;
 }
 .contentContainer {
-    top:37px;
+    top:0;
     left:0;
     right:0;
     bottom:0;
     display:none;
-    position:fixed;
 }
 .backButton {
     display:none;

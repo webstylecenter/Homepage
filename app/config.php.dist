@@ -21,7 +21,7 @@ $app['config'] = [
 ];
 
 $app['users'] = [
-    'peter' => 'plex8432'
+    'username' => 'password'
 ];
 
 $app['feed.adapters'] = [

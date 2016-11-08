@@ -15,7 +15,7 @@ $app['config'] = [
         'cachePath' => __DIR__ . '/../var/cache/twig'
     ],
     'openWeatherMap' => [
-        'key' => '1136b45e2af4fde1cd9cd208ef17cb37',
+        'key' => 'APPID',
         'location' => 'Eindhoven,NL',
     ],
 ];

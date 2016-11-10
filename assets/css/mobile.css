@@ -5,18 +5,22 @@
 }
 .list {
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
     width:100%;
 }
 .listTitle {
     font-size:10pt;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 .listContent {
     font-size:8pt;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 .listItem {
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 .contentContainer {
     top:0;

@@ -33,10 +33,10 @@
 
 }
 .navbar {
-    max-width:230px;
+    max-width:200px;
     overflow:hidden;
     float:right;
-    width:230px;
+    width:200px;
     margin-left:0;
     max-height:20px;
 }

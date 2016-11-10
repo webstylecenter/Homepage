@@ -9,9 +9,14 @@
 }
 .listTitle {
     font-size:10pt;
+    -webkit-user-select: none;
 }
 .listContent {
     font-size:8pt;
+    -webkit-user-select: none;
+}
+.listItem {
+    -webkit-user-select: none;
 }
 .contentContainer {
     top:0;

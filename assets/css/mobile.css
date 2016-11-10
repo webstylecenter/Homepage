@@ -4,6 +4,7 @@
     position:fixed;
 }
 .list {
+    -webkit-user-select: none;
     width:100%;
 }
 .listTitle {

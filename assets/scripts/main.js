@@ -23,4 +23,19 @@ $( document ).ready(function() {
         $('.pageLinkToUrl').text('');
     });
 
+    $('.pin').click(function() {
+        var pin = $(this);
+        $.ajax("/pin/" +$(this).data('pin-id'))
+            .done(function(response) {
+                if (response == '1') {
+                    if ($(pin).parent().hasClass('pinned')) {
+                        $(pin).parent().removeClass('pinned');
+                        console.log("Item unpinned");
+                    } else {
+                        $(pin).parent().addClass('pinned');
+                        console.log('Item pinned');
+                    }
+                }
+            });
+    });
 });

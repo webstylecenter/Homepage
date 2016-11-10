@@ -99,6 +99,9 @@ body {
     padding:10px;
     border-left:5px solid black;
 }
+.listTitle {
+    width:400px;
+}
 .visited .listTitle, .visited .listContent {
     color: #b6b6b6;
 }
@@ -110,6 +113,28 @@ body {
 }
 .selected .listTitle, .selected .listContent {
     color: #000;
+}
+.pinned .listTitle, .pinned .listContent {
+    color: #000;
+}
+.listItem.pinned .pin {
+    background-image: url('../images/pin_hover.png');
+}
+.listItem .pin {
+    background-repeat:no-repeat;
+    background-size:contain;
+    width:15px;
+    height:15px;
+    position: relative;
+    top:0;
+    right:0;
+    float:right;
+}
+.listItem:hover .pin {
+    background-image: url('../images/pin.png');
+}
+.listItem .pin:hover {
+    background-image: url('../images/pin_hover.png');
 }
 .listTitle {
     font-size:12pt;

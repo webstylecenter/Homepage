@@ -101,7 +101,7 @@ class FeedService
     public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT)
     {
         $feedItems = $this->database->fetchAll(
-            'SELECT * FROM feed_data ORDER BY dateAdded DESC LIMIT ?',
+            'SELECT * FROM feed_data ORDER BY pinned DESC, dateAdded DESC LIMIT ?',
             [$limit],
             [\PDO::PARAM_INT]
         );
@@ -112,7 +112,8 @@ class FeedService
                 $feedItem['title'],
                 $feedItem['description'],
                 $feedItem['url'],
-                $feedItem['site']
+                $feedItem['site'],
+                $feedItem['pinned']
             );
 
             $feedItemInstance->setViewed($feedItem['viewed']);
@@ -125,6 +126,9 @@ class FeedService
         return $feed;
     }
 
+    /**
+     * @return array
+     */
     public function getFeedItemTotals()
     {
         return $this->database->fetchAll('SELECT site,COUNT(*) as count FROM feed_data GROUP BY site ORDER BY count DESC;');
@@ -133,5 +137,22 @@ class FeedService
     public function markAllViewed()
     {
         $this->database->update('feed_data', ['viewed' => 1], ['viewed' => 0]);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return boolean
+     */
+    public function pinItem($id)
+    {
+        $feedItem = $this->database->fetchAll(
+            'SELECT pinned FROM feed_data WHERE id = ?',
+            [$id],
+            [\PDO::PARAM_INT]
+        );
+
+        $newPinState = $feedItem[0]['pinned'] == 1 ? NULL : 1;
+        return $this->database->update('feed_data', ['pinned' => $newPinState], ['id' => $id]);
     }
 }

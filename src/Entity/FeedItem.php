@@ -40,12 +40,19 @@ class FeedItem
     protected $site;
 
     /**
-     * @param int $id
-     * @param string $title
-     * @param string $description
-     * @param string $url
+     * @var boolean
      */
-    public function __construct($id, $title, $description, $url, $site)
+    protected $pinned;
+
+    /**
+     * @param $id
+     * @param $title
+     * @param $description
+     * @param $url
+     * @param $site
+     * @param $pinned
+     */
+    public function __construct($id, $title, $description, $url, $site, $pinned)
     {
         $this->id          = $id;
         $this->title       = $title;
@@ -53,6 +60,7 @@ class FeedItem
         $this->url         = $url;
         $this->dateAdded   = new \DateTime;
         $this->site        = $site;
+        $this->pinned      = $pinned;
     }
 
     /**
@@ -165,5 +173,21 @@ class FeedItem
     public function setSite($site)
     {
         $this->site = $site;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPinned()
+    {
+        return $this->pinned;
+    }
+
+    /**
+     * @param boolean $pinned
+     */
+    public function setPinned($pinned)
+    {
+        $this->pinned = $pinned;
     }
 }

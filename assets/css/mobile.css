@@ -4,23 +4,13 @@
     position:fixed;
 }
 .list {
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
     width:100%;
 }
 .listTitle {
     font-size:10pt;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
 }
 .listContent {
     font-size:8pt;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-}
-.listItem {
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
 }
 .contentContainer {
     top:0;
@@ -31,7 +21,7 @@
 }
 .backButton {
     display:none;
-    width:100px;
+    width:60px;
 }
 .shareButton {
     display:none;
@@ -49,6 +39,15 @@
     width:230px;
     margin-left:0;
     max-height:20px;
+}
+
+.mobilePin {
+    background-image: url('../images/pin.png');
+    background-size:contain;
+    height:15px;
+    width:15px;
+    display:inline-block;
+    margin-left:10px;
 }
 
 /* Hide incompatible entries, Apple can't create decent software that works */

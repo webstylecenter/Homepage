@@ -4,8 +4,8 @@
 
 {% block header %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/mobile.css?v=2b">
-    <script src='/assets/scripts/mobile.js?v=2'></script>
+    <link rel="stylesheet" href="/assets/css/mobile.css?v={{ "now"|date("mi") }}">
+    <script src='/assets/scripts/mobile.js?v={{ "now"|date("mi") }}'></script>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="/iphone-icon.png">
 {% endblock %}
@@ -23,7 +23,10 @@
         {% block content %}
         {% endblock %}
 
-        {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems} %}
+        <div class="noselect">
+            {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems} %}
+        </div>
+
         <div class="contentContainer">
             <iframe src="" sandbox="allow-scripts allow-same-origin allow-forms allow-popups
         allow-pointer-lock"></iframe>

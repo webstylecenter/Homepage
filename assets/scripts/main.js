@@ -32,4 +32,9 @@ $( document ).ready(function() {
                 }
             });
     });
+
+    $('.createButton').click(function() {
+        $('#createItem').modal({fadeDuration:100});
+    });
+
 });

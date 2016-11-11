@@ -20,7 +20,7 @@ $( document ).ready(function() {
         $('.pageLinkToUrl').hide();
     });
 
-    $('.listItem').hammer().bind("press", function() {
+    $('.listItem').hammer().on("swiperight", function() {
         var pin = $(this).find('.pin');
         $.ajax("/pin/" +$(pin).data('pin-id'))
             .done(function(response) {

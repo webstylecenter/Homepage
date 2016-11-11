@@ -20,11 +20,6 @@ $( document ).ready(function() {
         $('.pageLinkToUrl').hide();
     });
 
-    $('.mobilePin').click(function() {
-
-    });
-
-
     $('.listItem').hammer().bind("press", function() {
         var pin = $(this).find('.pin');
         $.ajax("/pin/" +$(pin).data('pin-id'))

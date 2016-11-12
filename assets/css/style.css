@@ -8,7 +8,7 @@ body {
     padding:10px 20px;
     background: #eeeeee;
     background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%);
-
+    position:fixed;
 }
 .title {
     display:inline-block;

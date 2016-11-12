@@ -9,6 +9,8 @@ body {
     background: #eeeeee;
     background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%);
     position:fixed;
+    right:0;
+    left:0;
 }
 .title {
     display:inline-block;

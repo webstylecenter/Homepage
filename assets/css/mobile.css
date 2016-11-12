@@ -48,11 +48,6 @@
     display:inline-block;
     margin-left:10px;
 }
-
-/* Hide incompatible entries, Apple can't create decent software that works */
-.RTLnieuws, .Dumpert {
-    display:none;
-}
 .noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;

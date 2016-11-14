@@ -112,12 +112,12 @@ class FeedService
                 $feedItem['title'],
                 $feedItem['description'],
                 $feedItem['url'],
-                $feedItem['site'],
-                $feedItem['pinned']
+                $feedItem['site']
             );
 
             $feedItemInstance->setViewed($feedItem['viewed']);
             $feedItemInstance->setDateAdded(new \DateTime($feedItem['dateAdded']));
+            $feedItemInstance->setPinned($feedItem['pinned']);
             return $feedItemInstance;
 
         }, $feedItems);

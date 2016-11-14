@@ -42,7 +42,7 @@ class FeedItem
     /**
      * @var boolean
      */
-    protected $pinned;
+    protected $pinned = false;
 
     /**
      * @param $id
@@ -50,9 +50,8 @@ class FeedItem
      * @param $description
      * @param $url
      * @param $site
-     * @param $pinned
      */
-    public function __construct($id, $title, $description, $url, $site, $pinned)
+    public function __construct($id, $title, $description, $url, $site)
     {
         $this->id          = $id;
         $this->title       = $title;
@@ -60,7 +59,6 @@ class FeedItem
         $this->url         = $url;
         $this->dateAdded   = new \DateTime;
         $this->site        = $site;
-        $this->pinned      = $pinned;
     }
 
     /**

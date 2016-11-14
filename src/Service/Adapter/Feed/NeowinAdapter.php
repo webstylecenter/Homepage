@@ -25,10 +25,10 @@ class NeowinAdapter implements FeedAdapterInterface
     }
 
     /**
-	 * @return FeedItem[]
-	 */
-	public function read()
-	{
+     * @return FeedItem[]
+     */
+    public function read()
+    {
         $feed = $this->reader->import(self::FEED_URL);
 
         $map = [];
@@ -48,9 +48,9 @@ class NeowinAdapter implements FeedAdapterInterface
         }
 
         return $map;
-	}
+    }
 
-	public function getName()
+    public function getName()
     {
         return self::NAME;
     }

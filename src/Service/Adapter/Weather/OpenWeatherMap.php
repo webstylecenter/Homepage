@@ -82,7 +82,7 @@ class OpenWeatherMap implements WeatherAdapterInterface
             return WeatherForecast::TYPE_RAIN;
         }
 
-        if (stripos($type, 'clouds') !== false || stripos($type, 'mist') !== false ) {
+        if (stripos($type, 'clouds') !== false || stripos($type, 'mist') !== false) {
             return WeatherForecast::TYPE_CLOUD;
         }
 

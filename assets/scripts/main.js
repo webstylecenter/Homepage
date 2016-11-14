@@ -12,7 +12,6 @@ $( document ).ready(function() {
         var url = $(this).data('url');
         if (url == '') { url = 'nourl.php'; }
 
-        console.log('Going to: ' + url);
         $('iframe').attr('src', url);
         $('.pageLinkToUrl').text(url);
         $('.pageLinkToUrl').attr('href', url);

@@ -26,7 +26,6 @@ $( document ).ready(function() {
             .done(function(response) {
                 if (response == '1') {
                     $(pin).parent().toggleClass('pinned');
-                    console.log("pinned");
                 }
             });
     });

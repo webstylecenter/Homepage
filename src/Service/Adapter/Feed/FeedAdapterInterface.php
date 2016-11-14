@@ -12,10 +12,10 @@ interface FeedAdapterInterface
      */
     public function __construct(ReaderImportInterface $reader);
 
-	/**
-	 * @return FeedItem[]
-	 */
-	public function read();
+    /**
+     * @return FeedItem[]
+     */
+    public function read();
 
     /**
      * @return string

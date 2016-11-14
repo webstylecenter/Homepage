@@ -32,7 +32,7 @@ class GuzzleClient implements ClientInterface
      */
     public function get($uri)
     {
-        $response  = $this->client->get($uri);
+        $response = $this->client->get($uri);
         return new GuzzleResponse($response);
     }
 }

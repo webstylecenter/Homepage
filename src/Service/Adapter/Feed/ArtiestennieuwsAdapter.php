@@ -5,7 +5,6 @@ namespace Service\Adapter\Feed;
 use Entity\FeedItem;
 use Zend\Feed\Reader\Feed\FeedInterface;
 use Zend\Feed\Reader\ReaderImportInterface;
-use Zend\Feed\Reader\Http\Client;
 
 
 class ArtiestennieuwsAdapter implements FeedAdapterInterface

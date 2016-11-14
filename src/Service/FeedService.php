@@ -71,7 +71,7 @@ class FeedService
                         'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),
                         'viewed' => 0
                     ]);
-                } catch(PDOException $e) {
+                } catch (PDOException $e) {
                     // do nothing.
                 }
             }

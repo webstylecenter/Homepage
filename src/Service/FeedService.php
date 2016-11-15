@@ -67,19 +67,7 @@ class FeedService
                     continue;
                 }
 
-                try {
-                    $this->database->insert('feed_data  ', [
-                        'guid' => $feedItem->getId(),
-                        'site' => $adapter->getName(),
-                        'title' => $feedItem->getTitle(),
-                        'description' => $feedItem->getDescription(),
-                        'url' => $feedItem->getUrl(),
-                        'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),
-                        'viewed' => 0
-                    ]);
-                } catch (PDOException $e) {
-                    // do nothing.
-                }
+                $this->importFeedItem($feedItem, $adapter);
             }
         }
     }
@@ -117,23 +105,53 @@ class FeedService
         );
 
         $feed = array_map(function($feedItem) {
-            $feedItemInstance = new FeedItem(
-                $feedItem['id'],
-                $feedItem['title'],
-                $feedItem['description'],
-                $feedItem['url'],
-                $feedItem['site']
-            );
-
-            $feedItemInstance->setViewed($feedItem['viewed']);
-            $feedItemInstance->setDateAdded(new \DateTime($feedItem['dateAdded']));
-            $feedItemInstance->setPinned($feedItem['pinned']);
-            return $feedItemInstance;
-
+            return $this->toEntity($feedItem);
         }, $feedItems);
 
         $this->markAllViewed();
         return $feed;
+    }
+
+    /**
+     * @param FeedItem $feedItem
+     * @param FeedAdapterInterface $feedAdapter
+     */
+    protected function importFeedItem(FeedItem $feedItem, FeedAdapterInterface $feedAdapter)
+    {
+        try {
+            $this->database->insert('feed_data', [
+                'guid' => $feedItem->getId(),
+                'site' => $feedAdapter->getName(),
+                'title' => $feedItem->getTitle(),
+                'description' => $feedItem->getDescription(),
+                'url' => $feedItem->getUrl(),
+                'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),
+                'viewed' => 0
+            ]);
+        } catch (PDOException $e) {
+            // do nothing.
+        }
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return FeedItem
+     */
+    protected function toEntity(array $data)
+    {
+        $feedItem = new FeedItem(
+            $data['id'],
+            $data['title'],
+            $data['description'],
+            $data['url'],
+            $data['site']
+        );
+
+        $feedItem->setViewed($data['viewed']);
+        $feedItem->setDateAdded(new \DateTime($data['dateAdded']));
+        $feedItem->setPinned($data['pinned']);
+        return $feedItem;
     }
 
     /**

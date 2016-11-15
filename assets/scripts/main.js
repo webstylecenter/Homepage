@@ -3,8 +3,33 @@
  */
 $( document ).ready(function() {
 
-    $('.listItem').click(function() {
+    $('.createButton').click(function() {
+        $('#createItem').modal({fadeDuration:100});
+    });
 
+    $('.submitFeedItem').click(function() {
+        $.post( "/add-item/", $('#createItem').serialize())
+            .done(function(data) {
+
+                if (data == "Done") {
+                    $.modal.close();
+                    requestNewFeedItems();
+                }
+                else {
+                    alert(data);
+                }
+            })
+            .fail(function(data) {
+                alert(data);
+            })
+    });
+
+   addListEventHandlers('list');
+
+});
+
+function addListEventHandlers(container) {
+    $('.' + container + ' .listItem').click(function() {
         $('.listItem').removeClass('selected');
         $(this).addClass('selected');
         $(this).addClass('used');
@@ -17,12 +42,13 @@ $( document ).ready(function() {
         $('.pageLinkToUrl').attr('href', url);
     });
 
-    $('.title a').click(function() {
+    $('.' + container + ' .title a').click(function() {
         $('iframe').attr('src', '/welcome/');
         $('.pageLinkToUrl').text('');
+        requestNewFeedItems();
     });
 
-    $('.pin').click(function(e) {
+    $('.' + container + ' .pin').click(function(e) {
         e.stopImmediatePropagation();
         var pin = $(this);
         $.ajax("/pin/" +$(this).data('pin-id'))
@@ -32,25 +58,28 @@ $( document ).ready(function() {
                 }
             });
     });
+}
 
-    $('.createButton').click(function() {
-        $('#createItem').modal({fadeDuration:100});
+var refreshDate;
+function setRefreshDate(refreshDateValue) {
+    refreshDate = refreshDateValue;
+}
+
+function getRefreshDate() {
+    return refreshDate;
+}
+
+function requestNewFeedItems() {
+    $.getJSON('/refresh/' + getRefreshDate())
+        .done(function(data) {
+            var html = data.html.replace('<div class="list">', '<div class="Newlist">');
+            $('.list').prepend(html);
+            addListEventHandlers('Newlist');
+            setRefreshDate(data.refreshDate);
+            clearCreateForm();
     });
+}
 
-    $('.submitFeedItem').click(function() {
-        $.post( "/add-item/", $('#createItem').serialize())
-            .done(function(data) {
-
-                if (data == "Done") {
-                    $.modal.close();
-                }
-                else {
-                    alert(data);
-                }
-            })
-            .fail(function(data) {
-                alert(data);
-            })
-    });
-
-});
+function clearCreateForm() {
+    $('#createItem').find("input[type=text], textarea").val("");
+}

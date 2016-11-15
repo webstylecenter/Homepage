@@ -98,12 +98,17 @@ class FeedService
      *
      * @return FeedItem[]
      */
-    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT)
+    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, $fromDate = null)
     {
+
+        if ($fromDate === null) {
+            $fromDate = (new \DateTime('2000-01-01'))->format('Y-m-d H:i:s');
+        }
+
         $feedItems = $this->database->fetchAll(
-            'SELECT * FROM feed_data ORDER BY pinned DESC, dateAdded DESC LIMIT ?',
-            [$limit],
-            [\PDO::PARAM_INT]
+            'SELECT * FROM feed_data WHERE dateAdded > ? ORDER BY pinned DESC, dateAdded DESC LIMIT ?',
+            [$fromDate, $limit],
+            [\PDO::PARAM_STR, \PDO::PARAM_INT]
         );
 
         $feed = array_map(function($feedItem) {
@@ -173,7 +178,7 @@ class FeedService
             md5($currentTime),
             $data['title'],
             $data['description'],
-            $data['url'],
+            strpos($data['url'], 'http') === 0 ? $data['url'] : 'http://' . $data['url'],
             'userInput'
         );
 

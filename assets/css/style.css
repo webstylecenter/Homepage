@@ -177,8 +177,7 @@ iframe {
 .NuTech { border-left-color: darkgoldenrod; }
 .Neowin { border-left-color: #1e5078;}
 .Dumpert { border-left-color: #66c221; }
-
-/* Error Page */
+.userInput { border-left-color: #ff0015; }
 .errorPage {
     margin:0;
     position:absolute;
@@ -189,9 +188,6 @@ iframe {
     padding:25px;
     background: linear-gradient(135deg, #f7f7f7 0%, #ae9490 100%);
 }
-
-
-/* Welcome Page */
 .welcomePage {
     position:absolute;
     top:0;

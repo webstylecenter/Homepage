@@ -1,11 +1,15 @@
 <?php
 
-$app->match('/', function() use($app) {
+$homeController = function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
 
-    return $app['twig']->render('home/index.html.twig', [
+    $templateFolder = $_SERVER['REQUEST_URI'] === '/m/' ? 'mobile' : 'home';
+    return $app['twig']->render($templateFolder . '/index.html.twig', [
         'feedItems'=> $feedService->getFeedItems(),
         'feedItemTotals'=> $feedService->getFeedItemTotals(),
     ]);
-});
+};
+
+$app->get('/', $homeController);
+$app->get('/m/', $homeController);

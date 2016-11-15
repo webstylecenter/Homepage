@@ -155,4 +155,41 @@ class FeedService
         $newPinState = $feedItem['pinned'] == 1 ? NULL : 1;
         return $this->database->update('feed_data', ['pinned' => $newPinState], ['id' => $id]);
     }
+
+    /**
+     * @param array $data
+     *
+     * @return string
+     */
+    public function addItem(Array $data)
+    {
+        $currentTime = (new \DateTime())->format('Y-m-d H:i:s');
+        $feedItem = new FeedItem(
+            md5($currentTime),
+            $data['title'],
+            $data['description'],
+            $data['url'],
+            'userInput'
+        );
+
+        $feedItem->setDateAdded($currentTime);
+        $feedItem->setPinned(true);
+
+        try {
+            $this->database->insert('feed_data', [
+                'guid' => $feedItem->getId(),
+                'site' => 'userInput',
+                'title' => $feedItem->getTitle(),
+                'description' => $feedItem->getDescription(),
+                'url' => $feedItem->getUrl(),
+                'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),
+                'viewed' => 0,
+                'pinned' => 1,
+            ]);
+
+            return 'Done';
+        } catch (PDOException $e) {
+            return 'Error: '.$e;
+        }
+    }
 }

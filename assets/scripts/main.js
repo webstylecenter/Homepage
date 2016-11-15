@@ -22,7 +22,8 @@ $( document ).ready(function() {
         $('.pageLinkToUrl').text('');
     });
 
-    $('.pin').click(function() {
+    $('.pin').click(function(e) {
+        e.stopImmediatePropagation();
         var pin = $(this);
         $.ajax("/pin/" +$(this).data('pin-id'))
             .done(function(response) {
@@ -34,6 +35,22 @@ $( document ).ready(function() {
 
     $('.createButton').click(function() {
         $('#createItem').modal({fadeDuration:100});
+    });
+
+    $('.submitFeedItem').click(function() {
+        $.post( "/add-item/", $('#createItem').serialize())
+            .done(function(data) {
+
+                if (data == "Done") {
+                    $.modal.close();
+                }
+                else {
+                    alert(data);
+                }
+            })
+            .fail(function(data) {
+                alert(data);
+            })
     });
 
 });

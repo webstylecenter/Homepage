@@ -78,28 +78,20 @@ class OpenWeatherMap implements WeatherAdapterInterface
      */
     protected function convertType($type)
     {
-        if (stripos($type, 'rain') !== false) {
-            return WeatherForecast::TYPE_RAIN;
-        }
+        $map = [
+            'rain' => WeatherForecast::TYPE_RAIN,
+            'clouds' => WeatherForecast::TYPE_CLOUD,
+            'mist' => WeatherForecast::TYPE_CLOUD,
+            'drizzle' => WeatherForecast::TYPE_PARTLY_CLOUD,
+            'snow' => WeatherForecast::TYPE_SNOW,
+            'clear' => WeatherForecast::TYPE_SUN,
+            'thunderstorm' => WeatherForecast::TYPE_THUNDER
+        ];
 
-        if (stripos($type, 'clouds') !== false || stripos($type, 'mist') !== false) {
-            return WeatherForecast::TYPE_CLOUD;
-        }
-
-        if (stripos($type, 'drizzle') !== false) {
-            return WeatherForecast::TYPE_PARTLY_CLOUD;
-        }
-
-        if (stripos($type, 'snow') !== false) {
-            return WeatherForecast::TYPE_SNOW;
-        }
-
-        if (stripos($type, 'clear') !== false) {
-            return WeatherForecast::TYPE_SUN;
-        }
-
-        if (stripos($type, 'thunderstorm') !== false) {
-            return WeatherForecast::TYPE_THUNDER;
+        foreach ($map as $key => $value) {
+            if (stripos($type, $key) !== false) {
+                return $value;
+            }
         }
 
         return WeatherForecast::TYPE_UNKNOWN;

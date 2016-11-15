@@ -11,6 +11,7 @@ use Zend\Feed\Reader\Reader;
 class FeedService
 {
     const DEFAULT_ITEM_LIMIT = 100;
+
     /**
      * @var FeedAdapterInterface[]
      */
@@ -84,7 +85,7 @@ class FeedService
     }
 
     /**
-     * @param $feedItem
+     * @param FeedItem $feedItem
      *
      * @return bool
      */
@@ -101,18 +102,17 @@ class FeedService
     /**
      * @param int $limit
      *
-     * @return FeedItem[]
+     * @param \DateTime|null $fromDate
+     *
+     * @return \Entity\FeedItem[]
      */
-    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, $fromDate = null)
+    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, \DateTime $fromDate = null)
     {
-
-        if ($fromDate === null) {
-            $fromDate = (new \DateTime('2000-01-01'))->format('Y-m-d H:i:s');
-        }
+        $fromDate = $fromDate ?: new \DateTime('2000-01-01');
 
         $feedItems = $this->database->fetchAll(
             'SELECT * FROM feed_data WHERE dateAdded > ? ORDER BY pinned DESC, dateAdded DESC LIMIT ?',
-            [$fromDate, $limit],
+            [$fromDate->format('Y-m-d H:i:s'), $limit],
             [\PDO::PARAM_STR, \PDO::PARAM_INT]
         );
 
@@ -167,28 +167,12 @@ class FeedService
     }
 
     /**
-     * @param array $data
+     * @param FeedItem $feedItem
      *
      * @return string
      */
-    public function addItem(Array $data)
+    public function addItem(FeedItem $feedItem)
     {
-
-        if (empty($data['title']) || empty($data['title']) || empty($data['url'])) {
-            return 'Error: No feed title and/or url entered!';
-        }
-
-        $currentTime = (new \DateTime())->format('Y-m-d H:i:s');
-        $feedItem = new FeedItem(
-            md5($currentTime),
-            $data['title'],
-            $data['description'],
-            strpos($data['url'], 'http') === 0 ? $data['url'] : 'http://' . $data['url'],
-            'userInput'
-        );
-
-        $feedItem->setPinned(true);
-
         try {
             $this->database->insert('feed_data', [
                 'guid' => $feedItem->getId(),
@@ -196,9 +180,9 @@ class FeedService
                 'title' => $feedItem->getTitle(),
                 'description' => $feedItem->getDescription(),
                 'url' => $feedItem->getUrl(),
-                'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),
-                'viewed' => 0,
-                'pinned' => 1,
+                'dateAdded' => $feedItem->getDateAdded()->format('Y-m-d H:i:s'),
+                'viewed' => (int) $feedItem->isViewed(),
+                'pinned' => (int) $feedItem->isPinned(),
             ]);
 
             return true;

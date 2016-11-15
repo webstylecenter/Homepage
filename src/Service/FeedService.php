@@ -193,7 +193,7 @@ class FeedService
 
             return 'Done';
         } catch (PDOException $e) {
-            return 'Error: '.$e;
+            return 'Error: ' . $e;
         }
     }
 }

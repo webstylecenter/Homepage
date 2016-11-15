@@ -212,15 +212,15 @@ iframe {
     padding-bottom:10px;
     margin-bottom:10px;
 }
-.modal input, .modal textarea {
+.modal input[type="text"], .modal textarea {
     box-sizing: border-box;
     width:300px;
     border:1px solid whitesmoke;
     padding:5px 10px;
 }
 .modal table .fullRow {
-    text-align: center;
+    text-align: right;
 }
-.modal button {
-    margin-left:55px;
+.modal input[type="button"] {
+    margin-right:180px;
 }

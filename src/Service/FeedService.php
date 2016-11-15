@@ -163,6 +163,11 @@ class FeedService
      */
     public function addItem(Array $data)
     {
+
+        if (!isset($data['title']) || !isset($data['url']) || strlen($data['title']) === 0 || strlen($data['url']) === 0) {
+            return 'Error: No feed title and/or url entered!';
+        }
+
         $currentTime = (new \DateTime())->format('Y-m-d H:i:s');
         $feedItem = new FeedItem(
             md5($currentTime),
@@ -172,7 +177,6 @@ class FeedService
             'userInput'
         );
 
-        $feedItem->setDateAdded($currentTime);
         $feedItem->setPinned(true);
 
         try {

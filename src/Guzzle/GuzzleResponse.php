@@ -7,14 +7,14 @@ use Zend\Feed\Reader\Http\ResponseInterface;
 class GuzzleResponse implements ResponseInterface
 {
     /**
-     * @var \GuzzleHttp\Psr7\Response
+     * @var \Psr\Http\Message\ResponseInterface
      */
     protected $response;
 
     /**
-     * @param \GuzzleHttp\Psr7\Response $response
+     * @param \Psr\Http\Message\ResponseInterface $response
      */
-    public function __construct(\GuzzleHttp\Psr7\Response $response)
+    public function __construct(\Psr\Http\Message\ResponseInterface $response)
     {
         $this->response = $response;
     }

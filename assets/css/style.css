@@ -206,6 +206,10 @@ iframe {
 }
 .modal table td {
     vertical-align: top;
+    white-space: nowrap;
+}
+.modal table td input[type="text"], .modal table td textarea {
+    width:100%;
 }
 .modal h2 {
     border-bottom:1px solid #cccccc;
@@ -220,7 +224,4 @@ iframe {
 }
 .modal table .fullRow {
     text-align: right;
-}
-.modal input[type="button"] {
-    margin-right:180px;
 }

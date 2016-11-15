@@ -169,7 +169,7 @@ class FeedService
     public function addItem(Array $data)
     {
 
-        if (!isset($data['title']) || !isset($data['url']) || strlen($data['title']) === 0 || strlen($data['url']) === 0) {
+        if (empty($data['title']) || empty($data['title']) || empty($data['url'])) {
             return 'Error: No feed title and/or url entered!';
         }
 

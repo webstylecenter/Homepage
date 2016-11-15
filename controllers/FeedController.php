@@ -15,7 +15,11 @@ $app->post('/add-item/', function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
 
-    return $feedService->addItem($_POST);
+    if ($feedService->addItem($_POST)) {
+        return 'Done';
+    } else {
+        return $feedService->getLastError();
+    }
 
 });
 

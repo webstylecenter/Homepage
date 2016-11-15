@@ -22,6 +22,11 @@ class FeedService
     protected $database;
 
     /**
+     * @var string $lastError
+     */
+    protected $lastError;
+
+    /**
      * @param Connection $database
      */
     public function __construct(Connection $database)
@@ -196,9 +201,27 @@ class FeedService
                 'pinned' => 1,
             ]);
 
-            return 'Done';
+            return true;
         } catch (PDOException $e) {
-            return 'Error: ' . $e;
+            $this->setLastError($e);
         }
+
+        return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastError()
+    {
+        return $this->lastError;
+    }
+
+    /**
+     * @param string $lastError
+     */
+    public function setLastError($lastError)
+    {
+        $this->lastError = $lastError;
     }
 }

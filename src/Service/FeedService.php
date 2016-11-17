@@ -108,7 +108,6 @@ class FeedService
             return $this->toEntity($feedItem);
         }, $feedItems);
 
-        $this->markAllViewed();
         return $feed;
     }
 

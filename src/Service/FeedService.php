@@ -96,7 +96,7 @@ class FeedService
      */
     public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, \DateTime $fromDate = null)
     {
-        $fromDate = $fromDate ?: new \DateTime('2000-01-01');
+        $fromDate = $fromDate ?: new \DateTime('@0');
 
         $feedItems = $this->database->fetchAll(
             'SELECT * FROM feed_data WHERE dateAdded > ? ORDER BY pinned DESC, dateAdded DESC LIMIT ?',

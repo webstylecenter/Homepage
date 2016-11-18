@@ -68,8 +68,15 @@
             {{ forecast.current.temperature }}&deg;C
         </div>
 
-        <p>The weather currently is {{ forecast.current.type }}, with a tempature of {{ forecast.current.temperature }}&deg;C<br />
-        The maximum will be {{ forecast.current.maxTemperature }}&deg;C with a low of: {{ forecast.current.minTemperature }}&deg;C</p>
+        <div class="weatherInfo">
+            <div class="weatherCurrentCondition">
+                {{ forecast.current.type }}
+            </div>
+            <div class="weatherTodayCast">
+                <span class="max">{{ forecast.current.maxTemperature }}&deg;C</span>
+                <span class="min">{{ forecast.current.minTemperature }}&deg;C</span>
+            </div>
+        </div>
 
         <div class="weekForecast">
             {% for weatherDay in  forecast.upcoming %}

@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Screensaver{% endblock %}
+
+{% block header %}
+    <link rel="stylesheet" href="/assets/css/screensaver.css?v={{ lastUpdate.css_mobile }}">
+    <script type="text/javascript" src="/assets/scripts/screensaver.js?v={{ lastUpdate.css_mobile }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="screenSaverPage">
+        <img src="https://source.unsplash.com/category/nature/3840x2160" class="screenSaver active" />
+        <img src="" class="screenSaver layer2 notActive" />
+        {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems} %}
+    </div>
+{% endblock %}

@@ -7,7 +7,6 @@
     url('../fonts/Lato-Light.ttf') format('truetype');
     font-style: italic;
     font-weight: normal;
-    text-rendering: optimizeLegibility;
 }
 @font-face {
     font-family: 'LatoWeb';
@@ -18,11 +17,10 @@
     url('../fonts/Lato-Regular.ttf') format('truetype');
     font-style: normal;
     font-weight: normal;
-    text-rendering: optimizeLegibility;
 }
 body {
     font-size:10pt;
-    font-family: "LatoWebLight", "Helvetica Neue";
+    font-family: "LatoWebLight", "Helvetica Neue", "Arial";
     margin:0;
 }
 .topbar {
@@ -107,7 +105,7 @@ body {
 }
 .contentContainer {
     position: absolute;
-    right:0px;
+    right:0;
     top:0;
     bottom:0;
     left:450px;
@@ -135,7 +133,7 @@ body {
     border-left:5px solid black;
 }
 .listTitle {
-    font-family: LatoWeb;
+    font-family: "LatoWeb", "Arial";
     width:400px;
 }
 .visited .listTitle, .visited .listContent {
@@ -222,6 +220,25 @@ iframe {
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center;
+}
+.weatherInfo {
+    width:400px;
+    margin:auto;
+}
+.weatherCurrentCondition {
+    width:195px;
+    display:inline-block;
+    box-sizing: border-box;
+    font-size:32pt;
+    text-transform: capitalize;
+}
+.weatherTodayCast {
+    width:195px;
+    display:inline-block;
+    box-sizing: border-box;
+}
+.weatherTodayCast span {
+    display:block;
 }
 .modal {
     display:none;

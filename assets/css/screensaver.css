@@ -1,0 +1,34 @@
+body {
+    background-color:black;
+}
+.screenSaver {
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    z-index:-1;
+    width:100%;
+    height:100%;
+}
+.layer2 {
+    z-index:-2;
+    display:none;
+}
+.list {
+    background-image: none;
+}
+.listItem:nth-child(even) {
+    background: rgba(0, 0, 0, 0.6);
+}
+.listItem:nth-child(odd) {
+    background: rgba(0, 0, 0, 0.7);
+   /* background: linear-gradient(to right, #363636 0%, #232323 100%); */
+
+}
+.visited .listTitle, .visited .listContent {
+    color: #FFF;
+}
+.used .listTitle, .used .listContent {
+    color: #FFF;
+}

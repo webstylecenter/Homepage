@@ -7,7 +7,7 @@ $app->before(function() use ($app) {
         return;
     }
 
-    if ($_SERVER['REQUEST_URI'] === '/screensaver/') {
+    if (in_array($_SERVER['REQUEST_URI'], ['/screensaver/', '/refresh/'])) {
         return;
     }
 

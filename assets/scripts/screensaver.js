@@ -2,7 +2,9 @@
  * Created by petervandam on 18/11/2016.
  */
 $(function() {
-    setInterval('refreshPage()', 60 * 1000);
+    setInterval(function() {
+        refreshPage();
+    }, 60 * 1000);
 });
 
 function refreshPage() {

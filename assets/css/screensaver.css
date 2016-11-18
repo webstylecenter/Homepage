@@ -32,3 +32,9 @@ body {
 .used .listTitle, .used .listContent {
     color: #FFF;
 }
+.listContent {
+    color: #FFF;
+}
+.listTitle {
+    color:#FFF;
+}

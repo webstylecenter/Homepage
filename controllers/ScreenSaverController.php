@@ -3,7 +3,7 @@
 $app->match('/screensaver/', function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
-    $feedItems = $feedService->getFeedItems(50, (new DateTime())->setTime(-6,0));
+    $feedItems = $feedService->getFeedItems(50, (new DateTime())->setTime(-6, 0));
     $weatherService = $app['weatherService'];
 
     return $app['twig']->render('screensaver/index.html.twig', [

@@ -1,0 +1,54 @@
+<div id="weatherIcon">
+
+    {% if 'partly_cloud' == forecast.current.type %}
+        <div class="icon sun-shower">
+            <div class="cloud"></div>
+            <div class="sun">
+                {% if "now"|date("H") < 20 and "now"|date("H") > 6 %}<div class="rays"></div>{% endif %}
+            </div>
+            <div class="rain"></div>
+        </div>
+    {% endif %}
+
+    {% if 'thunderstorm' == forecast.current.type %}
+        <div class="icon thunder-storm">
+            <div class="cloud"></div>
+            <div class="lightning">
+                <div class="bolt"></div>
+                <div class="bolt"></div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if 'rain' == forecast.current.type %}
+        <div class="icon rainy">
+            <div class="cloud"></div>
+            <div class="rain"></div>
+        </div>
+    {% endif %}
+
+    {% if 'snow' == forecast.current.type %}
+        <div class="icon flurries">
+            <div class="cloud"></div>
+            <div class="snow">
+                <div class="flake"></div>
+                <div class="flake"></div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if 'sun' == forecast.current.type %}
+        <div class="icon sunny">
+            <div class="sun">
+                {% if "now"|date("H") < 20 and "now"|date("H") > 6 %}<div class="rays"></div>{% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if 'cloud' == forecast.current.type %}
+        <div class="icon cloudy">
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+        </div>
+    {% endif %}
+</div>

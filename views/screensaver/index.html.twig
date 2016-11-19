@@ -4,13 +4,40 @@
 
 {% block header %}
     <link rel="stylesheet" href="/assets/css/screensaver.css?v={{ lastUpdate.css_mobile }}">
+    <link rel="stylesheet" href="/assets/css/weather.css">
     <script type="text/javascript" src="/assets/scripts/screensaver.js?v={{ lastUpdate.css_mobile }}"></script>
 {% endblock %}
 
 {% block body %}
+
     <div class="screenSaverPage">
-        <img src="https://source.unsplash.com/category/nature/3840x2160" class="screenSaver active" />
-        <img src="" class="screenSaver layer2 notActive" />
-        {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems} %}
+       <!-- <img src="https://source.unsplash.com/category/nature/3840x2160" class="screenSaver active" /> -->
+        <div class="screenSaver active">
+            <div class="activeNewsItem">
+                <div class="newsTitle">
+                    {{ firstFeedItem.title }}
+                </div>
+
+                <div class="newsDescription">
+                    {{ firstFeedItem.description }}
+                </div>
+            </div>
+        </div>
+        <div class="screenSaver layer2 notActive">
+            <div class="activeNewsItem">
+                <div class="newsTitle">
+                    {{ secondFeedItem.title }}
+                </div>
+
+                <div class="newsDescription">
+                    {{ secondFeedItem.description }}
+                </div>
+            </div>
+        </div>
+
+        {% include 'welcome/weathericon.html.twig' %}
+        <div class="temperature">
+            {{ forecast.current.temperature }}&deg;C
+        </div>
     </div>
 {% endblock %}

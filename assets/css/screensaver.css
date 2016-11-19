@@ -1,5 +1,7 @@
 body {
     background-color:black;
+    color:white;
+    text-shadow: 1px 1px #000;
 }
 .screenSaver {
     position:absolute;
@@ -10,31 +12,38 @@ body {
     z-index:-1;
     width:100%;
     height:100%;
+    background-image: url("https://source.unsplash.com/category/nature/3840x2160?t=");
+    background-size: cover;
 }
 .layer2 {
     z-index:-2;
     display:none;
 }
-.list {
-    background-image: none;
+#weatherIcon {
+    position:fixed;
+    top:40px;
+    right:270px;
 }
-.listItem:nth-child(even) {
-    background: rgba(0, 0, 0, 0.6);
+.temperature {
+    position: fixed;
+    top:110px;
+    right:130px;
+    font-size:36pt;
 }
-.listItem:nth-child(odd) {
-    background: rgba(0, 0, 0, 0.7);
-   /* background: linear-gradient(to right, #363636 0%, #232323 100%); */
-
+.activeNewsItem {
+    position:fixed;
+    bottom:200px;
+    left:100px;
+    right:100px;
+    height:130px;
+    overflow:hidden;
 }
-.visited .listTitle, .visited .listContent {
-    color: #FFF;
+.newsTitle {
+    font-family: "LatoWebLight", "Helvetica Neue", "Arial";
+    font-size:64pt;
+    height:100px;
+    overflow:hidden;
 }
-.used .listTitle, .used .listContent {
-    color: #FFF;
-}
-.listContent {
-    color: #FFF;
-}
-.listTitle {
-    color:#FFF;
+.newsDescription {
+    font-size:16pt;
 }

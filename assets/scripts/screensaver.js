@@ -8,14 +8,16 @@ $(function() {
 });
 
 function refreshPage() {
-    $('.notActive').attr('src', 'https://source.unsplash.com/category/nature/3840x2160?=' + $.now());
-    setTimeout('switchBackgrounds()', 4000);
+    $('.notActive').css('background-image', 'url("https://source.unsplash.com/category/nature/3840x2160?t=' + $.now() + '")');
+    setTimeout(function() {
+        switchBackgrounds();
+    }, 4000);
     requestNewFeedItems();
 }
 
 function switchBackgrounds() {
-    $('.notActive').fadeIn(4000).delay(3000);
-    $('.active').fadeOut(4000);
+    $('.notActive').fadeIn(3000).delay(3000);
+    $('.active').fadeOut(3000);
     $(".active, .notActive").toggleClass("active notActive");
 }
 

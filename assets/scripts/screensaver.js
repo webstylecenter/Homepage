@@ -4,7 +4,7 @@
 $(function() {
     setInterval(function() {
         refreshPage();
-    }, 10 * 1000);
+    }, 60 * 1000);
     setInterval(function() {
         updateTime();
     }, 1000);
@@ -21,6 +21,8 @@ function refreshPage() {
     tempImage.onload = function() {
         var randomNumber = Math.floor((Math.random() * 50) + 1);
         $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")');
+
+        /** global: newsItems */
         $('.notActive .newsTitle').html(newsItems[randomNumber][0]);
         $('.notActive .newsDescription').html(newsItems[randomNumber][1]);
         switchBackgrounds();

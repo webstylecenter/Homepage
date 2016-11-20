@@ -6,12 +6,20 @@
     <link rel="stylesheet" href="/assets/css/screensaver.css?v={{ lastUpdate.css_screensaver }}">
     <link rel="stylesheet" href="/assets/css/weather.css">
     <script type="text/javascript" src="/assets/scripts/screensaver.js?v={{ lastUpdate.js_screensaver }}"></script>
+    <script type="text/javascript">
+        var newsItems = new Array();
+        {% for item in feedItems %}
+            newsItems.push([
+                "{{ item.title|striptags }}",
+                "{{ item.description|truncate(120, true) }}"
+            ]);
+        {% endfor %}
+    </script>
 {% endblock %}
 
 {% block body %}
 
     <div class="screenSaverPage">
-       <!-- <img src="https://source.unsplash.com/category/nature/3840x2160" class="screenSaver active" /> -->
         <div class="screenSaver active">
             <div class="activeNewsItem">
                 <div class="newsTitle">
@@ -38,6 +46,10 @@
         {% include 'welcome/weathericon.html.twig' %}
         <div class="temperature">
             {{ forecast.current.temperature }}&deg;C
+        </div>
+
+        <div class="currentTime">
+            {{ "now"|date("H:i") }}
         </div>
     </div>
 {% endblock %}

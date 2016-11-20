@@ -3,8 +3,10 @@
  */
 $(function() {
     setInterval(function() {
-        refreshPage();
-    }, 60 * 1000);
+        setTimeout(function() {
+            refreshPage();
+        }, 5 * 1000);
+    }, 30 * 1000);
     setInterval(function() {
         updateTime();
     }, 1000);

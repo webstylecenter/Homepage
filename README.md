@@ -34,6 +34,18 @@ since the content of pages are displayed within an iframe, a few items
 are hidden because of security restrictions that prevent cross-site
 scripting and such.
 
+# Screensaver support
+For those running on Windows and MacOS, you can use this site as a nice
+screensaver. Just point your screensaver tool at /screensaver/
+On this page, a slideshow with random 4K quality photographs will
+present the feed items in a beautifull way. Photographs are downloaded
+from Unsplash and categories can be set in the ScreenSaverController.
+
+Please note that you shouldn't use the screensaver while roaming.
+Each image takes around 1,5MB of data transfer. You can set lower
+resolutions images in the ScreenSaverController though but still it's
+not recommended while roaming.
+
 # Ignore X-Frame headers
 For Google Chrome users, it's "recommended" to install Ignore X-Frame
 headers extension. This because one of the sites blocks the site from

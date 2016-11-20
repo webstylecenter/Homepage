@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/assets/css/weather.css">
     <script type="text/javascript" src="/assets/scripts/screensaver.js?v={{ lastUpdate.js_screensaver }}"></script>
     <script type="text/javascript">
+        /** global: newsItems */
         var newsItems = new Array();
         {% for item in feedItems %}
             newsItems.push([

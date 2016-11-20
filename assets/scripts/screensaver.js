@@ -14,6 +14,7 @@ $(function() {
 });
 
 function refreshPage() {
+    /** global: Image */
     var tempImage = new Image();
     var time = $.now();
     tempImage.src = '/screensaver/images/' + time  + '.jpg';

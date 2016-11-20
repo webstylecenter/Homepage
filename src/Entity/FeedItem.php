@@ -98,7 +98,7 @@ class FeedItem
      */
     public function getDescription()
     {
-        return $this->description;
+        return preg_replace( "/\r|\n/", "", $this->description);
     }
 
     /**

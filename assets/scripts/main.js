@@ -8,10 +8,9 @@ $( document ).ready(function() {
     });
 
     $('.submitFeedItem').click(function() {
-        $.post( "/add-item/", $('#createItem').serialize())
+        $.post('/add-item/', $('#createItem').serialize())
             .done(function(data) {
-
-                if (data == "Done") {
+                if (data === 'Done') {
                     $.modal.close();
                     requestNewFeedItems();
                 }
@@ -24,7 +23,7 @@ $( document ).ready(function() {
             })
     });
 
-    $('.weatherContent').load('/weather-page/');
+    $('.weatherContent').load('/weather/detail/');
 
    addListEventHandlers('list');
 

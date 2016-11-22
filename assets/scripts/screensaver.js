@@ -2,7 +2,6 @@
  * Created by petervandam on 18/11/2016.
  */
 $(function() {
-
     setInterval(function() {
         setTimeout(function() {
             refreshPage();
@@ -19,7 +18,6 @@ $(function() {
 
     refreshPage();
     updateWeather();
-
 });
 
 function refreshPage() {
@@ -41,7 +39,7 @@ function refreshPage() {
 function switchBackgrounds() {
     $('.notActive').fadeIn(3000);
     $('.active').fadeOut(3000);
-    $(".active, .notActive").toggleClass("active notActive");
+    $('.active, .notActive').toggleClass('active notActive');
 }
 
 function updateTime() {
@@ -52,9 +50,9 @@ function updateTime() {
     if (hours < 10) { hours = '0' + hours; }
     if (minutes < 10) { minutes = '0' + minutes; }
 
-    $('.currentTime').html(hours + ":" + minutes);
+    $('.currentTime').html(hours + ':' + minutes);
 }
 
 function updateWeather() {
-    $('.screensaverWeatherContent').load('/current-weather/')
+    $('.screensaverWeatherContent').load('/weather/current/')
 }

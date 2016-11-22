@@ -8,7 +8,7 @@
     <script type="text/javascript" src="/assets/scripts/screensaver.js?v={{ lastUpdate.js_screensaver }}"></script>
     <script type="text/javascript">
         /** global: newsItems */
-        var newsItems = new Array();
+        var newsItems = [];
         {% for item in feedItems %}
             newsItems.push([
                 "{{ item.title|striptags }}",

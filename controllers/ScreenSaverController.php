@@ -4,6 +4,12 @@ $app->match('/screensaver/', function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
     $feedItems = $feedService->getFeedItems(50, (new DateTime())->setTime(-6, 0));
+
+    if (count($feedItems) == 0) {
+        throw new \Exception("No feed items added in the past 6 hours, please make sure your cronjob is updating feeds using the /update/ url");
+    }
+
+    /** @var \Service\WeatherService $weatherService */
     $weatherService = $app['weatherService'];
 
     return $app['twig']->render('screensaver/index.html.twig', [

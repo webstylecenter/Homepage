@@ -3,8 +3,8 @@
 {% block title %}Screensaver{% endblock %}
 
 {% block header %}
-    <link rel="stylesheet" href="/assets/css/screensaver.css?v={{ lastUpdate.css_screensaver }}">
     <link rel="stylesheet" href="/assets/css/weather.css">
+    <link rel="stylesheet" href="/assets/css/screensaver.css?v={{ lastUpdate.css_screensaver }}">
     <script type="text/javascript" src="/assets/scripts/screensaver.js?v={{ lastUpdate.js_screensaver }}"></script>
     <script type="text/javascript">
         /** global: newsItems */
@@ -19,7 +19,6 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="screenSaverPage">
         <div class="screenSaver active">
             <div class="activeNewsItem">
@@ -44,10 +43,7 @@
             </div>
         </div>
 
-        {% include 'welcome/weathericon.html.twig' %}
-        <div class="temperature">
-            {{ forecast.current.temperature }}&deg;C
-        </div>
+        <div class="screensaverWeatherContent"></div>
 
         <div class="currentTime">
             {{ "now"|date("H:i") }}

@@ -28,6 +28,10 @@ body {
     top:110px;
     right:130px;
     font-size:36pt;
+    margin:0;
+    border-bottom:0;
+    width:auto;
+    padding-bottom:0;
 }
 .activeNewsItem {
     position:fixed;

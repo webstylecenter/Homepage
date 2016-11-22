@@ -11,7 +11,7 @@ html *:after { box-sizing: inherit; }
     text-align: center;
     color:white;
 }
-.tempLarge {
+.temperature {
     margin:auto;
     font-size:24pt;
     border-bottom:1px solid black;

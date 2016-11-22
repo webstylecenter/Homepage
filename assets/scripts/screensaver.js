@@ -2,16 +2,23 @@
  * Created by petervandam on 18/11/2016.
  */
 $(function() {
+
     setInterval(function() {
         setTimeout(function() {
             refreshPage();
         }, 5 * 1000);
     }, 60 * 1000);
+
     setInterval(function() {
         updateTime();
     }, 1000);
 
+    setInterval(function() {
+        updateWeather();
+    }, 5 * 60 * 1000);
+
     refreshPage();
+    updateWeather();
 
 });
 
@@ -46,4 +53,8 @@ function updateTime() {
     if (minutes < 10) { minutes = '0' + minutes; }
 
     $('.currentTime').html(hours + ":" + minutes);
+}
+
+function updateWeather() {
+    $('.screensaverWeatherContent').load('/current-weather/')
 }

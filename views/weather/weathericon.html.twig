@@ -1,3 +1,4 @@
+{# @var forecast \Entity\WeatherForecastList #}
 <div id="weatherIcon">
 
     {% if 'partly_cloud' == forecast.current.type %}
@@ -51,4 +52,8 @@
             <div class="cloud"></div>
         </div>
     {% endif %}
+</div>
+
+<div class="temperature">
+    {{ forecast.current.temperature }}&deg;C
 </div>

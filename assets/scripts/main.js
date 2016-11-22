@@ -24,6 +24,8 @@ $( document ).ready(function() {
             })
     });
 
+    $('.weatherContent').load('/weather-page/');
+
    addListEventHandlers('list');
 
 });

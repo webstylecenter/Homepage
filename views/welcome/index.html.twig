@@ -1,5 +1,3 @@
-{# @var forecast \Entity\WeatherForecastList #}
-
 {% extends 'base.html.twig' %}
 
 {% block header %}
@@ -8,30 +6,8 @@
 
 {% block body %}
     <div class="welcomePage">
-        <h1>Welcome!</h1>
-        {% include 'welcome/weathericon.html.twig' %}
-
-        <div class="tempLarge">
-            {{ forecast.current.temperature }}&deg;C
-        </div>
-
-        <div class="weatherInfo">
-            <div class="weatherCurrentCondition">
-                {{ forecast.current.type }}
-            </div>
-            <div class="weatherTodayCast">
-                <span class="max">{{ forecast.current.maxTemperature }}&deg;C</span>
-                <span class="min">{{ forecast.current.minTemperature }}&deg;C</span>
-            </div>
-        </div>
-
-        <div class="weekForecast">
-            {% for weatherDay in  forecast.upcoming %}
-                <div class="weatherDay">
-                    <div class="weatherIcon icon_{{ weatherDay.type }}"></div>
-                    <div class="weatherDayMax">{{ weatherDay.maxTemperature }}&deg;C</div>
-                </div>
-            {% endfor %}
+        <div class="weatherContent">
+            Loading weatherinfo...
         </div>
     </div>
 {% endblock %}

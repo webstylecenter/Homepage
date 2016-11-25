@@ -100,7 +100,7 @@ class FeedService
 
         $feedItems = $this->database->fetchAll(
             'SELECT * FROM feed_data WHERE dateAdded > ? ORDER BY pinned DESC, dateAdded DESC LIMIT ?, ?',
-            [$fromDate->format('Y-m-d H:i:s'), ($startFrom*$limit), $limit],
+            [$fromDate->format('Y-m-d H:i:s'), ($startFrom * $limit), $limit],
             [\PDO::PARAM_STR, \PDO::PARAM_INT, \PDO::PARAM_INT]
         );
 

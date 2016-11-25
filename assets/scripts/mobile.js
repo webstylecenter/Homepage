@@ -2,6 +2,10 @@
  * Created by petervandam on 07/11/2016.
  */
 $( document ).ready(function() {
+    addMobileListeners();
+});
+
+function addMobileListeners() {
     $('.listItem').click(function() {
         $('.list').hide();
         $('.title').hide();
@@ -29,5 +33,4 @@ $( document ).ready(function() {
                 }
             });
     });
-
-});
+}

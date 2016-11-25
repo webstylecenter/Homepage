@@ -56,6 +56,6 @@ $app->match('/page/{number}', function($number) use($app) {
     $feedService = $app['feedService'];
     return $app['twig']->render('home/newsfeed.html.twig', [
         'feedItems'=> $feedService->getFeedItems(50, null, $number),
-        'nextPageNumber' => $number+1,
+        'nextPageNumber' => $number + 1,
     ]);
 });

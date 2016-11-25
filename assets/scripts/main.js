@@ -31,6 +31,9 @@ $( document ).ready(function() {
         contentSelector: '.listItem',
         callback: function() {
             addListEventHandlers('list');
+            if (typeof addMobileListeners == 'function') {
+                addMobileListeners();
+            }
         }
     });
 

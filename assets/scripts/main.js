@@ -32,6 +32,7 @@ $( document ).ready(function() {
         callback: function() {
             addListEventHandlers('list');
             if (typeof addMobileListeners == 'function') {
+                /** global: addMobileListeners */
                 addMobileListeners();
             }
         }

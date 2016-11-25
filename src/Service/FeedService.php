@@ -10,7 +10,7 @@ use Zend\Feed\Reader\Reader;
 
 class FeedService
 {
-    const DEFAULT_ITEM_LIMIT = 100;
+    const DEFAULT_ITEM_LIMIT = 50;
 
     /**
      * @var FeedAdapterInterface[]
@@ -94,14 +94,14 @@ class FeedService
      *
      * @return \Entity\FeedItem[]
      */
-    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, \DateTime $fromDate = null)
+    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, \DateTime $fromDate = null, $startFrom = 0)
     {
         $fromDate = $fromDate ?: new \DateTime('@0');
 
         $feedItems = $this->database->fetchAll(
-            'SELECT * FROM feed_data WHERE dateAdded > ? ORDER BY pinned DESC, dateAdded DESC LIMIT ?',
-            [$fromDate->format('Y-m-d H:i:s'), $limit],
-            [\PDO::PARAM_STR, \PDO::PARAM_INT]
+            'SELECT * FROM feed_data WHERE dateAdded > ? ORDER BY pinned DESC, dateAdded DESC LIMIT ?, ?',
+            [$fromDate->format('Y-m-d H:i:s'), ($startFrom*$limit), $limit],
+            [\PDO::PARAM_STR, \PDO::PARAM_INT, \PDO::PARAM_INT]
         );
 
         $feed = array_map(function($feedItem) {

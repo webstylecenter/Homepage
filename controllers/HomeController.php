@@ -22,6 +22,7 @@ $homeController = function() use($app) {
             'js_main' => filemtime(__DIR__ . '/../assets/scripts/main.js'),
             'js_mobile' => filemtime(__DIR__ . '/../assets/scripts/mobile.js'),
         ],
+        'nextPageNumber' => 2,
     ]);
 };
 

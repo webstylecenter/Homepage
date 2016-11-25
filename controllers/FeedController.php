@@ -50,3 +50,12 @@ $app->match('/refresh/{date}', function($date) use($app) {
         'refreshDate' => (new \DateTime())->format('Y-m-d H:i:s'),
     ]);
 });
+
+$app->match('/page/{number}', function($number) use($app) {
+    /** @var \Service\FeedService $feedService */
+    $feedService = $app['feedService'];
+    return $app['twig']->render('home/newsfeed.html.twig', [
+        'feedItems'=> $feedService->getFeedItems(50, null, $number),
+        'nextPageNumber' => $number+1,
+    ]);
+});

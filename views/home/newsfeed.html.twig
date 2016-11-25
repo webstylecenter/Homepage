@@ -1,4 +1,4 @@
-<div class="list">
+<div class="list scroll">
     {% for item in feedItems %}
         <div class="listItem {{ item.viewed ? 'used ' : '' }}{{ item.pinned ? 'pinned ' : '' }}{{ item.site }}"
              data-url="{{ item.url
@@ -8,4 +8,8 @@
             <p class="listContent">{{ item.description|truncate(120, true) }}</p>
         </div>
     {% endfor %}
+
+    {% if feedItems|length > 0 %}
+        <a href="/page/{{ nextPageNumber }}" class="listItem jscroll-next">Next page</a>
+    {% endif %}
 </div>

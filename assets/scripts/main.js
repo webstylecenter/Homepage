@@ -25,6 +25,15 @@ $( document ).ready(function() {
 
     $('.weatherContent').load('/weather/detail/');
 
+    $('.scroll').jscroll({
+        padding: 150,
+        nextSelector: 'a.jscroll-next:last',
+        contentSelector: '.listItem',
+        callback: function() {
+            addListEventHandlers('list');
+        }
+    });
+
    addListEventHandlers('list');
 
 });

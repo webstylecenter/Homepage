@@ -5,6 +5,10 @@ namespace Guzzle;
 use GuzzleHttp\Client;
 use Zend\Feed\Reader\Http\ClientInterface;
 
+/**
+ * Class GuzzleClient
+ * @package Guzzle
+ */
 class GuzzleClient implements ClientInterface
 {
     /**

@@ -192,10 +192,11 @@ iframe {
 .RTLnieuws { border-left-color: #4c9ac1; }
 .Gamersnet { border-left-color: #0d265e; }
 .MajorNelson { border-left-color: #118411; }
-.NuTech { border-left-color: darkgoldenrod; }
+.NuTech { border-left-color: #5100af; }
 .Neowin { border-left-color: #1e5078;}
 .Dumpert { border-left-color: #66c221; }
-.userInput { border-left-color: #ff0015; }
+.userInput { border-left-color: #ffbe3f; }
+.NOS { border-left-color: #c00; }
 .errorPage {
     margin:0;
     position:absolute;

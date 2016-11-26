@@ -2,6 +2,10 @@
 
 namespace Service\Adapter\Feed;
 
+/**
+ * Class GeenstijlAdapter
+ * @package Service\Adapter\Feed
+ */
 class GeenstijlAdapter extends AbstractFeedAdapter
 {
     /**

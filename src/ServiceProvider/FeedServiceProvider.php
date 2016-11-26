@@ -6,6 +6,10 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Service\FeedService;
 
+/**
+ * Class FeedServiceProvider
+ * @package ServiceProvider
+ */
 class FeedServiceProvider implements ServiceProviderInterface
 {
     /**

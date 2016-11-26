@@ -5,6 +5,10 @@ namespace Service\Adapter\Feed;
 use Entity\FeedItem;
 use Zend\Feed\Reader\ReaderImportInterface;
 
+/**
+ * Interface FeedAdapterInterface
+ * @package Service\Adapter\Feed
+ */
 interface FeedAdapterInterface
 {
     /**

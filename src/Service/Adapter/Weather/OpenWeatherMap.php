@@ -5,6 +5,10 @@ namespace Service\Adapter\Weather;
 use Entity\WeatherForecast;
 use Entity\WeatherForecastList;
 
+/**
+ * Class OpenWeatherMap
+ * @package Service\Adapter\Weather
+ */
 class OpenWeatherMap implements WeatherAdapterInterface
 {
     const API_URL_PREFIX = 'http://api.openweathermap.org/data/2.5/';

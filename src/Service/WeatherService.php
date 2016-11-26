@@ -4,6 +4,10 @@ namespace Service;
 
 use Service\Adapter\Weather\WeatherAdapterInterface;
 
+/**
+ * Class WeatherService
+ * @package Service
+ */
 class WeatherService
 {
     /**

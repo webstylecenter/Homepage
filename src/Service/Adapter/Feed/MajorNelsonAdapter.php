@@ -2,6 +2,10 @@
 
 namespace Service\Adapter\Feed;
 
+/**
+ * Class MajorNelsonAdapter
+ * @package Service\Adapter\Feed
+ */
 class MajorNelsonAdapter extends AbstractFeedAdapter
 {
     /**

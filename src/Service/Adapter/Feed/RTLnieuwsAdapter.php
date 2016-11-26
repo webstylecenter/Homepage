@@ -2,6 +2,10 @@
 
 namespace Service\Adapter\Feed;
 
+/**
+ * Class RTLnieuwsAdapter
+ * @package Service\Adapter\Feed
+ */
 class RTLnieuwsAdapter extends AbstractFeedAdapter
 {
     /**

@@ -2,6 +2,10 @@
 
 namespace Service\Adapter\Feed;
 
+/**
+ * Class NuTechAdapter
+ * @package Service\Adapter\Feed
+ */
 class NuTechAdapter extends AbstractFeedAdapter
 {
     /**

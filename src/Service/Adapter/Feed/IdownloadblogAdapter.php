@@ -2,6 +2,10 @@
 
 namespace Service\Adapter\Feed;
 
+/**
+ * Class IdownloadblogAdapter
+ * @package Service\Adapter\Feed
+ */
 class IdownloadblogAdapter extends AbstractFeedAdapter
 {
     /**

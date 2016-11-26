@@ -8,6 +8,10 @@ use Entity\FeedItem;
 use Service\Adapter\Feed\FeedAdapterInterface;
 use Zend\Feed\Reader\Reader;
 
+/**
+ * Class FeedService
+ * @package Service
+ */
 class FeedService
 {
     const DEFAULT_ITEM_LIMIT = 50;

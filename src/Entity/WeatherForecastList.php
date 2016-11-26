@@ -2,6 +2,10 @@
 
 namespace Entity;
 
+/**
+ * Class WeatherForecastList
+ * @package Entity
+ */
 class WeatherForecastList
 {
     /**

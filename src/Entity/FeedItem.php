@@ -2,6 +2,10 @@
 
 namespace Entity;
 
+/**
+ * Class FeedItem
+ * @package Entity
+ */
 class FeedItem
 {
     /**

@@ -2,6 +2,10 @@
 
 namespace Service\Adapter\Feed;
 
+/**
+ * Class NeowinAdapter
+ * @package Service\Adapter\Feed
+ */
 class NeowinAdapter extends AbstractFeedAdapter
 {
     /**

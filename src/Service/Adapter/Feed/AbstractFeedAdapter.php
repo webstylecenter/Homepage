@@ -7,6 +7,10 @@ use Guzzle\GuzzleClient;
 use Zend\Feed\Reader\Feed\FeedInterface;
 use Zend\Feed\Reader\ReaderImportInterface;
 
+/**
+ * Class AbstractFeedAdapter
+ * @package Service\Adapter\Feed
+ */
 abstract class AbstractFeedAdapter implements FeedAdapterInterface
 {
     /**

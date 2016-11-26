@@ -2,6 +2,10 @@
 
 namespace Service\Adapter\Feed;
 
+/**
+ * Class ArtiestennieuwsAdapter
+ * @package Service\Adapter\Feed
+ */
 class ArtiestennieuwsAdapter extends AbstractFeedAdapter
 {
     /**

@@ -2,6 +2,10 @@
 
 namespace Service\Adapter\Feed;
 
+/**
+ * Class GamersnetAdapter
+ * @package Service\Adapter\Feed
+ */
 class GamersnetAdapter extends AbstractFeedAdapter
 {
     /**

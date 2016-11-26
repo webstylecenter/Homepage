@@ -6,6 +6,10 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Service\WeatherService;
 
+/**
+ * Class WeatherServiceProvider
+ * @package ServiceProvider
+ */
 class WeatherServiceProvider implements ServiceProviderInterface
 {
     /**

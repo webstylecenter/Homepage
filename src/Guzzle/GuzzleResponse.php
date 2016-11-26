@@ -4,6 +4,10 @@ namespace Guzzle;
 
 use Zend\Feed\Reader\Http\ResponseInterface;
 
+/**
+ * Class GuzzleResponse
+ * @package Guzzle
+ */
 class GuzzleResponse implements ResponseInterface
 {
     /**

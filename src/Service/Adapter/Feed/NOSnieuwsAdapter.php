@@ -3,17 +3,17 @@
 namespace Service\Adapter\Feed;
 
 /**
- * Class DumpertAdapter
+ * Class NOSnieuwsAdapter
  * @package Service\Adapter\Feed
  */
-class DumpertAdapter extends AbstractFeedAdapter
+class NOSnieuwsAdapter extends AbstractFeedAdapter
 {
     /**
      * @return string
      */
     public function getName()
     {
-        return 'Dumpert';
+        return 'NOS';
     }
 
     /**
@@ -21,7 +21,6 @@ class DumpertAdapter extends AbstractFeedAdapter
      */
     public function getFeedUrl()
     {
-        return 'http://www.dumpert.nl/rss.xml.php';
+        return 'http://feeds.nos.nl/nosnieuwsalgemeen';
     }
 }
-

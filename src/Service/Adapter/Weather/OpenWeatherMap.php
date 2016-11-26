@@ -82,6 +82,7 @@ class OpenWeatherMap implements WeatherAdapterInterface
             'rain' => WeatherForecast::TYPE_RAIN,
             'clouds' => WeatherForecast::TYPE_CLOUD,
             'mist' => WeatherForecast::TYPE_CLOUD,
+            'haze' => WeatherForecast::TYPE_CLOUD,
             'drizzle' => WeatherForecast::TYPE_PARTLY_CLOUD,
             'snow' => WeatherForecast::TYPE_SNOW,
             'clear' => WeatherForecast::TYPE_SUN,

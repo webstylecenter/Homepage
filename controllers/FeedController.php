@@ -46,6 +46,7 @@ $app->match('/refresh/{date}', function($date) use($app) {
     return json_encode([
         'html' => $app['twig']->render('home/newsfeed.html.twig', [
                     'feedItems'=> $feedService->getFeedItems(999, new \DateTime($date)),
+                    'nextPageNumber' => 50000,
                 ]),
         'refreshDate' => (new \DateTime())->format('Y-m-d H:i:s'),
     ]);

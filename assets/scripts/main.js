@@ -38,6 +38,25 @@ $( document ).ready(function() {
         }
     });
 
+    $('.parseUrlButton').click(function() {
+
+        var Url = $('#inputUrl').val();
+
+        if (Url.length > 0) {
+            $.ajax({
+                method: "POST",
+                url: "/parse-url/",
+                data: { url: Url}
+            })
+                .done(function( data ) {
+                    var json = $.parseJSON(data);
+                    $('#addTitle').val(json.title);
+                    $('#addDescription').val(json.description);
+                });
+        }
+
+    });
+
    addListEventHandlers('list');
 
 });
@@ -86,7 +105,7 @@ function getRefreshDate() {
 function requestNewFeedItems() {
     $.getJSON('/refresh/' + getRefreshDate())
         .done(function(data) {
-            var html = data.html.replace('<div class="list">', '<div class="Newlist">');
+            var html = data.html.replace('<div class="list scroll">', '<div class="Newlist">');
             $('.list').prepend(html);
             addListEventHandlers('Newlist');
             setRefreshDate(data.refreshDate);

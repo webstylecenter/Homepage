@@ -262,3 +262,6 @@ iframe {
 .modal table .fullRow {
     text-align: right;
 }
+#inputUrl {
+    width:85%;
+}

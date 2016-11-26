@@ -76,14 +76,11 @@ body {
     background: linear-gradient(to bottom, #a1a1a1 0%, #eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 .feedCounter {
-    position: absolute;
-    top:5px;
-    right:50px;
     height:25px;
     box-sizing: border-box;
     overflow:hidden;
     font-size:9pt;
-    color:gray;
+    margin-top:20px;
 }
 .feedCounterItem {
     display:inline-block;

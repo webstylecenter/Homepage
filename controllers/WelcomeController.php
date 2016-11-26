@@ -5,6 +5,9 @@ $app->match('/welcome/', function() use($app) {
     /** @var \Service\WeatherService $weatherService */
     $weatherService = $app['weatherService'];
 
+    /** @var \Service\FeedService $feedService */
+    $feedService = $app['feedService'];
+
     return $app['twig']->render('welcome/index.html.twig', [
         'forecast' => $weatherService->getForecastList(),
         'lastUpdate' => [
@@ -13,5 +16,6 @@ $app->match('/welcome/', function() use($app) {
             'js_main' => filemtime(__DIR__ . '/../assets/scripts/main.js'),
             'js_mobile' => filemtime(__DIR__ . '/../assets/scripts/mobile.js'),
         ],
+        'feedItemTotals'=> $feedService->getFeedItemTotals(),
     ]);
 });

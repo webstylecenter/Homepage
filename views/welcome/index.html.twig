@@ -9,5 +9,10 @@
         <div class="weatherContent">
             Loading weatherinfo...
         </div>
+        <div class="feedCounter">
+            {% for item in feedItemTotals %}
+                <div class="feedCounterItem">{{ item.site }}: <span class="itemCount">{{ item.count }}</span></div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -39,23 +39,12 @@ $( document ).ready(function() {
     });
 
     $('.parseUrlButton').click(function() {
-
-        var Url = $('#inputUrl').val();
-
-        if (Url.length > 0) {
-            $.ajax({
-                method: "POST",
-                url: "/parse-url/",
-                data: { url: Url}
-            })
-                .done(function( data ) {
-                    var json = $.parseJSON(data);
-                    $('#addTitle').val(json.title);
-                    $('#addDescription').val(json.description);
-                });
-        }
-
+        parseUrl();
     });
+
+    $('#inputUrl').on('blur', function() {
+        parseUrl();
+    })
 
    addListEventHandlers('list');
 
@@ -115,4 +104,21 @@ function requestNewFeedItems() {
 
 function clearCreateForm() {
     $('#createItem').find("input[type=text], textarea").val("");
+}
+
+function parseUrl() {
+    var Url = $('#inputUrl').val();
+
+    if (Url.length > 0) {
+        $.ajax({
+            method: "POST",
+            url: "/parse-url/",
+            data: { url: Url}
+        })
+            .done(function( data ) {
+                var json = $.parseJSON(data);
+                $('#addTitle').val(json.title);
+                $('#addDescription').val(json.description);
+            });
+    }
 }

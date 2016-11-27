@@ -18,25 +18,54 @@ class UrlParseService
      */
     public function getMetaData($url)
     {
+        $url = strpos($url, 'http') === 0 ? $url : 'http://' . $url;
         $urlParser = new UrlParse();
         $urlParser->setUrl($url);
 
-        $html = file_get_contents(strpos($url, 'http') === 0 ? $url : 'http://' . $url);
+        $doc = $this->loadContent($url);
+        $urlParser->setTitle($this->findTitle($doc));
+        $urlParser->setMetaDescription($this->findMetaDescription($doc));
 
+        return $urlParser;
+    }
+
+    /**
+     * @param $url
+     *
+     * @return DOMDocument
+     */
+    public function loadContent($url)
+    {
+        $html = file_get_contents($url);
         $doc = new DOMDocument();
         @$doc->loadHTML($html);
+        return $doc;
+    }
+
+    /**
+     * @param DOMDocument $doc
+     *
+     * @return string
+     */
+    public function findTitle(DOMDocument $doc)
+    {
         $nodes = $doc->getElementsByTagName('title');
+        return $nodes->item(0)->nodeValue;;
+    }
 
-        $urlParser->setTitle($nodes->item(0)->nodeValue);
-
+    /**
+     * @param DOMDocument $doc
+     *
+     * @return string
+     */
+    public function findMetaDescription(DOMDocument $doc)
+    {
         $metas = $doc->getElementsByTagName('meta');
         for ($i = 0; $i < $metas->length; $i++)
         {
             $meta = $metas->item($i);
             if($meta->getAttribute('name') == 'description')
-                $urlParser->setMetaDescription($meta->getAttribute('content'));
+               return $meta->getAttribute('content');
         }
-
-        return $urlParser;
     }
 }

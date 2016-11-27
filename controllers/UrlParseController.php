@@ -6,9 +6,9 @@
  * Time: 01:26
  */
 
-$app->post('/parse-url/', function() use($app) {
+$app->match('/parse-url/', function() use($app) {
     $urlParser = new \Service\UrlParseService();
-    $parsedUrl = $urlParser->getMetaData($_POST['url']);
+    $parsedUrl = $urlParser->getMetaData('http://webstylecenter.com');
 
     return json_encode([
         'title' => $parsedUrl->getTitle(),

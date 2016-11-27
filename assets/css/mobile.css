@@ -21,6 +21,8 @@
     right:0;
     bottom:0;
     display:none;
+    overflow:scroll;
+    -webkit-overflow-scrolling:touch;
 }
 .backButton {
     display:none;
@@ -41,6 +43,7 @@
     width:230px;
     margin-left:0;
     max-height:20px;
+    white-space: nowrap;
 }
 .mobilePin {
     background-image: url('../images/pin.png');

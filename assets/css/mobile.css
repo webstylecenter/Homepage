@@ -5,6 +5,8 @@
 }
 .list {
     width:100%;
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
 }
 .listTitle {
     font-size:10pt;

@@ -75,17 +75,34 @@ class MetaService
         $metas = $doc->getElementsByTagName('meta');
         for ($i = 0; $i < $metas->length; $i++) {
             $meta = $metas->item($i);
-            if ($meta->getAttribute('name') === 'description') {
-                $descriptionMap['description'] = $meta->getAttribute('content');
-            }
-
-            if ($meta->getAttribute('property') === 'og:description') {
-                $descriptionMap['og-description'] = $meta->getAttribute('content');
-            }
+            $descriptionMap['description'] = $this->getMetaContent($descriptionMap, $meta, 'name', 'description');
+            $descriptionMap['og-description'] = $this->getMetaContent($descriptionMap, $meta, 'property', 'og-description');
         }
 
         return $descriptionMap['og-description'] !== null
             ? $descriptionMap['og-description']
             : $descriptionMap['description'];
+    }
+
+    /**
+     * @param array $currentMeta
+     * @param array $meta
+     * @param string $attribute
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function getMetaContent(array $currentMeta, array $meta, $attribute, $name)
+    {
+
+        if (!empty($currentMeta[$name])) {
+            return $currentMeta[$name];
+        }
+
+        if ($meta->getAttribute($attribute) === $name) {
+           $currentMeta[$name] = $meta->getAttribute('content');
+        }
+
+        return $currentMeta[$name];
     }
 }

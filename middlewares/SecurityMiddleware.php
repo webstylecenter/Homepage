@@ -7,7 +7,7 @@ $app->before(function() use ($app) {
         return;
     }
 
-    if ($_SERVER['REQUEST_URI'] == '/') {
+    if ($_SERVER['REQUEST_URI'] === '/') {
         if (
             !isset($_SERVER['PHP_AUTH_USER'])
             || !isset($app['users'][$_SERVER['PHP_AUTH_USER']])

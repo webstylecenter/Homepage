@@ -3,7 +3,6 @@
 namespace Service;
 
 use Entity\Meta;
-use DOMDocument;
 
 /**
  * Class MetaService
@@ -35,7 +34,7 @@ class MetaService
 
     /**
      * @param string $url
-     * @return DOMDocument
+     * @return \DOMDocument
      */
     protected function loadContent($url)
     {
@@ -51,21 +50,21 @@ class MetaService
     }
 
     /**
-     * @param DOMDocument $doc
+     * @param \DOMDocument $doc
      *
      * @return string
      */
-    protected function findTitle(DOMDocument $doc)
+    protected function findTitle(\DOMDocument $doc)
     {
         return $doc->getElementsByTagName('title')->item(0)->nodeValue;
     }
 
     /**
-     * @param DOMDocument $doc
+     * @param \DOMDocument $doc
      *
      * @return string
      */
-    protected function findMetaDescription(DOMDocument $doc)
+    protected function findMetaDescription(\DOMDocument $doc)
     {
         $descriptionMap = [
             'description' => null,
@@ -86,13 +85,13 @@ class MetaService
 
     /**
      * @param array $currentMeta
-     * @param array $meta
+     * @param \DOMElement $meta
      * @param string $attribute
      * @param string $name
      *
      * @return string
      */
-    protected function getMetaContent(array $currentMeta, array $meta, $attribute, $name)
+    protected function getMetaContent(array $currentMeta, \DOMElement $meta, $attribute, $name)
     {
 
         if (!empty($currentMeta[$name])) {

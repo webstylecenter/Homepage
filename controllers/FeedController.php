@@ -60,3 +60,12 @@ $app->match('/page/{number}', function($number) use($app) {
         'nextPageNumber' => $number + 1,
     ]);
 });
+
+$app->match('/search/{query}', function($query) use($app) {
+    /** @var \Service\FeedService $feedService */
+    $feedService = $app['feedService'];
+    return $app['twig']->render('home/newsfeed.html.twig', [
+        'feedItems'=> $feedService->getFeedItems(10, null, null, $query),
+        'nextPageNumber' => 99999,
+    ]);
+});

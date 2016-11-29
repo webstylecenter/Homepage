@@ -73,6 +73,13 @@ body {
     border-radius:4px;
     opacity: 0.8;
     z-index:999;
+    display:none;
+}
+.totalbar .searchResults .used .listTitle {
+    color:black;
+}
+.totalbar .searchResults .jscroll-next {
+    display:none;
 }
 .mainContent {
     position: absolute;

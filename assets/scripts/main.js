@@ -145,7 +145,6 @@ function searchFeeds(searchQuery) {
     $('.searchResults').slideDown();
     $.ajax('/search/' + searchQuery)
         .done(function(data) {
-            console.log('Done loading...');
             var html = data.replace('<div class="list scroll">', '<div class="NewSearchlist">');
             html = html.replace('<a href="/page/2" class="listItem jscroll-next">Next page</a>', '');
             $('.searchResults').prepend(html);

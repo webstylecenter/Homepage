@@ -53,3 +53,4 @@ being viewed within an iFrame. Using this extension you can overide the
 restriction. However, there may be security concerns when enabling this
 extension, so please use at your own risk!
 
+[![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/webstylecenter/homepage)

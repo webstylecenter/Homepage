@@ -85,13 +85,13 @@ class MetaService
 
     /**
      * @param array $currentMeta
-     * @param \DOMElement $meta
+     * @param \DOMNode $meta
      * @param string $attribute
      * @param string $name
      *
      * @return string
      */
-    protected function getMetaContent(array $currentMeta, \DOMElement $meta, $attribute, $name)
+    protected function getMetaContent(array $currentMeta, \DOMNode $meta, $attribute, $name)
     {
 
         if (!empty($currentMeta[$name])) {

@@ -47,6 +47,7 @@ $( document ).ready(function() {
     })
 
    addListEventHandlers('list');
+   addListEventHandlers('searchResults');
 
 });
 

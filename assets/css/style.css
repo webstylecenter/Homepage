@@ -31,6 +31,7 @@ body {
     position:fixed;
     right:0;
     left:0;
+    z-index:3;
 }
 .title {
     display:inline-block;
@@ -55,6 +56,23 @@ body {
 .navbar a:hover {
     color:black;
     text-decoration: black;
+}
+.totalbar input[type="text"] {
+    position:fixed;
+    top:5px;
+    right:50px;
+    padding:3px 10px;
+}
+.totalbar .searchResults {
+    position: fixed;
+    top:30px;
+    right:50px;
+    width:400px;
+    border:1px solid gray;
+    background-color:white;
+    border-radius:4px;
+    opacity: 0.8;
+    z-index:999;
 }
 .mainContent {
     position: absolute;
@@ -184,6 +202,7 @@ iframe {
     left:0;
     width:100%;
     height:100%;
+    z-index:1;
 }
 
 /* Colors */

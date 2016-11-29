@@ -2,11 +2,7 @@
 
 namespace Entity;
 
-/**
- * Class UrlParse
- * @package Entity
- */
-class UrlParse
+class Meta
 {
     /**
      * @var string $url

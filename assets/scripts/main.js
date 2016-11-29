@@ -39,11 +39,11 @@ $( document ).ready(function() {
     });
 
     $('.parseUrlButton').click(function() {
-        parseUrl();
+        getUrlMetaData();
     });
 
     $('#inputUrl').on('blur', function() {
-        parseUrl();
+        getUrlMetaData();
     })
 
    addListEventHandlers('list');
@@ -106,13 +106,13 @@ function clearCreateForm() {
     $('#createItem').find("input[type=text], textarea").val("");
 }
 
-function parseUrl() {
+function getUrlMetaData() {
     var Url = $('#inputUrl').val();
 
     if (Url.length > 0) {
         $.ajax({
             method: "POST",
-            url: "/parse-url/",
+            url: "/meta/",
             data: { url: Url}
         })
             .done(function( data ) {

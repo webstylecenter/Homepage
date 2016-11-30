@@ -44,6 +44,7 @@
     margin-left:0;
     max-height:20px;
     white-space: nowrap;
+    display:none;
 }
 .mobilePin {
     background-image: url('../images/pin.png');

@@ -93,13 +93,12 @@ class MetaService
      */
     protected function getMetaContent(array $currentMeta, \DOMNode $meta, $attribute, $name)
     {
-
         if (!empty($currentMeta[$name])) {
             return $currentMeta[$name];
         }
 
         if ($meta->getAttribute($attribute) === $name) {
-           $currentMeta[$name] = $meta->getAttribute('content');
+            $currentMeta[$name] = $meta->getAttribute('content');
         }
 
         return $currentMeta[$name];

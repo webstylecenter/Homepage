@@ -104,8 +104,8 @@ class FeedService
         $fromDate = $fromDate ?: new \DateTime('@0');
         $feedItems = $this->database->fetchAll(
             'SELECT * FROM feed_data WHERE dateAdded > ? AND (title LIKE ? OR description LIKE ?) ORDER BY pinned DESC, dateAdded DESC LIMIT ?, ?',
-                [   $fromDate->format('Y-m-d H:i:s'),
-                    '%'.$searchQuery.'%', '%'.$searchQuery.'%',
+                [$fromDate->format('Y-m-d H:i:s'),
+                    '%' . $searchQuery . '%', '%' . $searchQuery . '%',
                     ($startFrom * $limit), $limit
                 ],
                 [

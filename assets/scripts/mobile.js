@@ -9,7 +9,6 @@ function addMobileListeners() {
     $('.listItem').click(function() {
 
         if ($(this).hasClass('Dumpert')) {
-            window.open($(this).data('url'));
             window.frames[0].stop();
             return;
         }
@@ -43,5 +42,11 @@ function addMobileListeners() {
                     $(pin).parent().toggleClass('pinned');
                 }
             });
+    });
+
+    $('.Dumpert').each(function() {
+        var title = $(this).find('.listTitle').text();
+        var url = $(this).data('url');
+        $(this).find('.listTitle').html('<a class="listTitle" href="' + url + '" target="_blank">' + title + '</a>');
     });
 }

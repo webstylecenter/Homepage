@@ -26,7 +26,7 @@ function refreshPage() {
     var time = $.now();
     tempImage.src = '/screensaver/images/' + time  + '.jpg';
     tempImage.onload = function() {
-        var randomNumber = Math.floor((Math.random() * 50) + 1);
+        var randomNumber = Math.floor((Math.random() * 24) + 1);
         $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")');
 
         /** global: newsItems */

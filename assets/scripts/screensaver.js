@@ -20,19 +20,28 @@ $(function() {
     updateWeather();
 });
 
+/** global: currentNewsItem */
+var currentNewsItem = 0;
+
 function refreshPage() {
     /** global: Image */
     var tempImage = new Image();
     var time = $.now();
     tempImage.src = '/screensaver/images/' + time  + '.jpg';
     tempImage.onload = function() {
-        var randomNumber = Math.floor((Math.random() * 24) + 1);
+
         $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")');
 
         /** global: newsItems */
-        $('.notActive .newsTitle').html(newsItems[randomNumber][0]);
-        $('.notActive .newsDescription').html(newsItems[randomNumber][1]);
+        $('.notActive .newsTitle').html(newsItems[currentNewsItem][0]);
+        $('.notActive .newsDescription').html(newsItems[currentNewsItem][1]);
         switchBackgrounds();
+
+        /** global: currentNewsItem */
+        currentNewsItem = currentNewsItem +1;
+        if (currentNewsItem > 24) {
+            currentNewsItem = 0;
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 .topbar {
     right:0;
     left:0;
+    top:0;
     position:fixed;
 }
 .list {
@@ -15,13 +16,11 @@
     font-size:8pt;
 }
 .contentContainer {
-    position: fixed;
     top:37px;
     left:0;
     right:0;
     bottom:0;
     display:none;
-    overflow:scroll;
     -webkit-overflow-scrolling:touch;
 }
 .backButton {

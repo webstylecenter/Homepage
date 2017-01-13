@@ -3,13 +3,6 @@
  */
 $( document ).ready(function() {
     addMobileListeners();
-
-    $( ".contentContainer" ).scroll(function() {
-        $( ".topbar" ).css('colorr', 'red');
-        var wind = $(".contentContainer").scrollTop();
-        console.log('test: ' + wind);
-
-    });
 });
 
 function addMobileListeners() {

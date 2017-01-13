@@ -3,7 +3,7 @@
 $app->match('/screensaver/', function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
-    $feedItems = $feedService->getFeedItems(50, (new DateTime())->setTime(-6, 0));
+    $feedItems = $feedService->getFeedItemsBySite('NOS');
 
     if (count($feedItems) === 0) {
         throw new \Exception('No feed items found within a period of the last six hours');

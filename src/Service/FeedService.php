@@ -123,6 +123,25 @@ class FeedService
     }
 
     /**
+     * @param $site
+     *
+     * @return array
+     */
+    public function getFeedItemsBySite($site)
+    {
+        $feedItems = $this->database->fetchAll(
+            'SELECT * FROM feed_data WHERE site = ? ORDER BY pinned DESC, dateAdded DESC LIMIT 25',
+            [$site], [\PDO::PARAM_STR]
+        );
+
+        $feed = array_map(function($feedItem) {
+            return $this->toEntity($feedItem);
+        }, $feedItems);
+
+        return $feed;
+    }
+
+    /**
      * @param FeedItem $feedItem
      * @param FeedAdapterInterface $feedAdapter
      */

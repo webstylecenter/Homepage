@@ -35,7 +35,7 @@ body {
 }
 .activeNewsItem {
     position:fixed;
-    bottom:200px;
+    bottom:190px;
     left:100px;
     right:400px;
     height:130px;
@@ -44,8 +44,8 @@ body {
 }
 .newsTitle {
     font-family: "LatoWebLight", "Helvetica Neue", "Arial";
-    font-size:64pt;
-    height:100px;
+    font-size:48pt;
+    height:80px;
     overflow:hidden;
 }
 .newsDescription {

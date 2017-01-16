@@ -14,7 +14,16 @@ $app->before(function() use ($app) {
             || $app['users'][$_SERVER['PHP_AUTH_USER']] !== $_SERVER['PHP_AUTH_PW']
         ) {
             header('WWW-Authenticate: Basic realm="Login required"');
-            return $app->json(['Message' => 'Not authorized'], 401);
+
+            echo $app['twig']->render('guests/index.html.twig', [
+                'lastUpdate' => [
+                    'css_main' => filemtime(__DIR__ . '/../assets/css/style.css'),
+                    'css_mobile' => filemtime(__DIR__ . '/../assets/css/mobile.css'),
+                    'js_main' => filemtime(__DIR__ . '/../assets/scripts/main.js'),
+                    'js_mobile' => filemtime(__DIR__ . '/../assets/scripts/mobile.js'),
+                ]
+            ]);
+            exit;
         }
 
         setcookie('jz.auth.succeed', true, time() + 31556926);

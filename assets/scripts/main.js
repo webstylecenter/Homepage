@@ -44,7 +44,7 @@ $( document ).ready(function() {
 
     $('#inputUrl').on('blur', function() {
         getUrlMetaData();
-    })
+    });
 
    addListEventHandlers('list');
 
@@ -61,9 +61,21 @@ $( document ).ready(function() {
 
     $('.searchBox').on('blur', function() {
         $('.searchResults').slideUp();
-    })
+    });
 
 
+    $('.specialTxt').each(function() {
+
+        var p1 = 'peter';
+        var p3 = 'vdam';
+        var p2 = '.nl';
+        var p4 = 'mail';
+        var p5 = '@';
+        var p6 = 'to';
+
+        $(this).html('<a href="' + p4 + p6 + ':' + p1 + p5 + p1 + p3 + p2 + '">' + p1 + p5 + p1 + p3 + p2 + '</a>');
+
+    });
 
 });
 

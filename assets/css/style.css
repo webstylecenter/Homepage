@@ -235,7 +235,7 @@ iframe {
     padding:25px;
     background: linear-gradient(135deg, #f7f7f7 0%, #ae9490 100%);
 }
-.welcomePage {
+.welcomePage, .guestsWelcomePage {
     position:absolute;
     top:0;
     right:0;
@@ -293,4 +293,12 @@ iframe {
 }
 #inputUrl {
     width:85%;
+}
+
+.guestsWelcomeInfo {
+    width:40%;
+    margin:10% auto;
+}
+.guestsWelcomeInfo a {
+    color: #7b0300;
 }

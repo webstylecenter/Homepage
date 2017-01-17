@@ -13,7 +13,7 @@ $app->match('/screensaver/', function() use($app) {
     $weatherService = $app['weatherService'];
 
     return $app['twig']->render('screensaver/index.html.twig', [
-        'forecast' => $weatherService->getForecastList(),
+        'forecast' => $weatherService,
         'feedItems'=> $feedItems,
         'firstFeedItem' => $feedItems[0],
         'secondFeedItem' => $feedItems[1],

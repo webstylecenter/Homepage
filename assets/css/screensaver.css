@@ -20,13 +20,14 @@ body {
 }
 #weatherIcon {
     position:fixed;
-    top:40px;
-    right:270px;
+    top:0;
+    right:200px;
+    padding:0;
 }
 .temperature {
     position: fixed;
-    top:110px;
-    right:130px;
+    top:40px;
+    right:40px;
     font-size:36pt;
     margin:0;
     border-bottom:0;
@@ -35,25 +36,51 @@ body {
 }
 .activeNewsItem {
     position:fixed;
-    bottom:190px;
-    left:100px;
-    right:400px;
-    height:130px;
+    bottom:0;
+    left:0;
+    right:0;
     overflow:hidden;
     text-overflow: ellipsis;
+    height:170px;
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 50%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 50%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to top,  rgba(0,0,0,0.65) 50%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
 }
 .newsTitle {
     font-family: "LatoWebLight", "Helvetica Neue", "Arial";
     font-size:48pt;
-    height:80px;
-    overflow:hidden;
+    padding:40px 0 0 30px;
+    display:inline-block;
 }
 .newsDescription {
     font-size:16pt;
+    padding:0 10px 10px 30px;
+    display:block;
+    max-width:80%;
+    max-height:32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .currentTime {
     position: fixed;
-    right:130px;
-    bottom:190px;
+    right:30px;
+    bottom:20px;
     font-size:72pt;
+}
+.newsSource {
+    color:white;
+    padding:5px 10px;
+    display:inline-block;
+    position:fixed;
+    bottom:135px;
+    font-size:16pt;
+    margin-left:30px;
+}
+.NOS {
+    background-color:red;
+}
+.hidden {
+    display:none;
 }

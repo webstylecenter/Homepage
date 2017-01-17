@@ -6,7 +6,7 @@ $(function() {
         setTimeout(function() {
             refreshPage();
         }, 5 * 1000);
-    }, 60 * 1000);
+    }, 3 * 60 * 1000);
 
     setInterval(function() {
         updateTime();
@@ -16,8 +16,17 @@ $(function() {
         updateWeather();
     }, 5 * 60 * 1000);
 
+    setInterval(function() {
+        nextNewsItem();
+    }, 20 * 1000);
+
     refreshPage();
     updateWeather();
+
+    setTimeout(function() {
+        showItems();
+    }, 3000);
+
 });
 
 /** global: currentNewsItem */
@@ -29,19 +38,8 @@ function refreshPage() {
     var time = $.now();
     tempImage.src = '/screensaver/images/' + time  + '.jpg';
     tempImage.onload = function() {
-
         $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")');
-
-        /** global: newsItems */
-        $('.notActive .newsTitle').html(newsItems[currentNewsItem][0]);
-        $('.notActive .newsDescription').html(newsItems[currentNewsItem][1]);
         switchBackgrounds();
-
-        /** global: currentNewsItem */
-        currentNewsItem = currentNewsItem +1;
-        if (currentNewsItem > 24) {
-            currentNewsItem = 0;
-        }
     }
 }
 
@@ -64,4 +62,43 @@ function updateTime() {
 
 function updateWeather() {
     $('.screensaverWeatherContent').load('/weather/current/')
+}
+
+function showItems() {
+    console.log('ShowItems');
+    $('.activeNewsItem').slideToggle('slow');
+    $('.newsSource').slideToggle('slow');
+    $('.newsTitle').slideToggle('slow');
+    $('.newsDescription').slideToggle('slow');
+    $('.currentTime').slideToggle('slow');
+}
+
+function nextNewsItem() {
+    hideNewsItem();
+    setTimeout(function() {
+        showNextNewsItem();
+    }, 1000);
+}
+
+function hideNewsItem() {
+    $('.newsSource').slideToggle('slow');
+    $('.newsTitle').slideToggle('slow');
+    $('.newsDescription').slideToggle('slow');
+}
+
+function showNextNewsItem() {
+    /** global: currentNewsItem */
+    currentNewsItem = currentNewsItem +1;
+    if (currentNewsItem > 24) {
+        currentNewsItem = 0;
+    }
+
+    /** global: newsItems */
+    $('.newsTitle').html(newsItems[currentNewsItem][0]);
+    $('.newsDescription').html(newsItems[currentNewsItem][1]);
+
+    $('.newsSource').slideToggle('slow');
+    $('.newsTitle').slideToggle('slow');
+    $('.newsDescription').slideToggle('slow');
+
 }

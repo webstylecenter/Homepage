@@ -20,32 +20,22 @@
 
 {% block body %}
     <div class="screenSaverPage">
-        <div class="screenSaver active">
-            <div class="activeNewsItem">
-                <div class="newsTitle">
-                    {{ firstFeedItem.title }}
-                </div>
-
-                <div class="newsDescription">
-                    {{ firstFeedItem.description }}
-                </div>
-            </div>
-        </div>
-        <div class="screenSaver layer2 notActive">
-            <div class="activeNewsItem">
-                <div class="newsTitle">
-                    {{ secondFeedItem.title }}
-                </div>
-
-                <div class="newsDescription">
-                    {{ secondFeedItem.description }}
-                </div>
-            </div>
-        </div>
-
+        <div class="screenSaver active"></div>
+        <div class="screenSaver layer2 notActive"></div>
         <div class="screensaverWeatherContent"></div>
 
-        <div class="currentTime">
+        <div class="activeNewsItem hidden">
+            <div class="newsSource NOS hidden">
+                NOS
+            </div>
+            <div class="newsTitle hidden">
+                {{ secondFeedItem.title }}
+            </div>
+            <div class="newsDescription hidden">
+                {{ secondFeedItem.description }}
+            </div>
+        </div>
+        <div class="currentTime hidden">
             {{ "now"|date("H:i") }}
         </div>
     </div>

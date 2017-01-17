@@ -11,6 +11,7 @@
         var newsItems = [];
         {% for item in feedItems %}
             newsItems.push([
+                "{{ item.site|striptags }}",
                 "{{ item.title|striptags }}",
                 "{{ item.description|truncate(120, true) }}"
             ]);
@@ -24,18 +25,18 @@
         <div class="screenSaver layer2 notActive"></div>
         <div class="screensaverWeatherContent"></div>
 
-        <div class="activeNewsItem hidden">
-            <div class="newsSource NOS hidden">
-                NOS
+        <div class="activeNewsItem hideOnStart">
+            <div class="newsSource newsBar{{ firstFeedItem.site }} hideOnStart">
+                {{ firstFeedItem.site }}
             </div>
-            <div class="newsTitle hidden">
-                {{ secondFeedItem.title }}
+            <div class="newsTitle hideOnStart">
+                {{ firstFeedItem.title }}
             </div>
-            <div class="newsDescription hidden">
-                {{ secondFeedItem.description }}
+            <div class="newsDescription hideOnStart">
+                {{ firstFeedItem.description }}
             </div>
         </div>
-        <div class="currentTime hidden">
+        <div class="currentTime hideOnStart">
             {{ "now"|date("H:i") }}
         </div>
     </div>

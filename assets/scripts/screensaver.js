@@ -65,7 +65,6 @@ function updateWeather() {
 }
 
 function showItems() {
-    console.log('ShowItems');
     $('.activeNewsItem').slideToggle('slow');
     $('.newsSource').slideToggle('slow');
     $('.newsTitle').slideToggle('slow');
@@ -89,16 +88,17 @@ function hideNewsItem() {
 function showNextNewsItem() {
     /** global: currentNewsItem */
     currentNewsItem = currentNewsItem +1;
-    if (currentNewsItem > 24) {
+    if (currentNewsItem > 49) {
         currentNewsItem = 0;
     }
 
     /** global: newsItems */
-    $('.newsTitle').html(newsItems[currentNewsItem][0]);
-    $('.newsDescription').html(newsItems[currentNewsItem][1]);
+    $('.newsSource').html(newsItems[currentNewsItem][0]);
+    $('.newsSource').attr('class', 'newsSource newsBar' + newsItems[currentNewsItem][0]);
+    $('.newsTitle').html(newsItems[currentNewsItem][1]);
+    $('.newsDescription').html(newsItems[currentNewsItem][2]);
 
     $('.newsSource').slideToggle('slow');
     $('.newsTitle').slideToggle('slow');
     $('.newsDescription').slideToggle('slow');
-
 }

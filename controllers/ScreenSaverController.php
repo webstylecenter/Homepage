@@ -3,7 +3,9 @@
 $app->match('/screensaver/', function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
-    $feedItems = $feedService->getFeedItemsBySite('NOS');
+    $feedItems = $feedService->getFeedItemsBySites([
+    	'NOS', 'Geenstijl', 'Neowin', 'Gamersnet', 'iDownloadblog', 'MajorNelson'
+    ]);
 
     if (count($feedItems) === 0) {
         throw new \Exception('No feed items found within a period of the last six hours');
@@ -16,7 +18,6 @@ $app->match('/screensaver/', function() use($app) {
         'forecast' => $weatherService,
         'feedItems'=> $feedItems,
         'firstFeedItem' => $feedItems[0],
-        'secondFeedItem' => $feedItems[1],
         'lastUpdate' => [
             'css_main' => filemtime(__DIR__ . '/../assets/css/style.css'),
             'css_mobile' => filemtime(__DIR__ . '/../assets/css/mobile.css'),

@@ -123,16 +123,17 @@ class FeedService
     }
 
     /**
-     * @param $site
+     * @param array $sites
      *
      * @return array
      */
-    public function getFeedItemsBySite($site)
+    public function getFeedItemsBySites(array $sites)
     {
-        $feedItems = $this->database->fetchAll(
-            'SELECT * FROM feed_data WHERE site = ? ORDER BY pinned DESC, dateAdded DESC LIMIT 25',
-            [$site], [\PDO::PARAM_STR]
-        );
+	    $params = str_repeat('?,', count($sites) - 1) . '?';
+	    $feedItems = $this->database->fetchAll(
+    		'SELECT * FROM feed_data WHERE site IN (' . $params . ') ORDER BY pinned DESC, dateAdded DESC LIMIT 50',
+		    $sites
+	    );
 
         $feed = array_map(function($feedItem) {
             return $this->toEntity($feedItem);

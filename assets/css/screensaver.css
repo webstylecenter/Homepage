@@ -52,6 +52,9 @@ body {
     font-size:48pt;
     padding:40px 0 0 30px;
     display:inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .newsDescription {
     font-size:16pt;
@@ -78,9 +81,17 @@ body {
     font-size:16pt;
     margin-left:30px;
 }
-.NOS {
-    background-color:red;
-}
-.hidden {
+.hideOnStart {
     display:none;
 }
+.newsBariDownloadBlog { background-color:gray; }
+.newsBarGeenStijl { background-color: #f09; }
+.newsBarRTLnieuws { background-color: #4c9ac1; }
+.newsBarGamersnet { background-color: #0d265e; }
+.newsBarMajorNelson { background-color: #118411; }
+.newsBarNuTech { background-color: #5100af; }
+.newsBarNeowin { background-color: #1e5078;}
+.newsBarDumpert { background-color: #66c221; }
+.newsBaruserInput { background-color: #ffbe3f; }
+.newsBarNOS { background-color: #c00; }
+.newsBarAngryJoe { background-color: #cc6b4c; }

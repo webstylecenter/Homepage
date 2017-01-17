@@ -4,7 +4,7 @@ $app->match('/screensaver/', function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
     $feedItems = $feedService->getFeedItemsBySites([
-    	'NOS', 'Geenstijl', 'Neowin', 'Gamersnet', 'iDownloadblog', 'MajorNelson'
+        'NOS', 'Geenstijl', 'Neowin', 'Gamersnet', 'iDownloadblog', 'MajorNelson'
     ]);
 
     if (count($feedItems) === 0) {

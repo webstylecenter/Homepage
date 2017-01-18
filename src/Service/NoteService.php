@@ -61,25 +61,44 @@ class NoteService
     {
         try {
             if ($id == null) {
-                echo 'CreateNote';
-                $this->database->insert('notes', [
-                    'id'=> null,
-                    'note' => $note,
-                    'position' => null,
-                ]);
+                $this->insertNoteToDatabase($id, $note, $position);
             } else {
-                $this->database->update('notes', [
-                    'note' => $note,
-                    'position' => $position
-                ], [
-                    'id' => $id
-                ]);
+                $this->updateNoteInDatabase($id, $note, $position);
             }
 
             return true;
         } catch (PDOException $e) {
             throw new \Exception($e);
         }
+    }
+
+    /**
+     * @param int $id
+     * @param $note
+     * @param int $position
+     */
+    public function insertNoteToDatabase($id, $note, $position)
+    {
+        $this->database->insert('notes', [
+            'id'=> null,
+            'note' => $note,
+            'position' => null,
+        ]);
+    }
+
+    /**
+     * @param int $id
+     * @param $note
+     * @param int $position
+     */
+    public function updateNoteInDatabase($id, $note, $position)
+    {
+        $this->database->update('notes', [
+            'note' => $note,
+            'position' => $position
+        ], [
+            'id' => $id
+        ]);
     }
 
     /**

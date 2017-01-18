@@ -26,9 +26,9 @@ class NoteService
     }
 
     /**
-     * @param $id
+     * @param null $id
      *
-     * @return string
+     * @return Note
      */
     public function loadNote($id = null)
     {
@@ -60,7 +60,6 @@ class NoteService
     public function saveNote($id = null, $note, $position = null)
     {
         try {
-
             if ($id == null) {
                 echo 'CreateNote';
                 $this->database->insert('notes', [
@@ -69,7 +68,6 @@ class NoteService
                     'position' => null,
                 ]);
             } else {
-                echo 'DoesUpdate'.$id;
                 $this->database->update('notes', [
                     'note' => $note,
                     'position' => $position

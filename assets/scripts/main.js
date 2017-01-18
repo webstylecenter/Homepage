@@ -63,6 +63,9 @@ $( document ).ready(function() {
         $('.searchResults').slideUp();
     });
 
+    $('.note').on('blur', function() {
+       saveNote($(this));
+    });
 
     $('.specialTxt').each(function() {
 
@@ -162,4 +165,33 @@ function searchFeeds(searchQuery) {
             $('.searchResults').prepend(html);
             addListEventHandlers('NewSearchlist');
         });
+}
+
+function saveNote(el) {
+    var id = $(el).attr('data-id');
+    var position = $(el).attr('data-position');
+    var note = $(el).val();
+
+    $.ajax({
+        method: "POST",
+        url: "/note/save/",
+        data: {
+            id: id,
+            position: position,
+            note: note
+        },
+        beforeSend: function() {
+            $(el).css('color', '#303030');
+        }
+    })
+        .done(function() {
+            $(el).css('color', 'black');
+        })
+        .fail(function() {
+            $(el).css('color', 'red');
+        });
+}
+
+function openWelcomePage() {
+    $('iframe').attr('src', '/welcome/');
 }

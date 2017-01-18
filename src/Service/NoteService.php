@@ -61,7 +61,7 @@ class NoteService
     {
         try {
             if ($id == null) {
-                $this->insertNoteToDatabase($id, $note, $position);
+                $this->insertNoteToDatabase($note);
             } else {
                 $this->updateNoteInDatabase($id, $note, $position);
             }
@@ -73,11 +73,9 @@ class NoteService
     }
 
     /**
-     * @param int $id
      * @param $note
-     * @param int $position
      */
-    public function insertNoteToDatabase($id, $note, $position)
+    public function insertNoteToDatabase($note)
     {
         $this->database->insert('notes', [
             'id'=> null,

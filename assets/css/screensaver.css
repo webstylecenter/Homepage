@@ -55,6 +55,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-right:400px;
 }
 .newsDescription {
     font-size:16pt;
@@ -65,6 +66,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-right:400px;
 }
 .currentTime {
     position: fixed;

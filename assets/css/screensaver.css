@@ -33,6 +33,11 @@ body {
     border-bottom:0;
     width:auto;
     padding-bottom:0;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
 }
 .activeNewsItem {
     position:fixed;

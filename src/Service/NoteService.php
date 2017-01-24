@@ -53,50 +53,16 @@ class NoteService
      * @param null $id
      * @param $note
      * @param null $position
-     *
-     * @return bool
-     * @throws \Exception
      */
     public function saveNote($id = null, $note, $position = null)
     {
-        try {
-            if ($id == null) {
-                $this->insertNoteToDatabase($note);
-            } else {
-                $this->updateNoteInDatabase($id, $note, $position);
-            }
+        $persist = $id === null ? 'insert' : 'update';
+        $identifier = $id !== null ? ['id' => $id] : [];
 
-            return true;
-        } catch (PDOException $e) {
-            throw new \Exception($e);
-        }
-    }
-
-    /**
-     * @param $note
-     */
-    public function insertNoteToDatabase($note)
-    {
-        $this->database->insert('notes', [
-            'id'=> null,
+        $this->database->$persist('notes', [
             'note' => $note,
-            'position' => null,
-        ]);
-    }
-
-    /**
-     * @param int $id
-     * @param $note
-     * @param int $position
-     */
-    public function updateNoteInDatabase($id, $note, $position)
-    {
-        $this->database->update('notes', [
-            'note' => $note,
-            'position' => $position
-        ], [
-            'id' => $id
-        ]);
+            'position' => $position,
+        ], $identifier);
     }
 
     /**

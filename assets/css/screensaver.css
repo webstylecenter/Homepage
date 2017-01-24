@@ -16,6 +16,7 @@ body {
     background-size:cover;
     background-repeat:no-repeat;
     background-position: center;
+    image-orientation: from-image;
 }
 .layer2 {
     z-index:-2;

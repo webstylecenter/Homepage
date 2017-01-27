@@ -23,7 +23,10 @@ $( document ).ready(function() {
             })
     });
 
-    $('.weatherContent').load('/weather/detail/');
+    $('.weatherContent').load('/weather/detail/').on('click', function() {
+        $('.note').slideToggle('slow');
+        $('.feedCounter').slideToggle('slow');
+    });;
 
     $('.scroll').jscroll({
         padding: 150,
@@ -51,15 +54,11 @@ $( document ).ready(function() {
     $('.searchBox').on('keyup', function() {
        searchFeeds($(this).val());
        addListEventHandlers('searchResults');
-    });
-
-    $('.searchBox').on('click', function() {
+    }).on('click', function() {
         if ($(this).val() !== '') {
             $('.searchResults').slideDown();
         }
-    });
-
-    $('.searchBox').on('blur', function() {
+    }).on('blur', function() {
         $('.searchResults').slideUp();
     });
 
@@ -68,16 +67,13 @@ $( document ).ready(function() {
     });
 
     $('.specialTxt').each(function() {
-
         var p1 = 'peter';
         var p3 = 'vdam';
         var p2 = '.nl';
         var p4 = 'mail';
         var p5 = '@';
         var p6 = 'to';
-
         $(this).html('<a href="' + p4 + p6 + ':' + p1 + p5 + p1 + p3 + p2 + '">' + p1 + p5 + p1 + p3 + p2 + '</a>');
-
     });
 
 });
@@ -92,8 +88,7 @@ function addListEventHandlers(container) {
         if (url == '') { url = 'nourl.php'; }
 
         $('iframe').attr('src', url);
-        $('.pageLinkToUrl').text(url);
-        $('.pageLinkToUrl').attr('href', url);
+        $('.pageLinkToUrl').text(url).attr('href', url);
     });
 
     $('.' + container + ' .title a').click(function() {
@@ -156,8 +151,7 @@ function getUrlMetaData() {
 }
 
 function searchFeeds(searchQuery) {
-    $('.searchResults').html("");
-    $('.searchResults').slideDown();
+    $('.searchResults').html("").slideDown();
     $.ajax('/search/' + searchQuery)
         .done(function(data) {
             var html = data.replace('<div class="list scroll">', '<div class="NewSearchlist">');

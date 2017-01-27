@@ -107,6 +107,7 @@ body {
     overflow:hidden;
     font-size:9pt;
     margin-top:20px;
+    display:none;
 }
 .feedCounterItem {
     display:inline-block;
@@ -242,10 +243,28 @@ iframe {
     bottom:0;
     left:0;
     text-align:center;
-    background-image:url('../images/background.jpg');
+    z-index:0;
+}
+.welcomePageBackground {
+    position:absolute;
+    top:-15px;
+    right:-15px;
+    bottom:-15px;
+    left:-15px;
+    background-image:url('/screensaver/images/Welcome.jpg');
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center;
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+    z-index:-1;
+}
+.weatherContent {
+    height:440px;
+    mix-blend-mode: difference;
 }
 .weatherInfo {
     width:400px;
@@ -313,4 +332,9 @@ iframe {
     border:1px solid black;
     border-radius:0;
     padding:5px;
+    display:none;
+    background-color:rgba(256, 256, 256, 0.8);
+}
+textarea:focus {
+    outline: none;
 }

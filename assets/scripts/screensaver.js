@@ -93,12 +93,10 @@ function showNextNewsItem() {
     }
 
     /** global: newsItems */
-    $('.newsSource').html(newsItems[currentNewsItem][0]);
-    $('.newsSource').attr('class', 'newsSource newsBar' + newsItems[currentNewsItem][0]);
-    $('.newsTitle').html(newsItems[currentNewsItem][1]);
-    $('.newsDescription').html(newsItems[currentNewsItem][2]);
+    $('.newsSource').html(newsItems[currentNewsItem][0])
+        .attr('class', 'newsSource newsBar' + newsItems[currentNewsItem][0])
+        .slideToggle('slow');
 
-    $('.newsSource').slideToggle('slow');
-    $('.newsTitle').slideToggle('slow');
-    $('.newsDescription').slideToggle('slow');
+    $('.newsTitle').html(newsItems[currentNewsItem][1]).slideToggle('slow');
+    $('.newsDescription').html(newsItems[currentNewsItem][2]).slideToggle('slow');
 }

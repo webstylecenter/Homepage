@@ -47,6 +47,7 @@ $app->match('/refresh/{date}', function($date) use($app) {
         'html' => $app['twig']->render('home/newsfeed.html.twig', [
                     'feedItems'=> $feedService->getFeedItems(999, new \DateTime($date)),
                     'nextPageNumber' => 50000,
+                    'addToChecklist' => '',
                 ]),
         'refreshDate' => (new \DateTime())->format('Y-m-d H:i:s'),
     ]);
@@ -58,6 +59,7 @@ $app->match('/page/{number}', function($number) use($app) {
     return $app['twig']->render('home/newsfeed.html.twig', [
         'feedItems'=> $feedService->getFeedItems(50, null, $number),
         'nextPageNumber' => $number + 1,
+        'addToChecklist' => '',
     ]);
 });
 
@@ -67,5 +69,6 @@ $app->match('/search/{query}', function($query) use($app) {
     return $app['twig']->render('home/newsfeed.html.twig', [
         'feedItems'=> $feedService->getFeedItems(10, null, null, $query),
         'nextPageNumber' => 99999,
+        'addToChecklist' => $query,
     ]);
 });

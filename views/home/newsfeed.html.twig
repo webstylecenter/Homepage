@@ -1,3 +1,9 @@
+{% if addToChecklist != '' %}
+    <div class="addToChecklist" onclick="addToChecklistFromSearch(this)">
+        Add "<b>{{ addToChecklist }}</b>" to checklist
+    </div>
+{% endif %}
+
 <div class="list scroll">
     {% for item in feedItems %}
         <div class="listItem {{ item.viewed ? 'used ' : '' }}{{ item.pinned ? 'pinned ' : '' }}{{ item.site }}"

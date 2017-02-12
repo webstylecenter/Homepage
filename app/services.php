@@ -25,3 +25,4 @@ $app['twig'] = $app->extend('twig', function(\Twig_Environment $twig, $app) {
 $app->register(new \ServiceProvider\FeedServiceProvider());
 $app->register(new \ServiceProvider\WeatherServiceProvider());
 $app->register(new \ServiceProvider\NoteServiceProvider());
+$app->register(new \ServiceProvider\ChecklistServiceProvider());

@@ -76,6 +76,14 @@ $( document ).ready(function() {
         $(this).html('<a href="' + p4 + p6 + ':' + p1 + p5 + p1 + p3 + p2 + '">' + p1 + p5 + p1 + p3 + p2 + '</a>');
     });
 
+    $('.checklistAdder input[type="button"]').on('click', function() {
+        addToChecklist($('.checklistAdder input[type="text"]').val(), true);
+    });
+
+    $('.checklistItem').on('click', function() {
+       checkItem(this);
+    });
+
 });
 
 function addListEventHandlers(container) {
@@ -188,4 +196,35 @@ function saveNote(el) {
 
 function openWelcomePage() {
     $('iframe').attr('src', '/welcome/');
+}
+
+function addToChecklistFromSearch(el) {
+    var value = $(el).find('b').html();
+    addToChecklist(value, false);
+    $(el).html('<b>' + value + ' added to checklist!');
+    $('.searchBox').val('');
+}
+
+function addToChecklist(value, performRefresh) {
+    $.ajax({
+        method: "POST",
+        url: "/checklist/add/",
+        data: {
+            item: value
+        }
+    })
+    .done(function() {
+        if (performRefresh) {
+            location.reload();
+        }
+        return true;
+    })
+    .fail(function() {
+        alert('Adding ' + value + ' to checklist failed');
+        return false;
+    });
+}
+
+function checkItem(el) {
+    alert('Function not yet available!');
 }

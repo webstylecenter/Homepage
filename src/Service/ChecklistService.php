@@ -63,10 +63,12 @@ class ChecklistService
             $this->database->insert('checklist', [
                 'item' => $checklistItem,
                 'checked' => $checked,
+                'lastUpdated' => date('Y-m-d H:i:s')
             ]);
         } else {
             $this->database->update('checklist', [
                 'checked' => $checked,
+                'lastUpdated' => date('Y-m-d H:i:s')
             ], ['id' => $id]);
         }
 
@@ -112,7 +114,7 @@ class ChecklistService
     public function getItems($checked)
     {
         $checklistItems = $this->database->fetchAll(
-            'SELECT * FROM checklist WHERE checked = ? LIMIT 0, 25',
+            'SELECT * FROM checklist WHERE checked = ? ORDER BY lastUpdated DESC LIMIT 0, 25',
             [$checked], [\PDO::PARAM_BOOL]
         );
 

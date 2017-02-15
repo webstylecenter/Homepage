@@ -8,6 +8,7 @@
 
 $app->match('/checklist/', function() use($app) {
 
+    /** @var \Service\ChecklistService $checklistService */
     $checklistService = $app['checklistService'];
     $todos = $checklistService->getTodos();
     $finished = $checklistService->getFinished();

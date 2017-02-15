@@ -77,7 +77,7 @@ $( document ).ready(function() {
     });
 
     $('.checklistAdder input[type="button"]').on('click', function() {
-        addToChecklist($('.checklistAdder input[type="text"]').val(), true);
+        addToChecklist($('.checklistAdder input[type="text"]').val());
     });
 
     $('.checklistItem').on('click', function() {
@@ -200,31 +200,46 @@ function openWelcomePage() {
 
 function addToChecklistFromSearch(el) {
     var value = $(el).find('b').html();
-    addToChecklist(value, false);
+    addToChecklist(value);
     $(el).html('<b>' + value + ' added to checklist!');
     $('.searchBox').val('');
 }
 
-function addToChecklist(value, performRefresh) {
-    $.ajax({
-        method: "POST",
-        url: "/checklist/add/",
-        data: {
-            item: value
-        }
-    })
-    .done(function() {
-        if (performRefresh) {
-            location.reload();
-        }
-        return true;
-    })
-    .fail(function() {
-        alert('Adding ' + value + ' to checklist failed');
-        return false;
-    });
+function addToChecklist(value) {
+    postToChecklist({item:value});
 }
 
 function checkItem(el) {
-    alert('Function not yet available!');
+    var id = $(el).data('database-id');
+    var newCheckedState = $(el).is(':checked');
+
+    postToChecklist({
+        id: id,
+        checked: newCheckedState
+    });
+
+}
+
+function postToChecklist(data) {
+
+    console.log(data);
+    $.ajax({
+        method: "POST",
+        url: "/checklist/add/",
+        data: data
+    })
+        .done(function(data) {
+            $('.checklists').html(data);
+            $('.checklistAdder input[type="text"]').val('');
+
+            $('.checklistItem').on('click', function() {
+                checkItem(this);
+            });
+
+            return true;
+        })
+        .fail(function() {
+            alert('Adding ' + value + ' to checklist failed');
+            return false;
+        });
 }

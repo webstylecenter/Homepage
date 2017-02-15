@@ -70,17 +70,19 @@
     font-size:12pt;
 }
 .checklistAdder input[type="text"] {
-    width:65%;
+    width:79%;
     padding:5px;
     box-sizing: border-box;
-    border:1px solid gray;
+    border:0;
+    background-color: #e2e2e2;
 }
 .checklistAdder input[type="button"] {
     width:20%;
-    padding:6px 5px;
+    padding:5px 5px;
     border:0px;
-    background-color:gray;
+    background-color: #cbcbcb;
     box-sizing: border-box;
+    -webkit-appearance: none;
 }
 .checklistContent ul {
     list-style: none;

@@ -26,7 +26,6 @@ $app->match('/checklist/', function() use($app) {
 
 $app->match('/checklist/add/', function() use($app) {
 
-
     /** @var \Service\ChecklistService $checklistService */
     $checklistService = $app['checklistService'];
     $checklistService->saveChecklistItem(
@@ -35,5 +34,11 @@ $app->match('/checklist/add/', function() use($app) {
         isset($_POST['checked']) && !empty($_POST['checked']) ? $_POST['checked'] : false
     );
 
-    return 'Done';
+    $todos = $checklistService->getTodos();
+    $finished = $checklistService->getFinished();
+
+    return $app['twig']->render('checklist/checklist.html.twig', [
+        'todos' => $todos,
+        'finished' => $finished
+    ]);
 });

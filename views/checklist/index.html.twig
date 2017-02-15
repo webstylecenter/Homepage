@@ -19,23 +19,9 @@
             <input type="text" name="item" /> <input type="button" value="Add" />
         </div>
 
-        <ul>
-            {% for checklistItem in todos %}
-                <li>
-                    <input class="checklistItem" type="checkbox" id="todo{{ checklistItem.id }}" />
-                    <label for="todo{{ checklistItem.id }}">{{ checklistItem.item }}</label>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="checklists">
+            {% include 'checklist/checklist.html.twig' with {'todos': todos, 'finished': finished} %}
+        </div>
 
-        <h2>Done</h2>
-        <ul class="done">
-            {% for checklistItem in finished %}
-                <li>
-                    <input class="checklistItem" type="checkbox" id="todo{{ checklistItem.id }}" checked="checked" />
-                    <label for="todo{{ checklistItem.id }}">{{ checklistItem.item }}</label>
-                </li>
-            {% endfor %}
-        </ul>
     </div>
 {% endblock %}

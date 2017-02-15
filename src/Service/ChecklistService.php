@@ -57,12 +57,19 @@ class ChecklistService
     public function saveChecklistItem($id = null, $checklistItem, $checked = null)
     {
         $persist = $id === null ? 'insert' : 'update';
-        $identifier = $id !== null ? ['id' => $id] : [];
+        if ($checked === 'true') { $checked = 1; }
 
-        $this->database->$persist('checklist', [
-            'item' => $checklistItem,
-            'checked' => $checked,
-        ], $identifier);
+        if ($persist === 'insert') {
+            $this->database->insert('checklist', [
+                'item' => $checklistItem,
+                'checked' => $checked,
+            ]);
+        } else {
+            $this->database->update('checklist', [
+                'checked' => $checked,
+            ], ['id' => $id]);
+        }
+
     }
 
     /**

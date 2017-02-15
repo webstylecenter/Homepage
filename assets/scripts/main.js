@@ -222,7 +222,6 @@ function checkItem(el) {
 
 function postToChecklist(data) {
 
-    console.log(data);
     $.ajax({
         method: "POST",
         url: "/checklist/add/",
@@ -239,7 +238,7 @@ function postToChecklist(data) {
             return true;
         })
         .fail(function() {
-            alert('Adding ' + value + ' to checklist failed');
+            alert('Updating checklist failed!');
             return false;
         });
 }

@@ -83,6 +83,7 @@
     background-color: #cbcbcb;
     box-sizing: border-box;
     -webkit-appearance: none;
+    float:right;
 }
 .checklistContent ul {
     list-style: none;

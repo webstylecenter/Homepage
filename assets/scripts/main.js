@@ -221,24 +221,15 @@ function checkItem(el) {
 }
 
 function postToChecklist(data) {
+    $.post("/checklist/add/", data).then(function(data) {
+        $('.checklists').html(data);
+        $('.checklistAdder input[type="text"]').val('');
 
-    $.ajax({
-        method: "POST",
-        url: "/checklist/add/",
-        data: data
-    })
-        .done(function(data) {
-            $('.checklists').html(data);
-            $('.checklistAdder input[type="text"]').val('');
-
-            $('.checklistItem').on('click', function() {
-                checkItem(this);
-            });
-
-            return true;
-        })
-        .fail(function() {
-            alert('Updating checklist failed!');
-            return false;
+        $('.checklistItem').on('click', function() {
+            checkItem(this);
         });
+    }).catch(function(error) {
+        alert('Updating checklist failed!');
+        return false;
+    });
 }

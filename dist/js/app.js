@@ -225,3 +225,163 @@ function postToChecklist(data) {
         return false;
     });
 }
+
+/**
+ * Created by petervandam on 07/11/2016.
+ */
+$( document ).ready(function() {
+    addMobileListeners();
+});
+
+function addMobileListeners() {
+    $('.listItem').click(function() {
+
+        if ($(this).hasClass('Dumpert')) {
+            window.frames[0].stop();
+            return;
+        }
+
+        $('.list').hide();
+        $('.title').hide();
+        $('.contentContainer').show();
+
+        $('.backButton').css('display', 'inline-block');
+        $('.pageLinkToUrl').show();
+        $('.navbar').css('display', 'inline-block');
+    });
+
+    $('.backButton').click(function() {
+        $('.list').show();
+        $('.title').show();
+        $('.contentContainer').hide();
+
+        $('.backButton').hide();
+        $('.pageLinkToUrl').hide();
+        $('.navbar').hide();
+
+        $('iframe').attr('src', 'about:blank');
+    });
+
+    $('.listItem').hammer().on("swiperight", function() {
+        var pin = $(this).find('.pin');
+        $.ajax("/pin/" +$(pin).data('pin-id'))
+            .done(function(response) {
+                if (response == '1') {
+                    $(pin).parent().toggleClass('pinned');
+                }
+            });
+    });
+
+    $('.Dumpert').each(function() {
+        var title = $(this).find('.listTitle').text();
+        var url = $(this).data('url');
+        $(this).find('.listTitle').html('<a class="listTitle" href="' + url + '" target="_blank">' + title + '</a>');
+    });
+}
+
+/**
+ * Created by petervandam on 18/11/2016.
+ */
+$(function() {
+    setInterval(function() {
+        setTimeout(function() {
+            refreshPage();
+        }, 5 * 1000);
+    }, 3 * 60 * 1000);
+
+    setInterval(function() {
+        updateTime();
+    }, 1000);
+
+    setInterval(function() {
+        updateWeather();
+    }, 5 * 60 * 1000);
+
+    setInterval(function() {
+        nextNewsItem();
+    }, 20 * 1000);
+
+    refreshPage();
+    updateWeather();
+
+    setTimeout(function() {
+        showItems();
+    }, 3000);
+
+});
+
+/** global: currentNewsItem */
+var currentNewsItem = 0;
+
+function refreshPage() {
+    /** global: Image */
+    var tempImage = new Image();
+    var time = $.now();
+    tempImage.src = '/screensaver/images/' + time  + '.jpg';
+    tempImage.onload = function() {
+        $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")');
+        switchBackgrounds();
+    };
+}
+
+function switchBackgrounds() {
+    $('.notActive').fadeIn(3000);
+    $('.active').fadeOut(3000);
+    $('.active, .notActive').toggleClass('active notActive');
+}
+
+function updateTime() {
+    var dt = new Date();
+    var hours = dt.getHours();
+    var minutes = dt.getMinutes();
+
+    if (hours < 10) { hours = '0' + hours; }
+    if (minutes < 10) { minutes = '0' + minutes; }
+
+    $('.currentTime').html(hours + ':' + minutes);
+}
+
+function updateWeather() {
+    $('.screensaverWeatherContent').load('/weather/current/');
+}
+
+function showItems() {
+    $('.activeNewsItem').slideToggle('slow');
+    $('.newsSource').slideToggle('slow');
+    $('.newsTitle').slideToggle('slow');
+    $('.newsDescription').slideToggle('slow');
+    $('.currentTime').slideToggle('slow');
+}
+
+function nextNewsItem() {
+    hideNewsItem();
+    setTimeout(function() {
+        showNextNewsItem();
+    }, 1000);
+}
+
+function hideNewsItem() {
+    $('.newsSource').slideToggle('slow');
+    $('.newsTitle').slideToggle('slow');
+    $('.newsDescription').slideToggle('slow');
+}
+
+function showNextNewsItem() {
+    /** global: currentNewsItem */
+    currentNewsItem = currentNewsItem +1;
+    if (currentNewsItem > 49) {
+        currentNewsItem = 0;
+    }
+
+    /** global: newsItems */
+    if (typeof(newsItems) === 'undefined') {
+        return;
+    }
+
+    $('.newsSource').html(newsItems[currentNewsItem][0])
+        .attr('class', 'newsSource newsBar' + newsItems[currentNewsItem][0])
+        .slideToggle('slow');
+
+    $('.newsTitle').html(newsItems[currentNewsItem][1]).slideToggle('slow');
+    $('.newsDescription').html(newsItems[currentNewsItem][2]).slideToggle('slow');
+}

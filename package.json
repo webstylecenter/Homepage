@@ -1,0 +1,39 @@
+{
+  "name": "homepage",
+  "version": "1.0.0",
+  "description": "Read and manage the latest news from interesting feeds and use it for newssite, screensaver and checklist",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.0.3",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.0.1",
+    "jshint": "^2.9.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webstylecenter/Homepage.git"
+  },
+  "keywords": [
+    "rss",
+    "feed",
+    "reader",
+    "screensaver",
+    "checklist"
+  ],
+  "author": "Peter van Dam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webstylecenter/Homepage/issues"
+  },
+  "homepage": "https://github.com/webstylecenter/Homepage#readme"
+}

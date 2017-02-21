@@ -3,19 +3,14 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>{% block title %}{% endblock %}</title>
-    <script src="/assets/scripts/jquery.js"></script>
-    <script src="/assets/scripts/jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/assets/scripts/jquery.jscroll.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src='/assets/scripts/main.js?v={{ lastUpdate.js_main }}'></script>
     <link rel="stylesheet" href="/assets/css/jquery.modal.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/assets/css/style.css?v={{ lastUpdate.css_main }}">
-    <script type="text/javascript">
-        setRefreshDate('{{ "now"|date('Y-m-d H:i:s')|url_encode }}');
-    </script>
     {% block header %}{% endblock %}
 </head>
-<body>
+<body data-refresh-date="{{ "now"|date('Y-m-d H:i:s') }}">
 {% block body %}
 {% endblock %}
+<script src="/dist/js/vendor.min.js"></script>
+<script src="/dist/js/app.min.js"></script>
 </body>
 </html>

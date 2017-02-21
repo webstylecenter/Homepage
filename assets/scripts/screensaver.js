@@ -40,7 +40,7 @@ function refreshPage() {
     tempImage.onload = function() {
         $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")');
         switchBackgrounds();
-    }
+    };
 }
 
 function switchBackgrounds() {
@@ -61,7 +61,7 @@ function updateTime() {
 }
 
 function updateWeather() {
-    $('.screensaverWeatherContent').load('/weather/current/')
+    $('.screensaverWeatherContent').load('/weather/current/');
 }
 
 function showItems() {
@@ -93,6 +93,10 @@ function showNextNewsItem() {
     }
 
     /** global: newsItems */
+    if (typeof(newsItems) === 'undefined') {
+        return;
+    }
+
     $('.newsSource').html(newsItems[currentNewsItem][0])
         .attr('class', 'newsSource newsBar' + newsItems[currentNewsItem][0])
         .slideToggle('slow');

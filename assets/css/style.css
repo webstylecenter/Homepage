@@ -1,20 +1,20 @@
 @font-face {
     font-family: 'LatoWebLight';
-    src: url('../fonts/Lato-Light.eot'); /* IE9 Compat Modes */
-    src: url('../fonts/Lato-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../fonts/Lato-Light.woff2') format('woff2'), /* Modern Browsers */
-    url('../fonts/Lato-Light.woff') format('woff'), /* Modern Browsers */
-    url('../fonts/Lato-Light.ttf') format('truetype');
+    src: url('/assets/fonts/Lato-Light.eot'); /* IE9 Compat Modes */
+    src: url('/assets/fonts/Lato-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/assets/fonts/Lato-Light.woff2') format('woff2'), /* Modern Browsers */
+    url('/assets/fonts/Lato-Light.woff') format('woff'), /* Modern Browsers */
+    url('/assets/fonts/Lato-Light.ttf') format('truetype');
     font-style: italic;
     font-weight: normal;
 }
 @font-face {
     font-family: 'LatoWeb';
-    src: url('../fonts/Lato-Regular.eot'); /* IE9 Compat Modes */
-    src: url('../fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../fonts/Lato-Regular.woff2') format('woff2'), /* Modern Browsers */
-    url('../fonts/Lato-Regular.woff') format('woff'), /* Modern Browsers */
-    url('../fonts/Lato-Regular.ttf') format('truetype');
+    src: url('/assets/fonts/Lato-Regular.eot'); /* IE9 Compat Modes */
+    src: url('/assets/fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/assets/fonts/Lato-Regular.woff2') format('woff2'), /* Modern Browsers */
+    url('/assets/fonts/Lato-Regular.woff') format('woff'), /* Modern Browsers */
+    url('/assets/fonts/Lato-Regular.ttf') format('truetype');
     font-style: normal;
     font-weight: normal;
 }
@@ -134,7 +134,7 @@ body {
     top:3px;
     right:10px;
     display:inline-block;
-    background-image: url('../images/create.png');
+    background-image: url('/assets/images/create.png');
     background-repeat: no-repeat;
     background-size: contain;
     height:28px;
@@ -189,7 +189,7 @@ body {
     color: #000;
 }
 .listItem.pinned .pin {
-    background-image: url('../images/pin_hover.png');
+    background-image: url('/assets/images/pin_hover.png');
 }
 .listItem .pin {
     background-repeat:no-repeat;
@@ -202,10 +202,10 @@ body {
     float:right;
 }
 .listItem:hover .pin {
-    background-image: url('../images/pin.png');
+    background-image: url('/assets/images/pin.png');
 }
 .listItem .pin:hover {
-    background-image: url('../images/pin_hover.png');
+    background-image: url('/assets/images/pin_hover.png');
 }
 .listTitle {
     font-size:12pt;

@@ -3,3 +3,5 @@
 
 /vendor/
 /var/
+node_modules/
+views/update/

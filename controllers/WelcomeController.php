@@ -12,12 +12,11 @@ $app->match('/welcome/', function() use($app) {
     $noteService = $app['noteService'];
 
     return $app['twig']->render('welcome/index.html.twig', [
+        'bodyId' => 'welcome',
         'forecast' => $weatherService->getForecastList(),
         'lastUpdate' => [
-            'css_main' => filemtime(__DIR__ . '/../assets/css/style.css'),
-            'css_mobile' => filemtime(__DIR__ . '/../assets/css/mobile.css'),
-            'js_main' => filemtime(__DIR__ . '/../assets/scripts/main.js'),
-            'js_mobile' => filemtime(__DIR__ . '/../assets/scripts/mobile.js'),
+            'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
+            'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
         ],
         'feedItemTotals'=> $feedService->getFeedItemTotals(),
         'note'=> $noteService->loadNote(),

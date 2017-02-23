@@ -6,7 +6,7 @@ $( document ).ready(function() {
 });
 
 function addMobileListeners() {
-    $('.listItem').click(function() {
+    $('#mobile .listItem').click(function() {
 
         if ($(this).hasClass('Dumpert')) {
             window.frames[0].stop();
@@ -22,7 +22,7 @@ function addMobileListeners() {
         $('.navbar').css('display', 'inline-block');
     });
 
-    $('.backButton').click(function() {
+    $('#mobile .backButton').click(function() {
         $('.list').show();
         $('.title').show();
         $('.contentContainer').hide();
@@ -34,7 +34,7 @@ function addMobileListeners() {
         $('iframe').attr('src', 'about:blank');
     });
 
-    $('.listItem').hammer().on("swiperight", function() {
+    $('#mobile .listItem').hammer().on("swiperight", function() {
         var pin = $(this).find('.pin');
         $.ajax("/pin/" +$(pin).data('pin-id'))
             .done(function(response) {
@@ -44,7 +44,7 @@ function addMobileListeners() {
             });
     });
 
-    $('.Dumpert').each(function() {
+    $('#mobile .Dumpert').each(function() {
         var title = $(this).find('.listTitle').text();
         var url = $(this).data('url');
         $(this).find('.listTitle').html('<a class="listTitle" href="' + url + '" target="_blank">' + title + '</a>');

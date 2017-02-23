@@ -1,9 +1,10 @@
-body {
-    background-color:black;
-    color:white;
-    text-shadow: 1px 1px #000;
-}
-.screenSaver {
+#screensaver {
+
+  color:white;
+  background-color:black;
+  text-shadow: 1px 1px #000;
+
+  .screenSaver {
     position:absolute;
     top:0;
     right:0;
@@ -17,17 +18,17 @@ body {
     background-repeat:no-repeat;
     background-position: center;
     image-orientation: from-image;
-}
-.layer2 {
+  }
+  .layer2 {
     z-index:-2;
-}
-#weatherIcon {
+  }
+  #weatherIcon {
     position:fixed;
     top:0;
     right:200px;
     padding:0;
-}
-.temperature {
+  }
+  .temperature {
     position: fixed;
     top:40px;
     right:40px;
@@ -41,8 +42,8 @@ body {
             1px -1px 0 #000,
             -1px 1px 0 #000,
             1px 1px 0 #000;
-}
-.activeNewsItem {
+  }
+  .activeNewsItem {
     position:fixed;
     bottom:0;
     left:0;
@@ -54,8 +55,8 @@ body {
     background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 50%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to top,  rgba(0,0,0,0.65) 50%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
-}
-.newsTitle {
+  }
+  .newsTitle {
     font-family: "LatoWebLight", "Helvetica Neue", "Arial";
     font-size:48pt;
     padding:40px 0 0 30px;
@@ -64,8 +65,8 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-right:400px;
-}
-.newsDescription {
+  }
+  .newsDescription {
     font-size:16pt;
     padding:0 10px 10px 30px;
     display:block;
@@ -75,14 +76,14 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-right:400px;
-}
-.currentTime {
+  }
+  .currentTime {
     position: fixed;
     right:30px;
     bottom:20px;
     font-size:72pt;
-}
-.newsSource {
+  }
+  .newsSource {
     color:white;
     padding:5px 10px;
     display:inline-block;
@@ -90,18 +91,19 @@ body {
     bottom:135px;
     font-size:16pt;
     margin-left:30px;
-}
-.hideOnStart {
+  }
+  .hideOnStart {
     display:none;
+  }
+  .newsBariDownloadBlog { background-color:gray; }
+  .newsBarGeenStijl { background-color: #f09; }
+  .newsBarRTLnieuws { background-color: #4c9ac1; }
+  .newsBarGamersnet { background-color: #0d265e; }
+  .newsBarMajorNelson { background-color: #118411; }
+  .newsBarNuTech { background-color: #5100af; }
+  .newsBarNeowin { background-color: #1e5078;}
+  .newsBarDumpert { background-color: #66c221; }
+  .newsBaruserInput { background-color: #ffbe3f; }
+  .newsBarNOS { background-color: #c00; }
+  .newsBarAngryJoe { background-color: #cc6b4c; }
 }
-.newsBariDownloadBlog { background-color:gray; }
-.newsBarGeenStijl { background-color: #f09; }
-.newsBarRTLnieuws { background-color: #4c9ac1; }
-.newsBarGamersnet { background-color: #0d265e; }
-.newsBarMajorNelson { background-color: #118411; }
-.newsBarNuTech { background-color: #5100af; }
-.newsBarNeowin { background-color: #1e5078;}
-.newsBarDumpert { background-color: #66c221; }
-.newsBaruserInput { background-color: #ffbe3f; }
-.newsBarNOS { background-color: #c00; }
-.newsBarAngryJoe { background-color: #cc6b4c; }

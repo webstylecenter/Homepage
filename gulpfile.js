@@ -3,6 +3,7 @@ const gulp = require('gulp');
 
 // Include Our Plugins
 const jshint = require('gulp-jshint');
+const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
@@ -41,6 +42,18 @@ gulp.task('scripts:app', function() {
         .pipe(gulp.dest('dist/js'));
 });
 
+// Compile Our Sass
+gulp.task('sass', function() {
+    return gulp.src('assets/scss/*.scss')
+        .pipe(sourcemaps.init())
+        .pipe(concat('style.css'))
+        .pipe(sass())
+        .pipe(cleanCSS({compatibility: 'edge'}))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist/css'));
+});
+
+/*
 gulp.task('stylesheets', function() {
     return gulp.src('assets/css/*.css')
         .pipe(sourcemaps.init())
@@ -48,13 +61,13 @@ gulp.task('stylesheets', function() {
         .pipe(cleanCSS({compatibility: 'edge'}))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/css'));
-});
+}); */
 
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('assets/scripts/*.js', ['lint', 'scripts:vendor', 'scripts:app']);
-    gulp.watch('assets/css/*.css', ['stylesheets']);
+    gulp.watch('assets/scss/*.scss', ['sass']);
 });
 
 // Default Task
-gulp.task('default', ['lint', 'scripts:vendor', 'scripts:app', 'stylesheets', 'watch']);
+gulp.task('default', ['lint', 'scripts:vendor', 'scripts:app', 'sass', 'watch']);

@@ -1,6 +1,7 @@
 /**
  * Created by petervandam on 26/10/2016.
  */
+
 $(function() {
     $('.createButton').click(function() {
         $('#createItem').modal({fadeDuration:100});
@@ -125,8 +126,6 @@ function requestNewFeedItems() {
             $('body').data('refresh-date', data.refreshDate);
             clearCreateForm();
     });
-
-    console.log($('body').data('refresh-date'));
 }
 
 function clearCreateForm() {

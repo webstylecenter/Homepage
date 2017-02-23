@@ -1,42 +1,43 @@
-.topbar {
+#mobile {
+  .topbar {
     right:0;
     left:0;
     top:0;
     position:fixed;
-}
-.list {
+  }
+  .list {
     width:100%;
     overflow-y: scroll; /* has to be scroll, not auto */
     -webkit-overflow-scrolling: touch;
-}
-.listTitle {
+  }
+  .listTitle {
     font-size:10pt;
-}
-.listContent {
+  }
+  .listContent {
     font-size:8pt;
-}
-.contentContainer {
+  }
+  .contentContainer {
     top:0;
     left:0;
     right:0;
     bottom:0;
     display:none;
     -webkit-overflow-scrolling:touch;
-}
-.backButton {
+  }
+  .backButton {
     display:none;
     width:60px;
-}
-.shareButton {
+  }
+  .shareButton {
     display:none;
     max-width:100px;
     overflow:hidden;
-}
-.pageLinkToUrl {
+  }
+  .pageLinkToUrl {
     display:none;
 
-}
-.navbar {
+  }
+  .navbar {
     max-width:230px;
     overflow:hidden;
     width:230px;
@@ -44,39 +45,39 @@
     max-height:20px;
     white-space: nowrap;
     display:none;
-}
-.mobilePin {
+  }
+  .mobilePin {
     background-image: url('../images/pin.png');
     background-size:contain;
     height:15px;
     width:15px;
     display:inline-block;
     margin-left:10px;
-}
-.noselect {
+  }
+  .noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
+  }
 
-/* Checklist CSS */
-.checklistContent {
+  /* Checklist CSS */
+  .checklistContent {
     margin:20px 0;
     font-size:12pt;
-}
-.checklistAdder input {
+  }
+  .checklistAdder input {
     font-size:12pt;
-}
-.checklistAdder input[type="text"] {
+  }
+  .checklistAdder input[type="text"] {
     width:79%;
     padding:5px;
     box-sizing: border-box;
     border:0;
     background-color: #e2e2e2;
-}
-.checklistAdder input[type="button"] {
+  }
+  .checklistAdder input[type="button"] {
     width:20%;
     padding:5px 5px;
     border:0px;
@@ -84,32 +85,33 @@
     box-sizing: border-box;
     -webkit-appearance: none;
     float:right;
-}
-.checklistContent ul {
+  }
+  .checklistContent ul {
     list-style: none;
     padding-left:0;
-}
-.checklistContent li {
+  }
+  .checklistContent li {
     padding-left:10px;
-}
-.checklistContent li:nth-child(even) {
+  }
+  .checklistContent li:nth-child(even) {
     background-color:whitesmoke;
-}
-.checklistAdder input[type="checkbox"] {
+  }
+  .checklistAdder input[type="checkbox"] {
     float:left;
-}
-.checklistContent label {
+  }
+  .checklistContent label {
     padding:10px;
     margin-left:10px;
     display:inline-block;
     width:72%;
-}
-.checklistContent h2 {
+  }
+  .checklistContent h2 {
     margin:50px 0 -10px 10px;
-}
-.checklistContent .done {
+  }
+  .checklistContent .done {
     color: #9d9d9d;
-}
-.checklistContent .done li:nth-child(even) {
+  }
+  .checklistContent .done li:nth-child(even) {
     background-color: #fcfcfc;
+  }
 }

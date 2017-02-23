@@ -7,18 +7,19 @@ $homeController = function() use($app) {
 
     if ($_SERVER['REQUEST_URI'] === '/m/') {
         $templateFolder = 'mobile';
+        $bodyId = 'mobile';
     } else {
         $templateFolder = 'home';
+        $bodyId = 'homepage';
         $feedService->markAllViewed();
     }
 
     return $app['twig']->render($templateFolder . '/index.html.twig', [
+        'bodyId' => $bodyId,
         'feedItems'=> $feedItems,
         'lastUpdate' => [
-            'css_main' => filemtime(__DIR__ . '/../assets/css/style.css'),
-            'css_mobile' => filemtime(__DIR__ . '/../assets/css/mobile.css'),
-            'js_main' => filemtime(__DIR__ . '/../assets/scripts/main.js'),
-            'js_mobile' => filemtime(__DIR__ . '/../assets/scripts/mobile.js'),
+            'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
+            'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
         ],
         'nextPageNumber' => 2,
     ]);

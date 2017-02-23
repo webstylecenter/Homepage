@@ -43,7 +43,17 @@ gulp.task('scripts:app', function() {
 });
 
 // Compile Our Sass
-gulp.task('sass', function() {
+gulp.task('stylesheets:vendor', function() {
+    return gulp.src('assets/scss/vendor/*.scss')
+        .pipe(sourcemaps.init())
+        .pipe(concat('vendor.css'))
+        .pipe(sass())
+        .pipe(cleanCSS({compatibility: 'edge'}))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist/css'));
+});
+
+gulp.task('stylesheets:app', function() {
     return gulp.src('assets/scss/*.scss')
         .pipe(sourcemaps.init())
         .pipe(concat('style.css'))
@@ -66,8 +76,8 @@ gulp.task('stylesheets', function() {
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('assets/scripts/*.js', ['lint', 'scripts:vendor', 'scripts:app']);
-    gulp.watch('assets/scss/*.scss', ['sass']);
+    gulp.watch('assets/scss/*.scss', ['stylesheets:vendor','stylesheets:app']);
 });
 
 // Default Task
-gulp.task('default', ['lint', 'scripts:vendor', 'scripts:app', 'sass', 'watch']);
+gulp.task('default', ['lint', 'scripts:vendor', 'scripts:app', 'stylesheets:vendor', 'stylesheets:app', 'watch']);

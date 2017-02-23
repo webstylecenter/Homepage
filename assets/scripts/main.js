@@ -224,3 +224,6 @@ function postToChecklist(data) {
         return false;
     });
 }
+
+new WOW().init();
+new WOW({ scrollContainer: '.scroll' }).init();

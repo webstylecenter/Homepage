@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/dist/css/vendor.css?v={{ lastUpdate.css_main }}">
     <link rel="stylesheet" href="/dist/css/style.css?v={{ lastUpdate.css_main }}">
     {% block header %}{% endblock %}
 </head>

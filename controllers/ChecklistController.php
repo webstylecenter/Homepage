@@ -14,11 +14,10 @@ $app->match('/checklist/', function() use($app) {
     $finished = $checklistService->getFinished();
 
     return $app['twig']->render('checklist/index.html.twig', [
+        'bodyId' => 'checklist',
         'lastUpdate' => [
-            'css_main' => filemtime(__DIR__ . '/../assets/css/style.css'),
-            'css_mobile' => filemtime(__DIR__ . '/../assets/css/mobile.css'),
-            'js_main' => filemtime(__DIR__ . '/../assets/scripts/main.js'),
-            'js_mobile' => filemtime(__DIR__ . '/../assets/scripts/mobile.js'),
+            'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
+            'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
         ],
         'todos' => $todos,
         'finished' => $finished

@@ -22,7 +22,9 @@
         {% endblock %}
 
         <div class="noselect">
-            {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems, 'addToChecklist': ''} %}
+            <div class="list scroll wow slideInLeft">
+                {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems, 'addToChecklist': ''} %}
+            </div>
         </div>
 
         <div class="contentContainer">

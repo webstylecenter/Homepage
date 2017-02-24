@@ -42,7 +42,9 @@
         {% block content %}
         {% endblock %}
 
-        {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems, 'addToChecklist': ''} %}
+        <div class="list scroll wow slideInLeft">
+            {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems, 'addToChecklist': ''} %}
+        </div>
         <div class="contentContainer">
             <iframe src="/welcome" sandbox="allow-scripts allow-same-origin allow-forms allow-popups
             allow-pointer-lock allow-modals"></iframe>

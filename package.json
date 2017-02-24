@@ -4,6 +4,7 @@
   "description": "Read and manage the latest news from interesting feeds and use it for newssite, screensaver and checklist",
   "main": "gulpfile.js",
   "dependencies": {
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
     "wow.js": "^1.2.2"
   },

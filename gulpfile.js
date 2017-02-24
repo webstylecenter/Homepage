@@ -9,6 +9,7 @@ const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const cleanCSS = require('gulp-clean-css');
+const del = require('del');
 
 // Lint Task
 gulp.task('lint', function() {
@@ -63,15 +64,10 @@ gulp.task('stylesheets:app', function() {
         .pipe(gulp.dest('dist/css'));
 });
 
-/*
-gulp.task('stylesheets', function() {
-    return gulp.src('assets/css/*.css')
-        .pipe(sourcemaps.init())
-        .pipe(concat('style.css'))
-        .pipe(cleanCSS({compatibility: 'edge'}))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/css'));
-}); */
+gulp.task('clean', function() {
+    return del.sync(['dist/**']);
+});
+
 
 // Watch Files For Changes
 gulp.task('watch', function() {
@@ -80,4 +76,4 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['lint', 'scripts:vendor', 'scripts:app', 'stylesheets:vendor', 'stylesheets:app', 'watch']);
+gulp.task('default', ['clean', 'lint', 'scripts:vendor', 'scripts:app', 'stylesheets:vendor', 'stylesheets:app', 'watch']);

@@ -231,5 +231,5 @@ function postToChecklist(data) {
 /** global: WOW */
 new WOW({
     scrollContainer: '.scroll',
-    mobile: false
+    mobile: true
 }).init();

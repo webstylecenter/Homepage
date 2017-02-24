@@ -88,6 +88,8 @@ $(function() {
 
 function addListEventHandlers(container) {
     $('.' + container + ' .listItem').click(function() {
+
+        $(this).addClass('animated pulse');
         $('.listItem').removeClass('selected');
         $(this).addClass('selected');
         $(this).addClass('used');
@@ -111,6 +113,7 @@ function addListEventHandlers(container) {
         $.ajax("/pin/" +$(this).data('pin-id'))
             .done(function(response) {
                 if (response == '1') {
+                    $(pin).parent().addClass('animated shake');
                     $(pin).parent().toggleClass('pinned');
                 }
             });
@@ -225,5 +228,8 @@ function postToChecklist(data) {
     });
 }
 
-new WOW().init();
-new WOW({ scrollContainer: '.scroll' }).init();
+/** global: WOW */
+new WOW({
+    scrollContainer: '.scroll',
+    mobile: false
+}).init();

@@ -1,0 +1,52 @@
+/* Checklist CSS */
+.checklistContent {
+  margin:20px 0;
+  font-size:12pt;
+}
+.checklistAdder input {
+  font-size:12pt;
+}
+.checklistAdder input[type="text"] {
+  width:79%;
+  padding:5px;
+  box-sizing: border-box;
+  border:0;
+  background-color: #e2e2e2;
+}
+.checklistAdder input[type="button"] {
+  width:20%;
+  padding:5px 5px;
+  border:0px;
+  background-color: #cbcbcb;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  float:right;
+}
+.checklistContent ul {
+  list-style: none;
+  padding-left:0;
+}
+.checklistContent li {
+  padding-left:10px;
+}
+.checklistContent li:nth-child(even) {
+  background-color:whitesmoke;
+}
+.checklistAdder input[type="checkbox"] {
+  float:left;
+}
+.checklistContent label {
+  padding:10px;
+  margin-left:10px;
+  display:inline-block;
+  width:72%;
+}
+.checklistContent h2 {
+  margin:50px 0 -10px 10px;
+}
+.checklistContent .done {
+  color: #9d9d9d;
+}
+.checklistContent .done li:nth-child(even) {
+  background-color: #fcfcfc;
+}

@@ -87,8 +87,6 @@ $(function() {
 
 function addListEventHandlers(container) {
     $('.' + container + ' .listItem').click(function() {
-
-        console.log('test');
         $(this).addClass('animated pulse');
         $('.listItem').removeClass('selected');
         $(this).addClass('selected');
@@ -159,7 +157,6 @@ function searchFeeds(searchQuery) {
             var html = data.replace('<div class="list scroll">', '<div class="NewSearchlist">');
             html = html.replace('<a href="/page/2" class="listItem jscroll-next">Next page</a>', '');
             $('.searchResults').prepend(html);
-
             addListEventHandlers('searchResults');
         });
 }

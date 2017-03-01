@@ -29,7 +29,7 @@ $app->match('/screensaver/', function() use($app) {
 $app->match('/screensaver/images/{file}.jpg', function() use($app) {
 
     if (rand(1, 5) === 1) {
-        header('location: http://drop.petervdam.nl/screensaver/');
+        header('location: https://drop.petervdam.nl/screensaver/');
     } else {
         header('location: https://source.unsplash.com/category/nature/1920x1080');
     }

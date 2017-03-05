@@ -72,3 +72,16 @@ $app->match('/search/{query}', function($query) use($app) {
         'addToChecklist' => $query,
     ]);
 });
+
+$app->match('/redirect-to/{itemId}', function($itemId) use($app) {
+    /** @var \Service\FeedService $feedService */
+    $feedService = $app['feedService'];
+
+    header('location: http://petervdam.nl');
+    exit;
+
+    /*
+    return $app['twig']->render('home/redirect.html.twig', [
+        'url'=> $feedService->getFeedItemUrl($itemId)
+    ]); */
+});

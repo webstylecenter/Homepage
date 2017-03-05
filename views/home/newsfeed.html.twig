@@ -7,8 +7,7 @@
 
 {% for item in feedItems %}
     <div class="listItem {{ item.viewed ? 'used ' : '' }}{{ item.pinned ? 'pinned ' : '' }}{{ item.site }}"
-         data-url="{{ item.url
-    }}">
+         data-url="https://itsmyhomepage.com/redirect-to/{{ item.id }}">
         <div class="pin" data-pin-id="{{ item.id }}"></div>
         <p class="listTitle ">{{ item.title|striptags }}</p>
         <p class="listContent">{{ item.description|truncate(120, true) }}</p>

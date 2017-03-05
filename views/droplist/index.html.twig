@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    <title>Drops from PVD.onl</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Drops</h1>
+
+    {% for image in imageList %}
+        <a href="https://pvd.onl/{{ image }}" target="_blank"><img src="https://pvd.onl/{{ image }}" alt="{{ image }}" style="max-width:300px;" /></a>
+    {% endfor %}
+{% endblock %}

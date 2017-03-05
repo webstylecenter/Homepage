@@ -7,7 +7,7 @@ $app->before(function() use ($app) {
         return;
     }
 
-    if ($_SERVER['REQUEST_URI'] === '/') {
+    if ($_SERVER['REQUEST_URI'] === '/' || $_SERVER['REQUEST_URI'] == '/droplist/') {
         if (
             !isset($_SERVER['PHP_AUTH_USER'])
             || !isset($app['users'][$_SERVER['PHP_AUTH_USER']])
@@ -17,11 +17,10 @@ $app->before(function() use ($app) {
 
             echo $app['twig']->render('guests/index.html.twig', [
                 'lastUpdate' => [
-                    'css_main' => filemtime(__DIR__ . '/../assets/css/style.css'),
-                    'css_mobile' => filemtime(__DIR__ . '/../assets/css/mobile.css'),
-                    'js_main' => filemtime(__DIR__ . '/../assets/scripts/main.js'),
-                    'js_mobile' => filemtime(__DIR__ . '/../assets/scripts/mobile.js'),
-                ]
+                    'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
+                    'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
+                ],
+                'bodyId' => 'error403'
             ]);
             exit;
         }

@@ -6,7 +6,9 @@ $('.dropOpen').on('click', function() {
     tab.focus();
 });
 
+/** global: Clipboard */
 new Clipboard('.dropCopy');
+
 $('.dropCopy').on('click', function() {
    $(this).css('color', 'red');
 });

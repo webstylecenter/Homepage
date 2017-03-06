@@ -1,0 +1,31 @@
+#dropList {
+  .image {
+    height:200px;
+    width: 300px;
+    background-position: center center;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-color:whitesmoke;
+    box-sizing: border-box;
+
+    .imageContainer {
+      display:none;
+    }
+  }
+  .image:hover {
+    .imageContainer {
+      height:200px;
+      width:300px;
+      background-color: rgba(107, 193, 103, 0.7);
+      display:block;
+    }
+    .imageButtons {
+      text-align:center;
+      padding-top:90px;
+
+      i {
+        padding:0 10px;
+      }
+    }
+  }
+}

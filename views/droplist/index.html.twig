@@ -1,13 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block header %}
-    <title>Drops from PVD.onl</title>
+{% block title %}
+    Drops from PVD.onl
 {% endblock %}
 
 {% block body %}
     <h1>Drops</h1>
 
-    {% for image in imageList %}
-        <a href="https://pvd.onl/{{ image }}" target="_blank"><img src="https://pvd.onl/{{ image }}" alt="{{ image }}" style="max-width:300px;" /></a>
-    {% endfor %}
+    <div class="dropList">
+        {% for image in imageList %}
+            <div class="image" style="background-image:url('https://pvd.onl/pages/getimage.php?file={{ image }}');">
+                <div class="imageContainer">
+                    <div class="imageButtons">
+                        <i class="fa fa-external-link fa-2x dropOpen" data-image="{{ image }}"></i>
+                        <i class="fa fa-clipboard fa-2x dropCopy" data-clipboard-text="https://pvd.onl/{{ image }}"></i>
+                        <i class="fa fa-eye-slash fa-2x dropHide" data-image="{{ image }}"></i>
+                        <i class="fa fa-trash-o fa-2x dropRemove" data-image="{{ image }}"></i>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

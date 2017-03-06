@@ -2,31 +2,32 @@
  * Created by petervandam on 18/11/2016.
  */
 $(function() {
-    setInterval(function() {
-        setTimeout(function() {
-            refreshPage();
-        }, 5 * 1000);
-    }, 3 * 60 * 1000);
+    if ($('#screensaver').length >0){
+        setInterval(function() {
+            setTimeout(function() {
+                refreshPage();
+            }, 5 * 1000);
+        }, 3 * 60 * 1000);
 
-    setInterval(function() {
-        updateTime();
-    }, 1000);
+        setInterval(function() {
+            updateTime();
+        }, 1000);
 
-    setInterval(function() {
+        setInterval(function() {
+            updateWeather();
+        }, 5 * 60 * 1000);
+
+        setInterval(function() {
+            nextNewsItem();
+        }, 20 * 1000);
+
+        refreshPage();
         updateWeather();
-    }, 5 * 60 * 1000);
 
-    setInterval(function() {
-        nextNewsItem();
-    }, 20 * 1000);
-
-    refreshPage();
-    updateWeather();
-
-    setTimeout(function() {
-        showItems();
-    }, 3000);
-
+        setTimeout(function() {
+            showItems();
+        }, 3000);
+    }
 });
 
 /** global: currentNewsItem */

@@ -135,11 +135,43 @@ body {
   top:3px;
   right:10px;
   display:inline-block;
-  background-image: url('/assets/images/create.png');
-  background-repeat: no-repeat;
-  background-size: contain;
   height:28px;
   width:28px;
+  font-size:16pt;
+}
+.showDropList {
+  position: absolute;
+  top:3px;
+  right:435px;
+  display:inline-block;
+  height:28px;
+  width:28px;
+  font-size:16pt;
+}
+.dropListPanel {
+  position: absolute;
+  top:23px;
+  right:285px;
+  display:inline-block;
+  width:300px;
+  border:1px solid gray;
+  background-color:whitesmoke;
+  border-radius:3px;
+  z-index:1999;
+  max-height:80vh;
+  overflow-y:scroll;
+  display:none;
+  box-shadow:1px 1px 5px #000;
+}
+.dropListBackground {
+  position: absolute;
+  right:0;
+  top:37px;
+  bottom:0;
+  left:450px;
+  background-color:rgba(0, 0, 0, 0.5);
+  z-index:2;
+  display:none;
 }
 .contentContainer {
   position: absolute;
@@ -152,8 +184,6 @@ body {
 .listItem:nth-child(even) {
   background: #f7f7f7;
   background: linear-gradient(to right,  #f7f7f7 0%,#e8e8e8 100%);
-
-
 }
 .listItem:nth-child(odd) {
   background: #eeeeee;

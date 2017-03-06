@@ -1,27 +1,61 @@
 var dropDomain = 'https://pvd.onl/';
+var stopProp = true;
 
-$('.dropOpen').on('click', function() {
-    var image = $(this).data('image');
-    var tab = window.open(dropDomain + image, '_blank');
-    tab.focus();
+$('.showDropList').on('click', function() {
+    $('#homepage .dropListPanel').load('/droplist/', function() {
+        showDropList();
+        activateDropListEvens();
+    });
 });
 
-/** global: Clipboard */
-new Clipboard('.dropCopy');
-
-$('.dropCopy').on('click', function() {
-   $(this).css('color', 'red');
+$('.dropListPanel').click(function(event) {
+    if (stopProp) {
+        event.stopPropagation();
+    }
 });
 
-$('.dropHide').on('click', function() {
-    var image = $(this).data('image');
-    dropAction(this, image, 'hide');
+$(window).click(function() {
+    hideDropList();
 });
 
-$('.dropRemove').on('click', function() {
-    var image = $(this).data('image');
-    dropAction(this, image, 'delete');
-});
+function showDropList() {
+    $('.dropListPanel').slideDown();
+    $('.dropListBackground').fadeIn();
+}
+
+function hideDropList() {
+    $('.dropListPanel').slideUp();
+    $('.dropListBackground').fadeOut();
+}
+
+function activateDropListEvens() {
+
+    /** global: Clipboard */
+    new Clipboard('.dropCopy');
+
+    $('.dropOpen').on('click', function() {
+        stopProp = false;
+        var image = $(this).data('image');
+        var tab = window.open(dropDomain + image, '_blank');
+        tab.focus();
+        stopProp = true;
+        hideDropList();
+    });
+
+    $('.dropCopy').on('click', function() {
+        $(this).css('color', 'red');
+    });
+
+    $('.dropHide').on('click', function() {
+        var image = $(this).data('image');
+        dropAction(this, image, 'hide');
+    });
+
+    $('.dropRemove').on('click', function() {
+        var image = $(this).data('image');
+        dropAction(this, image, 'delete');
+    });
+}
 
 function dropAction(el, file, action) {
     $.ajax({

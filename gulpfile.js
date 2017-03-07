@@ -1,8 +1,9 @@
 // Include gulp
 const gulp = require('gulp');
+const browserify = require('gulp-browserify');
 
 // Include Our Plugins
-const jshint = require('gulp-jshint');
+const eslint = require('gulp-eslint');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
@@ -10,12 +11,14 @@ const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
 const cleanCSS = require('gulp-clean-css');
 const del = require('del');
+const runSequence = require('run-sequence');
 
 // Lint Task
 gulp.task('lint', function() {
-    return gulp.src('assets/scripts/*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
+    return gulp.src(['assets/scripts/*.js'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 });
 
 gulp.task('scripts:vendor', function() {
@@ -33,14 +36,17 @@ gulp.task('scripts:vendor', function() {
 });
 
 gulp.task('scripts:app', function() {
-    return gulp.src('assets/scripts/*.js')
+    return gulp.src(['assets/scripts/index.js'])
         .pipe(sourcemaps.init())
+        .pipe(browserify({
+            transform: ['babelify'],
+        }))
         .pipe(concat('app.js'))
         .pipe(gulp.dest('dist/js'))
         .pipe(rename('app.min.js'))
-        .pipe(uglify())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/js'));
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('dist/js'))
+        ;
 });
 
 // Compile Our Sass
@@ -75,5 +81,17 @@ gulp.task('watch', function() {
     gulp.watch('assets/scss/*.scss', ['stylesheets:vendor','stylesheets:app']);
 });
 
+gulp.task('build', function(callback) {
+    runSequence(
+        'lint',
+        'clean',
+        ['stylesheets:vendor', 'stylesheets:app'],
+        'scripts:vendor',
+        'scripts:app',
+        'watch',
+        callback
+    );
+});
+
 // Default Task
-gulp.task('default', ['clean', 'lint', 'scripts:vendor', 'scripts:app', 'stylesheets:vendor', 'stylesheets:app', 'watch']);
+gulp.task('default', ['build']);

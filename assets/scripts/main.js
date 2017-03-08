@@ -79,6 +79,12 @@ $(function() {
         addToChecklist($('.checklistAdder input[type="text"]').val());
     });
 
+    $('.checklistAdder input[type="text"]').keypress(function(e) {
+        if (e.which == 13) {
+            $('.checklistAdder input[type="button"]').click();
+        }
+    });
+
     $('.checklistItem').on('click', function() {
        checkItem(this);
     });

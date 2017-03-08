@@ -18,6 +18,10 @@ $app['config'] = [
         'key' => 'APPID',
         'location' => 'Eindhoven,NL',
     ],
+    'wallpaperLocations' => [
+        'public' => 'https://source.unsplash.com/category/nature/1920x1080',
+        'private' => '[ENTER_AN_URL_TO_SHOW_OF_LOCAL_STORED_IMAGES]'
+    ]
 ];
 
 $app['users'] = [

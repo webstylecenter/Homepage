@@ -28,6 +28,9 @@ $app->match('/screensaver/', function() use($app) {
 
 $app->match('/screensaver/images/{file}.jpg', function() use($app) {
 
+    header('location: https://drop.petervdam.nl/screensaver/');
+    exit;
+
     if (rand(1, 5) === 1) {
         header('location: https://drop.petervdam.nl/screensaver/');
     } else {

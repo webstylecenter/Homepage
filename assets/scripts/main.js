@@ -90,5 +90,5 @@ function openWelcomePage() {
 /** global: WOW */
 new WOW({
     scrollContainer: '.scroll',
-    mobile: true
+    mobile: false
 }).init();

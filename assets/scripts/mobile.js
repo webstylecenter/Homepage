@@ -38,4 +38,16 @@ $(function() {
                 }
             });
     });
+
+    $('#mobile .topbar').hammer().on("swiperight", function() {
+        $('.list').show();
+        $('.title').show();
+        $('.contentContainer').hide();
+
+        $('.backButton').hide();
+        $('.pageLinkToUrl').hide();
+        $('.navbar').hide();
+
+        $('iframe').attr('src', 'about:blank');
+    });
 });

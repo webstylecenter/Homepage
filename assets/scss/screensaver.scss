@@ -15,7 +15,7 @@
     height:100vh;
     display:none;
     background-size:cover;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     background-position: center;
     image-orientation: from-image;
   }
@@ -38,10 +38,10 @@
     width:auto;
     padding-bottom:0;
     text-shadow:
-            -1px -1px 0 #000,
-            1px -1px 0 #000,
-            -1px 1px 0 #000,
-            1px 1px 0 #000;
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
   }
   .activeNewsItem {
     position:fixed;
@@ -57,7 +57,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
   }
   .newsTitle {
-    font-family: "LatoWebLight", "Helvetica Neue", "Arial";
+    font-family: "LatoWebLight", "Helvetica Neue", "Arial", sans-serif;
     font-size:48pt;
     padding:40px 0 0 30px;
     display:inline-block;

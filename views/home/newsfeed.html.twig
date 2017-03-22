@@ -6,7 +6,7 @@
 
 
 {% for item in feedItems %}
-    <div class="listItem {{ item.viewed ? 'used ' : '' }}{{ item.pinned ? 'pinned ' : '' }}{{ item.site }}"
+    <div class="listItem {{ item.viewed ? 'used ' : 'newItem' }}{{ item.pinned ? 'pinned ' : '' }}{{ item.site }}"
          data-url="{{ item.url
     }}">
         <div class="pin" data-pin-id="{{ item.id }}"></div>

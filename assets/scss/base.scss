@@ -210,8 +210,8 @@ body {
 .selected {
   background: linear-gradient(to right, #eeeeee 0%,#aad3e0 100%) !important;
 }
-.used .listTitle, .used .listContent {
-  color: #8a8a8a;
+.newItem {
+  background: linear-gradient(to right, #eeeeee 0%, #def6f6 100%) !important;
 }
 .selected .listTitle, .selected .listContent {
   color: #000;

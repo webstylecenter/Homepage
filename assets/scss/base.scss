@@ -224,9 +224,10 @@ body {
 }
 .listItem .pin {
   background-repeat:no-repeat;
-  background-size:contain;
-  width:15px;
-  height:15px;
+  background-size:80%;
+  background-position: center;
+  width:20px;
+  height:20px;
   position: relative;
   top:0;
   right:0;

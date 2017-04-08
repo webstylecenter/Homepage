@@ -8,13 +8,7 @@ $(function() {
         padding: 150,
         nextSelector: 'a.jscroll-next:last',
         contentSelector: '.listItem',
-        callback: function() {
-            $('#mobile .Dumpert').each(function() {
-                var title = $(this).find('.listTitle').text();
-                var url = $(this).data('url');
-                $(this).find('.listTitle').html('<a class="listTitle" href="' + url + '" target="_blank">' + title + '</a>');
-            });
-        }
+        callback: function() {}
     });
 
     // Make listItems clickable

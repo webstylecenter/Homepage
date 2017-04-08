@@ -11,8 +11,9 @@ $homeController = function() use($app) {
     } else {
         $templateFolder = 'home';
         $bodyId = 'homepage';
-        $feedService->markAllViewed();
     }
+
+    $feedService->markAllViewed();
 
     return $app['twig']->render($templateFolder . '/index.html.twig', [
         'bodyId' => $bodyId,

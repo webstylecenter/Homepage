@@ -4,11 +4,6 @@
 
 $(function() {
     $('#mobile').on('click', '.listItem', function() {
-        if ($(this).hasClass('Dumpert')) {
-            window.frames[0].stop();
-            return;
-        }
-
         $('.list').hide();
         $('.title').hide();
         $('.contentContainer').show();

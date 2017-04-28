@@ -12,12 +12,11 @@ const sourcemaps = require('gulp-sourcemaps');
 const cleanCSS = require('gulp-clean-css');
 const del = require('del');
 const runSequence = require('run-sequence');
+const through = require('through2');
 
-var environment = 'development';
-
-function isLiveSever() {
-    return environment === 'production';
-}
+const isLiveServer = function() {
+    return process.env.NODE_ENV === 'production';
+};
 
 // Lint Task
 gulp.task('lint', function() {
@@ -29,21 +28,21 @@ gulp.task('lint', function() {
 
 gulp.task('scripts:vendor', function() {
     return gulp.src([
-            'assets/scripts/vendor/jquery.js',
-            'assets/scripts/vendor/*.js'
-        ])
-        .pipe(!isLiveSever() ? sourcemaps.init() : null)
+        'assets/scripts/vendor/jquery.js',
+        'assets/scripts/vendor/*.js'
+    ])
+        .pipe(isLiveServer() ? through.obj() : sourcemaps.init())
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('dist/js'))
         .pipe(rename('vendor.min.js'))
         .pipe(uglify())
-        .pipe(!isLiveSever() ? sourcemaps.write() : null)
+        .pipe(isLiveServer() ? through.obj() : sourcemaps.write())
         .pipe(gulp.dest('dist/js'))
 });
 
 gulp.task('scripts:app', function() {
     return gulp.src(['assets/scripts/index.js'])
-        .pipe(!isLiveSever() ? sourcemaps.init() : null)
+        .pipe(isLiveServer() ? through.obj() : sourcemaps.init())
         .pipe(browserify({
             transform: ['babelify'],
         }))
@@ -51,29 +50,29 @@ gulp.task('scripts:app', function() {
         .pipe(gulp.dest('dist/js'))
         .pipe(rename('app.min.js'))
         .pipe(uglify())
-        .pipe(sourcemaps.write('.'))
+        .pipe(isLiveServer() ? through.obj() : sourcemaps.write('.'))
         .pipe(gulp.dest('dist/js'))
-        ;
+    ;
 });
 
 // Compile Our Sass
 gulp.task('stylesheets:vendor', function() {
     return gulp.src('assets/scss/vendor/*.scss')
-        .pipe(!isLiveSever() ? sourcemaps.init() : null)
+        .pipe(sourcemaps.init())
         .pipe(concat('vendor.css'))
         .pipe(sass())
         .pipe(cleanCSS({compatibility: 'edge'}))
-        .pipe(!isLiveSever() ? sourcemaps.write() : null)
+        .pipe(isLiveServer() ? through.obj() : sourcemaps.write())
         .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('stylesheets:app', function() {
     return gulp.src('assets/scss/*.scss')
-        .pipe(!isLiveSever() ? sourcemaps.init() : null)
+        .pipe(isLiveServer() ? through.obj() : sourcemaps.init())
         .pipe(concat('style.css'))
         .pipe(sass())
         .pipe(cleanCSS({compatibility: 'edge'}))
-        .pipe(!isLiveSever() ? sourcemaps.write() : null)
+        .pipe(isLiveServer() ? through.obj() : sourcemaps.write())
         .pipe(gulp.dest('dist/css'));
 });
 
@@ -98,11 +97,6 @@ gulp.task('build', function(callback) {
         'watch',
         callback
     );
-});
-
-gulp.task('launch', function(callback) {
-    environment = 'production';
-    runSequence('build');
 });
 
 // Default Task

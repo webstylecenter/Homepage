@@ -32,18 +32,18 @@ gulp.task('scripts:vendor', function() {
             'assets/scripts/vendor/jquery.js',
             'assets/scripts/vendor/*.js'
         ])
-        .pipe(isLiveSever() ? sourcemaps.init() : null)
+        .pipe(!isLiveSever() ? sourcemaps.init() : null)
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('dist/js'))
         .pipe(rename('vendor.min.js'))
         .pipe(uglify())
-        .pipe(isLiveSever() ? sourcemaps.write() : null)
+        .pipe(!isLiveSever() ? sourcemaps.write() : null)
         .pipe(gulp.dest('dist/js'))
 });
 
 gulp.task('scripts:app', function() {
     return gulp.src(['assets/scripts/index.js'])
-        .pipe(isLiveSever() ? sourcemaps.init() : null)
+        .pipe(!isLiveSever() ? sourcemaps.init() : null)
         .pipe(browserify({
             transform: ['babelify'],
         }))
@@ -59,21 +59,21 @@ gulp.task('scripts:app', function() {
 // Compile Our Sass
 gulp.task('stylesheets:vendor', function() {
     return gulp.src('assets/scss/vendor/*.scss')
-        .pipe(isLiveSever() ? sourcemaps.init() : null)
+        .pipe(!isLiveSever() ? sourcemaps.init() : null)
         .pipe(concat('vendor.css'))
         .pipe(sass())
         .pipe(cleanCSS({compatibility: 'edge'}))
-        .pipe(isLiveSever() ? sourcemaps.write() : null)
+        .pipe(!isLiveSever() ? sourcemaps.write() : null)
         .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('stylesheets:app', function() {
     return gulp.src('assets/scss/*.scss')
-        .pipe(isLiveSever() ? sourcemaps.init() : null)
+        .pipe(!isLiveSever() ? sourcemaps.init() : null)
         .pipe(concat('style.css'))
         .pipe(sass())
         .pipe(cleanCSS({compatibility: 'edge'}))
-        .pipe(isLiveSever() ? sourcemaps.write() : null)
+        .pipe(!isLiveSever() ? sourcemaps.write() : null)
         .pipe(gulp.dest('dist/css'));
 });
 

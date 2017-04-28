@@ -7,3 +7,7 @@ RewriteRule ^(.*)$ /index.php [NC,L,QSA]
 <IfModule mod_headers.c>
 Header set Cache-Control "no-transform"
 </IfModule>
+
+<FilesMatch "\.(gif|jpg|jpeg|png|js)$">
+     Header set Cache-Control "max-age=604800"
+</FilesMatch>

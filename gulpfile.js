@@ -13,6 +13,12 @@ const cleanCSS = require('gulp-clean-css');
 const del = require('del');
 const runSequence = require('run-sequence');
 
+var environment = 'development';
+
+function isLiveSever() {
+    return environment === 'production';
+}
+
 // Lint Task
 gulp.task('lint', function() {
     return gulp.src(['assets/scripts/*.js'])
@@ -26,18 +32,18 @@ gulp.task('scripts:vendor', function() {
             'assets/scripts/vendor/jquery.js',
             'assets/scripts/vendor/*.js'
         ])
-        .pipe(sourcemaps.init())
+        .pipe(isLiveSever() ? sourcemaps.init() : null)
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('dist/js'))
         .pipe(rename('vendor.min.js'))
         .pipe(uglify())
-        .pipe(sourcemaps.write())
+        .pipe(isLiveSever() ? sourcemaps.write() : null)
         .pipe(gulp.dest('dist/js'))
 });
 
 gulp.task('scripts:app', function() {
     return gulp.src(['assets/scripts/index.js'])
-        .pipe(sourcemaps.init())
+        .pipe(isLiveSever() ? sourcemaps.init() : null)
         .pipe(browserify({
             transform: ['babelify'],
         }))
@@ -53,21 +59,21 @@ gulp.task('scripts:app', function() {
 // Compile Our Sass
 gulp.task('stylesheets:vendor', function() {
     return gulp.src('assets/scss/vendor/*.scss')
-        .pipe(sourcemaps.init())
+        .pipe(isLiveSever() ? sourcemaps.init() : null)
         .pipe(concat('vendor.css'))
         .pipe(sass())
         .pipe(cleanCSS({compatibility: 'edge'}))
-        .pipe(sourcemaps.write())
+        .pipe(isLiveSever() ? sourcemaps.write() : null)
         .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('stylesheets:app', function() {
     return gulp.src('assets/scss/*.scss')
-        .pipe(sourcemaps.init())
+        .pipe(isLiveSever() ? sourcemaps.init() : null)
         .pipe(concat('style.css'))
         .pipe(sass())
         .pipe(cleanCSS({compatibility: 'edge'}))
-        .pipe(sourcemaps.write())
+        .pipe(isLiveSever() ? sourcemaps.write() : null)
         .pipe(gulp.dest('dist/css'));
 });
 
@@ -92,6 +98,11 @@ gulp.task('build', function(callback) {
         'watch',
         callback
     );
+});
+
+gulp.task('launch', function(callback) {
+    environment = 'production';
+    runSequence('build');
 });
 
 // Default Task

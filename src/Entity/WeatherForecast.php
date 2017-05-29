@@ -13,7 +13,7 @@ class WeatherForecast
     const TYPE_PARTLY_CLOUD = 'partly_cloud';
     const TYPE_SUN = 'sun';
     const TYPE_SNOW = 'snow';
-    const TYPE_THUNDER = 'thunder';
+    const TYPE_THUNDER = 'thunderstorm';
     const TYPE_UNKNOWN = 'unknown';
 
     /**

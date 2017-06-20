@@ -22,6 +22,7 @@ body {
   font-size:10pt;
   font-family: "LatoWebLight", "Helvetica Neue", "Arial";
   margin:0;
+  text-rendering: optimizeLegibility;
 }
 .wow { visibility: hidden; }
 .topbar {
@@ -271,7 +272,8 @@ iframe {
 .userInput { border-left-color: #ffbe3f; }
 .NOS { border-left-color: #c00; }
 .AngryJoe { border-left-color: #cc6b4c; }
-.errorPage {
+
+#nourl {
   margin:0;
   position:absolute;
   top:0;
@@ -279,9 +281,10 @@ iframe {
   bottom:0;
   left:0;
   padding:25px;
-  background: linear-gradient(135deg, #f7f7f7 0%, #ae9490 100%);
+  background: linear-gradient(180deg, #f7f7f7, 40%, #ec483d 100%);
+  background-attachment: fixed;
 }
-.welcomePage, .guestsWelcomePage {
+.welcomePage, .guestsWelcomePagem {
   position:absolute;
   top:0;
   right:0;

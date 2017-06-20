@@ -19,7 +19,7 @@ $(function() {
         $(this).addClass('used');
 
         var url = $(this).data('url');
-        if (url === '') { url = 'nourl.php'; }
+        if (url === '') { url = '/nourl/'; }
 
         $('iframe').attr('src', url);
         $('.pageLinkToUrl').text(url).attr('href', url);

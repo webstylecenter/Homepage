@@ -4,7 +4,7 @@ $app->match('/screensaver/', function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
     $feedItems = $feedService->getFeedItemsBySites([
-        'NOS', 'Geenstijl', 'Neowin', 'Gamersnet', 'iDownloadblog', 'MajorNelson'
+        1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12 // TODO: Make this happen with feed table
     ]);
 
     if (count($feedItems) === 0) {
@@ -18,6 +18,7 @@ $app->match('/screensaver/', function() use($app) {
         'bodyId' => 'screensaver',
         'forecast' => $weatherService,
         'feedItems'=> $feedItems,
+        'feeds' => $feedService->getFeeds(),
         'firstFeedItem' => $feedItems[0],
         'lastUpdate' => [
             'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),

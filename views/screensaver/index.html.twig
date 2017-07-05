@@ -8,7 +8,7 @@
         var newsItems = [];
         {% for item in feedItems %}
             newsItems.push([
-                "{{ item.site|striptags }}",
+                "{{ item.feedid }}",
                 "{{ item.title|striptags }}",
                 "{{ item.description|truncate(120, true) }}"
             ]);
@@ -23,8 +23,8 @@
         <div class="screensaverWeatherContent wow rollIn"></div>
 
         <div class="activeNewsItem hideOnStart">
-            <div class="newsSource newsBar{{ firstFeedItem.site }} hideOnStart">
-                {{ firstFeedItem.site }}
+            <div class="newsSource newsBar{{ firstFeedItem.feedid }} hidden">
+                {{ firstFeedItem.feedid }}
             </div>
             <div class="newsTitle hideOnStart">
                 {{ firstFeedItem.title }}

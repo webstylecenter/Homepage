@@ -145,7 +145,7 @@ class FeedService
     {
         $params = str_repeat('?,', count($sites) - 1) . '?';
         $feedItems = $this->database->fetchAll(
-        'SELECT * FROM feed_data WHERE site IN (' . $params . ') ORDER BY pinned DESC, dateAdded DESC LIMIT 50',
+        'SELECT * FROM feed_data WHERE feed IN (' . $params . ') ORDER BY pinned DESC, dateAdded DESC LIMIT 50',
             $sites
         );
 

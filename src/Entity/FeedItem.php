@@ -39,9 +39,9 @@ class FeedItem
     protected $viewed = false;
 
     /**
-     * @var string
+     * @var int
      */
-    protected $site;
+    protected $feedId;
 
     /**
      * @var boolean
@@ -53,16 +53,16 @@ class FeedItem
      * @param $title
      * @param $description
      * @param $url
-     * @param $site
+     * @param $feedId
      */
-    public function __construct($id, $title, $description, $url, $site)
+    public function __construct($id, $title, $description, $url, $feedId)
     {
         $this->id          = $id;
         $this->title       = $title;
         $this->description = $description;
         $this->url         = $url;
         $this->dateAdded   = new \DateTime;
-        $this->site        = $site;
+        $this->feedId      = $feedId;
     }
 
     /**
@@ -162,19 +162,19 @@ class FeedItem
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getSite()
+    public function getFeedId()
     {
-        return $this->site;
+        return $this->feedId;
     }
 
     /**
-     * @param string $site
+     * @param int $feedId
      */
-    public function setSite($site)
+    public function setFeedId($feedId)
     {
-        $this->site = $site;
+        $this->feedId = $feedId;
     }
 
     /**

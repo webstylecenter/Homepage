@@ -18,6 +18,7 @@ $homeController = function() use($app) {
     return $app['twig']->render($templateFolder . '/index.html.twig', [
         'bodyId' => $bodyId,
         'feedItems'=> $feedItems,
+        'feeds' => $feedService->getFeeds(),
         'lastUpdate' => [
             'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
             'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),

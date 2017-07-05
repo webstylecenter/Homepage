@@ -5,7 +5,8 @@ namespace Service;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDOException;
 use Entity\FeedItem;
-use Service\Adapter\Feed\FeedAdapterInterface;
+use Entity\Feed;
+use Guzzle\GuzzleClient;
 use Zend\Feed\Reader\Reader;
 
 /**
@@ -15,11 +16,6 @@ use Zend\Feed\Reader\Reader;
 class FeedService
 {
     const DEFAULT_ITEM_LIMIT = 50;
-
-    /**
-     * @var FeedAdapterInterface[]
-     */
-    protected $adapters = [];
 
     /**
      * @var Connection
@@ -40,40 +36,58 @@ class FeedService
     }
 
     /**
-     * @param string $name
-     * @param string $feedAdapter
+     * @return array
      */
-    public function registerAdapter($name, $feedAdapter)
+    public function getFeeds()
     {
-        $feedAdapterInstance = new $feedAdapter(new Reader());
-        if (!$feedAdapterInstance instanceof FeedAdapterInterface) {
-            throw new \InvalidArgumentException('FeedAdapter should be an instance of ' . FeedAdapterInterface::class);
-        }
+        $feedList = $this->database->fetchAll('SELECT * FROM feeds');
 
-        $this->adapters[$name] = $feedAdapterInstance;
-    }
+        $feeds = array_map(function($feed) {
+            return $this->toFeedEntity($feed);
+        }, $feedList);
 
-    /**
-     * @return FeedAdapterInterface[]
-     */
-    public function getAdapters()
-    {
-        return $this->adapters;
+        return $feeds;
     }
 
     public function import()
     {
-        foreach ($this->adapters as $name => $adapter) {
-            $feedItemList = $adapter->read();
+        $feeds = $this->getFeeds();
+        foreach ($feeds as $feed) {
 
+            $feedItemList = $this->read($feed);
             foreach ($feedItemList as $feedItem) {
+
                 if ($this->feedItemExists($feedItem)) {
                     continue;
                 }
 
-                $this->importFeedItem($feedItem, $adapter);
+                $this->importFeedItem($feed, $feedItem);
             }
         }
+    }
+
+    /**
+     * @return FeedItem[]
+     */
+    public function read($feed)
+    {
+        $client = new GuzzleClient();
+        $reader = new Reader();
+        $feedReader = $reader->importRemoteFeed($feed->getUrl(), $client);
+        $map = [];
+        foreach ($feedReader as $entry) {
+            /** @var $entry FeedInterface */
+            $content = strip_tags($entry->getDescription());
+            $content = trim(str_replace('Read more...', '', $content));
+            $map[] = new FeedItem(
+                $entry->getId(),
+                $entry->getTitle(),
+                $content,
+                $entry->getLink(),
+                $feed->getId()
+            );
+        }
+        return $map;
     }
 
     /**
@@ -95,7 +109,7 @@ class FeedService
      * @param int $limit
      * @param \DateTime|null $fromDate
      * @param int $startFrom
-     * @param null $searchQuery
+     * @param string $searchQuery
      *
      * @return array
      */
@@ -143,15 +157,15 @@ class FeedService
     }
 
     /**
+     * @param Feed $feed
      * @param FeedItem $feedItem
-     * @param FeedAdapterInterface $feedAdapter
      */
-    protected function importFeedItem(FeedItem $feedItem, FeedAdapterInterface $feedAdapter)
+    protected function importFeedItem(Feed $feed, FeedItem $feedItem)
     {
         try {
             $this->database->insert('feed_data', [
                 'guid' => $feedItem->getId(),
-                'site' => $feedAdapter->getName(),
+                'feed' => $feed->getId(),
                 'title' => $feedItem->getTitle(),
                 'description' => $feedItem->getDescription(),
                 'url' => $feedItem->getUrl(),
@@ -175,7 +189,7 @@ class FeedService
             $data['title'],
             $data['description'],
             $data['url'],
-            $data['site']
+            $data['feed']
         );
 
         $feedItem->setViewed($data['viewed']);
@@ -185,11 +199,26 @@ class FeedService
     }
 
     /**
+     * @param array $data
+     *
+     * @return Feed
+     */
+    protected function toFeedEntity(array $data)
+    {
+        return new Feed(
+            $data['id'],
+            $data['name'],
+            $data['url'],
+            $data['color']
+        );
+    }
+
+    /**
      * @return array
      */
     public function getFeedItemTotals()
     {
-        return $this->database->fetchAll('SELECT site,COUNT(*) as count FROM feed_data GROUP BY site ORDER BY count DESC;');
+        return $this->database->fetchAll('SELECT feed,COUNT(*) as count FROM feed_data GROUP BY feed ORDER BY count DESC;');
     }
 
     public function markAllViewed()
@@ -224,7 +253,7 @@ class FeedService
         try {
             $this->database->insert('feed_data', [
                 'guid' => $feedItem->getId(),
-                'site' => 'userInput',
+                'feed' => '0',
                 'title' => $feedItem->getTitle(),
                 'description' => $feedItem->getDescription(),
                 'url' => $feedItem->getUrl(),

@@ -5,11 +5,9 @@ use Entity\FeedItem;
 $app->match('/update/', function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
-
     $feedService->import();
 
     return 'Done';
-
 });
 
 
@@ -46,6 +44,7 @@ $app->match('/refresh/{date}', function($date) use($app) {
     return json_encode([
         'html' => $app['twig']->render('home/newsfeed.html.twig', [
                     'feedItems'=> $feedService->getFeedItems(999, new \DateTime($date)),
+                    'feeds' => $feedService->getFeeds(),
                     'nextPageNumber' => 50000,
                     'addToChecklist' => '',
                 ]),
@@ -58,6 +57,7 @@ $app->match('/page/{number}', function($number) use($app) {
     $feedService = $app['feedService'];
     return $app['twig']->render('home/newsfeed.html.twig', [
         'feedItems'=> $feedService->getFeedItems(50, null, $number),
+        'feeds' => $feedService->getFeeds(),
         'nextPageNumber' => $number + 1,
         'addToChecklist' => '',
     ]);
@@ -68,6 +68,7 @@ $app->match('/search/{query}', function($query) use($app) {
     $feedService = $app['feedService'];
     return $app['twig']->render('home/newsfeed.html.twig', [
         'feedItems'=> $feedService->getFeedItems(10, null, null, $query),
+        'feeds' => $feedService->getFeeds(),
         'nextPageNumber' => 99999,
         'addToChecklist' => $query,
     ]);

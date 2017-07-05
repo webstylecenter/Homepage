@@ -11,10 +11,10 @@
             <textarea class="note" data-id="{{ note.id }}" data-position="{{ note.position }}">{{ note.note }}</textarea>
         </div>
 
-        <div class="feedCounter">
+        <!-- <div class="feedCounter">
             {% for item in feedItemTotals %}
-                <div class="feedCounterItem">{{ item.site }}: <span class="itemCount">{{ item.count }}</span></div>
+                <div class="feedCounterItem">{{ item.feed }}: <span class="itemCount">{{ item.count }}</span></div>
             {% endfor %}
-        </div>
+        </div> -->
     </div>
 {% endblock %}

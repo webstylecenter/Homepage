@@ -51,70 +51,80 @@ class Feed
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @param int $id
      */
-    public function setId( $id ) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @param string $name
      */
-    public function setName( $name ) {
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
 
     /**
      * @param string $url
      */
-    public function setUrl( $url ) {
+    public function setUrl($url)
+    {
         $this->url = $url;
     }
 
     /**
      * @return string
      */
-    public function getColor() {
+    public function getColor()
+    {
         return $this->color;
     }
 
     /**
      * @param string $color
      */
-    public function setColor( $color ) {
+    public function setColor($color)
+    {
         $this->color = $color;
     }
 
     /**
      * @return \DateTime
      */
-    public function getCreated() {
+    public function getCreated()
+    {
         return $this->created;
     }
 
     /**
      * @param \DateTime $created
      */
-    public function setCreated( $created ) {
+    public function setCreated($created)
+    {
         $this->created = $created;
     }
 }

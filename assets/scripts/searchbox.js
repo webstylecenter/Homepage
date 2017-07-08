@@ -15,6 +15,11 @@ $(function() {
             searchAutoRun($(this));
         }
     });
+
+    $('.searchResults').on('click', '.addToChecklist', function() {
+        console.log('test');
+        addToChecklistFromSearch(this);
+    });
 });
 
 function searchFeeds(searchQuery) {
@@ -32,6 +37,23 @@ function searchFeeds(searchQuery) {
         });
 }
 
+function addToChecklist(value) {
+    postToChecklist({item:value});
+}
+
+function postToChecklist(data) {
+    $.post("/checklist/add/", data).then(function(data) {
+        $('.checklists').html(data);
+        $('.checklistAdder input[type="text"]').val('');
+
+        $('.checklistItem').on('click', function() {
+            checkItem(this);
+        });
+    }).catch(function() {
+        alert('Updating checklist failed!');
+        return false;
+    });
+}
 
 function addToChecklistFromSearch(el) {
     var value = $(el).find('b').html();

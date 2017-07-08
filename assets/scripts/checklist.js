@@ -14,11 +14,6 @@ $(function() {
     });
 });
 
-
-function addToChecklist(value) {
-    postToChecklist({item:value});
-}
-
 function checkItem(el) {
     var id = $(el).data('database-id');
     var newCheckedState = $(el).is(':checked');
@@ -28,6 +23,10 @@ function checkItem(el) {
         checked: newCheckedState
     });
 
+}
+
+function addToChecklist(value) {
+    postToChecklist({item:value});
 }
 
 function postToChecklist(data) {

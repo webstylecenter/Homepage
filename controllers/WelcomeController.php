@@ -3,7 +3,7 @@
 $app->match('/welcome/', function() use($app) {
 
     /** @var \Service\WeatherService $weatherService */
-    $weatherService = $app['weatherService'];
+    //$weatherService = $app['weatherService'];
 
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
@@ -11,15 +11,17 @@ $app->match('/welcome/', function() use($app) {
     /** @var \Service\NoteService $noteService */
     $noteService = $app['noteService'];
 
+
     return $app['twig']->render('welcome/index.html.twig', [
         'bodyId' => 'welcome',
-        'forecast' => $weatherService->getForecastList(),
+        //'forecast' => $weatherService->getForecastList(),
         'lastUpdate' => [
             'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
             'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
         ],
         'feedItemTotals'=> $feedService->getFeedItemTotals(),
         'note'=> $noteService->loadNote(),
+        'addedLinks' => $feedService->getFeedItemsBySites([0])
     ]);
 });
 

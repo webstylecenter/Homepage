@@ -280,46 +280,7 @@ iframe {
   text-align:center;
   z-index:0;
 }
-.welcomePageBackground {
-  position:absolute;
-  top:-15px;
-  right:-15px;
-  bottom:-15px;
-  left:-15px;
-  background-image:url('/screensaver/images/Welcome.jpg');
-  background-size:cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(10px);
-  filter: blur(10px);
-  z-index:-1;
-}
-.weatherContent {
-  height:440px;
-  mix-blend-mode: difference;
-}
-.weatherInfo {
-  width:400px;
-  margin:auto;
-}
-.weatherCurrentCondition {
-  width:195px;
-  display:inline-block;
-  box-sizing: border-box;
-  font-size:32pt;
-  text-transform: capitalize;
-}
-.weatherTodayCast {
-  width:195px;
-  display:inline-block;
-  box-sizing: border-box;
-}
-.weatherTodayCast span {
-  display:block;
-}
+
 .modal {
   display:none;
   margin:-70vh auto;
@@ -355,21 +316,4 @@ iframe {
 }
 .guestsWelcomeInfo a {
   color: #7b0300;
-}
-.noteArea {
-  margin-top:30px;
-}
-.noteArea textarea {
-  box-sizing: border-box;
-  width:50%;
-  height:350px;
-  background-color:transparent;
-  border:1px solid black;
-  border-radius:0;
-  padding:5px;
-  display:none;
-  background-color:rgba(256, 256, 256, 0.8);
-}
-textarea:focus {
-  outline: none;
 }

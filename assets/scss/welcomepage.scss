@@ -1,0 +1,77 @@
+.welcomePageBackground {
+  position:absolute;
+  top:-15px;
+  right:-15px;
+  bottom:-15px;
+  left:-15px;
+  background-image:url('/screensaver/images/Welcome.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+  filter: blur(10px);
+  z-index:-1;
+}
+
+.welcomePage {
+  h2 {
+    margin:0 0 0 10px;
+  }
+  .left {
+    width:49%;
+    text-align: left;
+    padding:20px;
+    box-sizing: border-box;
+    float:left;
+  }
+  .right {
+    width:49%;
+    text-align: left;
+    padding:20px;
+    box-sizing: border-box;
+    display:inline-block;
+  }
+  .addedLinks {
+    height:700px;
+    overflow-y:auto;
+    overflow-x:hidden;
+  }
+  .addedLinkItem {
+    width:100%;
+    overflow:hidden;
+    height:24px;
+    font-weight:bold;
+    text-align:left;
+    padding:5px 5px;
+    margin:2px 5px;
+    display:block;
+  }
+  .addedLinkItem:hover {
+    background-color:rgba(256, 256, 256, 0.3);
+    cursor: pointer;
+  }
+  .addedLinkItem span {
+    font-weight:lighter;
+    color: #292929;
+    opacity: 0.5;
+  }
+
+  .noteArea {
+
+  }
+  .noteArea textarea {
+    border:0;
+    box-sizing: border-box;
+    width:100%;
+    height:700px;
+    border-radius:0;
+    padding:5px;
+    background-color:rgba(256, 256, 256, 0.2);
+  }
+  textarea:focus {
+    outline: none;
+  }
+}

@@ -3,18 +3,37 @@
 {% block body %}
     <div class="welcomePageBackground"></div>
     <div class="welcomePage">
-        <div class="weatherContent wow rubberBand">
+
+        <!-- <div class="weatherContent wow rubberBand">
             Loading weatherinfo...
+        </div> -->
+        <div class="left">
+
+            <div class="addedLinks wow slideInLeft">
+                <h2>Added items</h2>
+                {% for addedLinkItem in addedLinks %}
+                    <div class="addedLinkItem wow slideInUp" data-url="{{ addedLinkItem.url }}">
+                        {{ addedLinkItem.title }} <span class="description">{{ addedLinkItem.description }}</span>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
-        <div class="noteArea">
-            <textarea class="note" data-id="{{ note.id }}" data-position="{{ note.position }}">{{ note.note }}</textarea>
+
+        <div class="right">
+            <h2>Notes</h2>
+            <div class="noteArea">
+                <textarea class="note" data-id="{{ note.id }}" data-position="{{ note.position }}">{{ note.note }}</textarea>
+            </div>
         </div>
 
-        <!-- <div class="feedCounter">
+
+
+
+        <div class="feedCounter">
             {% for item in feedItemTotals %}
                 <div class="feedCounterItem">{{ item.feed }}: <span class="itemCount">{{ item.count }}</span></div>
             {% endfor %}
-        </div> -->
+        </div>
     </div>
 {% endblock %}

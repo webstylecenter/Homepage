@@ -17,7 +17,6 @@ $(function() {
     });
 
     $('.searchResults').on('click', '.addToChecklist', function() {
-        console.log('test');
         addToChecklistFromSearch(this);
     });
 });

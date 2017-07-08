@@ -18,7 +18,29 @@ html *:after { box-sizing: inherit; }
   width:400px;
   padding-bottom:10px;
 }
-
+.weatherContent {
+  height:440px;
+  mix-blend-mode: difference;
+}
+.weatherInfo {
+  width:400px;
+  margin:auto;
+}
+.weatherCurrentCondition {
+  width:195px;
+  display:inline-block;
+  box-sizing: border-box;
+  font-size:32pt;
+  text-transform: capitalize;
+}
+.weatherTodayCast {
+  width:195px;
+  display:inline-block;
+  box-sizing: border-box;
+}
+.weatherTodayCast span {
+  display:block;
+}
 .icon {
   position: relative;
   display: inline-block;

@@ -52,7 +52,6 @@ gulp.task('scripts:app', function() {
         .pipe(uglify())
         .pipe(isLiveServer() ? through.obj() : sourcemaps.write('.'))
         .pipe(gulp.dest('dist/js'))
-    ;
 });
 
 // Compile Our Sass

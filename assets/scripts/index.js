@@ -5,3 +5,4 @@ import './mobile';
 import './newsfeedlist';
 import './screensaver';
 import './searchbox';
+import './welcome.js';

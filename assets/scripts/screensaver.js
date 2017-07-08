@@ -99,8 +99,9 @@ function showNextNewsItem() {
     }
 
     $('.newsSource').html(newsItems[currentNewsItem][0])
-        .attr('class', 'newsSource newsBar' + newsItems[currentNewsItem][0])
-        .slideToggle('slow');
+        .attr('class', 'newsSource')
+        .slideToggle('slow')
+        .css('backgroundColor', '#' + newsItems[currentNewsItem][3]);
 
     $('.newsTitle').html(newsItems[currentNewsItem][1]).slideToggle('slow');
     $('.newsDescription').html(newsItems[currentNewsItem][2]).slideToggle('slow');

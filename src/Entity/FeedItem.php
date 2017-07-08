@@ -49,6 +49,16 @@ class FeedItem
     protected $pinned = false;
 
     /**
+     * @var integer
+     */
+    protected $color;
+
+    /**
+     * @var string
+     */
+    protected $feedName;
+
+    /**
      * @param integer $id
      * @param string $title
      * @param string $description
@@ -222,6 +232,44 @@ class FeedItem
     {
         $this->pinned = $pinned;
 
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param int $color
+     *
+     * @return FeedItem
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFeedName()
+    {
+        return $this->feedName;
+    }
+
+    /**
+     * @param string $feedName
+     *
+     * @return FeedItem
+     */
+    public function setFeedName($feedName)
+    {
+        $this->feedName = $feedName;
         return $this;
     }
 }

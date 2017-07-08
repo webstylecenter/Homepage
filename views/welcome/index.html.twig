@@ -4,11 +4,11 @@
     <div class="welcomePageBackground"></div>
     <div class="welcomePage">
 
-        <!-- <div class="weatherContent wow rubberBand">
+        <div class="weatherContent wow rubberBand">
             Loading weatherinfo...
-        </div> -->
-        <div class="left">
+        </div>
 
+        <div class="left">
             <div class="addedLinks wow slideInLeft">
                 <h2>Added items</h2>
                 {% for addedLinkItem in addedLinks %}
@@ -27,13 +27,10 @@
             </div>
         </div>
 
-
-
-
-        <div class="feedCounter">
+        <!-- <div class="feedCounter">
             {% for item in feedItemTotals %}
-                <div class="feedCounterItem">{{ item.feed }}: <span class="itemCount">{{ item.count }}</span></div>
+                <div class="feedCounterItem">{{ item.name }}: <span class="itemCount">{{ item.count }}</span></div>
             {% endfor %}
-        </div>
+        </div> -->
     </div>
 {% endblock %}

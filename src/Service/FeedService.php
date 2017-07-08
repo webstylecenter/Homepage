@@ -84,7 +84,7 @@ class FeedService
     {
         $fromDate = $fromDate ?: new \DateTime('@0');
         $feedItems = $this->database->fetchAll(
-            'SELECT * FROM feed_data WHERE dateAdded > ? AND (title LIKE ? OR description LIKE ?) ORDER BY pinned DESC, dateAdded DESC LIMIT ?, ?',
+            'SELECT * FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE dateAdded > ? AND (title LIKE ? OR description LIKE ?) ORDER BY pinned DESC, dateAdded DESC LIMIT ?, ?',
                 [
                     $fromDate->format('Y-m-d H:i:s'),
                     '%' . $searchQuery . '%', '%' . $searchQuery . '%',
@@ -110,7 +110,7 @@ class FeedService
     {
         $params = str_repeat('?,', count($sites) - 1) . '?';
         $feedItems = $this->database->fetchAll(
-        'SELECT * FROM feed_data WHERE feed IN (' . $params . ') ORDER BY pinned DESC, dateAdded DESC LIMIT 50',
+        'SELECT * FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE feed IN (' . $params . ') ORDER BY pinned DESC, dateAdded DESC LIMIT 50',
             $sites
         );
 
@@ -124,7 +124,7 @@ class FeedService
      */
     public function getFeedItemTotals()
     {
-        return $this->database->fetchAll('SELECT feed,COUNT(*) as count FROM feed_data GROUP BY feed ORDER BY count DESC;');
+        return $this->database->fetchAll('SELECT feed,COUNT(*) as count, name FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id GROUP BY feed ORDER BY count DESC;');
     }
 
     public function markAllViewed()
@@ -227,6 +227,8 @@ class FeedService
         return (new FeedItem($data['id'], $data['title'], $data['description'], $data['url'], $data['feed']))
             ->setViewed($data['viewed'])
             ->setDateAdded(new \DateTime($data['dateAdded']))
-            ->setPinned($data['pinned']);
+            ->setPinned($data['pinned'])
+            ->setColor($data['color'])
+            ->setFeedName($data['name']);
     }
 }

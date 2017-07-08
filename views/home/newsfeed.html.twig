@@ -5,8 +5,8 @@
 {% endif %}
 
 {% for item in feedItems %}
-    <div class="listItem {{ item.viewed ? 'used ' : 'newItem ' }}{{ item.pinned ? 'pinned ' : '' }}feed{{ item.feedId }}"
-         data-url="{{ item.url }}">
+    <div class="listItem {{ item.viewed ? 'used ' : 'newItem ' }}{{ item.pinned ? 'pinned ' : '' }}"
+         data-url="{{ item.url }}" style="border-left-color:#{{ item.color }};">
         <div class="pin" data-pin-id="{{ item.id }}"></div>
         <p class="listTitle ">{{ item.title|striptags }}</p>
         <p class="listContent">{{ item.description|truncate(120, true) }}</p>

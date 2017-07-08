@@ -4,10 +4,6 @@ namespace Service;
 
 use Entity\Meta;
 
-/**
- * Class MetaService
- * @package Service
- */
 class MetaService
 {
     /**
@@ -17,11 +13,10 @@ class MetaService
      */
     public function getByUrl($url)
     {
-        $url = strpos($url, 'http') === 0 ? $url : 'http://' . $url;
-        $doc = $this->loadContent($url);
+        $meta = new Meta;
 
-        $meta = new Meta();
-        if (!$doc) {
+        $url = strpos($url, 'http') === 0 ? $url : 'http://' . $url;
+        if (!$this->loadContent($url)) {
             return $meta;
         }
 
@@ -78,9 +73,7 @@ class MetaService
             $descriptionMap['og-description'] = $this->getMetaContent($descriptionMap, $meta, 'property', 'og-description');
         }
 
-        return $descriptionMap['og-description'] !== null
-            ? $descriptionMap['og-description']
-            : $descriptionMap['description'];
+        return $descriptionMap['og-description'] ?: $descriptionMap['description'];
     }
 
     /**

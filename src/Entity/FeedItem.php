@@ -39,7 +39,7 @@ class FeedItem
     protected $viewed = false;
 
     /**
-     * @var int
+     * @var integer
      */
     protected $feedId;
 
@@ -49,11 +49,11 @@ class FeedItem
     protected $pinned = false;
 
     /**
-     * @param $id
-     * @param $title
-     * @param $description
-     * @param $url
-     * @param $feedId
+     * @param integer $id
+     * @param string $title
+     * @param string $description
+     * @param string $url
+     * @param integer $feedId
      */
     public function __construct($id, $title, $description, $url, $feedId)
     {
@@ -75,10 +75,14 @@ class FeedItem
 
     /**
      * @param int $id
+     *
+     * @return FeedItem
      */
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -91,10 +95,14 @@ class FeedItem
 
     /**
      * @param string $title
+     *
+     * @return FeedItem
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
     }
 
     /**
@@ -102,15 +110,19 @@ class FeedItem
      */
     public function getDescription()
     {
-        return preg_replace("/\r|\n/", "", $this->description);
+        return $this->description;
     }
 
     /**
      * @param string $description
+     *
+     * @return FeedItem
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -123,10 +135,14 @@ class FeedItem
 
     /**
      * @param string $url
+     *
+     * @return FeedItem
      */
     public function setUrl($url)
     {
         $this->url = $url;
+
+        return $this;
     }
 
     /**
@@ -139,14 +155,18 @@ class FeedItem
 
     /**
      * @param \DateTime $dateAdded
+     *
+     * @return FeedItem
      */
     public function setDateAdded($dateAdded)
     {
         $this->dateAdded = $dateAdded;
+
+        return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isViewed()
     {
@@ -154,11 +174,15 @@ class FeedItem
     }
 
     /**
-     * @param boolean $viewed
+     * @param bool $viewed
+     *
+     * @return FeedItem
      */
     public function setViewed($viewed)
     {
         $this->viewed = $viewed;
+
+        return $this;
     }
 
     /**
@@ -171,14 +195,18 @@ class FeedItem
 
     /**
      * @param int $feedId
+     *
+     * @return FeedItem
      */
     public function setFeedId($feedId)
     {
         $this->feedId = $feedId;
+
+        return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPinned()
     {
@@ -186,10 +214,14 @@ class FeedItem
     }
 
     /**
-     * @param boolean $pinned
+     * @param bool $pinned
+     *
+     * @return FeedItem
      */
     public function setPinned($pinned)
     {
         $this->pinned = $pinned;
+
+        return $this;
     }
 }

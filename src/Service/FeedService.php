@@ -7,6 +7,7 @@ use Doctrine\DBAL\Driver\PDOException;
 use Entity\FeedItem;
 use Entity\Feed;
 use Guzzle\GuzzleClient;
+use Zend\Feed\Reader\Entry\EntryInterface;
 use Zend\Feed\Reader\Reader;
 
 /**
@@ -35,59 +36,25 @@ class FeedService
         $this->database = $database;
     }
 
-    /**
-     * @return array
-     */
-    public function getFeeds()
-    {
-        $feedList = $this->database->fetchAll('SELECT * FROM feeds');
-
-        $feeds = array_map(function($feed) {
-            return $this->toFeedEntity($feed);
-        }, $feedList);
-
-        return $feeds;
-    }
-
     public function import()
     {
-        $feeds = $this->getFeeds();
-        foreach ($feeds as $feed) {
-
-            $feedItemList = $this->read($feed);
-            foreach ($feedItemList as $feedItem) {
-
-                if ($this->feedItemExists($feedItem)) {
-                    continue;
-                }
-
+        foreach ($this->getFeeds() as $feed) {
+            foreach ($this->read($feed) as $feedItem) {
                 $this->importFeedItem($feed, $feedItem);
             }
         }
     }
 
     /**
-     * @return FeedItem[]
+     * @return Feed[]
      */
-    public function read($feed)
+    public function getFeeds()
     {
-        $client = new GuzzleClient();
-        $reader = new Reader();
-        $feedReader = $reader->importRemoteFeed($feed->getUrl(), $client);
-        $map = [];
-        foreach ($feedReader as $entry) {
-            /** @var $entry FeedInterface */
-            $content = strip_tags($entry->getDescription());
-            $content = trim(str_replace('Read more...', '', $content));
-            $map[] = new FeedItem(
-                $entry->getId(),
-                $entry->getTitle(),
-                $content,
-                $entry->getLink(),
-                $feed->getId()
-            );
-        }
-        return $map;
+        $feedList = $this->database->fetchAll('SELECT * FROM feeds');
+
+        return array_map(function($feed) {
+            return new Feed($feed['id'], $feed['name'], $feed['url'], $feed['color']);
+        }, $feedList);
     }
 
     /**
@@ -95,7 +62,7 @@ class FeedService
      *
      * @return bool
      */
-    public function feedItemExists($feedItem)
+    public function feedItemExists(FeedItem $feedItem)
     {
         return !!$this->database->fetchColumn(
             'SELECT COUNT(*) FROM feed_data WHERE guid = ? LIMIT 1',
@@ -108,19 +75,20 @@ class FeedService
     /**
      * @param int $limit
      * @param \DateTime|null $fromDate
-     * @param int $startFrom
+     * @param int $startIndex
      * @param string $searchQuery
      *
      * @return array
      */
-    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, \DateTime $fromDate = null, $startFrom = 0, $searchQuery = '')
+    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, \DateTime $fromDate = null, $startIndex = 0, $searchQuery = '')
     {
         $fromDate = $fromDate ?: new \DateTime('@0');
         $feedItems = $this->database->fetchAll(
             'SELECT * FROM feed_data WHERE dateAdded > ? AND (title LIKE ? OR description LIKE ?) ORDER BY pinned DESC, dateAdded DESC LIMIT ?, ?',
-                [$fromDate->format('Y-m-d H:i:s'),
+                [
+                    $fromDate->format('Y-m-d H:i:s'),
                     '%' . $searchQuery . '%', '%' . $searchQuery . '%',
-                    ($startFrom * $limit), $limit
+                    ($startIndex * $limit), $limit
                 ],
                 [
                     \PDO::PARAM_STR,
@@ -129,16 +97,13 @@ class FeedService
                 ]
         );
 
-        $feed = array_map(function($feedItem) {
-            return $this->toEntity($feedItem);
+        return array_map(function($feedItem) {
+            return $this->toFeedItemEntity($feedItem);
         }, $feedItems);
-
-        return $feed;
     }
 
     /**
      * @param array $sites
-     *
      * @return array
      */
     public function getFeedItemsBySites(array $sites)
@@ -149,68 +114,9 @@ class FeedService
             $sites
         );
 
-        $feed = array_map(function($feedItem) {
-            return $this->toEntity($feedItem);
+        return array_map(function($feedItem) {
+            return $this->toFeedItemEntity($feedItem);
         }, $feedItems);
-
-        return $feed;
-    }
-
-    /**
-     * @param Feed $feed
-     * @param FeedItem $feedItem
-     */
-    protected function importFeedItem(Feed $feed, FeedItem $feedItem)
-    {
-        try {
-            $this->database->insert('feed_data', [
-                'guid' => $feedItem->getId(),
-                'feed' => $feed->getId(),
-                'title' => $feedItem->getTitle(),
-                'description' => $feedItem->getDescription(),
-                'url' => $feedItem->getUrl(),
-                'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),
-                'viewed' => 0
-            ]);
-        } catch (PDOException $e) {
-            // do nothing.
-        }
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return FeedItem
-     */
-    protected function toEntity(array $data)
-    {
-        $feedItem = new FeedItem(
-            $data['id'],
-            $data['title'],
-            $data['description'],
-            $data['url'],
-            $data['feed']
-        );
-
-        $feedItem->setViewed($data['viewed']);
-        $feedItem->setDateAdded(new \DateTime($data['dateAdded']));
-        $feedItem->setPinned($data['pinned']);
-        return $feedItem;
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return Feed
-     */
-    protected function toFeedEntity(array $data)
-    {
-        return new Feed(
-            $data['id'],
-            $data['name'],
-            $data['url'],
-            $data['color']
-        );
     }
 
     /**
@@ -233,14 +139,8 @@ class FeedService
      */
     public function pinItem($id)
     {
-        $feedItem = $this->database->fetchAssoc(
-            'SELECT pinned FROM feed_data WHERE id = ?',
-            [$id],
-            [\PDO::PARAM_INT]
-        );
-
-        $newPinState = $feedItem['pinned'] == 1 ? NULL : 1;
-        return $this->database->update('feed_data', ['pinned' => $newPinState], ['id' => $id]);
+        $feedItem = $this->database->fetchAssoc('SELECT pinned FROM feed_data WHERE id = ' . (int) $id);
+        return $this->database->update('feed_data', ['pinned' => !!$feedItem['pinned']], ['id' => $id]);
     }
 
     /**
@@ -264,7 +164,7 @@ class FeedService
 
             return true;
         } catch (PDOException $e) {
-            $this->setLastError($e);
+            $this->lastError = $e;
         }
 
         return false;
@@ -279,10 +179,54 @@ class FeedService
     }
 
     /**
-     * @param string $lastError
+     * @param Feed $feed
+     * @return FeedItem[]
      */
-    public function setLastError($lastError)
+    protected function read(Feed $feed)
     {
-        $this->lastError = $lastError;
+        $entries = iterator_to_array((new Reader)->importRemoteFeed($feed->getUrl(), new GuzzleClient));
+        return array_map(function (EntryInterface $entry) use ($feed) {
+            $content = strip_tags($entry->getDescription());
+            $content = trim(str_replace('Read more...', '', $content));
+
+            return new FeedItem($entry->getId(), $entry->getTitle(), $content, $entry->getLink(), $feed->getId());
+        }, $entries);
+    }
+
+    /**
+     * @param Feed $feed
+     * @param FeedItem $feedItem
+     */
+    protected function importFeedItem(Feed $feed, FeedItem $feedItem)
+    {
+        if ($this->feedItemExists($feedItem)) {
+            return;
+        }
+
+        try {
+            $this->database->insert('feed_data', [
+                'guid' => $feedItem->getId(),
+                'feed' => $feed->getId(),
+                'title' => $feedItem->getTitle(),
+                'description' => $feedItem->getDescription(),
+                'url' => $feedItem->getUrl(),
+                'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),
+                'viewed' => 0
+            ]);
+        } catch (PDOException $e) {
+            // do nothing.
+        }
+    }
+
+    /**
+     * @param array $data
+     * @return FeedItem
+     */
+    protected function toFeedItemEntity(array $data)
+    {
+        return (new FeedItem($data['id'], $data['title'], $data['description'], $data['url'], $data['feed']))
+            ->setViewed($data['viewed'])
+            ->setDateAdded(new \DateTime($data['dateAdded']))
+            ->setPinned($data['pinned']);
     }
 }

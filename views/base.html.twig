@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="/dist/css/vendor.css?v={{ lastUpdate.css_main }}">
     <link rel="stylesheet" href="/dist/css/style.css?v={{ lastUpdate.css_main }}">
     {% block header %}{% endblock %}
+
+    {% if feed is defined %}
+    <style type="text/css">
+        {% for feed in feeds %}
+        .feed{{ feed.id }} {border-left-color: #{{ feed.color }};}
+        {% endfor %}
+    </style>
+    {% endif %}
 </head>
 <body id="{{ bodyId }}" data-refresh-date="{{ "now"|date('Y-m-d H:i:s') }}">
 {% block body %}

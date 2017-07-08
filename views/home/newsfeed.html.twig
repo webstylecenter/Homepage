@@ -4,14 +4,6 @@
     </div>
 {% endif %}
 
-<style type="text/css">
-    {% for feed in feeds %}
-        .feed{{ feed.id }} {
-            border-left-color: #{{ feed.color }};
-        }
-    {% endfor %}
-</style>
-
 {% for item in feedItems %}
     <div class="listItem {{ item.viewed ? 'used ' : 'newItem ' }}{{ item.pinned ? 'pinned ' : '' }}feed{{ item.feedId }}"
          data-url="{{ item.url }}">

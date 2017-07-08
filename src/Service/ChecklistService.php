@@ -38,40 +38,25 @@ class ChecklistService
             [$id]
         );
 
-        $checklistItem = array_map(function($checklistItem) {
-            return $this->toEntity($checklistItem);
-        }, $checklistItemInfo);
-
-        if (isset($checklistItem[0])) {
-            return $checklistItem[0];
-        }
-
-        return new ChecklistItem();
+        return isset($checklistItemInfo[0]) ?  $this->toEntity($checklistItemInfo[0]) : new ChecklistItem;
     }
 
     /**
-     * @param null $id
+     * @param integer|null $id
      * @param $checklistItem
-     * @param null $checked
+     * @param boolean $checked
      */
-    public function saveChecklistItem($id = null, $checklistItem, $checked = null)
+    public function saveChecklistItem($id, $checklistItem, $checked = false)
     {
         $persist = $id === null ? 'insert' : 'update';
-        if ($checked === 'true') { $checked = 1; }
+        $identifier = $persist === 'update' ? ['id' => $id] : [];
 
+        $data = ['checked' => $checked, 'lastUpdated' => date('Y-m-d H:i:s')];
         if ($persist === 'insert') {
-            $this->database->insert('checklist', [
-                'item' => $checklistItem,
-                'checked' => $checked,
-                'lastUpdated' => date('Y-m-d H:i:s')
-            ]);
-        } else {
-            $this->database->update('checklist', [
-                'checked' => $checked,
-                'lastUpdated' => date('Y-m-d H:i:s')
-            ], ['id' => $id]);
+            $data['item'] = $checklistItem;
         }
 
+        $this->database->$persist('checklist', $data, $identifier);
     }
 
     /**
@@ -81,13 +66,7 @@ class ChecklistService
      */
     protected function toEntity(array $data)
     {
-        $checklistItem = new ChecklistItem(
-            $data['id'],
-            $data['item'],
-            $data['checked']
-        );
-
-        return $checklistItem;
+        return new ChecklistItem($data['id'], $data['item'], $data['checked']);
     }
 
     /**

@@ -4,12 +4,7 @@ namespace Service;
 
 use Entity\Note;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\PDOException;
 
-/**
- * Class NoteService
- * @package Service
- */
 class NoteService
 {
     /**
@@ -26,35 +21,22 @@ class NoteService
     }
 
     /**
-     * @param null $id
-     *
+     * @param integer|null $id
      * @return Note
      */
     public function loadNote($id = null)
     {
         $id = ($id === null ? 1 : $id);
-        $noteInfo = $this->database->fetchAll(
-            'SELECT * FROM notes WHERE id = ?',
-            [$id]
-        );
-
-        $note = array_map(function($noteItem) {
-            return $this->toEntity($noteItem);
-        }, $noteInfo);
-
-        if (isset($note[0])) {
-            return $note[0];
-        }
-
-        return new Note();
+        $noteInfo = $this->database->fetchAll('SELECT * FROM notes WHERE id = ' . (int) $id);
+        return isset($noteInfo[0]) ? $this->toEntity($noteInfo[0]) : new Note;
     }
 
     /**
-     * @param null $id
-     * @param $note
-     * @param null $position
+     * @param null|integer $id
+     * @param string $note
+     * @param integer|null $position
      */
-    public function saveNote($id = null, $note, $position = null)
+    public function saveNote($id, $note, $position = null)
     {
         $persist = $id === null ? 'insert' : 'update';
         $identifier = $id !== null ? ['id' => $id] : [];
@@ -67,17 +49,10 @@ class NoteService
 
     /**
      * @param array $data
-     *
      * @return Note
      */
     protected function toEntity(array $data)
     {
-        $note = new Note(
-            $data['id'],
-            $data['note'],
-            $data['position']
-        );
-
-        return $note;
+        return new Note($data['id'], $data['note'], $data['position']);
     }
 }

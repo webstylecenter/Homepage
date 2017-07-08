@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: petervandam
- * Date: 31/01/2017
- * Time: 19:58
- */
 
 $app->match('/checklist/', function() use($app) {
 
@@ -31,7 +25,7 @@ $app->match('/checklist/add/', function() use($app) {
     $checklistService->saveChecklistItem(
         isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null,
         isset($_POST['item']) && !empty($_POST['item']) ? $_POST['item'] : '',
-        isset($_POST['checked']) && !empty($_POST['checked']) ? $_POST['checked'] : false
+        isset($_POST['checked']) && $_POST['checked'] === 'true'
     );
 
     $todos = $checklistService->getTodos();

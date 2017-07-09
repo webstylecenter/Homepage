@@ -10,7 +10,7 @@
             newsItems.push([
                 "{{ item.feedName }}",
                 "{{ item.title|striptags }}",
-                "{{ item.description|truncate(120, true) }}",
+                "{{ item.description|truncate(120, true)|e('js') }}",
                 "{{ item.color }}"
             ]);
         {% endfor %}

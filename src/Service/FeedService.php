@@ -164,7 +164,7 @@ class FeedService
 
             return true;
         } catch (PDOException $e) {
-            $this->lastError = (string)$e;
+            $this->lastError = (string) $e;
         }
 
         return false;
@@ -185,7 +185,7 @@ class FeedService
     protected function read(Feed $feed)
     {
         $entries = iterator_to_array((new Reader)->importRemoteFeed($feed->getFeedUrl(), new GuzzleClient));
-        return array_map(function (EntryInterface $entry) use ($feed) {
+        return array_map(function(EntryInterface $entry) use ($feed) {
             $content = strip_tags($entry->getDescription());
             $content = trim(str_replace('Read more...', '', $content));
 

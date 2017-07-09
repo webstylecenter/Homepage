@@ -84,7 +84,7 @@ class FeedService
     {
         $fromDate = $fromDate ?: new \DateTime('@0');
         $feedItems = $this->database->fetchAll(
-            'SELECT *, feed_data.id AS itemId  FROM feed_data JOIN feeds ON feed_data.feed = feeds.id WHERE dateAdded > ? AND (title LIKE ? OR description LIKE ?) ORDER BY pinned DESC, feed_data.dateAdded DESC LIMIT ?, ?',
+            'SELECT *, feed_data.id AS itemId  FROM feed_data JOIN feeds ON feed_data.feed = feeds.id WHERE feed_data.dateAdded > ? AND (title LIKE ? OR description LIKE ?) ORDER BY pinned DESC, feed_data.dateAdded DESC LIMIT ?, ?',
                 [
                     $fromDate->format('Y-m-d H:i:s'),
                     '%' . $searchQuery . '%', '%' . $searchQuery . '%',
@@ -110,7 +110,7 @@ class FeedService
     {
         $params = str_repeat('?,', count($sites) - 1) . '?';
         $feedItems = $this->database->fetchAll(
-        'SELECT *, feed_data.id AS itemId FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE feed IN (' . $params . ') ORDER BY pinned DESC, dateAdded DESC LIMIT 50',
+        'SELECT *, feed_data.id AS itemId FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE feed IN (' . $params . ') ORDER BY pinned DESC, feed_data.dateAdded DESC LIMIT 50',
             $sites
         );
 

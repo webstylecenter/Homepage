@@ -21,7 +21,7 @@ class Feed
     /**
      * @var string
      */
-    protected $url;
+    protected $feedUrl;
 
     /**
      * @var string
@@ -36,14 +36,14 @@ class Feed
     /**
      * @param $id
      * @param $name
-     * @param $url
+     * @param $feedUrl
      * @param $color
      */
-    public function __construct($id, $name, $url, $color)
+    public function __construct($id, $name, $feedUrl, $color)
     {
         $this->id           = $id;
         $this->name         = $name;
-        $this->url          = $url;
+        $this->feedUrl      = $feedUrl;
         $this->color        = $color;
         $this->created      = new \DateTime;
     }
@@ -83,17 +83,17 @@ class Feed
     /**
      * @return string
      */
-    public function getUrl()
+    public function getFeedUrl()
     {
-        return $this->url;
+        return $this->feedUrl;
     }
 
     /**
-     * @param string $url
+     * @param string $feedUrl
      */
-    public function setUrl($url)
+    public function setFeedUrl($feedUrl)
     {
-        $this->url = $url;
+        $this->feedUrl = $feedUrl;
     }
 
     /**

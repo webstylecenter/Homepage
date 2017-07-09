@@ -4,6 +4,10 @@ namespace Service;
 
 use Entity\Meta;
 
+/**
+ * Class MetaService
+ * @package Service
+ */
 class MetaService
 {
     /**
@@ -16,10 +20,13 @@ class MetaService
         $meta = new Meta;
 
         $url = strpos($url, 'http') === 0 ? $url : 'http://' . $url;
-        if (!$this->loadContent($url)) {
+        $doc = $this->loadContent($url);
+
+        if (!$doc) {
             return $meta;
         }
 
+        $doc = $this->loadContent($url);
         $meta->setUrl($url);
         $meta->setTitle($this->findTitle($doc));
         $meta->setMetaDescription($this->findMetaDescription($doc));

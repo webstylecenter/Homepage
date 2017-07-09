@@ -17,9 +17,9 @@ $app->post('/add-item/', function() use ($app) {
     $feedItem = new FeedItem(
         md5((new \DateTime())->format('Y-m-d H:i:s')),
         $_POST['title'],
-        $_POST['description'] ?: null,
+        $_POST['description'] ?: '',
         strpos($_POST['url'], 'http') === 0 ? $_POST['url'] : 'http://' . $_POST['url'],
-        'userInput'
+        '0'
     );
 
     /** @var \Service\FeedService $feedService */

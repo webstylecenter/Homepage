@@ -184,7 +184,7 @@ class FeedService
      */
     protected function read(Feed $feed)
     {
-        $entries = iterator_to_array((new Reader)->importRemoteFeed($feed->getUrl(), new GuzzleClient));
+        $entries = iterator_to_array((new Reader)->importRemoteFeed($feed->getFeedUrl(), new GuzzleClient));
         return array_map(function (EntryInterface $entry) use ($feed) {
             $content = strip_tags($entry->getDescription());
             $content = trim(str_replace('Read more...', '', $content));

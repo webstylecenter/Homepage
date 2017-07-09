@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `feed_data` (
   `guid` varchar(255) NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` text NOT NULL,
+  `feedUrl` text NOT NULL,
   `dateAdded` datetime NOT NULL,
   `viewed` tinyint(1) NOT NULL,
   `pinned` tinyint(1) DEFAULT NULL,

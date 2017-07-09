@@ -84,7 +84,7 @@ class FeedService
     {
         $fromDate = $fromDate ?: new \DateTime('@0');
         $feedItems = $this->database->fetchAll(
-            'SELECT * FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE dateAdded > ? AND (title LIKE ? OR description LIKE ?) ORDER BY pinned DESC, dateAdded DESC LIMIT ?, ?',
+            'SELECT *, feed_data.id AS itemId  FROM feed_data JOIN feeds ON feed_data.feed = feeds.id WHERE dateAdded > ? AND (title LIKE ? OR description LIKE ?) ORDER BY pinned DESC, feed_data.dateAdded DESC LIMIT ?, ?',
                 [
                     $fromDate->format('Y-m-d H:i:s'),
                     '%' . $searchQuery . '%', '%' . $searchQuery . '%',
@@ -110,7 +110,7 @@ class FeedService
     {
         $params = str_repeat('?,', count($sites) - 1) . '?';
         $feedItems = $this->database->fetchAll(
-        'SELECT * FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE feed IN (' . $params . ') ORDER BY pinned DESC, dateAdded DESC LIMIT 50',
+        'SELECT *, feed_data.id AS itemId FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE feed IN (' . $params . ') ORDER BY pinned DESC, dateAdded DESC LIMIT 50',
             $sites
         );
 
@@ -139,8 +139,9 @@ class FeedService
      */
     public function pinItem($id)
     {
-        $feedItem = $this->database->fetchAssoc('SELECT pinned FROM feed_data WHERE id = ' . (int) $id);
-        return $this->database->update('feed_data', ['pinned' => !!$feedItem['pinned']], ['id' => $id]);
+        $feedItem = $this->database->fetchAssoc('SELECT pinned FROM feed_data WHERE id = ?', [$id],[\PDO::PARAM_INT]);
+        $newPinState = $feedItem['pinned'] == 1 ? NULL : 1;
+        return $this->database->update('feed_data', ['pinned' => $newPinState], ['id' => $id]);
     }
 
     /**
@@ -224,7 +225,7 @@ class FeedService
      */
     protected function toFeedItemEntity(array $data)
     {
-        return (new FeedItem($data['id'], $data['title'], $data['description'], $data['url'], $data['feed']))
+        return (new FeedItem($data['itemId'], $data['title'], $data['description'], $data['url'], $data['feed']))
             ->setViewed($data['viewed'])
             ->setDateAdded(new \DateTime($data['dateAdded']))
             ->setPinned($data['pinned'])

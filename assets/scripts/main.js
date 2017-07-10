@@ -4,12 +4,6 @@
 
 $(function() {
 
-
-    $('.weatherContent').load('/weather/detail/').on('click', function() {
-        $('.note').slideToggle('slow');
-        $('.feedCounter').slideToggle('slow');
-    });
-
     $('.parseUrlButton').click(function() {
         getUrlMetaData();
     });

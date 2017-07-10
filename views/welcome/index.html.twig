@@ -12,7 +12,7 @@
             <div class="addedLinks wow slideInLeft">
                 <h2>Added items</h2>
                 {% for addedLinkItem in addedLinks %}
-                    <div class="addedLinkItem wow slideInUp" data-url="{{ addedLinkItem.url }}">
+                    <div class="addedLinkItem" data-url="{{ addedLinkItem.url }}">
                         {{ addedLinkItem.title }} <span class="description">{{ addedLinkItem.description }}</span>
                     </div>
                 {% endfor %}
@@ -21,8 +21,8 @@
 
 
         <div class="right">
-            <h2>Notes</h2>
-            <div class="noteArea">
+            <div class="noteArea wow slideInRight">
+                <h2>Notes</h2>
                 <textarea class="note" data-id="{{ note.id }}" data-position="{{ note.position }}">{{ note.note }}</textarea>
             </div>
         </div>

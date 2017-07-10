@@ -36,13 +36,3 @@ $app->match('/checklist/add/', function() use($app) {
         'finished' => $finished
     ]);
 });
-
-$app->match('/test/', function() use($app) {
-    return $app['twig']->render('checklist/temp.html.twig', [
-        'bodyId' => 'test',
-        'lastUpdate' => [
-            'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
-            'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
-        ]
-    ]);
-});

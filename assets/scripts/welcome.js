@@ -7,4 +7,7 @@ $(function() {
         parent.$('iframe').attr('src', url);
         parent.$('.pageLinkToUrl').text(url).attr('href', url);
     });
+
+    $('.weatherContent').load('/weather/detail/');
+
 });

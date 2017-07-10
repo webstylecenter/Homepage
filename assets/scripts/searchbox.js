@@ -28,10 +28,10 @@ function searchFeeds(searchQuery) {
         return;
     }
 
-    $.ajax('/search/' + searchQuery)
+    $.ajax('/feed/search/' + searchQuery)
         .done(function(data) {
             var html = data.replace('<div class="list scroll">', '<div class="NewSearchlist">');
-            html = html.replace('<a href="/page/2" class="listItem jscroll-next">Next page</a>', '');
+            html = html.replace('<a href="/feed/page/2" class="listItem jscroll-next">Next page</a>', '');
             $('.searchResults').prepend(html);
         });
 }
@@ -90,7 +90,7 @@ function searchAutoRun(el) {
                 } else {
                     $.ajax({
                         method: "POST",
-                        url: "/add-item/",
+                        url: "/feed/add-item/",
                         data: {
                             url: value,
                             title: json.title,

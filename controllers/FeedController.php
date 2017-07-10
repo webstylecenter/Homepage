@@ -2,14 +2,12 @@
 
 use Entity\FeedItem;
 
-$app->match('/update/', function() use ($app) {
+$app->get('/feed/update/', function() use ($app) {
     $app['feedService']->import();
-
     return 'Done';
 });
 
-
-$app->post('/add-item/', function() use ($app) {
+$app->post('/feed/add-item/', function() use ($app) {
     if (!isset($_POST['description']) || !isset($_POST['title']) || empty($_POST['title']) || !isset($_POST['url']) || empty($_POST['url'])) {
         return 'Error: No feed title and/or url provided!';
     }
@@ -31,7 +29,7 @@ $app->post('/add-item/', function() use ($app) {
     return 'Done';
 });
 
-$app->get('/refresh/{date}', function($date) use ($app) {
+$app->get('/feed/refresh/{date}', function($date) use ($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
 
@@ -46,7 +44,7 @@ $app->get('/refresh/{date}', function($date) use ($app) {
     ]);
 });
 
-$app->get('/page/{number}', function($number) use ($app) {
+$app->get('/feed/page/{number}', function($number) use ($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
     return $app['twig']->render('home/newsfeed.html.twig', [
@@ -57,7 +55,7 @@ $app->get('/page/{number}', function($number) use ($app) {
     ]);
 });
 
-$app->get('/search/{query}', function($query) use ($app) {
+$app->get('/feed/search/{query}', function($query) use ($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
     return $app['twig']->render('home/newsfeed.html.twig', [

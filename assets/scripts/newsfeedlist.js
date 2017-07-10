@@ -32,7 +32,7 @@ $(function() {
         .on('click', '.pin', function(e) {
             e.stopImmediatePropagation();
             var pin = $(this);
-            $.ajax("/pin/" +$(this).data('pin-id'))
+            $.ajax("/feed/pin/" +$(this).data('pin-id'))
                 .done(function(response) {
                     if (response == '1') {
                         $(pin).parent().addClass('animated shake');
@@ -44,7 +44,7 @@ $(function() {
             $('#createItem').modal({fadeDuration:100});
         })
         .on('click', '.submitFeedItem', function() {
-            $.post('/add-item/', $('#createItem').serialize())
+            $.post('/feed/add-item/', $('#createItem').serialize())
                 .done(function(data) {
                     if (data === 'Done') {
                         $.modal.close();
@@ -61,7 +61,7 @@ $(function() {
 });
 
 $.requestNewFeedItems = function requestNewFeedItems() {
-    $.getJSON('/refresh/' + encodeURI($('body').data('refresh-date')))
+    $.getJSON('/feed/refresh/' + encodeURI($('body').data('refresh-date')))
         .done(function(data) {
             var html = data.html.replace('<div class="list scroll">', '<div class="Newlist">');
             $('.list').prepend(html);

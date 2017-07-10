@@ -14,5 +14,5 @@
 {% endfor %}
 
 {% if feedItems|length > 0 and nextPageNumber != 50000 %}
-    <a href="/page/{{ nextPageNumber }}" class="listItem jscroll-next">Next page</a>
+    <a href="/feed/page/{{ nextPageNumber }}" class="listItem jscroll-next">Next page</a>
 {% endif %}

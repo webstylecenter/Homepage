@@ -33,7 +33,7 @@ $app->before(function() use ($app) {
         return;
     }
 
-    if (strpos($_SERVER['REQUEST_URI'], '/refresh/') !== false) {
+    if (strpos($_SERVER['REQUEST_URI'], '/feed/refresh/') !== false) {
         return;
     }
 

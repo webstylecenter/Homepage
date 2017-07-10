@@ -28,11 +28,10 @@ function searchFeeds(searchQuery) {
         return;
     }
 
-    $.ajax('/feed/search/' + searchQuery)
+    $.ajax('/feed/search/' + searchQuery + '/0')
         .done(function(data) {
             var html = data.replace('<div class="list scroll">', '<div class="NewSearchlist">');
-            html = html.replace('<a href="/feed/page/2" class="listItem jscroll-next">Next page</a>', '');
-            $('.searchResults').prepend(html);
+            $('.searchResults').html(html);
         });
 }
 

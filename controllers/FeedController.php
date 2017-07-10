@@ -55,13 +55,13 @@ $app->get('/feed/page/{number}', function($number) use ($app) {
     ]);
 });
 
-$app->get('/feed/search/{query}', function($query) use ($app) {
+$app->get('/feed/search/{query}/{startIndex}', function($query, $startIndex) use ($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
     return $app['twig']->render('home/newsfeed.html.twig', [
-        'feedItems'=> $feedService->getFeedItems(10, null, null, $query),
+        'feedItems'=> $feedService->getFeedItems(10, null, $startIndex, $query),
         'feeds' => $feedService->getFeeds(),
-        'nextPageNumber' => 99999,
+        'nextPageNumber' => $startIndex + 1,
         'addToChecklist' => $query,
     ]);
 });

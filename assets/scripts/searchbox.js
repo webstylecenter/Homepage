@@ -9,7 +9,12 @@ $(function() {
             $('.searchResults').slideDown();
         }
     }).on('blur', function() {
-        $('.searchResults').slideUp();
+        $('.searchResults').each(function() {
+           if (!$(this).hasClass('doNotHide')) {
+               $('.searchResults').slideUp();
+           }
+        });
+
     }).on('keydown', function(e) {
         if (e.which == 13) {
             searchAutoRun($(this));

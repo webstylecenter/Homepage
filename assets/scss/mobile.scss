@@ -28,19 +28,25 @@
     display:none;
     width:60px;
   }
-  .shareButton {
-    display:none;
-    max-width:100px;
-    overflow:hidden;
+  .searchButton {
+    position:absolute;
+    height:28px;
+    width:28px;
+    font-size:16pt;
+    display:inline-block;
+    right:50px;
+    top:3px;
   }
   .pageLinkToUrl {
     display:none;
 
   }
   .navbar {
-    max-width:230px;
+    position:absolute;
+    top:9px;
+    left:100px;
+    right:100px;
     overflow:hidden;
-    width:230px;
     margin-left:0;
     max-height:20px;
     white-space: nowrap;
@@ -60,5 +66,16 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+  }
+  .searchbar input {
+    width:100%;
+    padding:10px;
+    font-size:12pt;
+  }
+  .jscroll-next {
+    display:none;
+  }
+  .searchview {
+    display:none;
   }
 }

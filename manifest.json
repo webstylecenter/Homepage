@@ -20,7 +20,7 @@
   ],
   "start_url": "/m/",
   "background_color": "#FFDAB3",
-  "display": "fullscreen",
+  "display": "standalone",
   "theme_color": "#2BA1FF",
   "lang": "en-US",
   "dir": "ltr"

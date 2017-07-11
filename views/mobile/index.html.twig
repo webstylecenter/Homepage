@@ -13,18 +13,25 @@
         <div class="title noselect"><a href="javascript:requestNewFeedItems();">Peter van Dam's Homepage</a></div>
         <div class="backButton noselect">&lt; Back</div>
         <div class="navbar"><a href="#" class="pageLinkToUrl" target="_blank"></a></div>
-        <div class="shareButton"></div>
-        <div class="createButton"></div>
+        <div class="searchButton searchNotActive"><i class="fa fa-search fa-x4"></i></div>
+        <div class="createButton"><i class="fa fa-file-text-o fa-x4"></i></div>
     </div>
 
     <div class="mainContent">
         {% block content %}
         {% endblock %}
 
-        <div class="noselect">
+        <div class="noselect listview">
             <div class="list scroll wow slideInLeft">
                 {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems, 'addToChecklist': '', 'feeds': feeds} %}
             </div>
+        </div>
+
+        <div class="noselect searchview">
+            <div class="searchbar">
+                <input class="searchBox" name="q" type="text" placeholder="Search items" autocomplete="off" />
+            </div>
+            <div class="searchResults doNotHide"></div>
         </div>
 
         <div class="contentContainer">

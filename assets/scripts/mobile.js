@@ -38,6 +38,21 @@ $(function() {
         });
     }
 
+    $('.searchButton').on('click', function() {
+       mobileSwitchToListItemView();
+       if ($(this).hasClass("searchNotActive")) {
+           $(this).removeClass('searchNotActive');
+           $('.listview').hide();
+           $('.searchview').show();
+           $(this).css('color', 'red');
+       } else {
+           $(this).addClass('searchNotActive');
+           $('.listview').show();
+           $('.searchview').hide();
+           $(this).css('color', 'black');
+       }
+    });
+
 });
 
 function mobileSwitchToWebView() {

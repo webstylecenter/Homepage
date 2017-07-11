@@ -21,7 +21,7 @@
   "start_url": "/m/",
   "background_color": "#FFDAB3",
   "display": "standalone",
-  "theme_color": "#2BA1FF",
+  "theme_color": "#eeeeee",
   "lang": "en-US",
   "dir": "ltr"
 }

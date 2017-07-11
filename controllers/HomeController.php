@@ -29,3 +29,13 @@ $homeController = function() use($app) {
 
 $app->get('/', $homeController);
 $app->get('/m/', $homeController);
+
+$app->get('/offline/', function() use($app) {
+    return $app['twig']->render('home/offline.html.twig', [
+        'bodyId' => 'offline',
+        'lastUpdate' => [
+            'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
+            'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
+        ],
+    ]);
+});

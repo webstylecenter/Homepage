@@ -20,6 +20,8 @@
   ],
   "start_url": "/m/",
   "background_color": "#FFDAB3",
-  "display": "standalone",
-  "theme_color": "#FFAB22"
+  "display": "fullscreen",
+  "theme_color": "#2BA1FF",
+  "lang": "en-US",
+  "dir": "ltr"
 }

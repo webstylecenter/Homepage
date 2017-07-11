@@ -11,3 +11,5 @@ Header set Cache-Control "no-transform"
 <FilesMatch "\.(gif|jpg|jpeg|png|js)$">
      Header set Cache-Control "max-age=604800"
 </FilesMatch>
+
+AddType text/cache-manifest .appcache

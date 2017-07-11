@@ -11,6 +11,10 @@ $app->match('/welcome/', function() use($app) {
     /** @var \Service\NoteService $noteService */
     $noteService = $app['noteService'];
 
+    /** @var \Service\ChecklistService $checklistService */
+    $checklistService = $app['checklistService'];
+    $todos = $checklistService->getTodos();
+
 
     return $app['twig']->render('welcome/index.html.twig', [
         'bodyId' => 'welcome',
@@ -21,7 +25,8 @@ $app->match('/welcome/', function() use($app) {
         ],
         'feedItemTotals'=> $feedService->getFeedItemTotals(),
         'note'=> $noteService->loadNote(),
-        'addedLinks' => $feedService->getFeedItemsBySites([0])
+        'addedLinks' => $feedService->getFeedItemsBySites([0]),
+        'todos' => $todos
     ]);
 });
 

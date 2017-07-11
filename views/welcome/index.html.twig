@@ -4,28 +4,40 @@
     <div class="welcomePageBackground"></div>
     <div class="welcomePage">
 
-        <div class="weatherContent wow rubberBand">
-            Loading weatherinfo...
-        </div>
+        <div class="row">
+            <div class="widget">
+                <div class="weatherContent wow rubberBand">
+                    Loading weatherinfo...
+                </div>
+            </div>
 
-        <div class="left">
-            <div class="addedLinks wow slideInLeft">
-                <h2>Added items</h2>
-                {% for addedLinkItem in addedLinks %}
-                    <div class="addedLinkItem" data-url="{{ addedLinkItem.url }}">
-                        {{ addedLinkItem.title }} <span class="description">{{ addedLinkItem.description }}</span>
-                    </div>
-                {% endfor %}
+            <div class="widget">
+                <h2>Todo's</h2>
+                {% include 'checklist/widget.html.twig' %}
             </div>
         </div>
 
+        <div class="row">
+            <div class="widget">
+                <div class="addedLinks wow slideInLeft">
+                    <h2>Added items</h2>
+                    {% for addedLinkItem in addedLinks %}
+                        <div class="addedLinkItem" data-url="{{ addedLinkItem.url }}">
+                            {{ addedLinkItem.title }} <span class="description">{{ addedLinkItem.description }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-        <div class="right">
-            <div class="noteArea wow slideInRight">
-                <h2>Notes</h2>
-                <textarea class="note" data-id="{{ note.id }}" data-position="{{ note.position }}">{{ note.note }}</textarea>
+
+            <div class="widget">
+                <div class="noteArea wow slideInRight">
+                    <h2>Notes</h2>
+                    <textarea class="note" data-id="{{ note.id }}" data-position="{{ note.position }}">{{ note.note }}</textarea>
+                </div>
             </div>
         </div>
+
 
         <!-- <div class="feedCounter">
             {% for item in feedItemTotals %}

@@ -5,6 +5,7 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="/dist/css/vendor.css?v={{ lastUpdate.css_main }}">
     <link rel="stylesheet" href="/dist/css/style.css?v={{ lastUpdate.css_main }}">
+    <link rel="manifest" href="/manifest.json">
     {% block header %}{% endblock %}
 </head>
 <body id="{{ bodyId }}" data-refresh-date="{{ "now"|date('Y-m-d H:i:s') }}">

@@ -45,6 +45,7 @@ $(function() {
            $('.listview').hide();
            $('.searchview').show();
            $(this).css('color', 'red');
+           $('.searchBox').focus();
        } else {
            $(this).addClass('searchNotActive');
            $('.listview').show();

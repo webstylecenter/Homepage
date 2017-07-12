@@ -2,7 +2,7 @@
  * Created by petervandam on 18/11/2016.
  */
 $(function() {
-    if ($('#screensaver').length >0){
+    if ($('.screensaver').length >0){
         setInterval(function() {
             setTimeout(function() {
                 refreshPage();
@@ -62,7 +62,7 @@ function updateTime() {
 }
 
 function updateWeather() {
-    $('.screensaverWeatherContent').load('/weather/current/');
+    $('.screensaver .weather').load('/weather/current/');
 }
 
 function showItems() {

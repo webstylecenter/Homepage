@@ -1,10 +1,10 @@
-#screensaver {
+.screensaver {
 
   color:white;
   background-color:black;
   text-shadow: 1px 1px #000;
 
-  .screenSaver {
+  .background {
     position:absolute;
     top:0;
     right:0;
@@ -24,11 +24,11 @@
   }
   .largeIcon {
     position:fixed;
-    top:0;
+    top:-25px;
     right:200px;
     padding:0;
   }
-  .temperature {
+  .weather .temperature {
     position: fixed;
     top:40px;
     right:40px;

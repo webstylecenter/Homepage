@@ -1,0 +1,29 @@
+.modal {
+  display:none;
+  margin:-70vh auto;
+
+  table td {
+    vertical-align: top;
+    white-space: nowrap;
+
+    input[type="text"], textarea {
+      box-sizing: border-box;
+      width:100%;
+      border:1px solid whitesmoke;
+      padding:5px 10px;
+
+      &.w-85 {
+        width:85%;
+      }
+    }
+  }
+
+  h2 {
+    border-bottom:1px solid #cccccc;
+    padding-bottom:10px;
+    margin-bottom:10px;
+  }
+  .fullRow {
+    text-align: right;
+  }
+}

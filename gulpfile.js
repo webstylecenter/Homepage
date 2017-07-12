@@ -83,7 +83,7 @@ gulp.task('clean', function() {
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('assets/scripts/*.js', ['lint', 'scripts:vendor', 'scripts:app']);
-    gulp.watch('assets/scss/*.scss', ['stylesheets:vendor','stylesheets:app']);
+    gulp.watch('assets/scss/*/*.scss', ['stylesheets:vendor','stylesheets:app']);
 });
 
 gulp.task('build', function(callback) {

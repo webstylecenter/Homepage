@@ -1,0 +1,138 @@
+html { box-sizing: border-box; }
+html *,
+html *:before,
+html *:after { box-sizing: inherit; }
+
+@font-face {
+  font-family: 'LatoWebLight';
+  src: url('/assets/fonts/Lato-Light.eot'); /* IE9 Compat Modes */
+  src: url('/assets/fonts/Lato-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/assets/fonts/Lato-Light.woff2') format('woff2'), /* Modern Browsers */
+  url('/assets/fonts/Lato-Light.woff') format('woff'), /* Modern Browsers */
+  url('/assets/fonts/Lato-Light.ttf') format('truetype');
+  font-style: italic;
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'LatoWeb';
+  src: url('/assets/fonts/Lato-Regular.eot'); /* IE9 Compat Modes */
+  src: url('/assets/fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/assets/fonts/Lato-Regular.woff2') format('woff2'), /* Modern Browsers */
+  url('/assets/fonts/Lato-Regular.woff') format('woff'), /* Modern Browsers */
+  url('/assets/fonts/Lato-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+body {
+  font-size:10pt;
+  font-family: "LatoWebLight", "Helvetica Neue", "Arial";
+  margin:0;
+  text-rendering: optimizeLegibility;
+}
+.wow { visibility: hidden; }
+.topbar {
+  border-bottom:1px solid gray;
+  padding:10px 20px;
+  background: #eeeeee;
+  background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%);
+  position:fixed;
+  right:0;
+  left:0;
+  top:0;
+  z-index:3;
+}
+.title {
+  display:inline-block;
+
+  a {
+    text-decoration: none;
+    color:black;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.navbar {
+  display:inline-block;
+  margin-left:280px;
+  font-style:italic;
+  color:gray;
+
+  a {
+    color:gray;
+    text-decoration: none;
+
+    &:hover {
+      color:black;
+      text-decoration: black;
+    }
+  }
+}
+.mainContent {
+  position: absolute;
+  top:37px;
+  right:0;
+  bottom:0;
+  left:0;
+}
+.list {
+  border-right:1px solid gray;
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  width:450px;
+  box-sizing: border-box;
+  overflow-x:hidden;
+  overflow-y:scroll;
+  background: linear-gradient(to bottom, #a1a1a1 0%, #eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+.contentContainer {
+  position: absolute;
+  right:0;
+  top:0;
+  bottom:0;
+  left:450px;
+  box-sizing: border-box;
+}
+iframe {
+  border:0;
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+}
+.welcomePage, .guestsWelcomePage {
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  text-align:center;
+  z-index:0;
+
+  .content {
+    width:40%;
+    margin:10% auto;
+    a {
+      color: #7b0300;
+    }
+  }
+}
+.nourl {
+  margin:0;
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  padding:25px;
+  background: linear-gradient(180deg, #f7f7f7, 40%, #ec483d 100%);
+  background-attachment: fixed;
+}
+

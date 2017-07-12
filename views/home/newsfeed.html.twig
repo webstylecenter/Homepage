@@ -8,8 +8,8 @@
     <div class="listItem {{ item.viewed ? 'used ' : 'newItem ' }}{{ item.pinned ? 'pinned ' : '' }}"
          data-url="{{ item.url }}" style="border-left-color:#{{ item.color }};">
         <div class="pin" data-pin-id="{{ item.id }}"></div>
-        <p class="listTitle ">{{ item.title|striptags }}</p>
-        <p class="listContent">{{ item.description|truncate(120, true) }}</p>
+        <p class="title ">{{ item.title|striptags }}</p>
+        <p class="description">{{ item.description|truncate(120, true) }}</p>
     </div>
 {% endfor %}
 

@@ -1,3 +1,4 @@
+
 .listItem {
   border-bottom:1px solid gray;
   padding:10px;
@@ -12,21 +13,10 @@
   .visited {
     color: #b6b6b6;
   }
-  .selected {
-    background: linear-gradient(to right, #eeeeee 0%,#aad3e0 100%);
-  }
-  .newItem {
-    background: linear-gradient(to right, #eeeeee 0%, #def6f6 100%);
-  }
   .description {
     color: #454545;
     margin:0;
     color: #000;
-  }
-  .pinned {
-    .pin {
-      background-image: url('/assets/images/pin_hover.png');
-    }
   }
   .pin {
     background-repeat:no-repeat;
@@ -45,7 +35,6 @@
       }
     }
   }
-
   &:nth-child(even) {
     background: #f7f7f7;
     background: linear-gradient(to right,  #f7f7f7 0%,#e8e8e8 100%);
@@ -62,6 +51,18 @@
       background-image: url('/assets/images/pin.png');
     }
   }
+}
+
+.pinned {
+  .pin {
+    background-image: url('/assets/images/pin_hover.png');
+  }
+}
+.selected {
+  background: linear-gradient(to right, #eeeeee 0%,#aad3e0 100%);
+}
+.newItem {
+  background: linear-gradient(to right, #eeeeee 0%, #def6f6 100%) !important;
 }
 
 

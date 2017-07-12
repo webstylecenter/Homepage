@@ -2,7 +2,7 @@ var dropDomain = 'https://pvd.onl/';
 var stopProp = true;
 
 $('.showDropList').on('click', function() {
-    $('#homepage .dropListPanel').load('/droplist/', function() {
+    $('.dropListPanel').load('/droplist/', function() {
         showDropList();
         activateDropListEvens();
     });

@@ -3,14 +3,14 @@
  */
 
 $(function() {
-    $('#mobile').on('click', '.listItem', function() {
+    $('.mobile').on('click', '.listItem', function() {
         mobileSwitchToWebView();
     })
         .on('click', '.backButton', function() {
             mobileSwitchToListItemView();
         });
 
-    $('#mobile .listItem').hammer().on("swiperight", function() {
+    $('.mobile .listItem').hammer().on("swiperight", function() {
         var pin = $(this).find('.pin');
         $.ajax("/pin/" +$(pin).data('pin-id'))
             .done(function(response) {
@@ -20,7 +20,7 @@ $(function() {
             });
     });
 
-    $('#mobile .topbar').hammer().on("swiperight", function() {
+    $('.mobile .topbar').hammer().on("swiperight", function() {
         $('.list').show();
         $('.title').show();
         $('.contentContainer').hide();

@@ -8,6 +8,6 @@ $(function() {
         parent.$('.pageLinkToUrl').text(url).attr('href', url);
     });
 
-    $('.weatherContent').load('/weather/detail/');
+    $('.weather .content').load('/weather/detail/');
 
 });

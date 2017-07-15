@@ -18,22 +18,22 @@
 {% endblock %}
 
 {% block body %}
-    <div class="background notActive"></div>
-    <div class="background active"></div>
+    <div class="screensaver--background notActive"></div>
+    <div class="screensaver--background active"></div>
     <div class="weather wow rollIn"></div>
 
-    <div class="activeNewsItem hideOnStart">
-        <div class="newsSource hideOnStart" style="background-color:#{{ firstFeedItem.color }};">
+    <div class="screensaver--newsticker hideOnStart">
+        <div class="screensaver--newsticker-source hideOnStart" style="background-color:#{{ firstFeedItem.color }};">
             {{ firstFeedItem.feedName }}
         </div>
-        <div class="newsTitle hideOnStart">
+        <div class="screensaver--newsticker-title hideOnStart">
             {{ firstFeedItem.title }}
         </div>
-        <div class="newsDescription hideOnStart">
+        <div class="screensaver--newsticker-description hideOnStart">
             {{ firstFeedItem.description }}
         </div>
     </div>
-    <div class="currentTime hideOnStart">
+    <div class="screensaver--time hideOnStart">
         {{ "now"|date("H:i") }}
     </div>
 {% endblock %}

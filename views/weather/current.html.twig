@@ -1,7 +1,7 @@
 {# @var forecast \Entity\WeatherForecastList #}
-<div class="largeIcon">
+<div class="weather--icon-large">
     {% if 'partly_cloud' == forecast.current.type %}
-        <div class="icon sun-shower">
+        <div class="weather--icon sun-shower">
             <div class="cloud"></div>
             <div class="sun">
                 {% if "now"|date("H") < 20 and "now"|date("H") > 6 %}<div class="rays"></div>{% endif %}
@@ -11,7 +11,7 @@
     {% endif %}
 
     {% if 'thunderstorm' == forecast.current.type %}
-        <div class="icon thunder-storm">
+        <div class="weather--icon thunder-storm">
             <div class="cloud"></div>
             <div class="lightning">
                 <div class="bolt"></div>
@@ -21,14 +21,14 @@
     {% endif %}
 
     {% if 'rain' == forecast.current.type %}
-        <div class="icon rainy">
+        <div class="weather--icon rainy">
             <div class="cloud"></div>
             <div class="rain"></div>
         </div>
     {% endif %}
 
     {% if 'snow' == forecast.current.type %}
-        <div class="icon flurries">
+        <div class="weather--icon flurries">
             <div class="cloud"></div>
             <div class="snow">
                 <div class="flake"></div>
@@ -38,7 +38,7 @@
     {% endif %}
 
     {% if 'sun' == forecast.current.type %}
-        <div class="icon sunny">
+        <div class="weather--icon sunny">
             <div class="sun">
                 {% if "now"|date("H") < 20 and "now"|date("H") > 6 %}<div class="rays"></div>{% endif %}
             </div>
@@ -46,13 +46,13 @@
     {% endif %}
 
     {% if 'cloud' == forecast.current.type %}
-        <div class="icon cloudy">
+        <div class="weather--icon cloudy">
             <div class="cloud"></div>
             <div class="cloud"></div>
         </div>
     {% endif %}
 </div>
 
-<div class="temperature">
+<div class="weather--temperature">
     {{ forecast.current.temperature }}&deg;C
 </div>

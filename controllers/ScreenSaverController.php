@@ -15,7 +15,7 @@ $app->match('/screensaver/', function() use($app) {
     $weatherService = $app['weatherService'];
 
     return $app['twig']->render('screensaver/index.html.twig', [
-        'bodyId' => 'screensaver',
+        'bodyClass' => 'screensaver',
         'forecast' => $weatherService,
         'feedItems'=> $feedItems,
         'feeds' => $feedService->getFeeds(),

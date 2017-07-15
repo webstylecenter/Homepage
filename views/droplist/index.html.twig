@@ -1,14 +1,12 @@
-<div id="dropList" class="dropList">
-    {% for image in imageList %}
-        <div class="image" style="background-image:url('https://pvd.onl/pages/getimage.php?file={{ image }}');">
-            <div class="imageContainer">
-                <div class="imageButtons">
-                    <i class="fa fa-external-link fa-2x dropOpen" data-image="{{ image }}"></i>
-                    <i class="fa fa-clipboard fa-2x dropCopy" data-clipboard-text="https://pvd.onl/{{ image }}"></i>
-                    <i class="fa fa-eye-slash fa-2x dropHide" data-image="{{ image }}"></i>
-                    <i class="fa fa-trash-o fa-2x dropRemove" data-image="{{ image }}"></i>
-                </div>
+{% for image in imageList %}
+    <div class="screenshot-list--image" style="background-image:url('https://pvd.onl/pages/getimage.php?file={{ image }}');">
+        <div class="screenshot-list--image-container">
+            <div class="imageButtons">
+                <i class="fa fa-external-link fa-2x dropOpen" data-image="{{ image }}"></i>
+                <i class="fa fa-clipboard fa-2x dropCopy" data-clipboard-text="https://pvd.onl/{{ image }}"></i>
+                <i class="fa fa-eye-slash fa-2x dropHide" data-image="{{ image }}"></i>
+                <i class="fa fa-trash-o fa-2x dropRemove" data-image="{{ image }}"></i>
             </div>
         </div>
-    {% endfor %}
-</div>
+    </div>
+{% endfor %}

@@ -1,0 +1,21 @@
+.widget-custom-item {
+    width: 100%;
+    overflow: hidden;
+    height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 5px 5px;
+    margin: 2px 5px;
+    display: block;
+
+    &:hover {
+      background-color: rgba(256, 256, 256, 0.9);
+      cursor: pointer;
+    }
+
+    span {
+      font-weight: lighter;
+      color: #292929;
+      opacity: 0.5;
+    }
+}

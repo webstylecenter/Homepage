@@ -1,0 +1,60 @@
+.header--bar {
+  border-bottom: 1px solid gray;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  height: $header-height;
+  background: #eeeeee;
+  background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%);
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 900;
+
+  .fa {
+    font-size: 1.5em;
+  }
+
+  > div {
+    display: inline-block;
+  }
+
+  &-site {
+    .title {
+      padding-top: 5px;
+    }
+  }
+  &-actions {
+    float: right;
+
+    span {
+      display: inline-block;
+    }
+
+    .action-search--wrapper {
+      display: inline-block;
+
+      input {
+        top: 5px;
+        right: 50px;
+        padding: 5px 10px;
+        width: $header-width-search;
+      }
+    }
+
+    > * {
+      margin-left: 30px;
+    }
+  }
+
+  &-navigation {
+    display: inline-block;
+    margin-left: 280px;
+    font-style: italic;
+    color: gray;
+
+    a {
+      color: gray;
+    }
+  }
+}

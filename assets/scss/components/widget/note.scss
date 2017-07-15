@@ -1,0 +1,16 @@
+.widget-note {
+  &--input {
+    margin: 10px;
+    background-color: transparent;
+    border: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 650px;
+    border-radius: 0;
+    padding: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

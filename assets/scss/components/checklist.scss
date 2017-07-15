@@ -1,0 +1,64 @@
+.checklist {
+  margin:20px 0;
+  font-size:12pt;
+
+  ul {
+    list-style: none;
+    padding-left:0;
+  }
+
+  li {
+    padding-left:10px;
+
+    &:nth-child(even) {
+      background-color:whitesmoke;
+    }
+  }
+
+  label {
+    padding:10px;
+    margin-left:10px;
+    display:inline-block;
+    width:72%;
+  }
+
+  h2 {
+    margin:50px 0 -10px 10px;
+  }
+
+  .done {
+    color: #9d9d9d;
+
+    li:nth-child(even) {
+      background-color: #fcfcfc;
+    }
+  }
+}
+
+.checklist--form {
+  input {
+    font-size:12pt;
+  }
+
+  input[type="text"] {
+    width:79%;
+    padding:5px;
+    box-sizing: border-box;
+    border:0;
+    background-color: #e2e2e2;
+  }
+
+  input[type="checkbox"] {
+    float:left;
+  }
+
+  input[type="button"] {
+    width:20%;
+    padding:5px 5px;
+    border:0px;
+    background-color: #cbcbcb;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    float:right;
+  }
+}

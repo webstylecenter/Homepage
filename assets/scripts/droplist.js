@@ -1,44 +1,36 @@
 var dropDomain = 'https://pvd.onl/';
-var stopProp = true;
 
-$('.showDropList').on('click', function() {
-    $('.dropListPanel').load('/droplist/', function() {
+$('.js-toggle').on('click', function() {
+    var targetElement = $($(this).data('toggle-element'));
+
+    targetElement.load(targetElement.data('target'), function() {
         showDropList();
         activateDropListEvens();
     });
 });
 
-$('.dropListPanel').click(function(event) {
-    if (stopProp) {
-        event.stopPropagation();
-    }
-});
-
-$(window).click(function() {
+$(window).on('click', function(e) {
     hideDropList();
 });
 
 function showDropList() {
-    $('.dropListPanel').slideDown();
-    $('.dropListBackground').fadeIn();
+    $('.js-screenshot-list').slideDown();
+    $('.content-overlay').fadeIn();
 }
 
 function hideDropList() {
-    $('.dropListPanel').slideUp();
-    $('.dropListBackground').fadeOut();
+    $('.js-screenshot-list').slideUp();
+    $('.content-overlay').fadeOut();
 }
 
 function activateDropListEvens() {
-
     /** global: Clipboard */
     new Clipboard('.dropCopy');
 
     $('.dropOpen').on('click', function() {
-        stopProp = false;
         var image = $(this).data('image');
         var tab = window.open(dropDomain + image, '_blank');
         tab.focus();
-        stopProp = true;
         hideDropList();
     });
 

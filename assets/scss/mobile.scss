@@ -1,3 +1,13 @@
+@media screen and (max-width: 920px) {
+  .searchBox, .showDropList {
+    display:none;
+  }
+}
+
+
+
+/* old code, might be needed later
+
 .mobile {
   .topbar {
     right:0;
@@ -7,7 +17,7 @@
   }
   .list {
     width:100%;
-    overflow-y: scroll; /* has to be scroll, not auto */
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
   }
   .listTitle {
@@ -79,3 +89,4 @@
     display:none;
   }
 }
+*/

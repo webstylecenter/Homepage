@@ -1,11 +1,11 @@
 {% if addToChecklist != '' and nextPageNumber == 1 %}
-    <div class="addToChecklist">
+    <div class="feed-list-item--state-button">
         Add "<b>{{ addToChecklist }}</b>" to checklist
     </div>
 {% endif %}
 
 {% for item in feedItems %}
-    <div class="listItem {{ item.viewed ? 'used ' : 'newItem ' }}{{ item.pinned ? 'pinned ' : '' }}"
+    <div class="feed-list-item {% if not item.viewed %}feed-list-item--state-new{% endif %} {% if item.pinned %}feed-list-item--state-pinned{% endif %}"
          data-url="{{ item.url }}" style="border-left-color:#{{ item.color }};">
         <div class="pin" data-pin-id="{{ item.id }}"></div>
         <p class="title ">{{ item.title|striptags }}</p>

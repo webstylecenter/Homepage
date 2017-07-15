@@ -15,9 +15,13 @@ $app->match('/welcome/', function() use($app) {
     $checklistService = $app['checklistService'];
     $todos = $checklistService->getTodos();
 
+    $device = new Mobile_Detect();
+    if ($device->isMobile()) {
+        return 'Welcome mobile user!';
+    }
 
     return $app['twig']->render('welcome/index.html.twig', [
-        'bodyId' => 'welcome',
+        'bodyClass' => 'welcome',
         'forecast' => $weatherService->getForecastList(),
         'lastUpdate' => [
             'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
@@ -32,7 +36,7 @@ $app->match('/welcome/', function() use($app) {
 
 $app->match('/nourl/', function() use($app) {
     return $app['twig']->render('home/no-url.html.twig', [
-        'bodyId' => 'nourl',
+        'bodyClass' => 'iframe-nolink',
         'lastUpdate' => [
             'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
             'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),

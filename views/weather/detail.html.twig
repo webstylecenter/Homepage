@@ -1,20 +1,20 @@
 {# @var forecast \Entity\WeatherForecastList #}
 {% include 'weather/current.html.twig' %}
 
-<div class="info">
-    <div class="currentCondition">
+<div class="weather--info">
+    <div class="weather--info-current">
         {{ forecast.current.type }}
     </div>
-    <div class="todayCast">
+    <div class="weather--info-today">
         <span class="max">{{ forecast.current.maxTemperature }}&deg;C</span>
         <span class="min">{{ forecast.current.minTemperature }}&deg;C</span>
     </div>
 </div>
 
-<div class="weekForecast">
+<div class="weather--forecast">
     {% for weatherDay in  forecast.upcoming %}
-        <div class="day">
-            <div class="smallIcon icon_{{ weatherDay.type }}"></div>
+        <div class="weather--forecast-day">
+            <div class="weather--icon-small icon_{{ weatherDay.type }}"></div>
             <div class="max">{{ weatherDay.maxTemperature }}&deg;C</div>
         </div>
     {% endfor %}

@@ -8,6 +8,5 @@ $(function() {
         parent.$('.pageLinkToUrl').text(url).attr('href', url);
     });
 
-    $('.weather .content').load('/weather/detail/');
-
+    $('.weather--content').load('/weather/detail/');
 });

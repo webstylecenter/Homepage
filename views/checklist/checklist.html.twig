@@ -1,7 +1,7 @@
 <ul>
     {% for checklistItem in todos %}
         <li>
-            <input class="checklistItem" type="checkbox" id="todo{{ checklistItem.id }}" data-database-id="{{ checklistItem.id }}" />
+            <input class="js-checklist-item" type="checkbox" id="todo{{ checklistItem.id }}" data-database-id="{{ checklistItem.id }}" />
             <label for="todo{{ checklistItem.id }}">{{ checklistItem.item }}</label>
         </li>
     {% endfor %}
@@ -12,7 +12,7 @@
 
         {% for checklistItem in finished %}
             <li>
-                <input class="checklistItem" type="checkbox" id="todo{{ checklistItem.id }}" data-database-id="{{ checklistItem.id }}" checked="checked" />
+                <input class="js-checklist-item" type="checkbox" id="todo{{ checklistItem.id }}" data-database-id="{{ checklistItem.id }}" checked="checked" />
                 <label for="todo{{ checklistItem.id }}">{{ checklistItem.item }}</label>
             </li>
         {% endfor %}

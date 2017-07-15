@@ -1,6 +1,21 @@
-@import "index/layout";
-@import "index/create";
-@import "index/droplist";
-@import "index/listitem";
-@import "index/search";
-@import "index/modal";
+@import "base/font-face";
+@import "base/variables";
+@import "base/base";
+
+@import "components/modal";
+@import "components/header";
+@import "components/container";
+@import "components/content";
+@import "components/feed-list";
+@import "components/weather";
+@import "components/checklist";
+
+@import "components/widget";
+@import "components/widget/note";
+@import "components/widget/custom-items";
+@import "components/widget/checklist";
+@import "components/screenshot-list";
+
+@import "pages/homepage";
+@import "pages/screensaver";
+@import "pages/iframe-nolink";

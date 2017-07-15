@@ -1,42 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="welcomePageBackground"></div>
-    <div class="welcomePage">
+    <div class="page--homepage">
+        <div class="page--homepage-background"></div>
+        <div class="page--homepage-background--overlay"></div>
 
-        <div class="row">
+        <div class="widgets">
             <div class="widget">
                 <div class="weather wow rubberBand">
-                    <div class="content">
+                    <div class="weather--content">
                         Loading weatherinfo...
                     </div>
                 </div>
             </div>
 
-            <div class="widget">
+            <div class="widget widget--checklist">
                 <h2>Todo's</h2>
                 {% include 'checklist/widget.html.twig' %}
             </div>
-        </div>
 
-        <div class="row">
-            <div class="widget">
-                <div class="addedLinks wow slideInLeft">
-                    <h2>Added items</h2>
-                    {% for addedLinkItem in addedLinks %}
-                        <div class="addedLinkItem" data-url="{{ addedLinkItem.url }}">
-                            {{ addedLinkItem.title }} <span class="description">{{ addedLinkItem.description }}</span>
-                        </div>
-                    {% endfor %}
-                </div>
+            <div class="widget widget-custom-items wow slideInLeft">
+                <h2>Added items</h2>
+                {% for addedLinkItem in addedLinks %}
+                    <div class="widget-custom-item" data-url="{{ addedLinkItem.url }}">
+                        {{ addedLinkItem.title }} <span class="description">{{ addedLinkItem.description }}</span>
+                    </div>
+                {% endfor %}
             </div>
 
 
-            <div class="widget">
-                <div class="noteArea wow slideInRight">
-                    <h2>Notes</h2>
-                    <textarea class="note" data-id="{{ note.id }}" data-position="{{ note.position }}">{{ note.note }}</textarea>
-                </div>
+            <div class="widget widget-note wow slideInRight">
+                <h2>Notes</h2>
+                <textarea class="widget-note--input" data-id="{{ note.id }}" data-position="{{ note.position }}">{{ note.note }}</textarea>
             </div>
         </div>
     </div>

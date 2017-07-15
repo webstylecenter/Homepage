@@ -8,7 +8,7 @@ $app->match('/checklist/', function() use($app) {
     $finished = $checklistService->getFinished();
 
     return $app['twig']->render('checklist/index.html.twig', [
-        'bodyId' => 'checklist',
+        'bodyClass' => 'checklist',
         'lastUpdate' => [
             'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
             'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),

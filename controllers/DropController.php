@@ -17,6 +17,6 @@ $app->match('/droplist/', function() use($app) {
             'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
             'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
         ],
-        'bodyId' => 'dropList'
+        'bodyClass' => 'dropList'
     ]);
 });

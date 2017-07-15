@@ -1,73 +1,74 @@
 .weather {
-  .content {
-    height:440px;
-    text-align:center;
-    mix-blend-mode:normal;
-    width:auto;
-    color:black;
+  &--content {
+    height: 440px;
+    text-align: center;
+    mix-blend-mode: normal;
+    width: auto;
+    color: black;
   }
-  .largeIcon {
+
+  &--icon-large {
     max-width: 42em;
     padding: 2em;
     margin: 0 auto;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    color:white;
+    color: white;
   }
-  .smallIcon {
-    height:64px;
-    width:64px;
-    margin:auto;
+  &--icon-small {
+    height: 64px;
+    width: 64px;
+    margin: auto;
   }
-  .icon {
+  &--icon {
     position: relative;
     display: inline-block;
     width: 12em;
     height: 10em;
-    font-size: 1em; /* control icon size here */
+    font-size: 1em;
   }
-  .temperature {
-    margin:auto;
-    font-size:24pt;
-    border-bottom:1px solid black;
-    width:400px;
-    padding-bottom:10px;
+  &--temperature {
+    margin: auto;
+    font-size: 24pt;
+    border-bottom: 1px solid black;
+    width: 50%;
+    padding-bottom: 10px;
   }
-  .info {
-    width:400px;
-    margin:auto;
+  &--info {
+    width: 100%;
+    margin: auto;
   }
-  .currentCondition {
-    width:195px;
-    display:inline-block;
+  &--info-current {
+    width: 195px;
+    display: inline-block;
     box-sizing: border-box;
-    font-size:32pt;
+    font-size: 32pt;
     text-transform: capitalize;
   }
-  .todayCast {
-    width:195px;
-    display:inline-block;
+  &--info-today {
+    width: 195px;
+    display: inline-block;
     box-sizing: border-box;
     span {
-      display:block;
+      display: block;
     }
   }
-  .day {
-    display:inline-block;
-    border-right:1px solid black;
-    padding-right:10px;
-    width:20%;
+  .weather--forecast-day {
+    display: inline-block;
+    border-right: 1px solid black;
+    padding-right: 10px;
+    width: 19%;
     box-sizing: border-box;
-    height:100px;
+    height: 100px;
     margin-top: 50px;
     .max {
-      margin-top:10px;
-      font-size:14pt;
-      font-weight:lighter;
+      margin-top: 10px;
+      font-size: 14pt;
+      font-weight: lighter;
     }
     &:last-child {
-      border-right:0;
-      padding-right:0;
+      border-right: 0;
+      padding-right: 0;
     }
   }
   .cloud {
@@ -80,7 +81,7 @@
     margin: -1.84375em;
     background: currentColor;
     border-radius: 50%;
-    box-shadow:
+    box-shadow: 
             -2.1875em 0.6875em 0 -0.6875em,
             2.0625em 0.9375em 0 -0.9375em,
             0 0 0 0.375em #000000,
@@ -101,7 +102,7 @@
   .cloud:nth-child(2) {
     z-index: 0;
     background: #000000;
-    box-shadow:
+    box-shadow: 
             -2.1875em 0.6875em 0 -0.6875em #000000,
             2.0625em 0.9375em 0 -0.9375em #000000,
             0 0 0 0.375em #000000,
@@ -182,7 +183,7 @@
     margin: -1em 0 0 -0.25em;
     background: #0cf;
     border-radius: 100% 0 60% 50% / 60% 0 100% 50%;
-    box-shadow:
+    box-shadow: 
             0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
             -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
             -1.375em -0.125em 0 rgba(255,255,255,0.2);
@@ -274,28 +275,32 @@
     opacity: 0.4;
     animation: spin 16s linear infinite reverse;
   }
+  
   .icon_rain {
-    background-image:url('/assets/images/rain.png');
+    background-image: url('/assets/images/rain.png');
   }
+  
   .icon_cloud {
-    background-image:url('/assets/images/cloud.png');
+    background-image: url('/assets/images/cloud.png');
   }
+  
   .icon_partly_cloud {
-    background-image:url('/assets/images/partly_cloud.png');
+    background-image: url('/assets/images/partly_cloud.png');
   }
+  
   .icon_snow {
-    background-image:url('/assets/images/snow.png');
+    background-image: url('/assets/images/snow.png');
   }
+  
   .icon_sun {
-    background-image:url('/assets/images/sun.png');
+    background-image: url('/assets/images/sun.png');
   }
+  
   .icon_thunder {
-    background-image:url('/assets/images/thunder.png');
+    background-image: url('/assets/images/thunder.png');
   }
-
-
+  
   /* Animations */
-
   @keyframes spin {
     100% { transform: rotate(360deg); }
   }
@@ -312,26 +317,26 @@
   @keyframes rain {
     0% {
       background: #0cf;
-      box-shadow:
+      box-shadow: 
               0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
               -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
               -1.375em -0.125em 0 #0cf;
     }
     25% {
-      box-shadow:
+      box-shadow: 
               0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
               -0.875em 1.125em 0 -0.125em #0cf,
               -1.375em -0.125em 0 rgba(255,255,255,0.2);
     }
     50% {
       background: rgba(255,255,255,0.3);
-      box-shadow:
+      box-shadow: 
               0.625em 0.875em 0 -0.125em #0cf,
               -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
               -1.375em -0.125em 0 rgba(255,255,255,0.2);
     }
     100% {
-      box-shadow:
+      box-shadow: 
               0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
               -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
               -1.375em -0.125em 0 #0cf;

@@ -3,32 +3,40 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
-    <div class="topbar wow slideInDown">
-        <div class="title"><a href="javascript:requestNewFeedItems();openWelcomePage();">Peter van Dam's Homepage</a></div>
-        <div class="navbar"><a href="#" class="pageLinkToUrl" target="_blank"></a></div>
-        <div class="totalbar">
-            <div class="showDropList"><i class="fa fa-dropbox"></i></div>
-            <div class="dropListPanel"></div>
-            <input class="searchBox" type="text" name="q" placeholder="Search feeds or add items to checklist" autocomplete="off" />
-            <div class="searchResults"></div>
-            <div class="createButton"><i class="fa fa-file-text-o fa-x4"></i></div>
+    <header class="header--bar">
+        <div class="header--bar-site">
+            <div class="title">
+                <a href="/" class="js-reload-page">Peter van Dam's Homepage</a>
+            </div>
         </div>
-    </div>
+        <div class="header--bar-navigation">
+            <a href="#" class="pageLinkToUrl" target="_blank"></a>
+        </div>
+        <div class="header--bar-actions">
+            <span class="fa fa-dropbox js-toggle" data-toggle-element=".screenshot-list"></span>
+            <div class="action-search--wrapper">
+                <input class="js-search-feed" type="text" name="q" placeholder="Search feeds or add items to checklist" autocomplete="off" />
+                <div style="display: none;" class="js-search-list feed-list feed-list--type-search"></div>
+            </div>
+            <span data-modal-target=".js-form-feed" class="js-modal-trigger fa fa-file-text-o fa-x4"></span>
 
-    <div class="dropListBackground"></div>
+            <div style="display: none;" class="screenshot-list js-screenshot-list" data-target="/droplist/"'></div>
+        </div>
+    </header>
+    <section class="container">
+        {% block content %}{% endblock %}
 
-    <div class="mainContent">
-        {% block content %}
-        {% endblock %}
-
-        <div class="list scroll wow slideInLeft">
+        <aside class="feed-list feed-list--type-sidebar wow slideInLeft">
             {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems, 'addToChecklist': '', 'feeds': feeds} %}
-        </div>
-        <div class="contentContainer">
-            <iframe src="/welcome" sandbox="allow-scripts allow-same-origin allow-forms allow-popups
+        </aside>
+
+        <div class="content">
+            <div class="content-overlay"></div>
+
+            <iframe class="content-frame" src="/welcome" sandbox="allow-scripts allow-same-origin allow-forms allow-popups
             allow-pointer-lock allow-modals"></iframe>
         </div>
-    </div>
+    </section>
 
     {% include 'modals/create.html.twig' %}
 {% endblock %}

@@ -1,59 +1,38 @@
-/**
- * Created by petervandam on 18/11/2016.
- */
 $(function() {
-    if ($('.screensaver').length >0){
+    if ($('.screensaver--background').length >0) {
         setInterval(function() {
-            setTimeout(function() {
-                refreshPage();
-            }, 5 * 1000);
+            setTimeout(refreshPage, 5 * 1000);
         }, 3 * 60 * 1000);
 
-        setInterval(function() {
-            updateTime();
-        }, 1000);
-
-        setInterval(function() {
-            updateWeather();
-        }, 5 * 60 * 1000);
-
-        setInterval(function() {
-            nextNewsItem();
-        }, 20 * 1000);
+        setInterval(updateTime, 1000);
+        setInterval(updateWeather, 5 * 60 * 1000);
+        setInterval(nextNewsItem, 20 * 1000);
+        setTimeout(showItems, 3000);
 
         refreshPage();
         updateWeather();
-
-        setTimeout(function() {
-            showItems();
-        }, 3000);
     }
 });
 
-/** global: currentNewsItem */
-var currentNewsItem = 0;
+var currentNewsItemKey = 0;
 
 function refreshPage() {
-    /** global: Image */
-    var tempImage = new Image();
+    var newImage = new Image();
     var time = $.now();
-    tempImage.src = '/screensaver/images/' + time  + '.jpg';
-    tempImage.onload = function() {
-        $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")');
-        switchBackgrounds();
+    newImage.src = '/screensaver/images/' + time  + '.jpg';
+    newImage.onload = function() {
+        $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")').fadeIn(3000);
+        $('.active').fadeOut(3000);
+
+        $('.notActive, .active').toggleClass('active notActive');
+
     };
 }
 
-function switchBackgrounds() {
-    $('.notActive').fadeIn(3000);
-    $('.active').fadeOut(3000);
-    $('.active, .notActive').toggleClass('active notActive');
-}
-
 function updateTime() {
-    var dt = new Date();
-    var hours = dt.getHours();
-    var minutes = dt.getMinutes();
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
 
     if (hours < 10) { hours = '0' + hours; }
     if (minutes < 10) { minutes = '0' + minutes; }
@@ -66,43 +45,31 @@ function updateWeather() {
 }
 
 function showItems() {
-    $('.activeNewsItem').slideToggle('slow');
-    $('.newsSource').slideToggle('slow');
-    $('.newsTitle').slideToggle('slow');
-    $('.newsDescription').slideToggle('slow');
-    $('.currentTime').slideToggle('slow');
+    $(
+        '.screensaver--newsticker,'
+        + '.screensaver--time,'
+        + '.screensaver--newsticker-source,'
+        + '.screensaver--newsticker-title, '
+        + '.screensaver--newsticker-description'
+    ).slideToggle('slow');
 }
 
 function nextNewsItem() {
-    hideNewsItem();
-    setTimeout(function() {
-        showNextNewsItem();
-    }, 1000);
-}
-
-function hideNewsItem() {
-    $('.newsSource').slideToggle('slow');
-    $('.newsTitle').slideToggle('slow');
-    $('.newsDescription').slideToggle('slow');
+    $('.screensaver--newsticker-source, .screensaver--newsticker-title, .screensaver--newsticker-description').slideToggle('slow');
+    setTimeout(showNextNewsItem, 1000);
 }
 
 function showNextNewsItem() {
-    /** global: currentNewsItem */
-    currentNewsItem = currentNewsItem +1;
-    if (currentNewsItem > 49) {
-        currentNewsItem = 0;
+    currentNewsItemKey++;
+    if (currentNewsItemKey > 49) {
+        currentNewsItemKey = 0;
     }
 
-    /** global: newsItems */
-    if (typeof(newsItems) === 'undefined') {
-        return;
-    }
-
-    $('.newsSource').html(newsItems[currentNewsItem][0])
-        .attr('class', 'newsSource')
+    $('.screensaver--newsticker-source').html(newsItems[currentNewsItemKey][0])
+        .attr('class', 'screensaver--newsticker-source')
         .slideToggle('slow')
-        .css('backgroundColor', '#' + newsItems[currentNewsItem][3]);
+        .css('backgroundColor', '#' + newsItems[currentNewsItemKey][3]);
 
-    $('.newsTitle').html(newsItems[currentNewsItem][1]).slideToggle('slow');
-    $('.newsDescription').html(newsItems[currentNewsItem][2]).slideToggle('slow');
+    $('.screensaver--newsticker-title').html(newsItems[currentNewsItemKey][1]).slideToggle('slow');
+    $('.screensaver--newsticker-description').html(newsItems[currentNewsItemKey][2]).slideToggle('slow');
 }

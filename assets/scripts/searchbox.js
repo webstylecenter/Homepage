@@ -1,42 +1,34 @@
-/**
- * Created by petervandam on 22/03/2017.
- */
 $(function() {
-    $('.searchBox').on('keyup', function() {
+    $('.js-search-feed').on('keyup', function() {
         searchFeeds($(this).val());
     }).on('click', function() {
         if ($(this).val() !== '') {
-            $('.searchResults').slideDown();
+            $('.js-search-list').slideDown();
         }
     }).on('blur', function() {
-        $('.searchResults').each(function() {
-           if (!$(this).hasClass('doNotHide')) {
-               $('.searchResults').slideUp();
-           }
-        });
-
+        $('.js-search-list:not(.doNotHide)').slideUp()
     }).on('keydown', function(e) {
-        if (e.which == 13) {
+        if (e.which === 13) {
             searchAutoRun($(this));
         }
     });
 
-    $('.searchResults').on('click', '.addToChecklist', function() {
+    $('.js-search-list').on('click', '.feed-list-item--state-button', function() {
         addToChecklistFromSearch(this);
     });
 });
 
 function searchFeeds(searchQuery) {
-    $('.searchResults').html("").slideDown();
+    $('.js-search-list').html('').slideDown();
 
-    if (searchQuery == '' || searchQuery.substring(0, 4) == 'http') {
+    if (searchQuery == '' || searchQuery.substring(0, 4) === 'http') {
         return;
     }
 
     $.ajax('/feed/search/' + searchQuery + '/0')
         .done(function(data) {
             var html = data.replace('<div class="list scroll">', '<div class="NewSearchlist">');
-            $('.searchResults').html(html);
+            $('.js-search-list').html(html);
         });
 }
 
@@ -46,10 +38,10 @@ function addToChecklist(value) {
 
 function postToChecklist(data) {
     $.post("/checklist/add/", data).then(function(data) {
-        $('.checklists').html(data);
-        $('.checklistAdder input[type="text"]').val('');
+        $('.checklist--list').html(data);
+        $('.checklist--form input[type="text"]').val('');
 
-        $('.checklistItem').on('click', function() {
+        $('.js-checklist-item').on('click', function() {
             checkItem(this);
         });
     }).catch(function() {
@@ -62,18 +54,17 @@ function addToChecklistFromSearch(el) {
     var value = $(el).find('b').html();
     addToChecklist(value);
     $(el).html('<b>' + value + ' added to checklist!');
-    $('.searchBox').val('');
+    $('.s-search-feed').val('');
 }
 
 function searchAutoRun(el) {
     let value = $(el).val();
-    $('.searchResults').hide();
+    $('.js-search-list').hide();
 
     if ((value.substring(0, 4) !== 'http')) {
         addToChecklist(value);
     } else {
         $(el).val("Fetching meta data...");
-        $('.searchResults').hide();
 
         $.ajax({
             method: "POST",
@@ -81,16 +72,14 @@ function searchAutoRun(el) {
             data: { url: value}
         })
             .done(function( data ) {
-
                 $(el).val("Adding data to feed...");
-                $('.searchResults').hide();
+                $('.js-search-list').hide();
 
                 let json = $.parseJSON(data);
-
-                if (json.title.length == 0) {
-                    $('#createItem').modal({fadeDuration:100});
-                    $('#inputUrl').val(value);
-                    $('#addDescription').val(json.description);
+                if (json.title.length === 0) {
+                    $('.js-form-feed modal').modal({fadeDuration:100});
+                    $('.js-form-feed [name="title"]').val(value);
+                    $('.js-form-feed [name="description"]').val(json.description);
                 } else {
                     $.ajax({
                         method: "POST",
@@ -103,14 +92,14 @@ function searchAutoRun(el) {
                     }).done(function(data) {
                         if (data === 'Done') {
                             $(el).val("");
-                            $.requestNewFeedItems();
+                            requestNewFeedItems();
                             $.modal.close();
                         } else {
                             $(el).val(value);
                             alert(data);
                         }
 
-                        $('.searchResults').hide();
+                        $('.js-search-list').hide();
                     });
                 }
             });

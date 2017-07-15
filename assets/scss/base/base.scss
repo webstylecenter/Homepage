@@ -1,0 +1,26 @@
+html { box-sizing: border-box; }
+html *,
+html *:before,
+html *:after { box-sizing: inherit; }
+
+body {
+  font-size: 10pt;
+  font-family: $font-default;
+  font-weight: 300;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.wow {
+  visibility: hidden;
+}

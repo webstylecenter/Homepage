@@ -1,0 +1,31 @@
+.widget--checklist {
+  .checklist li:nth-child(even) {
+    background: transparent;
+  }
+
+  .checklist label {
+    padding: 0;
+  }
+
+  .checklist--form input {
+    font-size: 9pt;
+  }
+
+  .checklist--form input[type=text] {
+    background: rgba(0, 0, 0, 0.1);
+    border: 0;
+  }
+
+  .checklist--form input[type=button] {
+    background: rgba(0, 0, 0, 0.2);
+    border: 0;
+  }
+
+  .done {
+    display: none;
+  }
+
+  .checklist--list h2 {
+    display: none;
+  }
+}

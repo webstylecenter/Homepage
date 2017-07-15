@@ -66,7 +66,7 @@ gulp.task('stylesheets:vendor', function() {
 });
 
 gulp.task('stylesheets:app', function() {
-    return gulp.src('assets/scss/*.scss')
+    return gulp.src(['assets/scss/*.scss'])
         .pipe(isLiveServer() ? through.obj() : sourcemaps.init())
         .pipe(concat('style.css'))
         .pipe(sass())
@@ -84,6 +84,7 @@ gulp.task('clean', function() {
 gulp.task('watch', function() {
     gulp.watch('assets/scripts/*.js', ['lint', 'scripts:vendor', 'scripts:app']);
     gulp.watch('assets/scss/*/*.scss', ['stylesheets:vendor','stylesheets:app']);
+    gulp.watch('assets/scss/*.scss', ['stylesheets:vendor','stylesheets:app']);
 });
 
 gulp.task('build', function(callback) {

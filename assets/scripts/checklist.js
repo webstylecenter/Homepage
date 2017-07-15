@@ -1,40 +1,32 @@
 $(function() {
-    $('.checklistAdder input[type="button"]').on('click', function() {
-        addToChecklist($('.checklistAdder input[type="text"]').val());
+    $('.checklist--form input[type="button"]').on('click', function() {
+        postToChecklist({item: $('.checklist--form input[type="text"]').val()});
     });
 
-    $('.checklistAdder input[type="text"]').keypress(function(e) {
-        if (e.which == 13) {
-            $('.checklistAdder input[type="button"]').click();
+    $('.checklist--form input[type="text"]').keypress(function(e) {
+        if (e.which === 13) {
+            $('.checklist--form input[type="button"]').click();
         }
     });
 
-    $('.checklistItem').on('click', function() {
+    $('.js-checklist-item').on('click', function() {
         checkItem(this);
     });
 });
 
 function checkItem(el) {
-    var id = $(el).data('database-id');
-    var newCheckedState = $(el).is(':checked');
-
     postToChecklist({
-        id: id,
-        checked: newCheckedState
+        id: $(el).data('database-id'),
+        checked: $(el).is(':checked')
     });
-
-}
-
-function addToChecklist(value) {
-    postToChecklist({item:value});
 }
 
 function postToChecklist(data) {
     $.post("/checklist/add/", data).then(function(data) {
-        $('.checklists').html(data);
-        $('.checklistAdder input[type="text"]').val('');
+        $('.checklist--list').html(data);
+        $('.checklist--form input[type="text"]').val('');
 
-        $('.checklistItem').on('click', function() {
+        $('.js-checklist-item').on('click', function() {
             checkItem(this);
         });
     }).catch(function() {

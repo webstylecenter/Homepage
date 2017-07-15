@@ -2,6 +2,10 @@
  * Created by petervandam on 07/11/2016.
  */
 
+
+
+/* Old code that is required at a later point
+
 $(function() {
     $('.mobile').on('click', '.listItem', function() {
         mobileSwitchToWebView();
@@ -80,3 +84,4 @@ function mobileSwitchToListItemView() {
     $('iframe').attr('src', 'about:blank');
     window.history.pushState('forward', null, './#' + $.now());
 }
+ */

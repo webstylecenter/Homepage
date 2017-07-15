@@ -3,16 +3,20 @@
  */
 
 $(function() {
+    $(document).on('click', '.js-reload-page', function (event) {
+        event.preventDefault();
+        $('iframe').attr('src', '/welcome/');
+    });
 
-    $('.parseUrlButton').click(function() {
+    $('.js-button-parse-url').on('click', function() {
         getUrlMetaData();
     });
 
-    $('#inputUrl').on('blur', function() {
+    $('.js-form-feed [name="url"]').on('blur', function() {
         getUrlMetaData();
     });
 
-    $('.note').on('blur', function() {
+    $('.widget-note textarea').on('blur', function() {
        saveNote($(this));
     });
 
@@ -25,16 +29,10 @@ $(function() {
         var p6 = 'to';
         $(this).html('<a href="' + p4 + p6 + ':' + p1 + p5 + p1 + p3 + p2 + '">' + p1 + p5 + p1 + p3 + p2 + '</a>');
     });
-
 });
 
-
-function clearCreateForm() {
-    $('#createItem').find("input[type=text], textarea").val("");
-}
-
 function getUrlMetaData() {
-    var Url = $('#inputUrl').val();
+    var Url = $('.js-form-feed [name="url"]').val();
 
     if (Url.length > 0) {
         $.ajax({
@@ -44,18 +42,16 @@ function getUrlMetaData() {
         })
             .done(function( data ) {
                 var json = $.parseJSON(data);
-                $('#addTitle').val(json.title);
-                $('#addDescription').val(json.description);
+                $('.js-form-feed [name="title"]').val(json.title);
+                $('.js-form-feed [name="description"]').val(json.description);
             });
     }
 }
 
-
-
-function saveNote(el) {
-    var id = $(el).attr('data-id');
-    var position = $(el).attr('data-position');
-    var note = $(el).val();
+function saveNote($el) {
+    var id = $el.attr('data-id');
+    var position = $el.attr('data-position');
+    var note = $el.val();
 
     $.ajax({
         method: "POST",
@@ -66,19 +62,15 @@ function saveNote(el) {
             note: note
         },
         beforeSend: function() {
-            $(el).css('color', '#303030');
+            $el.css('color', '#303030');
         }
     })
         .done(function() {
-            $(el).css('color', 'black');
+            $el.css('color', 'black');
         })
         .fail(function() {
-            $(el).css('color', 'red');
+            $el.css('color', 'red');
         });
-}
-
-function openWelcomePage() {
-    $('iframe').attr('src', '/welcome/');
 }
 
 /** global: WOW */

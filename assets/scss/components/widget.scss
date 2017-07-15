@@ -1,0 +1,15 @@
+.widget {
+  height: 700px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 50%;
+  text-align: left;
+  padding: 20px;
+  box-sizing: border-box;
+  float: left;
+
+  h2 {
+    margin: 0 0 0 10px;
+    font-weight: 400;
+  }
+}

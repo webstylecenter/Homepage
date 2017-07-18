@@ -2,4 +2,22 @@ $header-height: 37px;
 $header-width-search: 380px;
 $sidebar-width: 450px;
 
+
+$max-width-mobile: 480px;
+$min-width-tablet: $max-width-mobile + 1px;
+$max-width-tablet: 780px;
+$min-width-desktop: $max-width-tablet + 1px;
+
+@mixin respond-to($media) {
+  @if $media == mobile {
+    @media only screen and (max-width: $max-width-mobile) { @content; }
+  }
+  @else if $media == tablet {
+    @media only screen and (min-width: $min-width-tablet) and (max-width: $max-width-tablet) { @content; }
+  }
+  @else {
+    @media only screen and (min-width: $min-width-desktop) { @content; }
+  }
+}
+
 $font-default: "Lato", "Helvetica Neue", "Arial", sans-serif

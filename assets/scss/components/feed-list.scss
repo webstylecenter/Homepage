@@ -6,6 +6,14 @@
   overflow-y: scroll;
   background: linear-gradient(to bottom, #a1a1a1 0%, #eeeeee 100%);
 
+  @include respond-to(mobile) {
+    width: 100%;
+  }
+
+  @include respond-to(tablet) {
+    width: 100%;
+  }
+
   &--type-sidebar {
     position: absolute;
     top: 0;

@@ -6,6 +6,15 @@
   left: $sidebar-width;
   box-sizing: border-box;
 
+  @include respond-to(mobile) {
+    display: none;
+    left:0;
+  }
+  @include respond-to(tablet) {
+    display: none;
+    left:0;
+  }
+
   &-overlay {
     position: relative;
     width: 100%;

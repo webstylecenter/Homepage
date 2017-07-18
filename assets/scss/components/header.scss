@@ -22,6 +22,10 @@
   &-site {
     .title {
       padding-top: 5px;
+
+      &--back {
+        display: none;
+      }
     }
   }
   &-actions {
@@ -39,6 +43,13 @@
         right: 50px;
         padding: 5px 10px;
         width: $header-width-search;
+
+        @include respond-to(mobile) {
+          display: none;
+        }
+        @include respond-to(tablet) {
+          width: 250px;
+        }
       }
     }
 
@@ -49,12 +60,20 @@
 
   &-navigation {
     display: inline-block;
-    margin-left: 280px;
     font-style: italic;
     color: gray;
 
+    @include respond-to(desktop) {
+      margin-left: 280px;
+    }
+
     a {
       color: gray;
+      display: none;
+
+      @include respond-to(desktop) {
+        display: inline;
+      }
     }
   }
 }

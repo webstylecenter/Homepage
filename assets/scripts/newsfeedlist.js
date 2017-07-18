@@ -12,16 +12,28 @@ $(function() {
         requestNewFeedItems();
     });
 
-    $(document).on('click', '.feed-list-item', function() {
+    $(document).on('click', '.js-action-feed-list-click', function() {
         $(this).addClass('animated pulse feed-list-item--state-selected');
         $('.feed-list-item').removeClass('feed-list-item--state-selected');
 
         var url = $(this).data('url') !== '' ? $(this).data('url') : '/nourl/';
 
+        $('.content').show();
+        $('.js-reload-page').addClass('hide-if-mobile hide-if-tablet');
+        $('.js-return').addClass('show-if-mobile show-if-tablet');
+
         $('iframe').attr('src', url);
         $('.pageLinkToUrl').text(url).attr('href', url);
     })
-        .on ('click', '.title a', function() {
+        .on('click', '.js-return', function (e) {
+            e.preventDefault();
+
+            $('.content iframe').prop('src', 'about:blank');
+            $('.content').hide();
+            $('.js-reload-page').removeClass('hide-if-mobile hide-if-tablet');
+            $('.js-return').removeClass('show-if-mobile show-if-tablet');
+        })
+        .on ('click', '.js-reload-page', function(e) {
             $('iframe').attr('src', '/welcome/');
             $('.pageLinkToUrl').text('');
             requestNewFeedItems();
@@ -58,6 +70,10 @@ $(function() {
                     console.log(data);
                     alert(data);
                 });
+        });
+
+        $('.js-action-feed-list-swipe').hammer().on("swiperight", function() {
+            $(this).find('.pin').trigger('click');
         });
 });
 

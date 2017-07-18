@@ -24,3 +24,23 @@ a {
 .wow {
   visibility: hidden;
 }
+
+.show-if-mobile {
+  @include respond-to(mobile) {
+    display: block !important;
+  }
+}
+
+.show-if-desktop {
+  @include respond-to(desktop) {
+    display: block !important;
+  }
+}
+
+.show-if-tablet {
+  @include respond-to(tablet) {
+    display: block !important;
+  }
+}
+
+

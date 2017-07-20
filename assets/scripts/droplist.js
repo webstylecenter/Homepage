@@ -1,15 +1,21 @@
 var dropDomain = 'https://pvd.onl/';
 
-$('.js-toggle').on('click', function() {
+$('.js-toggle').on('click', function(e) {
+    e.preventDefault();
+
     var targetElement = $($(this).data('toggle-element'));
 
     targetElement.load(targetElement.data('target'), function() {
         showDropList();
-        activateDropListEvens();
+        activateDropListEvents();
     });
 });
 
-$(window).on('click', function(e) {
+$('.js-more-droplist').on('click', function() {
+   window.location.href = '/droplist/all';
+});
+
+$('.content-overlay, .header--bar, .feed-list').on('click', function(e) {
     hideDropList();
 });
 
@@ -23,7 +29,8 @@ function hideDropList() {
     $('.content-overlay').fadeOut();
 }
 
-function activateDropListEvens() {
+function activateDropListEvents() {
+
     /** global: Clipboard */
     new Clipboard('.dropCopy');
 

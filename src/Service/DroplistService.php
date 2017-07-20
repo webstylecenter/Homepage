@@ -23,10 +23,12 @@ class DroplistService
     }
 
     /**
+     * @param null $limit
+     *
      * @return array
      */
-    public function getImages()
+    public function getImages($limit = null)
     {
-        return $this->images;
+        return ($limit == null ? $this->images : array_slice($this->images, 0, $limit));
     }
 }

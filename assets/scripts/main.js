@@ -3,10 +3,6 @@
  */
 
 $(function() {
-    $(document).on('click', '.js-reload-page', function (event) {
-        event.preventDefault();
-        $('iframe').attr('src', '/welcome/');
-    });
 
     $('.js-button-parse-url').on('click', function() {
         getUrlMetaData();

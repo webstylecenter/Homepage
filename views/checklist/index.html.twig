@@ -9,5 +9,7 @@
 {% endblock %}
 
 {% block body %}
-    {% include 'checklist/widget.html.twig' with {'finished': finished, 'todos': todos} %}
+    <div class="checklist--parent">
+        {% include 'checklist/widget.html.twig' with {'finished': finished, 'todos': todos} %}
+    </div>
 {% endblock %}

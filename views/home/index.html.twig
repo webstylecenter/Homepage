@@ -14,12 +14,19 @@
             <a href="#" class="pageLinkToUrl" target="_blank"></a>
         </div>
         <div class="header--bar-actions">
-            <span class="fa fa-dropbox js-toggle" data-toggle-element=".screenshot-list"></span>
-            <div class="action-search--wrapper">
+
+            <span class="fa fa-dropbox js-toggle hide-if-tablet hide-if-mobile" data-toggle-element=".screenshot-list"></span>
+            <span class="fa fa-dropbox js-open-url hide-if-desktop" data-url="/droplist/15"></span>
+
+            <span data-url="/checklist/" class="js-open-url fa fa-check fa-x4"></span>
+            <span data-modal-target=".js-form-feed" class="js-modal-trigger fa fa-file-text-o fa-x4"></span>
+
+            {# TODO: <span data-modal-target=".js-mobile-search-button" class="js-toggle fa fa-search-plus fa-x4 hide-if-desktop hide-if-tablet" data-toggle-element=".mobile-search"></span> #}
+
+            <div class="action-search--wrapper hide-if-mobile">
                 <input class="js-search-feed" type="text" name="q" placeholder="Search feeds or add items to checklist" autocomplete="off" />
                 <div style="display: none;" class="js-search-list feed-list feed-list--type-search"></div>
             </div>
-            <span data-modal-target=".js-form-feed" class="js-modal-trigger fa fa-file-text-o fa-x4"></span>
 
             <div style="display: none;" class="screenshot-list js-screenshot-list" data-target="/droplist/"'></div>
         </div>

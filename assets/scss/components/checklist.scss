@@ -33,6 +33,11 @@
       background-color: #fcfcfc;
     }
   }
+
+  &--parent {
+    max-width:700px;
+    margin:50px auto;
+  }
 }
 
 .checklist--form {

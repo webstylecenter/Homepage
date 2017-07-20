@@ -1,5 +1,5 @@
 $(function() {
-    if ($('.screensaver--background').length >0) {
+    if ($('.screensaver--newsticker-title').html().length >0) {
         setInterval(function() {
             setTimeout(refreshPage, 5 * 1000);
         }, 3 * 60 * 1000);
@@ -38,7 +38,7 @@ function updateTime() {
     if (hours < 10) { hours = '0' + hours; }
     if (minutes < 10) { minutes = '0' + minutes; }
 
-    $('.currentTime').html(hours + ':' + minutes);
+    $('.screensaver--time').html(hours + ':' + minutes);
 }
 
 function updateWeather() {

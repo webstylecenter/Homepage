@@ -17,6 +17,7 @@ $(function() {
 var currentNewsItemKey = 0;
 
 function refreshPage() {
+    /** global: Image */
     var newImage = new Image();
     var time = $.now();
     newImage.src = '/screensaver/images/' + time  + '.jpg';
@@ -65,6 +66,7 @@ function showNextNewsItem() {
         currentNewsItemKey = 0;
     }
 
+    /** global: newsItems */
     $('.screensaver--newsticker-source').html(newsItems[currentNewsItemKey][0])
         .attr('class', 'screensaver--newsticker-source')
         .slideToggle('slow')

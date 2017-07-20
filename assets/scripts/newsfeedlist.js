@@ -12,7 +12,7 @@ $(function() {
         requestNewFeedItems();
     });
 
-    $(document).on('click', '.js-open-url', function (event) {
+    $(document).on('click', '.js-open-url', function () {
         openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/');
     });
 
@@ -31,7 +31,7 @@ $(function() {
             $('.js-reload-page').removeClass('hide-if-mobile hide-if-tablet');
             $('.js-return').removeClass('show-if-mobile show-if-tablet');
         })
-        .on ('click', '.js-reload-page', function(e) {
+        .on ('click', '.js-reload-page', function() {
             $('iframe').attr('src', '/welcome/');
             $('.pageLinkToUrl').text('');
             requestNewFeedItems();
@@ -50,7 +50,7 @@ $(function() {
         .on('click', '.js-modal-trigger', function() {
             $($(this).data('modal-target')).modal({fadeDuration:100});
         })
-        .on('click', '.js-form-feed button', function(e) {
+        .on('click', '.js-form-feed button', function() {
             $.post('/feed/add-item/', $('.js-form-feed').serialize())
                 .done(function(data) {
                     if (data === 'Done') {
@@ -58,14 +58,10 @@ $(function() {
                         requestNewFeedItems();
                     }
                     else {
-                        console.log('done');
-                        console.log(data);
                         alert(data);
                     }
                 })
                 .fail(function(data) {
-                    console.log('fail');
-                    console.log(data);
                     alert(data);
                 });
         });

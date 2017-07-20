@@ -15,7 +15,7 @@ $('.js-more-droplist').on('click', function() {
    window.location.href = '/droplist/all';
 });
 
-$('.content-overlay, .header--bar, .feed-list').on('click', function(e) {
+$('.content-overlay, .header--bar, .feed-list').on('click', function() {
     hideDropList();
 });
 

@@ -44,13 +44,13 @@ $app->get('/feed/refresh/{date}', function($date) use ($app) {
     ]);
 });
 
-$app->get('/feed/page/{number}', function($number) use ($app) {
+$app->get('/feed/page/{startIndex}', function($startIndex) use ($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
     return $app['twig']->render('home/newsfeed.html.twig', [
-        'feedItems'=> $feedService->getFeedItems(50, null, $number),
+        'feedItems'=> $feedService->getFeedItems(50, null, $startIndex),
         'feeds' => $feedService->getFeeds(),
-        'nextPageNumber' => $number + 1,
+        'nextPageNumber' => $startIndex + 1,
         'addToChecklist' => '',
     ]);
 });

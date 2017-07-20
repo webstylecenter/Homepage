@@ -1,6 +1,6 @@
 $(function() {
     // Endless scroll
-    $('.scroll').jscroll({
+    $('.feed-list').jscroll({
         padding: 150,
         nextSelector: 'a.jscroll-next:last',
         contentSelector: '.feed-list-item',

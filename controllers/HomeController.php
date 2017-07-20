@@ -1,6 +1,6 @@
 <?php
 
-$homeController = function() use($app) {
+$app->get('/', function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
     $feedItems = $feedService->getFeedItems();
@@ -25,10 +25,7 @@ $homeController = function() use($app) {
         ],
         'nextPageNumber' => 2,
     ]);
-};
-
-$app->get('/', $homeController);
-$app->get('/m/', $homeController);
+});
 
 $app->get('/offline/', function() use($app) {
     return $app['twig']->render('home/offline.html.twig', [

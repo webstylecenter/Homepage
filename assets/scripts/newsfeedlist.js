@@ -13,6 +13,10 @@ $(function() {
         });
     }
 
+    $('.header--bar').hammer().on("swiperight", function() {
+        $('.js-return').trigger('click');
+    });
+
     $(document).on('click', '.js-reload-page', function (event) {
         event.preventDefault();
         requestNewFeedItems();

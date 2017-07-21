@@ -7,6 +7,12 @@ $(function() {
         callback: function() {}
     });
 
+    if (window.history && window.history.pushState) {
+        $(window).on('popstate', function() {
+            $('.js-return').trigger('click');
+        });
+    }
+
     $(document).on('click', '.js-reload-page', function (event) {
         event.preventDefault();
         requestNewFeedItems();
@@ -21,6 +27,7 @@ $(function() {
         $('.feed-list-item').removeClass('feed-list-item--state-selected');
 
         openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/');
+        window.history.pushState('forward', null, './#' + $.now());
 
     })
         .on('click', '.js-return', function (e) {
@@ -30,6 +37,7 @@ $(function() {
             $('.content').hide();
             $('.js-reload-page').removeClass('hide-if-mobile hide-if-tablet');
             $('.js-return').removeClass('show-if-mobile show-if-tablet');
+            window.history.pushState('backward', null, '/#' + $.now());
         })
         .on ('click', '.js-reload-page', function() {
             $('iframe').attr('src', '/welcome/');

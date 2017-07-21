@@ -41,11 +41,13 @@ $(function() {
             $('.content').hide();
             $('.js-reload-page').removeClass('hide-if-mobile hide-if-tablet');
             $('.js-return').removeClass('show-if-mobile show-if-tablet');
+            $('.js-copy-to-clipboard').removeClass('show-if-mobile');
             window.history.pushState('backward', null, '/#' + $.now());
+
         })
         .on ('click', '.js-reload-page', function() {
             $('iframe').attr('src', '/welcome/');
-            $('.pageLinkToUrl').text('');
+            $('.header--bar-navigation a').text('').attr('data-clipboard-text', '');
             requestNewFeedItems();
         })
         .on('click', '.pin', function(e) {
@@ -81,6 +83,22 @@ $(function() {
         $('.js-action-feed-list-swipe').hammer().on("swiperight", function() {
             $(this).find('.pin').trigger('click');
         });
+
+    var clipboard = new Clipboard('.js-copy-to-clipboard');
+
+    clipboard.on('success', function(e) {
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+
+        e.clearSelection();
+    });
+
+    clipboard.on('error', function(e) {
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+    });
+
 });
 
 function requestNewFeedItems() {
@@ -99,6 +117,7 @@ function openPage(url) {
     $('.js-return').addClass('show-if-mobile show-if-tablet');
 
     $('iframe').attr('src', url);
-    $('.pageLinkToUrl').text(url).attr('href', url);
+    $('.header--bar-navigation a').text(url).attr('href', url);
+    $('.js-copy-to-clipboard').attr('data-clipboard-text', url).addClass('show-if-mobile');
 }
 

@@ -13,6 +13,10 @@
 
   .fa {
     font-size: 1.5em;
+
+    @include  respond-to('mobile') {
+      font-size:1.8em;
+    }
   }
 
   > div {

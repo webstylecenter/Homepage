@@ -1,0 +1,17 @@
+.footer--bar {
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color:whitesmoke;
+  color:gray;
+  border:1px solid gray;
+  text-align: center;
+  font-size:24pt;
+  padding:12px 0 20px 0;
+
+  span {
+    margin:0 30px;
+    display:inline-block;
+  }
+}

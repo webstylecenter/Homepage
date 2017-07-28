@@ -4,7 +4,11 @@ $(function() {
         padding: 150,
         nextSelector: 'a.jscroll-next:last',
         contentSelector: '.feed-list-item',
-        callback: function() {}
+        callback: function() {
+            $('.jscroll-added:last-of-type .js-action-feed-list-swipe').hammer().on("swiperight", function() {
+                $(this).find('.pin').trigger('click');
+            });
+        }
     });
 
     if (window.history && window.history.pushState) {
@@ -20,13 +24,11 @@ $(function() {
     $(document).on('click', '.js-reload-page', function (event) {
         event.preventDefault();
         requestNewFeedItems();
-    });
-
-    $(document).on('click', '.js-open-url', function () {
+    })
+        .on('click', '.js-open-url', function () {
         openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/');
-    });
-
-    $(document).on('click', '.js-action-feed-list-click', function() {
+    })
+        .on('click', '.js-action-feed-list-click', function() {
         $(this).addClass('animated pulse feed-list-item--state-selected');
         $('.feed-list-item').removeClass('feed-list-item--state-selected');
 
@@ -42,6 +44,7 @@ $(function() {
             $('.js-reload-page').removeClass('hide-if-mobile hide-if-tablet');
             $('.js-return').removeClass('show-if-mobile show-if-tablet');
             $('.js-copy-to-clipboard').removeClass('show-if-mobile show-if-tablet');
+            $('.js-open-new-window').removeClass('show-if-mobile show-if-tablet');
             window.history.pushState('forward', null, '/#' + $.now());
 
         })
@@ -78,11 +81,14 @@ $(function() {
                 .fail(function(data) {
                     alert(data);
                 });
+        })
+        .on('click', '.js-open-new-window', function() {
+            window.open($('.header--bar-navigation a').attr('href'));
         });
 
-        $('.js-action-feed-list-swipe').hammer().on("swiperight", function() {
-            $(this).find('.pin').trigger('click');
-        });
+    $('.js-action-feed-list-swipe').hammer().on("swiperight", function() {
+        $(this).find('.pin').trigger('click');
+    });
 
     /** global: Clipboard */
     var clipboard = new Clipboard('.js-copy-to-clipboard');
@@ -120,5 +126,6 @@ function openPage(url) {
     $('iframe').attr('src', url);
     $('.header--bar-navigation a').text(url).attr('href', url);
     $('.js-copy-to-clipboard').attr('data-clipboard-text', url).addClass('show-if-mobile show-if-tablet');
+    $('.js-open-new-window').addClass('show-if-mobile show-if-tablet');
 }
 

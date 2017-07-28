@@ -1,6 +1,8 @@
 $(function() {
     $('.checklist--form input[type="button"]').on('click', function() {
-        postToChecklist({item: $('.checklist--form input[type="text"]').val()});
+        if ($('.checklist--form input[type="text"]').val()) {
+            postToChecklist({item: $('.checklist--form input[type="text"]').val()});
+        }
     });
 
     $('.checklist--form input[type="text"]').keypress(function(e) {

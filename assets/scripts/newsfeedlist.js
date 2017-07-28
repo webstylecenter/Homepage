@@ -42,7 +42,7 @@ $(function() {
             $('.js-reload-page').removeClass('hide-if-mobile hide-if-tablet');
             $('.js-return').removeClass('show-if-mobile show-if-tablet');
             $('.js-copy-to-clipboard').removeClass('show-if-mobile');
-            window.history.pushState('backward', null, '/#' + $.now());
+            window.history.pushState('forward', null, '/#' + $.now());
 
         })
         .on ('click', '.js-reload-page', function() {

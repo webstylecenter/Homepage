@@ -1,5 +1,5 @@
 $(function() {
-    $('.addedLinkItem').on('click', function() {
+    $(document).on('click', '.widget-custom-item', function() {
         var url = $(this).data('url');
         if (url === '') { url = '/nourl/'; }
 

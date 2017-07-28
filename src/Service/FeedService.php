@@ -39,6 +39,10 @@ class FeedService
     public function import()
     {
         foreach ($this->getFeeds() as $feed) {
+            if (!$feed->getFeedUrl()) {
+                continue;
+            }
+
             foreach ($this->read($feed) as $feedItem) {
                 $this->importFeedItem($feed, $feedItem);
             }

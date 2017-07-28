@@ -1,5 +1,5 @@
 $(function() {
-    if ($('.screensaver--newsticker-title').html().length >0) {
+    if ($('.screensaver--newsticker-title').html()) {
         setInterval(function() {
             setTimeout(refreshPage, 5 * 1000);
         }, 3 * 60 * 1000);

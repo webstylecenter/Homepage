@@ -41,7 +41,7 @@ $(function() {
             $('.content').hide();
             $('.js-reload-page').removeClass('hide-if-mobile hide-if-tablet');
             $('.js-return').removeClass('show-if-mobile show-if-tablet');
-            $('.js-copy-to-clipboard').removeClass('show-if-mobile');
+            $('.js-copy-to-clipboard').removeClass('show-if-mobile show-if-tablet');
             window.history.pushState('forward', null, '/#' + $.now());
 
         })
@@ -119,6 +119,6 @@ function openPage(url) {
 
     $('iframe').attr('src', url);
     $('.header--bar-navigation a').text(url).attr('href', url);
-    $('.js-copy-to-clipboard').attr('data-clipboard-text', url).addClass('show-if-mobile');
+    $('.js-copy-to-clipboard').attr('data-clipboard-text', url).addClass('show-if-mobile show-if-tablet');
 }
 

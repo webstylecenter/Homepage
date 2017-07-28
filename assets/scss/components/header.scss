@@ -63,14 +63,9 @@
   }
 
   &-navigation {
-    display: inline-block;
     font-style: italic;
     color: gray;
-
-    @include respond-to(desktop) {
-      margin-left: 280px;
-    }
-
+    margin-left: 280px;
     a {
       color: gray;
       display: none;

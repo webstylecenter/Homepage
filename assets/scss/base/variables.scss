@@ -5,7 +5,7 @@ $sidebar-width: 450px;
 
 $max-width-mobile: 480px;
 $min-width-tablet: $max-width-mobile + 1px;
-$max-width-tablet: 780px;
+$max-width-tablet: 1050px;
 $min-width-desktop: $max-width-tablet + 1px;
 
 @mixin respond-to($media) {

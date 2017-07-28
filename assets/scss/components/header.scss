@@ -15,6 +15,13 @@
     top:inherit;
     bottom:0;
     border-top:1px solid gray;
+    font-size:1.8em;
+    padding:12px 0 20px 0;
+    height:$footer-height;
+
+    span {
+      margin:0 30px;
+    }
   }
 
   .fa {
@@ -33,6 +40,10 @@
     .title {
       padding-top: 5px;
 
+      @include  respond-to('mobile') {
+        padding-top:0;
+      }
+
       &--back {
         display: none;
       }
@@ -41,6 +52,10 @@
   &-actions {
     float: right;
     color: #3e4143;
+
+    @include  respond-to('mobile') {
+      color:gray;
+    }
 
     span {
       display: inline-block;

@@ -45,6 +45,7 @@ $(function() {
             $('.js-return').removeClass('show-if-mobile show-if-tablet');
             $('.js-copy-to-clipboard').removeClass('show-if-mobile show-if-tablet');
             $('.js-open-new-window').removeClass('show-if-mobile show-if-tablet');
+            $('.header--bar').removeClass('show-if-mobile');
             window.history.pushState('forward', null, '/#' + $.now());
 
         })
@@ -122,6 +123,7 @@ function openPage(url) {
     $('.content').show();
     $('.js-reload-page').addClass('hide-if-mobile hide-if-tablet');
     $('.js-return').addClass('show-if-mobile show-if-tablet');
+    $('.header--bar').addClass('show-if-mobile');
 
     $('iframe').attr('src', url);
     $('.header--bar-navigation a').text(url).attr('href', url);

@@ -5,6 +5,11 @@
   bottom: 0;
   left: 0;
 
+  @include respond-to('mobile') {
+    top:0;
+    bottom:$header-height;
+  }
+
   &--container-overlay {
     position: relative;
     width: 100%;

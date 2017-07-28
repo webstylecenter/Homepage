@@ -11,6 +11,12 @@
   top: 0;
   z-index: 900;
 
+  @include  respond-to('mobile') {
+    top:inherit;
+    bottom:0;
+    border-top:1px solid gray;
+  }
+
   .fa {
     font-size: 1.5em;
 

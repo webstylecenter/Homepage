@@ -77,6 +77,12 @@ $(function() {
         })
         .on('click', '.js-open-new-window', function() {
             window.open($('.header--bar-navigation a').attr('href'));
+        })
+        .on('click', '.js-hide', function() {
+            $($(this).data('target')).hide();
+        })
+        .on('click', '.js-show', function() {
+            $($(this).data('target')).show();
         });
 
     $('.js-action-feed-list-swipe').hammer().on("swiperight", function() {

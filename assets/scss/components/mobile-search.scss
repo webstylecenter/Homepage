@@ -1,0 +1,28 @@
+.mobile-search {
+  position: fixed;
+  bottom: $footer-height;
+  left:0;
+  right:0;
+  border-top:1px solid gray;
+  background-color: white;
+  z-index:99999;
+  display:none;
+
+  input {
+    padding:10px 10px;
+    font-size:12pt;
+    width:90vw;
+  }
+
+  span {
+    margin-left:10px;
+  }
+
+  &--results {
+    opacity: 1;
+    position: fixed;
+    top:0;
+    width:100%;
+    bottom:($footer-height + 42);
+  }
+}

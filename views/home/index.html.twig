@@ -43,11 +43,16 @@
         </div>
     </section>
 
+    <div class="mobile-search">
+        <input type="text" placeholder="Search feeds" class="js-search-feed" autocomplete="off" /> <span class="fa fa-close js-hide" data-target=".mobile-search"></span>
+    </div>
+    <div style="display: none;" class="js-search-list feed-list feed-list--type-search hide-if-tablet hide-if-desktop mobile-search--results"></div>
+
     <footer class="footer--bar hide-if-tablet hide-if-desktop">
         <span data-modal-target=".js-form-feed" class="js-modal-trigger fa fa-file-text-o fa-x4"></span>
         <span data-url="/checklist/" class="js-open-url fa fa-check fa-x4"></span>
         <span class="fa fa-dropbox js-open-url" data-url="/droplist/15"></span>
-        <span data-modal-target=".js-mobile-search-button" class="js-toggle fa fa-search-plus fa-x4 hide-if-desktop hide-if-tablet" data-toggle-element=".mobile-search"></span>
+        <span data-modal-target=".js-mobile-search-button" class="js-show fa fa-search-plus fa-x4 hide-if-desktop hide-if-tablet" data-target=".mobile-search"></span>
     </footer>
 
     {% include 'modals/create.html.twig' %}

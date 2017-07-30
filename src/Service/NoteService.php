@@ -32,19 +32,55 @@ class NoteService
     }
 
     /**
+     * @return array
+     */
+    public function loadNotes()
+    {
+        $notesInfo = $this->database->fetchAll('SELECT * FROM notes ORDER BY `position` ASC');
+        $notes = [];
+
+        foreach ($notesInfo as $noteInfo) {
+            $notes[] = $this->toEntity($noteInfo);
+        }
+
+        return $notes;
+    }
+
+    /**
      * @param null|integer $id
+     * @param string $name
      * @param string $note
      * @param integer|null $position
      */
-    public function saveNote($id, $note, $position = null)
+    public function saveNote($id, $name, $note, $position = null)
     {
         $persist = $id === null ? 'insert' : 'update';
         $identifier = $id !== null ? ['id' => $id] : [];
 
         $this->database->$persist('notes', [
+            'name' => $name,
             'note' => $note,
             'position' => $position,
         ], $identifier);
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastNoteId()
+    {
+        $notesInfo = $this->database->fetchAll('SELECT id FROM notes ORDER BY id DESC LIMIT 1');
+        return $notesInfo[0]['id'];
+    }
+
+    /**
+     * @param $id
+     *
+     * @return bool
+     */
+    public function removeNote($id)
+    {
+        return $this->database->delete('notes', ['id'=>$id], [\PDO::PARAM_INT]);
     }
 
     /**
@@ -53,6 +89,6 @@ class NoteService
      */
     protected function toEntity(array $data)
     {
-        return new Note($data['id'], $data['note'], $data['position']);
+        return new Note($data['id'], $data['name'], $data['note'], $data['position']);
     }
 }

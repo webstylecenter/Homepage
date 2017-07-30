@@ -28,7 +28,7 @@ $app->match('/welcome/', function() use($app) {
             'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
         ],
         'feedItemTotals'=> $feedService->getFeedItemTotals(),
-        'note'=> $noteService->loadNote(),
+        'notes'=> $noteService->loadNotes(),
         'addedLinks' => $feedService->getFeedItemsBySites([0]),
         'todos' => $todos
     ]);

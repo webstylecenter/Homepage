@@ -84,6 +84,7 @@ gulp.task('clean', function() {
 gulp.task('watch', function() {
     gulp.watch('assets/scripts/*.js', ['lint', 'scripts:vendor', 'scripts:app']);
     gulp.watch('assets/scss/*/*.scss', ['stylesheets:vendor','stylesheets:app']);
+    gulp.watch('assets/scss/*/*/*.scss', ['stylesheets:vendor','stylesheets:app']);
     gulp.watch('assets/scss/*.scss', ['stylesheets:vendor','stylesheets:app']);
 });
 

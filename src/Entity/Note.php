@@ -14,6 +14,11 @@ class Note
     protected $id;
 
     /**
+     * @var string $name
+     */
+    protected $name;
+
+    /**
      * @var string $note
      */
     protected $note;
@@ -25,11 +30,13 @@ class Note
 
     /**
      * @param $id
+     * @param $name
      * @param $note
      * @param $position
      */
-    public function __construct($id = null, $note = null, $position = null) {
+    public function __construct($id = null, $name = null, $note = null, $position = null) {
         $this->id = $id;
+        $this->name = $name;
         $this->note = $note;
         $this->position = $position;
     }
@@ -46,6 +53,22 @@ class Note
      */
     public function setId($id) {
         $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**

@@ -97,7 +97,6 @@ function removeNote(id) {
             data: { id: id}
         })
             .done(function() {
-                console.log("SEL" + '.note-selector-' + id);
                 $('.note-selector-' + id).hide();
                 $('.note-data-' + id).hide();
             });

@@ -28,5 +28,5 @@ $app->post('/note/remove/', function() use($app) {
         }
     }
 
-   return 'Error: No ID set';
+    return 'Error: No ID set';
 });

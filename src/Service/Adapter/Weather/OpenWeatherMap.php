@@ -57,18 +57,7 @@ class OpenWeatherMap implements WeatherAdapterInterface
     public function updateForecast()
     {
         $forecastData = $this->downloadForecast();
-        $weatherForecastList = new WeatherForecastList();
-        $weatherForecastList->setCurrent($this->mapForecast($forecastData['weather']));
-
-        foreach ($forecastData['forecast']['list'] as $item) {
-            $date = new \DateTime($item['dt_txt']);
-
-            if ($date->format('H') !== '15') {
-                continue;
-            }
-
-            $weatherForecastList->addUpcoming($this->mapForecast($item));
-        }
+        $weatherForecastList = $this->createForecastList($forecastData['weather'], $forecastData['forecast']);
 
         $this->database->update(
             'cache', [
@@ -98,6 +87,29 @@ class OpenWeatherMap implements WeatherAdapterInterface
             'weather' => $weather,
             'forecast' => $forecast
         ];
+    }
+
+    /**
+     * @param $weather
+     * @param $forecast
+     *
+     * @return WeatherForecastList
+     */
+    protected function createForecastList($weather, $forecast)
+    {
+        $weatherForecastList = new WeatherForecastList();
+        $weatherForecastList->setCurrent($this->mapForecast($weather));
+
+        foreach ($forecast['list'] as $item) {
+            $date = new \DateTime($item['dt_txt']);
+
+            if ($date->format('H') !== '15') {
+                continue;
+            }
+
+            $weatherForecastList->addUpcoming($this->mapForecast($item));
+        }
+        return $weatherForecastList;
     }
 
     /**

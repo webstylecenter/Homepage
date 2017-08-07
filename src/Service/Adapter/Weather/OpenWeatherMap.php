@@ -56,7 +56,19 @@ class OpenWeatherMap implements WeatherAdapterInterface
      */
     public function updateForecast()
     {
-        $weatherForecastList = $this->downloadForecast();
+        $forecastData = $this->downloadForecast();
+        $weatherForecastList = new WeatherForecastList();
+        $weatherForecastList->setCurrent($this->mapForecast($forecastData['weather']));
+
+        foreach ($forecastData['forecast']['list'] as $item) {
+            $date = new \DateTime($item['dt_txt']);
+
+            if ($date->format('H') !== '15') {
+                continue;
+            }
+
+            $weatherForecastList->addUpcoming($this->mapForecast($item));
+        }
 
         $this->database->update(
             'cache', [
@@ -70,7 +82,7 @@ class OpenWeatherMap implements WeatherAdapterInterface
     }
 
     /**
-     * @return WeatherForecastList
+     * @return array
      * @throws \Exception
      */
     protected function downloadForecast()
@@ -82,20 +94,10 @@ class OpenWeatherMap implements WeatherAdapterInterface
             throw new \Exception('Weatherdata could not be updated. Failed to load API');
         }
 
-        $weatherForecastList = new WeatherForecastList();
-        $weatherForecastList->setCurrent($this->mapForecast($weather));
-
-        foreach ($forecast['list'] as $item) {
-            $date = new \DateTime($item['dt_txt']);
-
-            if ($date->format('H') !== '15') {
-                continue;
-            }
-
-            $weatherForecastList->addUpcoming($this->mapForecast($item));
-        }
-
-        return $weatherForecastList;
+        return [
+            'weather' => $weather,
+            'forecast' => $forecast
+        ];
     }
 
     /**

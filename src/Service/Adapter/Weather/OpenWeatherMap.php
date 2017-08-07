@@ -53,9 +53,27 @@ class OpenWeatherMap implements WeatherAdapterInterface
 
     /**
      * @return string
-     * @throws \Exception
      */
     public function updateForecast()
+    {
+        $weatherForecastList = $this->downloadForecast();
+
+        $this->database->update(
+            'cache', [
+                'data'=> serialize($weatherForecastList),
+                'updated_at'=> date('y-m-d H:i:s')
+            ], [
+                'cache_id' => 'weather_forecast'
+            ]
+        );
+        return 'Done';
+    }
+
+    /**
+     * @return WeatherForecastList
+     * @throws \Exception
+     */
+    protected function downloadForecast()
     {
         $weather = json_decode(@file_get_contents($this->weatherUrl), true);
         $forecast = json_decode(@file_get_contents($this->forecastUrl), true);
@@ -77,15 +95,7 @@ class OpenWeatherMap implements WeatherAdapterInterface
             $weatherForecastList->addUpcoming($this->mapForecast($item));
         }
 
-        $this->database->update(
-            'cache', [
-                'data'=> serialize($weatherForecastList),
-                'updated_at'=> date('y-m-d H:i:s')
-            ], [
-                'cache_id' => 'weather_forecast'
-            ]
-        );
-        return 'Done';
+        return $weatherForecastList;
     }
 
     /**

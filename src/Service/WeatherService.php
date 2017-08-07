@@ -2,6 +2,7 @@
 
 namespace Service;
 
+use Doctrine\DBAL\Connection;
 use Service\Adapter\Weather\WeatherAdapterInterface;
 
 /**
@@ -16,11 +17,18 @@ class WeatherService
     protected $weatherAdapter;
 
     /**
-     * @param WeatherAdapterInterface $weatherAdapter
+     * @var Connection
      */
-    public function __construct(WeatherAdapterInterface $weatherAdapter)
+    protected $database;
+
+    /**
+     * @param WeatherAdapterInterface $weatherAdapter
+     * @param Connection $database
+     */
+    public function __construct(WeatherAdapterInterface $weatherAdapter, Connection $database)
     {
         $this->weatherAdapter = $weatherAdapter;
+        $this->database = $database;
     }
 
     /**
@@ -29,5 +37,13 @@ class WeatherService
     public function getForecastList()
     {
         return $this->weatherAdapter->getForecast();
+    }
+
+    /**
+     * @return string
+     */
+    public function updateForecast()
+    {
+        return $this->weatherAdapter->updateForecast();
     }
 }

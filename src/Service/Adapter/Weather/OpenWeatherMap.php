@@ -2,8 +2,10 @@
 
 namespace Service\Adapter\Weather;
 
+use Doctrine\DBAL\Connection;
 use Entity\WeatherForecast;
 use Entity\WeatherForecastList;
+use function GuzzleHttp\Promise\exception_for;
 
 /**
  * Class OpenWeatherMap
@@ -24,14 +26,21 @@ class OpenWeatherMap implements WeatherAdapterInterface
     protected $forecastUrl;
 
     /**
-     * @param array $config
+     * @var Connection
      */
-    public function __construct(array $config)
+    protected $database;
+
+    /**
+     * @param array $config
+     * @param Connection $database
+     */
+    public function __construct(array $config, Connection $database)
     {
         $key = $config['openWeatherMap']['key'];
         $location = $config['openWeatherMap']['location'];
         $this->weatherUrl = self::API_URL_PREFIX . 'weather?q=' . $location . '&APPID=' . $key . '&units=metric';
         $this->forecastUrl = self::API_URL_PREFIX . 'forecast?q=' . $location . '&APPID=' . $key . '&units=metric';
+        $this->database = $database;
     }
 
     /**
@@ -39,8 +48,21 @@ class OpenWeatherMap implements WeatherAdapterInterface
      */
     public function getForecast()
     {
-        $weather = json_decode(file_get_contents($this->weatherUrl), true);
-        $forecast = json_decode(file_get_contents($this->forecastUrl), true);
+        return unserialize($this->database->fetchAll('SELECT data FROM cache WHERE cache_id = "weather_forecast" LIMIT 1')[0]['data']);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function updateForecast()
+    {
+        $weather = json_decode(@file_get_contents($this->weatherUrl), true);
+        $forecast = json_decode(@file_get_contents($this->forecastUrl), true);
+
+        if (!is_array($weather) || !is_array($forecast)) {
+            throw new \Exception('Weatherdata could not be updated. Failed to load API');
+        }
 
         $weatherForecastList = new WeatherForecastList();
         $weatherForecastList->setCurrent($this->mapForecast($weather));
@@ -55,7 +77,15 @@ class OpenWeatherMap implements WeatherAdapterInterface
             $weatherForecastList->addUpcoming($this->mapForecast($item));
         }
 
-        return $weatherForecastList;
+        $this->database->update(
+            'cache', [
+                'data'=> serialize($weatherForecastList),
+                'updated_at'=> date('y-m-d H:i:s')
+            ], [
+                'cache_id' => 'weather_forecast'
+            ]
+        );
+        return 'Done';
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-$app->match('/weather/{type}/', function($type) use($app) {
+$app->get('/weather/{type}/', function($type) use($app) {
 
     /** @var \Service\WeatherService $weatherService */
     $weatherService = $app['weatherService'];
@@ -12,5 +12,11 @@ $app->match('/weather/{type}/', function($type) use($app) {
     return $app['twig']->render('weather/' . $type . '.html.twig', [
         'forecast' => $weatherService->getForecastList(),
     ]);
+});
+
+$app->get('/weather/update', function() use($app) {
+    /** @var \Service\WeatherService $weatherService */
+    $weatherService = $app['weatherService'];
+    return $weatherService->updateForecast();
 });
 

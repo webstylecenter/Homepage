@@ -19,7 +19,7 @@ class WeatherServiceProvider implements ServiceProviderInterface
     public function register(Container $app)
     {
         $app['weatherService'] = function() use ($app) {
-            return new WeatherService(new $app['weather.adapter']($app['config']));
+            return new WeatherService(new $app['weather.adapter']($app['config'], $app['db']), $app['db']);
         };
     }
 }

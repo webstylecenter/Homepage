@@ -26,7 +26,7 @@
     width: 30%;
     display: inline-block;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     float: left;
     margin: 10px 0 0 10px;
 
@@ -71,6 +71,9 @@
     }
 
     textarea {
+      overflow-x:hidden;
+      overflow-y:auto;
+
       &:focus {
         background-color: rgba(256, 256, 256, 0.3);
         outline-width: 0;

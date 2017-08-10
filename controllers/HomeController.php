@@ -1,6 +1,10 @@
 <?php
 
 $app->get('/', function() use($app) {
+
+    /** @var \Service\WeatherService $weatherService */
+    $weatherService = $app['weatherService'];
+
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
     $feedItems = $feedService->getFeedItems();
@@ -17,6 +21,7 @@ $app->get('/', function() use($app) {
 
     return $app['twig']->render($templateFolder . '/index.html.twig', [
         'bodyClass' => $bodyClass,
+        'forecast' => $weatherService->getForecastList(),
         'feedItems'=> $feedItems,
         'feeds' => $feedService->getFeeds(),
         'lastUpdate' => [

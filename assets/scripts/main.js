@@ -20,6 +20,10 @@ $(function() {
        $(this).parent().find('textarea').trigger('blur');
     });
 
+    setInterval(function() {
+        $('.js-update-weahter-icon').load('/weather/icon/');
+    }, 5 * 60 * 1000);
+
     $(document).on('click', '.js-open-note', function() {
         $('.widget-note--notes > div').hide();
         $('.note-data-' + $(this).data('note-id')).show();

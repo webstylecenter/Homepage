@@ -97,4 +97,14 @@
       }
     }
   }
+
+  &-weather-icon {
+    display:inline-block;
+
+    .temperature {
+      position:relative;
+      top:-1px;
+      left:10px;
+    }
+  }
 }

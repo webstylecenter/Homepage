@@ -23,6 +23,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), [
 
 $app['twig'] = $app->extend('twig', function(\Twig_Environment $twig, $app) {
     $twig->addExtension(new Twig_Extensions_Extension_Text());
+    $twig->addExtension(new Twig_Extensions_Extension_Date());
     return $twig;
 });
 

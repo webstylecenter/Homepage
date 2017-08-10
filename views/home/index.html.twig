@@ -2,12 +2,15 @@
 
 {% block title %}Homepage{% endblock %}
 
+{% set difference = date('2017-02-04'|date('Y/m/d')).diff(date('now'|date('Y/m/d'))) %}
+{% set leftDays = difference.days %}
+
 {% block body %}
     <header class="header--bar hide-if-mobile">
         <div class="header--bar-site">
             <div class="title">
                 <a href="/" class="title--back noselect js-return"><span class="fa fa-chevron-circle-left"></span></a>
-                <a href="/" class="js-reload-page">Peter van Dam's Homepage</a>
+                <a href="/" class="js-reload-page">Peter van Dam's Homepage {{ leftDays }}</a>
             </div>
         </div>
         <div class="header--bar-navigation hide-if-tablet hide-if-mobile">

@@ -22,6 +22,7 @@ $(function() {
 
     setInterval(function() {
         $('.js-update-weahter-icon').load('/weather/icon/');
+        $('.js-weather-radar').attr('src', 'https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512&time=' + Math.random());
     }, 5 * 60 * 1000);
 
     $(document).on('click', '.js-open-note', function() {
@@ -30,6 +31,14 @@ $(function() {
     })
         .on('click', '.js-remove-note', function() {
             removeNote($(this).data('id'));
+        })
+        .on('click', '.js-update-weather-icon', function() {
+            $('.content-overlay').fadeIn();
+            $('.js-show-weather-radar').slideDown();
+        })
+        .on('click', '.content-overlay, .feed-list', function() {
+            $('.content-overlay').fadeOut();
+            $('.js-show-weather-radar').slideUp();
         });
 
     $('.specialTxt').each(function() {

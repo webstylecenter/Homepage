@@ -59,6 +59,10 @@
 
     span {
       display: inline-block;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .action-search--wrapper {
@@ -106,5 +110,16 @@
       top:-1px;
       left:10px;
     }
+  }
+
+  &-weather-radar {
+    z-index:9999999;
+    position: fixed;
+    border:1px solid gray;
+    box-shadow: 2px 2px 10px #2b2b2b;
+    background-color:whitesmoke;
+    padding:3px 3px 0 3px;
+    margin-left:-200px;
+    display:none;
   }
 }

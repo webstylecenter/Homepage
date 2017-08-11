@@ -5,6 +5,7 @@ $color3 : #a9a9a9;
 
 .loading-screen {
 
+  display:block;
 
   &--top {
     position:fixed;
@@ -106,16 +107,6 @@ $color3 : #a9a9a9;
         bottom: 50%;
         right: 50%;
         @include animation(outline 4s linear infinite);
-        &:before{
-          content: "";
-          display: block;
-          border: solid 5px #fff;
-          width: 200%;
-          height: 200%;
-          border-radius: 50%;
-          @include transform(skewX(-80deg));
-          @include animation(outlineBefore 4s linear infinite);
-        }
       }
     }
   }
@@ -135,32 +126,6 @@ $color3 : #a9a9a9;
     }
     100%{
       @include transform(rotate(2160deg) skewX(80deg));
-    }
-  }
-
-  @include keyframes(outlineBefore){
-    0%{
-      @include transform(skewX(-80deg));
-      border: solid 5px #ffffff;
-    }
-    25%{
-      @include transform(skewX(-15deg));
-      border: solid 5px #ffffff;
-    }
-    49%{
-      border: solid 5px #ffffff;
-    }
-    50%{
-      @include transform(skewX(-40deg));
-      border: solid 5px $color3;
-    }
-    75%{
-      @include transform(skewX(-60deg));
-      border: solid 5px $color3;
-    }
-    100%{
-      @include transform(skewX(-80deg));
-      border: solid 5px $color3;
     }
   }
 

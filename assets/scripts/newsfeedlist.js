@@ -32,7 +32,7 @@ $(function() {
         .on('click', '.js-return', function (e) {
             e.preventDefault();
 
-            $('.content iframe').prop('src', 'about:blank');
+            $('.content iframe').prop('src', '/welcome/');
             $('.content').hide();
             $('.js-reload-page').removeClass('hide-if-mobile hide-if-tablet');
             $('.js-return').removeClass('show-if-mobile show-if-tablet');

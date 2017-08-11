@@ -17,7 +17,13 @@ $app->match('/welcome/', function() use($app) {
 
     $device = new Mobile_Detect();
     if ($device->isMobile()) {
-        return 'Welcome mobile user!';
+        return $app['twig']->render('welcome/mobile.html.twig', [
+            'bodyClass' => 'loading-screen',
+            'lastUpdate' => [
+                'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
+                'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
+            ]
+        ]);
     }
 
     return $app['twig']->render('welcome/index.html.twig', [

@@ -17,6 +17,9 @@ $app->get('/', function() use($app) {
         $bodyClass = 'homepage';
     }
 
+    /** @var $device */
+    $device = new Mobile_Detect();
+
     $feedService->markAllViewed();
 
     return $app['twig']->render($templateFolder . '/index.html.twig', [
@@ -24,6 +27,7 @@ $app->get('/', function() use($app) {
         'forecast' => $weatherService->getForecastList(),
         'feedItems'=> $feedItems,
         'feeds' => $feedService->getFeeds(),
+        'device' => $device,
         'lastUpdate' => [
             'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
             'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),

@@ -1,8 +1,6 @@
 {% set hadNewItems = false %}
 {% set showedEarlierTodayMessage = false %}
 {% set hadYesterdayBefore = false %}
-{% set yesterdayDate = "-1 days"|date('Y-m-d') %}
-{% set isFirst = true %}
 
 {% if addToChecklist != '' and nextPageNumber == 1 %}
     <div class="feed-list-item--state-button">
@@ -11,17 +9,16 @@
 {% endif %}
 
 {% for item in feedItems %}
-
     {% if not item.viewed %}
         {% set hadNewItems = true %}
     {% endif %}
 
-    {% if item.viewed and hadNewItems and not showedEarlierTodayMessage and not isFirst %}
+    {% if item.viewed and hadNewItems and not showedEarlierTodayMessage and loop.index > 1 %}
         <div class="feed-list--separator">
             Earlier today
         </div>
         {% set showedEarlierTodayMessage = true %}
-    {% elseif item.viewed and not hadYesterdayBefore and item.dateAdded|date('Y-m-d') == yesterdayDate and not isFirst %}
+    {% elseif item.viewed and not hadYesterdayBefore and item.dateAdded|date('Y-m-d') == "yesterday"|date('Y-m-d') and loop.index > 1 %}
         <div class="feed-list--separator">
             Yesterday
         </div>
@@ -35,7 +32,6 @@
         <p class="description">{{ item.description|truncate(120, true) }}</p>
     </div>
 
-    {% set isFirst = false %}
 {% endfor %}
 
 {% if feedItems|length > 0 and nextPageNumber != 50000 %}

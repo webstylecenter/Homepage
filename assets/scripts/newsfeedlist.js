@@ -65,7 +65,6 @@ $(function() {
                 .done(function(data) {
                     if (data === 'Done') {
                         $.modal.close();
-                        requestNewFeedItems();
                     }
                     else {
                         alert(data);

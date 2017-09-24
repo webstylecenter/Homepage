@@ -47,7 +47,8 @@ class MetaService
             ]
         ];
 
-        $html = file_get_contents($url, false, stream_context_create($options));
+        $html = '';
+        $html .= @file_get_contents($url, false, stream_context_create($options));
         return @\DOMDocument::loadHTML($html);
     }
 

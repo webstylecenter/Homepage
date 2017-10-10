@@ -103,6 +103,6 @@ function getDataUri(url, callback) {
         callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
     };
 
-    img.setAttribute('crossOrigin', 'anonymous');
+    image.setAttribute('crossOrigin', 'anonymous');
     image.src = url;
 }

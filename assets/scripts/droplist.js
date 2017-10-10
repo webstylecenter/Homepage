@@ -19,6 +19,10 @@ $('.content-overlay, .feed-list').on('click', function() {
    hideDropList();
 });
 
+$(function() {
+    activateDropListEvents();
+});
+
 function showDropList() {
     $('.js-screenshot-list').slideDown();
     $('.content-overlay').fadeIn();

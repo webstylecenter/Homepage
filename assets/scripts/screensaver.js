@@ -84,25 +84,9 @@ function screenSaverKeyPressHandler() {
     $(window).keypress(function(e) {
         if (e.which === 32) {
             /** global: lastBackgroundUrl */
-            getDataUri(lastBackgroundUrl, function(dataUri) {
-                $.post( "/screensaver/save-image/", { imageData: dataUri } );
-                $('.screensaver--newsticker-source').html('Background image saved!');
-            });
+            window.open(lastBackgroundUrl);
         }
     });
 }
 
-function getDataUri(url, callback) {
-    let image = new Image();
 
-    image.onload = function () {
-        let canvas = document.createElement('canvas');
-        canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
-        canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
-        canvas.getContext('2d').drawImage(this, 0, 0);
-        callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
-    };
-
-    image.setAttribute('crossOrigin', 'anonymous');
-    image.src = url;
-}

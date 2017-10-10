@@ -11,26 +11,20 @@ $(function() {
 
         refreshPage();
         updateWeather();
-        screenSaverKeyPressHandler();
     }
 });
 
 var currentNewsItemKey = 0;
-var lastBackgroundUrl = '';
 
 function refreshPage() {
     /** global: Image */
     var newImage = new Image();
     var time = $.now();
     newImage.src = '/screensaver/images/' + time  + '.jpg';
-    /** global: lastBackgroundUrl */
-    lastBackgroundUrl = '/screensaver/images/' + time  + '.jpg';
     newImage.onload = function() {
         $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")').fadeIn(3000);
         $('.active').fadeOut(3000);
-
         $('.notActive, .active').toggleClass('active notActive');
-
     };
 }
 
@@ -79,14 +73,3 @@ function showNextNewsItem() {
     $('.screensaver--newsticker-title').html(newsItems[currentNewsItemKey][1]).slideToggle('slow');
     $('.screensaver--newsticker-description').html(newsItems[currentNewsItemKey][2]).slideToggle('slow');
 }
-
-function screenSaverKeyPressHandler() {
-    $(window).keypress(function(e) {
-        if (e.which === 32) {
-            /** global: lastBackgroundUrl */
-            window.open(lastBackgroundUrl);
-        }
-    });
-}
-
-

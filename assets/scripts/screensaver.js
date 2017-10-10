@@ -11,16 +11,20 @@ $(function() {
 
         refreshPage();
         updateWeather();
+        screenSaverKeyPressHandler();
     }
 });
 
 var currentNewsItemKey = 0;
+var lastBackgroundUrl = '';
 
 function refreshPage() {
     /** global: Image */
     var newImage = new Image();
     var time = $.now();
     newImage.src = '/screensaver/images/' + time  + '.jpg';
+    /** global: lastBackgroundUrl */
+    lastBackgroundUrl = '/screensaver/images/' + time  + '.jpg';
     newImage.onload = function() {
         $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")').fadeIn(3000);
         $('.active').fadeOut(3000);
@@ -74,4 +78,30 @@ function showNextNewsItem() {
 
     $('.screensaver--newsticker-title').html(newsItems[currentNewsItemKey][1]).slideToggle('slow');
     $('.screensaver--newsticker-description').html(newsItems[currentNewsItemKey][2]).slideToggle('slow');
+}
+
+function screenSaverKeyPressHandler() {
+    $(window).keypress(function(e) {
+        if (e.which === 32) {
+            /** global: lastBackgroundUrl */
+            getDataUri(lastBackgroundUrl, function(dataUri) {
+                $.post( "/screensaver/save-image/", { imageData: dataUri } );
+                $('.screensaver--newsticker-source').html('Background image saved!');
+            });
+        }
+    });
+}
+
+function getDataUri(url, callback) {
+    let image = new Image();
+
+    image.onload = function () {
+        let canvas = document.createElement('canvas');
+        canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+        canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+        canvas.getContext('2d').drawImage(this, 0, 0);
+        callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
+    };
+
+    image.src = url;
 }

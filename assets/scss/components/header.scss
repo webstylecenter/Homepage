@@ -92,12 +92,21 @@
     font-style: italic;
     color: gray;
     margin-left: 280px;
+    max-width: 400px;
+    white-space: nowrap;
+    height: 25px;
+    overflow:hidden;
+
     a {
       color: gray;
       display: none;
 
       @include respond-to(desktop) {
         display: inline;
+      }
+
+      @media only screen and (max-width: 1550px) {
+        display: none;
       }
     }
   }

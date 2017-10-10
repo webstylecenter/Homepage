@@ -6,3 +6,5 @@
 node_modules/
 dist/*
 views/update/
+saved-images/*
+!saved-images/.gitkeep

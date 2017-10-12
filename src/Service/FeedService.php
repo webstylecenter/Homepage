@@ -128,7 +128,7 @@ class FeedService
      */
     public function getFeedItemTotals()
     {
-        return $this->database->fetchAll('SELECT feed,COUNT(*) as count, name FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id GROUP BY feed ORDER BY count DESC;');
+        return $this->database->fetchAll('SELECT feed,COUNT(*) as count, name, feed_data.dateAdded FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id GROUP BY feed ORDER BY count DESC');
     }
 
     public function markAllViewed()

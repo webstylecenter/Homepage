@@ -1,0 +1,122 @@
+.page--settings {
+  &-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('/screensaver/images/Welcome.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+    z-index: -2;
+  }
+
+  &-background--overlay {
+    background-color: rgba(256, 256, 256, 0.6);
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .container {
+    width:80%;
+    margin:auto;
+    padding: 20px;
+  }
+
+  h1 {
+    border-bottom: 1px solid gray;
+    padding-bottom: 20px;
+  }
+
+  input {
+    font-size: 9pt;
+  }
+
+  input[type=text] {
+    background: rgba(0, 0, 0, 0.1);
+    border: 0;
+    padding: 3px;
+    width:300px;
+  }
+
+  input[type=submit] {
+    background: rgba(0, 0, 0, 0.2);
+    border: 0;
+  }
+
+  table {
+    width: 100%;
+
+    td {
+      margin: 0;
+      padding: 5px 10px;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    tr:nth-child(odd) {
+      background-color: rgba(256, 256, 256, 0.2);
+    }
+
+    tr:hover {
+      background-color: rgba(256, 256, 256, 0.8);
+    }
+
+    .feedColor {
+      width: 1%;
+
+      span {
+        width: 10px;
+        height: 10px;
+        display: block;
+        border-radius: 2px;
+      }
+    }
+
+    .feedName {
+      width: 68%;
+
+      span {
+        display: block;
+        color: gray;
+        font-style:italic;
+        overflow:hidden;
+        overflow-wrap: break-word;
+        max-width:400px;
+        white-space:nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .feedAmount {
+      width: 10%;
+      text-align: right;
+    }
+
+    .feedLastUpdate {
+      width: 10%;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .feedActions {
+      width: 10%;
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+
+
+}

@@ -37,16 +37,3 @@ $app->match('/screensaver/images/{file}.jpg', function() use($app) {
 
     exit;
 });
-
-$app->match('/screensaver/save-image/', function() use($app) {
-
-    $imageData = $_POST['imageData'];
-    if (strlen($imageData) > 0) {
-        file_put_contents('saved-images/'.date('Y-m-d-h-i-s').'.jpg', base64_decode($imageData));
-        echo 'Image saved';
-    } else {
-        echo 'Empty image received';
-    }
-
-    exit;
-});

@@ -10,9 +10,6 @@
                 <a href="/" class="js-reload-page">Peter van Dam's Homepage</a>
             </div>
         </div>
-        <div class="header--bar-navigation hide-if-tablet hide-if-mobile">
-            <a href="#" target="_blank"></a>
-        </div>
         <div class="header--bar-actions">
 
             {% if not device.isMobile %}
@@ -46,6 +43,10 @@
 
             <iframe class="content-frame" src="/welcome" sandbox="allow-scripts allow-same-origin allow-forms allow-popups
             allow-pointer-lock allow-modals"></iframe>
+        </div>
+
+        <div class="urlbar show-if-desktop">
+            <a href="/welcome/" target="_blank">/welcome/</a>
         </div>
     </section>
 

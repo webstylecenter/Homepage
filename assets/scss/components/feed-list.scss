@@ -5,6 +5,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
   background: linear-gradient(to bottom, #a1a1a1 0%, #eeeeee 100%);
+  backdrop-filter: blur(10px);
 
   @include respond-to(mobile) {
     width: 100%;

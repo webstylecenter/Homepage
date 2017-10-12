@@ -43,7 +43,7 @@ $(function() {
         })
         .on ('click', '.js-reload-page', function() {
             $('iframe').attr('src', '/welcome/');
-            $('.header--bar-navigation a').text('').attr('data-clipboard-text', '');
+            $('.urlbar a').text('').attr('data-clipboard-text', '');
             requestNewFeedItems();
         })
         .on('click', '.pin', function(e) {
@@ -75,7 +75,7 @@ $(function() {
                 });
         })
         .on('click', '.js-open-new-window', function() {
-            window.open($('.header--bar-navigation a').attr('href'));
+            window.open($('.urlbar a').attr('href'));
         })
         .on('click', '.js-visbility-toggle', function() {
         $($(this).data('target')).toggle();
@@ -121,7 +121,7 @@ function openPage(url) {
     $('.header--bar').addClass('show-if-mobile');
 
     $('iframe').attr('src', url);
-    $('.header--bar-navigation a').text(url).attr('href', url);
+    $('.urlbar a').text(url).attr('href', url);
     $('.js-copy-to-clipboard').attr('data-clipboard-text', url).addClass('show-if-mobile show-if-tablet');
     $('.js-open-new-window').addClass('show-if-mobile show-if-tablet');
 }

@@ -30,6 +30,7 @@
     padding: 6px 10px;
     z-index: 2;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: none;
   }
 }

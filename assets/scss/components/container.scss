@@ -7,7 +7,7 @@
 
   @include respond-to('mobile') {
     top:0;
-    bottom:$footer-height;
+    bottom:0;
   }
 
   &--container-overlay {

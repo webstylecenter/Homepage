@@ -3,7 +3,6 @@
   padding: 5px 20px;
   box-sizing: border-box;
   height: $header-height;
-  background: #eeeeee;
   background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%);
   position: fixed;
   right: 0;
@@ -12,15 +11,17 @@
   z-index: 900;
 
   @include  respond-to('mobile') {
-    top:inherit;
-    bottom:0;
-    border-top:1px solid gray;
-    font-size:1.8em;
-    padding:12px 0 20px 0;
-    height:$footer-height;
+    top: inherit;
+    bottom: 0;
+    border-top: 1px solid gray;
+    font-size: 1.8em;
+    padding: 12px 0 20px 0;
+    height: $footer-height;
+    background: linear-gradient(to bottom,  rgba(256, 256, 256, 0.5) 0%, rgba(77, 77, 77, 0.5) 100%);
+    backdrop-filter: blur(10px);
 
     span {
-      margin:0 30px;
+      margin: 0 30px;
     }
   }
 
@@ -28,7 +29,7 @@
     font-size: 1.5em;
 
     @include  respond-to('mobile') {
-      font-size:1.8em;
+      font-size: 1.8em;
     }
   }
 
@@ -54,7 +55,7 @@
     color: #3e4143;
 
     @include  respond-to('mobile') {
-      color:gray;
+      color:#000;
     }
 
     span {

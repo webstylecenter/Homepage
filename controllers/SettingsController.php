@@ -27,5 +27,17 @@ $app->post('/settings/feeds/remove/', function() use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
     return $feedService->removeFeed($_POST['feedId']);
+});
 
+$app->post('/settings/feeds/add/', function() use($app) {
+
+    if (!isset($_POST['name']) || strlen($_POST['name']) === 0 || !isset($_POST['url']) || strlen($_POST['url']) === 0 || !isset($_POST['color']) || strlen($_POST['color']) === 0) {
+        exit ('Error: Not all feed details entered');
+    }
+
+    $_POST['color'] = substr($_POST['color'], 1);
+
+    /** @var \Service\FeedService $feedService */
+    $feedService = $app['feedService'];
+    return $feedService->addFeed($_POST['name'], $_POST['url'], $_POST['color']);
 });

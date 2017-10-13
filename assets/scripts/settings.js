@@ -17,4 +17,32 @@ $(function() {
                });
        }
    });
+
+    $("#spectrum").spectrum({
+        color: "#000",
+        allowEmpty: false,
+        preferredFormat: "hex"
+    });
+
+    $('.js-settings-add-feed').on('click', function() {
+       let name = $(this).parent().find("[name='name']").val();
+       let url = $(this).parent().find("[name='url']").val();
+       let color = $(this).parent().find("[name='color']").val();
+
+        $.post( "/settings/feeds/add/", {
+            name: name,
+            url: url,
+            color: color
+        })
+            .done(function(data) {
+                if (data.replace('Error', '') !== data) {
+                    alert(data);
+                } else {
+                    alert("RSS Feed added! It may take up to 20 minutes before your feed is displayed on your Homepage");
+                }
+            })
+            .fail(function(data) {
+                alert(data);
+            });
+    });
 });

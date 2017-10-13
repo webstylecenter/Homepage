@@ -185,6 +185,27 @@ class FeedService
     }
 
     /**
+     * @param $name
+     * @param $url
+     * @param $color
+     *
+     * @return int
+     */
+    public function addFeed($name, $url, $color)
+    {
+        if (!isset($name) || empty($name) || !isset($url) || empty($url) || !isset($color) || empty($color)) {
+            throw new Exception('Not all feed data given');
+        }
+
+        return $this->database->insert('feeds', [
+            'name' => $name,
+            'feedUrl' => $url,
+            'color' => $color,
+            'created' => (new \DateTime())->format('Y-m-d H:i:s')
+        ]);
+    }
+
+    /**
      * @param $feedId
      *
      * @return int

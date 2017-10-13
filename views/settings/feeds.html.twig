@@ -1,5 +1,10 @@
 <h2>RSS Feed preferences</h2>
-<p><input type="text" name="newFeedItem" value="" placeholder="Insert RSS feed url" /> <input type="submit" value="Add" /></p>
+<p>
+    <input type="text" name="name" value="" placeholder="Name" />
+    <input type="text" name="url" value="" placeholder="Insert RSS feed url" />
+    <input type="text" name="color" value="#000" placeholder="Insert RGB without the #" id="spectrum" />
+    <input type="submit" value="Add" class="js-settings-add-feed" />
+</p>
 
 {% if feeds is not empty %}
     <table>

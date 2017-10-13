@@ -144,7 +144,7 @@ class FeedService
      */
     public function pinItem($id)
     {
-        $feedItem = $this->database->fetchAssoc('SELECT pinned FROM feed_data WHERE id = ?', [$id],[\PDO::PARAM_INT]);
+        $feedItem = $this->database->fetchAssoc('SELECT pinned FROM feed_data WHERE id = ?', [$id], [\PDO::PARAM_INT]);
         $newPinState = $feedItem['pinned'] == 1 ? NULL : 1;
         return $this->database->update('feed_data', ['pinned' => $newPinState], ['id' => $id]);
     }

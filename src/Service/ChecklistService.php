@@ -38,7 +38,7 @@ class ChecklistService
             [$id]
         );
 
-        return isset($checklistItemInfo[0]) ?  $this->toEntity($checklistItemInfo[0]) : new ChecklistItem;
+        return isset($checklistItemInfo[0]) ? $this->toEntity($checklistItemInfo[0]) : new ChecklistItem;
     }
 
     /**

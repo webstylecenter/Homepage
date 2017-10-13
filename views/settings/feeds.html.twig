@@ -16,7 +16,7 @@
                     {% endif %}
                 {% endfor %}
 
-                <tr data-feed-id="{{ feed.id }}">
+                <tr data-feed-id="{{ feed.id }}" data-feed-name="{{ feed.name }}">
                     <td class="feedColor">
                         <span style="background-color:#{{ feed.color }};"></span>
                     </td>
@@ -27,12 +27,12 @@
                     <td class="feedAmount">
                         {{ amount }}
                     </td>
-                    <td class="feedLastUpdate">
+                    {# <td class="feedLastUpdate">
                         {{ lastUpdate }}
-                    </td>
+                    </td> #}
                     <td class="feedActions">
-                        <button class="fa fa-edit"></button>
-                        <button class="fa fa-remove"></button>
+                        {# <button class="fa fa-edit"></button> #}
+                        <button class="js-settings-remove-feed fa fa-remove"></button>
                     </td>
                 </tr>
             {% endfor %}

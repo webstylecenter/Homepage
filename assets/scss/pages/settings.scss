@@ -63,15 +63,19 @@
     }
 
     tr:nth-child(even) {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: rgba(215, 215, 215, 0.5);
     }
 
     tr:nth-child(odd) {
-      background-color: rgba(256, 256, 256, 0.2);
+      background-color: rgba(256, 256, 256, 0.7);
     }
 
     tr:hover {
       background-color: rgba(256, 256, 256, 0.8);
+    }
+
+    .removed {
+      opacity: 0.2;
     }
 
     .feedColor {
@@ -86,7 +90,7 @@
     }
 
     .feedName {
-      width: 68%;
+      width: 78%;
 
       span {
         display: block;

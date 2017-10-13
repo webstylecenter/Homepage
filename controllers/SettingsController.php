@@ -17,3 +17,15 @@ $app->get('/settings/', function() use($app) {
         'feedtotals' => $feedService->getFeedItemTotals()
     ]);
 });
+
+$app->post('/settings/feeds/remove/', function() use($app) {
+
+    if (!isset($_POST['feedId']) || strlen($_POST['feedId']) === 0) {
+        exit ('No feed Id given');
+    }
+
+    /** @var \Service\FeedService $feedService */
+    $feedService = $app['feedService'];
+    return $feedService->removeFeed($_POST['feedId']);
+
+});

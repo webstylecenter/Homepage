@@ -7,6 +7,7 @@ use Doctrine\DBAL\Driver\PDOException;
 use Entity\FeedItem;
 use Entity\Feed;
 use Guzzle\GuzzleClient;
+use Symfony\Component\Security\Acl\Exception\Exception;
 use Zend\Feed\Reader\Entry\EntryInterface;
 use Zend\Feed\Reader\Reader;
 
@@ -181,6 +182,26 @@ class FeedService
     public function getLastError()
     {
         return $this->lastError;
+    }
+
+    /**
+     * @param $feedId
+     *
+     * @return int
+     */
+    public function removeFeed($feedId)
+    {
+        if (!isset($feedId) || empty($feedId)) {
+            throw new Exception('No feed Id given to remove');
+        }
+
+        $this->database->delete('feed_data', [
+            'feed' => $feedId
+        ]);
+
+        return $this->database->delete('feeds', [
+            'id' => $feedId
+        ]);
     }
 
     /**

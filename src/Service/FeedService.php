@@ -193,7 +193,7 @@ class FeedService
      */
     public function addFeed($name, $url, $color)
     {
-        if (!isset($name) || empty($name) || !isset($url) || empty($url) || !isset($color) || empty($color)) {
+        if (empty($name) || empty($url) || empty($color)) {
             throw new Exception('Not all feed data given');
         }
 

@@ -9,7 +9,6 @@ $(function() {
        if (check) {
            $.post( "/settings/feeds/remove/", { feedId: feedId })
                .done(function() {
-                   console.log("Removed");
                    $(button).parent().parent().addClass('removed');
                })
                .fail(function(data) {

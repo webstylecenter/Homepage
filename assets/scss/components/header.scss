@@ -1,14 +1,14 @@
 .header--bar {
-  border-bottom: 1px solid gray;
+  background-color: $blue;
   padding: 5px 20px;
   box-sizing: border-box;
   height: $header-height;
-  background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%);
   position: fixed;
   right: 0;
   left: 0;
   top: 0;
   z-index: 900;
+  color: white;
 
   @include  respond-to('mobile') {
     top: inherit;
@@ -52,7 +52,7 @@
   }
   &-actions {
     float: right;
-    color: #3e4143;
+    color: white;
 
     @include  respond-to('mobile') {
       color:#000;
@@ -60,6 +60,7 @@
 
     span {
       display: inline-block;
+      margin-top: 3px;
 
       &:hover {
         cursor: pointer;
@@ -70,10 +71,13 @@
       display: inline-block;
 
       input {
-        top: 5px;
-        right: 50px;
-        padding: 5px 10px;
+        position:relative;
+        top:-2px;
         width: $header-width-search;
+        background-color: #5b98ff;
+        border: 0;
+        padding: 5px 5px;
+        color: white;
 
         @include respond-to(mobile) {
           display: none;
@@ -81,6 +85,10 @@
         @include respond-to(tablet) {
           width: 250px;
         }
+      }
+
+      input::-webkit-input-placeholder {
+        color: white;
       }
     }
 

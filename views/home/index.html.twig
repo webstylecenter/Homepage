@@ -4,13 +4,13 @@
 
 {% block body %}
     <header class="header--bar hide-if-mobile">
-        <div class="header--bar-site">
+        <div class="header--bar-site  wow slideInLeft">
             <div class="title">
                 <a href="/" class="title--back noselect js-return"><span class="fa fa-chevron-circle-left"></span></a>
                 <a href="/" class="js-reload-page">Peter van Dam's Homepage</a>
             </div>
         </div>
-        <div class="header--bar-actions">
+        <div class="header--bar-actions wow slideInRight">
 
             {% if not device.isMobile %}
                 <div class="js-update-weather-icon header--bar-weather-icon">{% include 'weather/icon.html.twig' %}</div>
@@ -18,7 +18,7 @@
             {% endif %}
 
             <span style="display:none;" class="js-open-new-window fa fa-external-link fa-x4"></span>
-            <span style="display:none;" class="js-copy-to-clipboard fa fa-share-square-o fa-x4" data-clipboard-action="copy" data-clipboard-text="#"></span>
+            <span class="js-copy-to-clipboard fa fa-share-square-o fa-x4" data-clipboard-action="copy" data-clipboard-text="#"></span>
 
             <span class="fa fa-dropbox js-toggle hide-if-mobile" data-toggle-element=".screenshot-list"></span>
             <span data-url="/checklist/" class="js-open-url fa fa-check fa-x4 hide-if-mobile"></span>
@@ -46,7 +46,7 @@
             allow-pointer-lock allow-modals"></iframe>
         </div>
 
-        <div class="urlbar show-if-desktop">
+        <div class="urlbar">
             <a href="/welcome/" target="_blank">/welcome/</a>
         </div>
     </section>

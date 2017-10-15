@@ -1,11 +1,10 @@
 .feed-list {
-  border-right: 1px solid gray;
   width: $sidebar-width;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: scroll;
-  background: linear-gradient(to bottom, #a1a1a1 0%, #eeeeee 100%);
   backdrop-filter: blur(10px);
+  color: black;
 
   @include respond-to(mobile) {
     width: 100%;
@@ -44,22 +43,18 @@
 }
 
 .feed-list-item {
-  border-bottom: 1px solid gray;
   padding: 10px;
   border-left: 5px solid #ffbe3f;
 
   &:nth-child(even) {
     background: #f7f7f7;
-    background: linear-gradient(to right,  #f7f7f7 0%,#e8e8e8 100%);
   }
   &:nth-child(odd) {
     background: #eeeeee;
-    background: linear-gradient(to right, #f5f5f5 0%, #e3e3e3 100%);
   }
 
   &:hover {
     background-color: white;
-    background: linear-gradient(to right, #f5f5f5 0%, #f4f4f4 100%);
     cursor: pointer;
     .pin {
       background-image: url('/assets/images/pin.png');

@@ -26,8 +26,8 @@ $(function() {
         .on('click', '.js-action-feed-list-click', function() {
         $(this).addClass('animated pulse feed-list-item--state-selected');
         $('.feed-list-item').removeClass('feed-list-item--state-selected');
-        $('.header--bar').css('backgroundColor', $(this).css('borderLeftColor').replace(')', ', 0.35)').replace('rgb', 'rgba'));
-
+        // $('.header--bar').css('backgroundColor', $(this).css('borderLeftColor').replace(')', ', 0.35)').replace('rgb', 'rgba'));
+        $('.header--bar').css('backgroundColor', $(this).css('borderLeftColor'));
         openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/');
 
     })

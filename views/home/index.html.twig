@@ -1,4 +1,5 @@
 {% extends "base.html.twig" %}
+{% set hour = "now"|date("H") %}
 
 {% block title %}Homepage{% endblock %}
 
@@ -35,7 +36,7 @@
     <section class="container">
         {% block content %}{% endblock %}
 
-        <aside class="feed-list feed-list--type-sidebar wow slideInLeft">
+        <aside class="feed-list feed-list--type-sidebar wow slideInLeft {% if device.isMobile and hour > 21 %}darkTheme{% endif %} {{ hour }}">
             {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems, 'addToChecklist': '', 'feeds': feeds} %}
         </aside>
 

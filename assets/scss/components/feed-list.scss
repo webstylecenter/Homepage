@@ -5,6 +5,7 @@
   overflow-y: scroll;
   backdrop-filter: blur(10px);
   color: black;
+  background: #f7f7f7;
 
   @include respond-to(mobile) {
     width: 100%;
@@ -45,15 +46,12 @@
   padding: 10px;
   border-left: 5px solid #ffbe3f;
 
-  &:nth-child(even) {
-    background: #f7f7f7;
-  }
   &:nth-child(odd) {
-    background: #eeeeee;
+    background: rgba(123, 123, 123, 0.05);
   }
 
   &:hover {
-    background-color: white;
+    background-color: rgba(256, 256, 256, 0.6);
     cursor: pointer;
     .pin {
       background-image: url('/assets/images/pin.png');
@@ -108,5 +106,34 @@
     top: 0;
     right: 0;
     float: right;
+  }
+}
+
+.darkTheme {
+  color: #a2a2a2;
+  &.feed-list {
+    color: #a2a2a2;
+    background-color: #1a1a1a;
+  }
+  .description {
+    color: #595959;
+  }
+  .feed-list-item:hover {
+    color: white;
+
+    .description {
+      color: #cccccc;
+    }
+  }
+  .page--homepage-background--overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .weather--temperature, .weather--content, textarea, input {
+    color: #cccccc;
+  }
+
+  .weather--icon-small {
+    filter: invert(100%);
   }
 }

@@ -1,4 +1,5 @@
 .header--bar {
+  transition: background-color 1500ms;
   background-color: $blue;
   padding: 5px 20px;
   box-sizing: border-box;
@@ -74,7 +75,7 @@
         position:relative;
         top:-2px;
         width: $header-width-search;
-        background-color: #5b98ff;
+        background-color: rgba(255, 255, 255, 0.3);
         border: 0;
         padding: 5px 5px;
         color: white;

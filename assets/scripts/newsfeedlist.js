@@ -21,10 +21,12 @@ $(function() {
     })
         .on('click', '.js-open-url', function () {
         openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/');
+        $('.header--bar').css('backgroundColor', '#337dff');
     })
         .on('click', '.js-action-feed-list-click', function() {
         $(this).addClass('animated pulse feed-list-item--state-selected');
         $('.feed-list-item').removeClass('feed-list-item--state-selected');
+        $('.header--bar').css('backgroundColor', $(this).css('borderLeftColor'));
 
         openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/');
 
@@ -44,6 +46,7 @@ $(function() {
         .on ('click', '.js-reload-page', function() {
             $('iframe').attr('src', '/welcome/');
             $('.urlbar a').text('').attr('data-clipboard-text', '');
+            $('.header--bar').css('backgroundColor', '#337dff');
             requestNewFeedItems();
         })
         .on('click', '.pin', function(e) {

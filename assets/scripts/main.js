@@ -56,6 +56,7 @@ $(function() {
        $('.page--homepage .header').animate({
            height: '400px'
        }, 500);
+       $('.widget').fadeIn();
     });
 });
 

@@ -1,11 +1,13 @@
 .weather {
   &--content {
-    height: 400px;
+    position:absolute;
+    bottom: 20px;
+    right: 20px;
     text-align: right;
     mix-blend-mode: normal;
     width: auto;
     color: rgba(256, 256, 256, 0.8);
-    text-shadow: #000 0 0 3px;
+    font-weight:600;
   }
 
   &--current {

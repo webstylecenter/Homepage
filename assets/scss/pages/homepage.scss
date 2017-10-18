@@ -5,11 +5,12 @@
     top: 0;
     right: 0;
     left: 0;
-    height:400px;
+    height:100vh;
     background-image: url('/screensaver/images/Welcome.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    z-index:9;
   }
 
   .widgets {

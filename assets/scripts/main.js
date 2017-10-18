@@ -50,6 +50,13 @@ $(function() {
         var p6 = 'to';
         $(this).html('<a href="' + p4 + p6 + ':' + p1 + p5 + p1 + p3 + p2 + '">' + p1 + p5 + p1 + p3 + p2 + '</a>');
     });
+
+    $('.page--homepage').on('click', function() {
+       //$('.page--homepage .header').css('height', '400px');
+       $('.page--homepage .header').animate({
+           height: '400px'
+       }, 500);
+    });
 });
 
 function getUrlMetaData() {

@@ -1,14 +1,28 @@
 .page--homepage {
-  &-background {
+
+  .header {
     position: fixed;
     top: 0;
     right: 0;
-    bottom: 0;
     left: 0;
+    height:400px;
     background-image: url('/screensaver/images/Welcome.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+  }
+
+  .widgets {
+    position: fixed;
+    top: 400px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+  }
+
+  &-background {
+
     -webkit-filter: blur(10px);
     -moz-filter: blur(10px);
     -o-filter: blur(10px);

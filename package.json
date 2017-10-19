@@ -7,9 +7,6 @@
     "del": "^2.2.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "wow.js": "^1.2.2"
-  },
-  "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-eslint": "^7.1.1",
     "babel-plugin-transform-react-display-name": "^6.23.0",

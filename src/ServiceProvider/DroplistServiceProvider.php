@@ -19,7 +19,7 @@ class DroplistServiceProvider implements ServiceProviderInterface
     public function register(Container $app)
     {
         $app['droplistService'] = function() use ($app) {
-            return new DroplistService();
+            return new DroplistService($app['config']);
         };
     }
 }

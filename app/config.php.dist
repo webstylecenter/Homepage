@@ -21,7 +21,8 @@ $app['config'] = [
     'wallpaperLocations' => [
         'public' => 'https://source.unsplash.com/category/nature/1920x1080',
         'private' => '[ENTER_AN_URL_TO_SHOW_OF_LOCAL_STORED_IMAGES]'
-    ]
+    ],
+    'droplocation' => '[ENTER_URL]', // this url should return an array with images as path
 ];
 
 $app['users'] = [

@@ -24,9 +24,7 @@ function refreshPage() {
     newImage.onload = function() {
         $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")').fadeIn(3000);
         $('.active').fadeOut(3000);
-
         $('.notActive, .active').toggleClass('active notActive');
-
     };
 }
 

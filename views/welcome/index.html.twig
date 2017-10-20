@@ -2,14 +2,14 @@
 
 {% block body %}
     <div class="page--homepage">
-        <div class="page--homepage-background"></div>
-        <div class="page--homepage-background--overlay"></div>
+        <div class="header">
+            {% include 'widgets/weather.html.twig' %}
+        </div>
 
         <div class="widgets">
-            {% include 'widgets/weather.html.twig' %}
+            {% include 'widgets/notes.html.twig' with {'notes':notes }  %}
             {% include 'widgets/checklist.html.twig' with {'todos': todos } %}
             {% include 'widgets/custom-items-list.html.twig' with { 'addedLinks': addedLinks } %}
-            {% include 'widgets/notes.html.twig' with {'notes':notes }  %}
         </div>
     </div>
 {% endblock %}

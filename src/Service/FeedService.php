@@ -7,6 +7,7 @@ use Doctrine\DBAL\Driver\PDOException;
 use Entity\FeedItem;
 use Entity\Feed;
 use Guzzle\GuzzleClient;
+use Symfony\Component\Security\Acl\Exception\Exception;
 use Zend\Feed\Reader\Entry\EntryInterface;
 use Zend\Feed\Reader\Reader;
 
@@ -128,7 +129,7 @@ class FeedService
      */
     public function getFeedItemTotals()
     {
-        return $this->database->fetchAll('SELECT feed,COUNT(*) as count, name FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id GROUP BY feed ORDER BY count DESC;');
+        return $this->database->fetchAll('SELECT feed,COUNT(*) as count, name, feed_data.dateAdded FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id GROUP BY feed ORDER BY count DESC');
     }
 
     public function markAllViewed()
@@ -143,7 +144,7 @@ class FeedService
      */
     public function pinItem($id)
     {
-        $feedItem = $this->database->fetchAssoc('SELECT pinned FROM feed_data WHERE id = ?', [$id],[\PDO::PARAM_INT]);
+        $feedItem = $this->database->fetchAssoc('SELECT pinned FROM feed_data WHERE id = ?', [$id], [\PDO::PARAM_INT]);
         $newPinState = $feedItem['pinned'] == 1 ? NULL : 1;
         return $this->database->update('feed_data', ['pinned' => $newPinState], ['id' => $id]);
     }
@@ -181,6 +182,47 @@ class FeedService
     public function getLastError()
     {
         return $this->lastError;
+    }
+
+    /**
+     * @param $name
+     * @param $url
+     * @param $color
+     *
+     * @return int
+     */
+    public function addFeed($name, $url, $color)
+    {
+        if (empty($name) || empty($url) || empty($color)) {
+            throw new Exception('Not all feed data given');
+        }
+
+        return $this->database->insert('feeds', [
+            'name' => $name,
+            'feedUrl' => $url,
+            'color' => $color,
+            'created' => (new \DateTime())->format('Y-m-d H:i:s')
+        ]);
+    }
+
+    /**
+     * @param $feedId
+     *
+     * @return int
+     */
+    public function removeFeed($feedId)
+    {
+        if (!isset($feedId) || empty($feedId)) {
+            throw new Exception('No feed Id given to remove');
+        }
+
+        $this->database->delete('feed_data', [
+            'feed' => $feedId
+        ]);
+
+        return $this->database->delete('feeds', [
+            'id' => $feedId
+        ]);
     }
 
     /**

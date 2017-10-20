@@ -1,5 +1,6 @@
 .widget-note {
-  padding:5px;
+  padding: 5px;
+  width: 70%;
 
   &--input {
     margin: 10px 0 0 0;
@@ -16,8 +17,16 @@
   }
 
   &--remove {
-    background-color: rgba(0,0,0,.2);
-    border: 0;
+    background-color: transparent;
+    border: 1px solid whitesmoke;
+    border-radius: 3px;
+    color: $blue;
+
+    &:hover {
+      background-color: $blue;
+      color: white;
+      cursor: pointer;
+    }
   }
 
   &--notes-list {
@@ -37,7 +46,8 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
       &:hover {
-        background-color: rgba(256, 256, 256, 0.8);
+        background-color: rgba(0, 0, 0, 0.1);
+        cursor: pointer;
       }
 
       &:last-of-type {
@@ -71,8 +81,8 @@
     }
 
     textarea {
-      overflow-x:hidden;
-      overflow-y:auto;
+      overflow-x: hidden;
+      overflow-y: auto;
 
       &:focus {
         background-color: rgba(256, 256, 256, 0.3);

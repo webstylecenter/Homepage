@@ -30,9 +30,9 @@ $app->match('/screensaver/', function() use($app) {
 $app->match('/screensaver/images/{file}.jpg', function() use($app) {
 
     if (rand(1, 5) === 1) {
-        header('location: '.$app['config']['wallpaperLocations']['private']);
+        header('location: ' . $app['config']['wallpaperLocations']['private']);
     } else {
-        header('location: '.$app['config']['wallpaperLocations']['public']);
+        header('location: ' . $app['config']['wallpaperLocations']['public']);
     }
 
     exit;

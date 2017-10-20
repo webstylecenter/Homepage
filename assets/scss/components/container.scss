@@ -7,15 +7,30 @@
 
   @include respond-to('mobile') {
     top:0;
-    bottom:$footer-height;
+    bottom:0;
   }
 
   &--container-overlay {
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(256, 256, 256, 0.5);
     z-index: 700;
     display: none;
+    backdrop-filter: blur(10px);
+  }
+
+  .urlbar {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: $sidebar-width;
+    right: 0;
+    box-sizing: border-box;
+    background-color: $blue;
+    padding: 6px 10px;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 }

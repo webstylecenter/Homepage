@@ -35,7 +35,7 @@
   &--image:hover {
     .screenshot-list--image-container {
       height:200px;
-      width:300px;
+      width:auto;
       background-color: rgba(107, 193, 103, 0.7);
       display:block;
     }

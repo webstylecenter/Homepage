@@ -21,11 +21,13 @@ $(function() {
     })
         .on('click', '.js-open-url', function () {
         openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/');
+        $('.header--bar').css('backgroundColor', '#337dff');
     })
         .on('click', '.js-action-feed-list-click', function() {
         $(this).addClass('animated pulse feed-list-item--state-selected');
         $('.feed-list-item').removeClass('feed-list-item--state-selected');
-
+        // $('.header--bar').css('backgroundColor', $(this).css('borderLeftColor').replace(')', ', 0.35)').replace('rgb', 'rgba'));
+        $('.header--bar').css('backgroundColor', $(this).css('borderLeftColor'));
         openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/');
 
     })
@@ -43,7 +45,8 @@ $(function() {
         })
         .on ('click', '.js-reload-page', function() {
             $('iframe').attr('src', '/welcome/');
-            $('.header--bar-navigation a').text('').attr('data-clipboard-text', '');
+            $('.urlbar a').text('').attr('data-clipboard-text', '');
+            $('.header--bar').css('backgroundColor', '#337dff');
             requestNewFeedItems();
         })
         .on('click', '.pin', function(e) {
@@ -75,7 +78,7 @@ $(function() {
                 });
         })
         .on('click', '.js-open-new-window', function() {
-            window.open($('.header--bar-navigation a').attr('href'));
+            window.open($('.urlbar a').attr('href'));
         })
         .on('click', '.js-visbility-toggle', function() {
         $($(this).data('target')).toggle();
@@ -121,8 +124,22 @@ function openPage(url) {
     $('.header--bar').addClass('show-if-mobile');
 
     $('iframe').attr('src', url);
-    $('.header--bar-navigation a').text(url).attr('href', url);
+    $('.urlbar a').text(url).attr('href', url);
     $('.js-copy-to-clipboard').attr('data-clipboard-text', url).addClass('show-if-mobile show-if-tablet');
     $('.js-open-new-window').addClass('show-if-mobile show-if-tablet');
 }
 
+function hexToRgb(hex) {
+    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        return r + r + g + g + b + b;
+    });
+
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}

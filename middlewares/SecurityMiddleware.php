@@ -7,7 +7,16 @@ $app->before(function() use ($app) {
         return;
     }
 
-    if ($_SERVER['REQUEST_URI'] === '/' || $_SERVER['REQUEST_URI'] == '/droplist/') {
+    $protectedPages = [
+        '/',
+        '/droplist/',
+        '/settings/',
+        '/welcome/',
+        '/note/save/',
+        '/note/remove/',
+    ];
+
+    if (in_array($_SERVER['REQUEST_URI'], $protectedPages)) {
         if (
             !isset($_SERVER['PHP_AUTH_USER'])
             || !isset($app['users'][$_SERVER['PHP_AUTH_USER']])

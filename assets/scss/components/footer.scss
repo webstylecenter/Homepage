@@ -1,18 +1,18 @@
 .footer--bar {
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background-color:whitesmoke;
-  color:gray;
-  border-top:1px solid gray;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: whitesmoke;
+  border-top: 1px solid gray;
   text-align: center;
-  font-size:24pt;
-  padding:12px 0 20px 0;
-  box-shadow: 0 0 15px #717171;
+  font-size: 24pt;
+  padding: 12px 0 20px 0;
+  background: linear-gradient(to bottom,  rgba(120, 120, 120, 0.9) 0%, rgba(16, 16, 16, 0.9) 100%);
+  backdrop-filter: blur(10px);
 
   span {
-    margin:0 30px;
-    display:inline-block;
+    margin: 0 25px;
+    display: inline-block;
   }
 }

@@ -5,3 +5,4 @@ import './newsfeedlist';
 import './screensaver';
 import './searchbox';
 import './welcome';
+import './settings';

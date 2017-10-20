@@ -1,0 +1,48 @@
+<h2>RSS Feed preferences</h2>
+<p>
+    <input type="text" name="name" value="" placeholder="Name" />
+    <input type="text" name="url" value="" placeholder="Insert RSS feed url" />
+    <input type="text" name="color" value="#000" placeholder="Insert RGB without the #" id="spectrum" />
+    <input type="submit" value="Add" class="js-settings-add-feed" />
+</p>
+
+{% if feeds is not empty %}
+    <table>
+        <tbody>
+            {% for feed in feeds %}
+
+                {% set amount = 0 %}
+                {% set lastUpdate = '' %}
+
+                {% for total in feedtotals %}
+                    {% if total.feed == feed.id %}
+                        {% set amount = total.count|number_format(0, ',', '.') %}
+                        {% set lastUpdate = total.dateAdded %}
+                    {% endif %}
+                {% endfor %}
+
+                <tr data-feed-id="{{ feed.id }}" data-feed-name="{{ feed.name }}">
+                    <td class="feedColor">
+                        <span style="background-color:#{{ feed.color }};"></span>
+                    </td>
+                    <td class="feedName">
+                        {{ feed.name }}
+                        <span>{{ feed.feedurl }}</span>
+                    </td>
+                    <td class="feedAmount">
+                        {{ amount }}
+                    </td>
+                    {# <td class="feedLastUpdate">
+                        {{ lastUpdate }}
+                    </td> #}
+                    <td class="feedActions">
+                        {# <button class="fa fa-edit"></button> #}
+                        <button class="js-settings-remove-feed fa fa-remove"></button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Add your first RSS Feed to have it listed here</p>
+{% endif %}

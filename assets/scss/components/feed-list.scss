@@ -1,10 +1,11 @@
 .feed-list {
-  border-right: 1px solid gray;
   width: $sidebar-width;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: scroll;
-  background: linear-gradient(to bottom, #a1a1a1 0%, #eeeeee 100%);
+  backdrop-filter: blur(10px);
+  color: black;
+  background: #f7f7f7;
 
   @include respond-to(mobile) {
     width: 100%;
@@ -15,11 +16,10 @@
   }
 
   &--separator {
-    border-bottom: 1px solid gray;
     padding: 10px;
-    background: linear-gradient(to bottom,  #868686 0%, #cccccc 10%);
     text-align:center;
-    border-left: 5px solid #3e4143;
+    border-left: 5px solid lightgray;
+    color: $blue;
   }
 
   &--type-sidebar {
@@ -43,30 +43,19 @@
 }
 
 .feed-list-item {
-  border-bottom: 1px solid gray;
   padding: 10px;
   border-left: 5px solid #ffbe3f;
 
-  &:nth-child(even) {
-    background: #f7f7f7;
-    background: linear-gradient(to right,  #f7f7f7 0%,#e8e8e8 100%);
-  }
   &:nth-child(odd) {
-    background: #eeeeee;
-    background: linear-gradient(to right, #f5f5f5 0%, #e3e3e3 100%);
+    background: rgba(123, 123, 123, 0.05);
   }
 
   &:hover {
-    background-color: white;
-    background: linear-gradient(to right, #f5f5f5 0%, #f4f4f4 100%);
+    background-color: rgba(256, 256, 256, 0.6);
     cursor: pointer;
     .pin {
       background-image: url('/assets/images/pin.png');
     }
-  }
-
-  &--state-new {
-    background: linear-gradient(to right, #eeeeee 0%, #def6f6 100%) !important;
   }
 
   &--state-button {
@@ -117,5 +106,34 @@
     top: 0;
     right: 0;
     float: right;
+  }
+}
+
+.darkTheme {
+  color: #a2a2a2;
+  &.feed-list {
+    color: #a2a2a2;
+    background-color: #1a1a1a;
+  }
+  .description {
+    color: #727272;
+  }
+  .feed-list-item:hover {
+    color: white;
+
+    .description {
+      color: #cccccc;
+    }
+  }
+  .page--homepage-background--overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .weather--temperature, .weather--content, textarea, input {
+    color: #cccccc;
+  }
+
+  .weather--icon-small {
+    filter: invert(100%);
   }
 }

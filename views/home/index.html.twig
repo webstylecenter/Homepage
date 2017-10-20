@@ -1,19 +1,17 @@
 {% extends "base.html.twig" %}
+{% set hour = "now"|date("H") %}
 
-{% block title %}Homepage{% endblock %}
+{% block title %}Feednews.me{% endblock %}
 
 {% block body %}
     <header class="header--bar hide-if-mobile">
-        <div class="header--bar-site">
+        <div class="header--bar-site  wow slideInLeft">
             <div class="title">
                 <a href="/" class="title--back noselect js-return"><span class="fa fa-chevron-circle-left"></span></a>
-                <a href="/" class="js-reload-page">Peter van Dam's Homepage</a>
+                <a href="/" class="js-reload-page"><b>FEEDNEWS</b><em>.me</em></a>
             </div>
         </div>
-        <div class="header--bar-navigation hide-if-tablet hide-if-mobile">
-            <a href="#" target="_blank"></a>
-        </div>
-        <div class="header--bar-actions">
+        <div class="header--bar-actions wow slideInRight">
 
             {% if not device.isMobile %}
                 <div class="js-update-weather-icon header--bar-weather-icon">{% include 'weather/icon.html.twig' %}</div>
@@ -21,12 +19,13 @@
             {% endif %}
 
             <span style="display:none;" class="js-open-new-window fa fa-external-link fa-x4"></span>
-            <span style="display:none;" class="js-copy-to-clipboard fa fa-share-square-o fa-x4" data-clipboard-action="copy" data-clipboard-text="#"></span>
+            <span class="js-copy-to-clipboard fa fa-share-square-o fa-x4" data-clipboard-action="copy" data-clipboard-text="#"></span>
 
             <span class="fa fa-dropbox js-toggle hide-if-mobile" data-toggle-element=".screenshot-list"></span>
             <span data-url="/checklist/" class="js-open-url fa fa-check fa-x4 hide-if-mobile"></span>
             <span data-modal-target=".js-form-feed" class="js-modal-trigger fa fa-file-text-o fa-x4 hide-if-mobile"></span>
 
+            <span data-url="/settings/" class="js-open-url fa fa-cog fa-x4 hide-if-mobile"></span>
             <div class="action-search--wrapper hide-if-mobile">
                 <input class="js-search-feed" type="text" name="q" placeholder="Search feeds or add items to checklist" autocomplete="off" />
                 <div style="display: none;" class="js-search-list feed-list feed-list--type-search"></div>
@@ -37,7 +36,7 @@
     <section class="container">
         {% block content %}{% endblock %}
 
-        <aside class="feed-list feed-list--type-sidebar wow slideInLeft">
+        <aside class="feed-list feed-list--type-sidebar wow fadeIn {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
             {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems, 'addToChecklist': '', 'feeds': feeds} %}
         </aside>
 
@@ -46,6 +45,10 @@
 
             <iframe class="content-frame" src="/welcome" sandbox="allow-scripts allow-same-origin allow-forms allow-popups
             allow-pointer-lock allow-modals"></iframe>
+        </div>
+
+        <div class="urlbar">
+            <a href="/welcome/" target="_blank">/welcome/</a>
         </div>
     </section>
 

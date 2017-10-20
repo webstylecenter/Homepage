@@ -1,26 +1,31 @@
 .header--bar {
-  border-bottom: 1px solid gray;
+  transition: background-color 1500ms;
+  background-color: $blue;
   padding: 5px 20px;
   box-sizing: border-box;
   height: $header-height;
-  background: #eeeeee;
-  background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%);
   position: fixed;
   right: 0;
   left: 0;
   top: 0;
   z-index: 900;
+  color: white;
 
   @include  respond-to('mobile') {
-    top:inherit;
-    bottom:0;
-    border-top:1px solid gray;
-    font-size:1.8em;
-    padding:12px 0 20px 0;
-    height:$footer-height;
+    top: inherit;
+    bottom: 0;
+    border-top: 1px solid gray;
+    font-size: 1.8em;
+    padding: 12px 0 20px 0;
+    height: $footer-height;
+    background: linear-gradient(to bottom,  rgba(256, 256, 256, 0.5) 0%, rgba(184, 184, 184, 0.5) 100%);
+    backdrop-filter: blur(10px);
 
     span {
-      margin:0 30px;
+      margin: 0 30px;
+    }
+    a {
+      color: black;
     }
   }
 
@@ -28,7 +33,7 @@
     font-size: 1.5em;
 
     @include  respond-to('mobile') {
-      font-size:1.8em;
+      font-size: 1.8em;
     }
   }
 
@@ -51,14 +56,15 @@
   }
   &-actions {
     float: right;
-    color: #3e4143;
+    color: white;
 
     @include  respond-to('mobile') {
-      color:gray;
+      color:#000;
     }
 
     span {
       display: inline-block;
+      margin-top: 3px;
 
       &:hover {
         cursor: pointer;
@@ -69,10 +75,13 @@
       display: inline-block;
 
       input {
-        top: 5px;
-        right: 50px;
-        padding: 5px 10px;
+        position:relative;
+        top:-2px;
         width: $header-width-search;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 0;
+        padding: 5px 5px;
+        color: white;
 
         @include respond-to(mobile) {
           display: none;
@@ -81,24 +90,14 @@
           width: 250px;
         }
       }
+
+      input::-webkit-input-placeholder {
+        color: white;
+      }
     }
 
     > * {
       margin-left: 30px;
-    }
-  }
-
-  &-navigation {
-    font-style: italic;
-    color: gray;
-    margin-left: 280px;
-    a {
-      color: gray;
-      display: none;
-
-      @include respond-to(desktop) {
-        display: inline;
-      }
     }
   }
 

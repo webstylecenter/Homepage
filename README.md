@@ -1,7 +1,8 @@
 #  NewsFeed.me
+![alt text](https://pvd.onl/oy59sb.jpg)
 A powerfull dashboard tool to keep track of your favorite news sites, daily tasks, reminders, and so much more. NewsFeed.me, previously calles "It's my Homepage" brings you a site that you can set as startpage of your browser, or use Electron to run it as an app. 
 
-#Functionality
+# Functionality
 - Read and manage RSS Feeds
     - Assign colors to different sites
     - Search items
@@ -68,7 +69,7 @@ Please not that some sites, that have the previous mentioned X-Frame headers mig
 
 It's recommended to load the page on WIFI if your low on your data limit the first time you open it on your mobile after running gulp. If you do so, all css and javascripts will be cached until you run gulp again. It's not megabytes of a difference, but in case your developing this tool it's a usefull reminder.
 
-#Idea's?
+# Idea's?
 I wish to hear your thoughts and idea's for this project. I've been working on this project for a year now, and love to improve it a lot more. It's not ready for multiusers yet. But if you know how to work with git, composer, npm this tool can be used daily. It's been my browsers homepage for a year now, can't live without! I have so many ideas poping in every day and I hope I can make something that many people will enjoy! Any help is appreciated. So if you want to help, code away and submit a pull request! If it's good I'm sure to add it!
 
 

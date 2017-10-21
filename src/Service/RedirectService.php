@@ -2,7 +2,6 @@
 
 namespace Service;
 
-use Entity\FeedItem;
 use Doctrine\DBAL\Connection;
 
 class RedirectService
@@ -41,19 +40,5 @@ class RedirectService
         );
 
         return $feedItem[0]['url'];
-    }
-
-    /**
-     * @param array $data
-     * @return FeedItem
-     */
-    protected function toFeedItemEntity(array $data)
-    {
-        return (new FeedItem($data['itemId'], $data['title'], $data['description'], $data['url'], $data['feed']))
-            ->setViewed($data['viewed'])
-            ->setDateAdded(new \DateTime($data['dateAdded']))
-            ->setPinned($data['pinned'])
-            ->setColor($data['color'])
-            ->setFeedName($data['name']);
     }
 }

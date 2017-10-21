@@ -20,15 +20,14 @@ $(function() {
         requestNewFeedItems();
     })
         .on('click', '.js-open-url', function () {
-        openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/');
+        openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'));
         $('.header--bar').css('backgroundColor', '#337dff');
     })
         .on('click', '.js-action-feed-list-click', function() {
         $(this).addClass('animated pulse feed-list-item--state-selected');
         $('.feed-list-item').removeClass('feed-list-item--state-selected');
-        // $('.header--bar').css('backgroundColor', $(this).css('borderLeftColor').replace(')', ', 0.35)').replace('rgb', 'rgba'));
         $('.header--bar').css('backgroundColor', $(this).css('borderLeftColor'));
-        openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/');
+        openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'));
 
     })
         .on('click', '.js-return', function (e) {
@@ -117,15 +116,15 @@ function requestNewFeedItems() {
         });
 };
 
-function openPage(url) {
+function openPage(url, shareId) {
     $('.content').show();
     $('.js-reload-page').addClass('hide-if-mobile hide-if-tablet');
     $('.js-return').addClass('show-if-mobile show-if-tablet');
     $('.header--bar').addClass('show-if-mobile');
 
     $('iframe').attr('src', url);
-    $('.urlbar a').text(url).attr('href', url);
-    $('.js-copy-to-clipboard').attr('data-clipboard-text', url).addClass('show-if-mobile show-if-tablet');
+    $('.urlbar a').text('https://' + window.location.hostname + '/share/' + shareId).attr('href', url);
+    $('.js-copy-to-clipboard').attr('data-clipboard-text', 'https://' + window.location.hostname + '/share/' + shareId).addClass('show-if-mobile show-if-tablet');
     $('.js-open-new-window').addClass('show-if-mobile show-if-tablet');
 }
 

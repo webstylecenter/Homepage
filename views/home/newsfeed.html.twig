@@ -26,7 +26,7 @@
     {% endif %}
 
     <div class="feed-list-item js-action-feed-list-click js-action-feed-list-swipe {% if not item.viewed %}feed-list-item--state-new{% endif %} {% if item.pinned %}feed-list-item--state-pinned{% endif %}"
-         data-url="{{ item.url }}" style="border-left-color:#{{ item.color }};">
+         data-url="{{ item.url }}" data-share-id="{{ item.id }}-{{ item.feedid }}" style="border-left-color:#{{ item.color }};">
         <div class="pin" data-pin-id="{{ item.id }}"></div>
         <p class="title ">{{ item.title|striptags }}</p>
         <p class="description">{{ item.description|truncate(120, true) }}</p>

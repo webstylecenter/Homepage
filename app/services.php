@@ -32,3 +32,4 @@ $app->register(new \ServiceProvider\WeatherServiceProvider());
 $app->register(new \ServiceProvider\NoteServiceProvider());
 $app->register(new \ServiceProvider\ChecklistServiceProvider());
 $app->register(new \ServiceProvider\DroplistServiceProvider());
+$app->register(new \ServiceProvider\RedirectServiceProvider());

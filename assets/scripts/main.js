@@ -52,11 +52,26 @@ $(function() {
     });
 
     $('.page--homepage').on('click', function() {
-       //$('.page--homepage .header').css('height', '400px');
        $('.page--homepage .header').animate({
            height: '400px'
        }, 500);
        $('.widget').fadeIn();
+    });
+
+    $('.js-toggle-fullscreen').on('dblclick', function() {
+        var sidebarWidth = $('.container .feed-list').css('width');
+        var headerColor = '#337dff';
+
+        if ($('.content').css('left') !== '0px') {
+            sidebarWidth = 0;
+            headerColor = '#000';
+        }
+
+        $('.header--bar-actions').toggle('slow');
+        $('.header--bar').css('backgroundColor', headerColor);
+        $('.content').animate({
+            left: sidebarWidth
+        }, 1000);
     });
 });
 

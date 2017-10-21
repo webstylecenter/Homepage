@@ -1,6 +1,6 @@
 <?php
 
-$app->get('/share/{id}-{feedId}', function($id, $feedId) use($app) {
+$app->get('/share/{id}/{feedId}', function($id, $feedId) use($app) {
 
     /** @var \Service\RedirectService $redirectService */
     $redirectService = $app['redirectService'];

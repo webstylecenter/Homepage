@@ -1,11 +1,11 @@
 <?php
 
-$app->get('/share/{id}/{feedId}', function($id, $feedId) use($app) {
+$app->get('/share/{feedName}/{id}/', function($feedName, $id) use($app) {
 
     /** @var \Service\RedirectService $redirectService */
     $redirectService = $app['redirectService'];
 
-    $url = $redirectService->getSharedFeedItem($id, $feedId);
+    $url = $redirectService->getSharedFeedItem($id, $feedName);
     header('HTTP/1.1 301 Moved Permanently');
     header('Location: ' . $url);
     exit;

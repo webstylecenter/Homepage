@@ -21,24 +21,14 @@ class RedirectService
 
     /**
      * @param int $id
-     * @param int $feedId
+     * @param int $feedName
      *
      * @return string
      */
-    public function getSharedFeedItem($id, $feedId)
+    public function getSharedFeedItem($id, $feedName)
     {
-        $feedItem = $this->database->fetchAll(
-            'SELECT url FROM feed_data WHERE id = ? AND feed = ? LIMIT 1',
-            [
-                $id,
-                $feedId
-            ],
-            [
-                \PDO::PARAM_INT,
-                \PDO::PARAM_INT
-            ]
-        );
-
+        // TODO: Do a feedName check to see if it matches the selected feedItem for security purposes
+        $feedItem = $this->database->fetchAll('SELECT url FROM feed_data WHERE id = ? LIMIT 1', [$id], [\PDO::PARAM_INT]);
         return $feedItem[0]['url'];
     }
 }

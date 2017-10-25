@@ -1,5 +1,8 @@
 <?php
 
+use Cocur\Slugify\Bridge\Twig\SlugifyExtension;
+use Cocur\Slugify\Slugify;
+
 $app->register(new Silex\Provider\DoctrineServiceProvider(), [
     'dbs.options' => array(
         'main' => array(
@@ -24,6 +27,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), [
 $app['twig'] = $app->extend('twig', function(\Twig_Environment $twig, $app) {
     $twig->addExtension(new Twig_Extensions_Extension_Text());
     $twig->addExtension(new Twig_Extensions_Extension_Date());
+    $twig->addExtension(new SlugifyExtension(Slugify::create()));
     return $twig;
 });
 

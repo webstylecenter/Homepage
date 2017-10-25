@@ -27,6 +27,7 @@
         "guzzlehttp/guzzle": "~6.0",
         "mobiledetect/mobiledetectlib": "^2.8",
         "monolog/monolog": "^1.23",
-        "sentry/sentry": "^1.7"
+        "sentry/sentry": "^1.7",
+        "cocur/slugify": "^3.0"
     }
 }

@@ -106,11 +106,11 @@ $(function() {
 
 });
 
-function requestNewFeedItems() {
+global.requestNewFeedItems = function() {
     $.getJSON('/feed/refresh/' + encodeURI($('body').data('refresh-date')))
         .done(function(data) {
-            var html = data.html.replace('<div class="list scroll">', '<div class="Newlist">');
-            $('.list').prepend(html);
+            var html = data.html;
+            $('.feed-list').prepend(html);
             $('body').data('refresh-date', data.refreshDate);
             $('.js-form-feed').find("input[type=text], textarea").val("");
         });

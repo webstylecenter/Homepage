@@ -31,6 +31,7 @@ function searchFeeds(searchQuery) {
         }
 
         var source = document.getElementById('js-search-result').innerHTML;
+        /** global: Handlebars */
         var template = Handlebars.compile(source);
 
         $('.js-search-list').html(template({

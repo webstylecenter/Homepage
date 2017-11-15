@@ -69,17 +69,17 @@ $app->get('/feed/search/{startIndex}', function($startIndex) use ($app) {
     $feedItems = $feedService->getFeedItems(10, null, $startIndex, $query);
 
     return json_encode([
-       'status' => 'success',
-       'data' => array_map(function (FeedItem $feedItem) {
-           return [
-               'id' => $feedItem->getId(),
-               'title' => $feedItem->getTitle(),
-               'description' => $feedItem->getShortDescription(),
-               'url' => $feedItem->getUrl(),
-               'color' => $feedItem->getColor(),
-               'shareId' => $feedItem->getFeedName() . '/' . $feedItem->getId() . '/',
-               'pinned' => $feedItem->isPinned()
-           ];
-       }, $feedItems)
+        'status' => 'success',
+        'data' => array_map(function (FeedItem $feedItem) {
+            return [
+                'id' => $feedItem->getId(),
+                'title' => $feedItem->getTitle(),
+                'description' => $feedItem->getShortDescription(),
+                'url' => $feedItem->getUrl(),
+                'color' => $feedItem->getColor(),
+                'shareId' => $feedItem->getFeedName() . '/' . $feedItem->getId() . '/',
+                'pinned' => $feedItem->isPinned()
+            ];
+        }, $feedItems)
     ]);
 });

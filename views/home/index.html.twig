@@ -65,4 +65,19 @@
     </footer>
 
     {% include 'modals/create.html.twig' %}
+
+    {% verbatim %}
+        <script id="js-search-result" type="text/x-handlebars-template">
+            <div class="feed-list-item--state-button">Add "<b>{{query}}</b>" to checklist</div>
+            {{#each results}}
+                <div class="feed-list-item js-action-feed-list-click js-action-feed-list-swipe {{#if pinned}}feed-list-item--state-pinned{{/if}}"
+                     data-url="{{url}}" data-share-id="{{shareId}}" style="border-left-color:#{{color}};">
+                    <div class="pin" data-pin-id="{{id}}"></div>
+                    <p class="title">{{title}}</p>
+                    <p class="description">{{description}}</p>
+                </div>
+            {{/each}}
+            <a href="/feed/search/0/{{query}}" class="feed-list-item jscroll-next">Next page</a>
+        </script>
+    {% endverbatim %}
 {% endblock %}

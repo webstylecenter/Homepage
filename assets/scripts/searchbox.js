@@ -25,11 +25,19 @@ function searchFeeds(searchQuery) {
         return;
     }
 
-    $.ajax('/feed/search/' + searchQuery + '/0')
-        .done(function(data) {
-            var html = data.replace('<div class="list scroll">', '<div class="NewSearchlist">');
-            $('.js-search-list').html(html);
-        });
+    $.getJSON('/feed/search/0?query=' + encodeURIComponent(searchQuery), function (data) {
+        if (data.status !== 'success') {
+            return;
+        }
+
+        var source = document.getElementById('js-search-result').innerHTML;
+        var template = Handlebars.compile(source);
+
+        $('.js-search-list').html(template({
+            results: data.data,
+            query: searchQuery
+        }));
+    });
 }
 
 function addToChecklist(value) {

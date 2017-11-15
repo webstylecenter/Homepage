@@ -55,13 +55,31 @@ $app->get('/feed/page/{startIndex}', function($startIndex) use ($app) {
     ]);
 });
 
-$app->get('/feed/search/{query}/{startIndex}', function($query, $startIndex) use ($app) {
+$app->get('/feed/search/{startIndex}', function($startIndex) use ($app) {
+    $query = isset($_GET['query']) ? $_GET['query'] : null;
+    if (!$query) {
+        return json_encode([
+            'status' => 'fail',
+            'message' => 'Missing parameter(s): query'
+        ]);
+    }
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
-    return $app['twig']->render('home/newsfeed.html.twig', [
-        'feedItems'=> $feedService->getFeedItems(10, null, $startIndex, $query),
-        'feeds' => $feedService->getFeeds(),
-        'nextPageNumber' => $startIndex + 1,
-        'addToChecklist' => $query,
+
+    $feedItems = $feedService->getFeedItems(10, null, $startIndex, $query);
+
+    return json_encode([
+       'status' => 'success',
+       'data' => array_map(function (FeedItem $feedItem) {
+           return [
+               'id' => $feedItem->getId(),
+               'title' => $feedItem->getTitle(),
+               'description' => $feedItem->getShortDescription(),
+               'url' => $feedItem->getUrl(),
+               'color' => $feedItem->getColor(),
+               'shareId' => $feedItem->getFeedName() . '/' . $feedItem->getId() . '/',
+               'pinned' => $feedItem->isPinned()
+           ];
+       }, $feedItems)
     ]);
 });

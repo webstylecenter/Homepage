@@ -136,6 +136,19 @@ class FeedItem
     }
 
     /**
+     * @param int $length
+     *
+     * @return string
+     */
+    public function getShortDescription($length = 120)
+    {
+        if (false === ($breakpoint = mb_strpos($this->description, ' ', $length, 'UTF-8'))) {
+            return $this->description;
+        }
+
+        return rtrim(mb_substr($this->description, 0, $breakpoint, 'UTF-8')) . '...';
+    }
+    /**
      * @return string
      */
     public function getUrl()
@@ -220,7 +233,7 @@ class FeedItem
      */
     public function isPinned()
     {
-        return $this->pinned;
+        return !!$this->pinned;
     }
 
     /**

@@ -88,18 +88,19 @@ class FeedService
     public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, \DateTime $fromDate = null, $startIndex = 0, $searchQuery = '')
     {
         $fromDate = $fromDate ?: new \DateTime('@0');
+        $searchQueryString = $searchQuery ? ' AND MATCH(title, description) AGAINST(? IN BOOLEAN MODE)' : null;
+
+        $types = [\PDO::PARAM_STR, \PDO::PARAM_INT, \PDO::PARAM_INT];
+        $params = [$fromDate->format('Y-m-d H:i:s'), ($startIndex * $limit), $limit];
+        if ($searchQuery) {
+            $types = [\PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_INT, \PDO::PARAM_INT];
+            $params = [$fromDate->format('Y-m-d H:i:s'), '*' . $searchQuery . '*', ($startIndex * $limit), $limit];
+        }
+
         $feedItems = $this->database->fetchAll(
-            'SELECT *, feed_data.id AS itemId  FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE feed_data.dateAdded > ? AND (title LIKE ? OR description LIKE ?) ORDER BY feed_data.pinned DESC, feed_data.dateAdded DESC LIMIT ?, ?',
-                [
-                    $fromDate->format('Y-m-d H:i:s'),
-                    '%' . $searchQuery . '%', '%' . $searchQuery . '%',
-                    ($startIndex * $limit), $limit
-                ],
-                [
-                    \PDO::PARAM_STR,
-                    \PDO::PARAM_STR, \PDO::PARAM_STR,
-                    \PDO::PARAM_INT, \PDO::PARAM_INT
-                ]
+            'SELECT *, feed_data.id AS itemId  FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE feed_data.dateAdded > ? ' . $searchQueryString . ' ORDER BY feed_data.pinned DESC, feed_data.dateAdded DESC LIMIT ?, ?',
+            $params,
+            $types
         );
 
         return array_map(function($feedItem) {
@@ -271,7 +272,7 @@ class FeedService
      */
     protected function toFeedItemEntity(array $data)
     {
-        return (new FeedItem($data['itemId'], $data['title'], $data['description'], $data['url'], $data['feed']))
+        return (new FeedItem($data['id'], $data['title'], $data['description'], $data['url'], $data['feed']))
             ->setViewed($data['viewed'])
             ->setDateAdded(new \DateTime($data['dateAdded']))
             ->setPinned($data['pinned'])

@@ -272,7 +272,7 @@ class FeedService
      */
     protected function toFeedItemEntity(array $data)
     {
-        return (new FeedItem($data['id'], $data['title'], $data['description'], $data['url'], $data['feed']))
+        return (new FeedItem($data['itemId'], $data['title'], $data['description'], $data['url'], $data['feed']))
             ->setViewed($data['viewed'])
             ->setDateAdded(new \DateTime($data['dateAdded']))
             ->setPinned($data['pinned'])

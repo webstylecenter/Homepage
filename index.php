@@ -13,13 +13,13 @@ $app = new Silex\Application();
 
 require_once __DIR__ . '/app/config.php';
 require_once __DIR__ . '/app/services.php';
-require_once __DIR__ . '/commands.php';
-require_once __DIR__ . '/controller.php';
 
 if (PHP_SAPI === 'cli') {
     set_time_limit(0);
+    require_once __DIR__ . '/commands.php';
     $app['console']->run();
 } else {
+    require_once __DIR__ . '/controller.php';
     require_once __DIR__ . '/middleware.php';
     $app->run();
 }

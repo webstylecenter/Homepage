@@ -4,7 +4,9 @@ use Cocur\Slugify\Bridge\Twig\SlugifyExtension;
 use Cocur\Slugify\Slugify;
 use Knp\Provider\ConsoleServiceProvider;
 
-$app->register(new ConsoleServiceProvider());
+if (PHP_SAPI === 'cli') {
+    $app->register(new ConsoleServiceProvider());
+}
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), [
     'dbs.options' => array(

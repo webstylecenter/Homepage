@@ -2,6 +2,9 @@
 
 use Cocur\Slugify\Bridge\Twig\SlugifyExtension;
 use Cocur\Slugify\Slugify;
+use Knp\Provider\ConsoleServiceProvider;
+
+$app->register(new ConsoleServiceProvider());
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), [
     'dbs.options' => array(
@@ -37,3 +40,4 @@ $app->register(new \ServiceProvider\NoteServiceProvider());
 $app->register(new \ServiceProvider\ChecklistServiceProvider());
 $app->register(new \ServiceProvider\DroplistServiceProvider());
 $app->register(new \ServiceProvider\RedirectServiceProvider());
+

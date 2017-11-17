@@ -15,10 +15,3 @@ $app->get('/weather/{type}/', function($type) use($app) {
         'forecast' => $weatherService->getForecastList(),
     ]);
 });
-
-$app->get('/weather/update', function() use($app) {
-    /** @var \Service\WeatherService $weatherService */
-    $weatherService = $app['weatherService'];
-    return $weatherService->updateForecast();
-});
-

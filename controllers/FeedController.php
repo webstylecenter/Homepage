@@ -2,11 +2,6 @@
 
 use Entity\FeedItem;
 
-$app->get('/feed/update/', function() use ($app) {
-    $app['feedService']->import();
-    return json_encode(['status' => 'success', 'message' => 'Feed updated']);
-});
-
 $app->post('/feed/add-item/', function() use ($app) {
     if (!isset($_POST['description']) || !isset($_POST['title']) || empty($_POST['title']) || !isset($_POST['url']) || empty($_POST['url'])) {
         return json_encode(['status' => 'fail', 'message' => 'Missing parameter(s): title, description, url']);

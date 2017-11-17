@@ -33,7 +33,10 @@ class FeedService
         $this->database = $database;
     }
 
-    public function import()
+    /**
+     * @param callable $onFeedImported
+     */
+    public function import(callable $onFeedImported)
     {
         foreach ($this->getFeeds() as $feed) {
             if (!$feed->getFeedUrl()) {
@@ -43,6 +46,8 @@ class FeedService
             foreach ($this->read($feed) as $feedItem) {
                 $this->importFeedItem($feed, $feedItem);
             }
+
+            $onFeedImported($feed->getName());
         }
     }
 

@@ -142,6 +142,9 @@ class FeedItem
      */
     public function getShortDescription($length = 120)
     {
+        if (mb_strlen($this->description, 'UTF-8') < 120) {
+            return $this->description;
+        }
         if (false === ($breakpoint = mb_strpos($this->description, ' ', $length, 'UTF-8'))) {
             return $this->description;
         }

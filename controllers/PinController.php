@@ -1,7 +1,9 @@
 <?php
 
-$app->get('/feed/pin/{id}', function($id) use($app) {
+$app->post('/feed/pin/{id}', function($id) use($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
-    return $feedService->pinItem($id);
+    $feedService->pinItem($id);
+
+    return json_encode(['status' => 'success', 'message' => 'Pin toggled']);
 });

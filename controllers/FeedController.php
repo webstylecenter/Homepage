@@ -4,12 +4,12 @@ use Entity\FeedItem;
 
 $app->get('/feed/update/', function() use ($app) {
     $app['feedService']->import();
-    return 'Done';
+    return json_encode(['status' => 'success', 'message' => 'Feed updated']);
 });
 
 $app->post('/feed/add-item/', function() use ($app) {
     if (!isset($_POST['description']) || !isset($_POST['title']) || empty($_POST['title']) || !isset($_POST['url']) || empty($_POST['url'])) {
-        return 'Error: No feed title and/or url provided!';
+        return json_encode(['status' => 'fail', 'message' => 'Missing parameter(s): title, description, url']);
     }
 
     $feedItem = new FeedItem(
@@ -17,7 +17,7 @@ $app->post('/feed/add-item/', function() use ($app) {
         $_POST['title'],
         $_POST['description'] ?: '',
         strpos($_POST['url'], 'http') === 0 ? $_POST['url'] : 'http://' . $_POST['url'],
-        '0'
+        0
     );
 
     /** @var \Service\FeedService $feedService */
@@ -26,7 +26,7 @@ $app->post('/feed/add-item/', function() use ($app) {
     if (!$feedService->addItem($feedItem)) {
         return $feedService->getLastError();
     }
-    return 'Done';
+    return json_encode(['status' => 'success', 'message' => 'Item added']);
 });
 
 $app->get('/feed/refresh/{date}', function($date) use ($app) {
@@ -58,14 +58,11 @@ $app->get('/feed/page/{startIndex}', function($startIndex) use ($app) {
 $app->get('/feed/search/{startIndex}', function($startIndex) use ($app) {
     $query = isset($_GET['query']) ? $_GET['query'] : null;
     if (!$query) {
-        return json_encode([
-            'status' => 'fail',
-            'message' => 'Missing parameter(s): query'
-        ]);
+        return json_encode(['status' => 'fail', 'message' => 'Missing parameter(s): query']);
     }
+
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
-
     $feedItems = $feedService->getFeedItems(10, null, $startIndex, $query);
 
     return json_encode([

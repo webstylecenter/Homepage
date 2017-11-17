@@ -11,10 +11,6 @@ use Symfony\Component\Security\Acl\Exception\Exception;
 use Zend\Feed\Reader\Entry\EntryInterface;
 use Zend\Feed\Reader\Reader;
 
-/**
- * Class FeedService
- * @package Service
- */
 class FeedService
 {
     const DEFAULT_ITEM_LIMIT = 50;
@@ -81,48 +77,54 @@ class FeedService
      * @param int $limit
      * @param \DateTime|null $fromDate
      * @param int $startIndex
-     * @param string $searchQuery
+     * @param string|null $searchQuery
      *
-     * @return array
+     * @return FeedItem[]
      */
-    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, \DateTime $fromDate = null, $startIndex = 0, $searchQuery = '')
+    public function getFeedItems($limit = self::DEFAULT_ITEM_LIMIT, \DateTime $fromDate = null, $startIndex = 0, $searchQuery = null)
     {
         $fromDate = $fromDate ?: new \DateTime('@0');
-        $searchQueryString = $searchQuery ? ' AND MATCH(title, description) AGAINST(? IN BOOLEAN MODE)' : null;
 
-        $types = [\PDO::PARAM_STR, \PDO::PARAM_INT, \PDO::PARAM_INT];
-        $params = [$fromDate->format('Y-m-d H:i:s'), ($startIndex * $limit), $limit];
+        $params = [$fromDate->format('Y-m-d H:i:s')];
         if ($searchQuery) {
-            $types = [\PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_INT, \PDO::PARAM_INT];
-            $params = [$fromDate->format('Y-m-d H:i:s'), '*' . $searchQuery . '*', ($startIndex * $limit), $limit];
+            $params[] = '*' . $searchQuery . '*';
         }
 
-        $feedItems = $this->database->fetchAll(
-            'SELECT *, feed_data.id AS itemId  FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE feed_data.dateAdded > ? ' . $searchQueryString . ' ORDER BY feed_data.pinned DESC, feed_data.dateAdded DESC LIMIT ?, ?',
+        $feedItems = $this->database->fetchAll("
+            SELECT feed_data.*, feeds.color as feedColor, feeds.name as feedName
+            FROM feed_data 
+            LEFT JOIN feeds 
+            ON feed_data.feed = feeds.id 
+            WHERE feed_data.dateAdded > ? 
+            " . ($searchQuery ? ' AND MATCH(title, description) AGAINST(? IN BOOLEAN MODE)' : null) . " 
+            ORDER BY feed_data.pinned DESC, feed_data.dateAdded DESC 
+            LIMIT " . (int) $limit . " 
+            OFFSET " . (int) ($startIndex * $limit),
             $params,
-            $types
+            array_fill(0, count($params), \PDO::PARAM_STR)
         );
 
-        return array_map(function($feedItem) {
-            return $this->toFeedItemEntity($feedItem);
-        }, $feedItems);
+        return array_map([$this, 'toFeedItemEntity'], $feedItems);
     }
 
     /**
      * @param array $sites
-     * @return array
+     * @return FeedItem[]
      */
     public function getFeedItemsBySites(array $sites)
     {
-        $params = str_repeat('?,', count($sites) - 1) . '?';
-        $feedItems = $this->database->fetchAll(
-        'SELECT *, feed_data.id AS itemId FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id WHERE feed IN (' . $params . ') ORDER BY feed_data.pinned DESC, feed_data.dateAdded DESC LIMIT 50',
+        $feedItems = $this->database->fetchAll("
+            SELECT feed_data.*, feeds.color as feedColor, feeds.name as feedName
+            FROM feed_data 
+            LEFT JOIN feeds 
+            ON feed_data.feed = feeds.id 
+            WHERE feed IN (" . (str_repeat('?,', count($sites) - 1) . '?') . ")
+            ORDER BY feed_data.pinned DESC, feed_data.dateAdded DESC
+            LIMIT 50",
             $sites
         );
 
-        return array_map(function($feedItem) {
-            return $this->toFeedItemEntity($feedItem);
-        }, $feedItems);
+        return array_map([$this, 'toFeedItemEntity'], $feedItems);
     }
 
     /**
@@ -130,7 +132,14 @@ class FeedService
      */
     public function getFeedItemTotals()
     {
-        return $this->database->fetchAll('SELECT feed,COUNT(*) as count, name, feed_data.dateAdded FROM feed_data LEFT JOIN feeds ON feed_data.feed = feeds.id GROUP BY feed ORDER BY count DESC');
+        return $this->database->fetchAll("
+            SELECT feed, COUNT(*) as count, name, feed_data.dateAdded 
+            FROM feed_data 
+            LEFT JOIN feeds 
+            ON feed_data.feed = feeds.id 
+            GROUP BY feed 
+            ORDER BY count DESC
+        ");
     }
 
     public function markAllViewed()
@@ -140,27 +149,23 @@ class FeedService
 
     /**
      * @param int $id
-     *
-     * @return boolean
      */
     public function pinItem($id)
     {
-        $feedItem = $this->database->fetchAssoc('SELECT pinned FROM feed_data WHERE id = ?', [$id], [\PDO::PARAM_INT]);
-        $newPinState = $feedItem['pinned'] == 1 ? NULL : 1;
-        return $this->database->update('feed_data', ['pinned' => $newPinState], ['id' => $id]);
+        $this->database->query('UPDATE feed_data SET pinned = !pinned WHERE id = ' . (int) $id);
     }
 
     /**
      * @param FeedItem $feedItem
      *
-     * @return string
+     * @return boolean
      */
     public function addItem(FeedItem $feedItem)
     {
         try {
             $this->database->insert('feed_data', [
                 'guid' => $feedItem->getId(),
-                'feed' => '0',
+                'feed' => 0,
                 'title' => $feedItem->getTitle(),
                 'description' => $feedItem->getDescription(),
                 'url' => $feedItem->getUrl(),
@@ -186,15 +191,15 @@ class FeedService
     }
 
     /**
-     * @param $name
-     * @param $url
-     * @param $color
+     * @param string $name
+     * @param string $url
+     * @param string $color
      *
      * @return int
      */
     public function addFeed($name, $url, $color)
     {
-        if (empty($name) || empty($url) || empty($color)) {
+        if (!$name || !$url || !$color) {
             throw new Exception('Not all feed data given');
         }
 
@@ -217,13 +222,8 @@ class FeedService
             throw new Exception('No feed Id given to remove');
         }
 
-        $this->database->delete('feed_data', [
-            'feed' => $feedId
-        ]);
-
-        return $this->database->delete('feeds', [
-            'id' => $feedId
-        ]);
+        $this->database->delete('feed_data', ['feed' => $feedId]);
+        return $this->database->delete('feeds', ['id' => $feedId]);
     }
 
     /**
@@ -272,11 +272,11 @@ class FeedService
      */
     protected function toFeedItemEntity(array $data)
     {
-        return (new FeedItem($data['itemId'], $data['title'], $data['description'], $data['url'], $data['feed']))
+        return (new FeedItem($data['id'], $data['title'], $data['description'], $data['url'], $data['feed']))
             ->setViewed($data['viewed'])
             ->setDateAdded(new \DateTime($data['dateAdded']))
             ->setPinned($data['pinned'])
-            ->setColor($data['color'])
-            ->setFeedName($data['name']);
+            ->setColor($data['feedColor'])
+            ->setFeedName($data['feedName']);
     }
 }

@@ -51,7 +51,7 @@ class ChecklistService
         $persist = $id === null ? 'insert' : 'update';
         $identifier = $persist === 'update' ? ['id' => $id] : [];
 
-        $data = ['checked' => $checked, 'lastUpdated' => date('Y-m-d H:i:s')];
+        $data = ['checked' => (int) $checked, 'lastUpdated' => date('Y-m-d H:i:s')];
         if ($persist === 'insert') {
             $data['item'] = $checklistItem;
         }

@@ -1,5 +1,7 @@
 <?php
 
+chdir(__DIR__);
+
 if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'dev') !== false) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);

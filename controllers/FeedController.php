@@ -62,7 +62,7 @@ $app->get('/feed/search/{startIndex}', function($startIndex) use ($app) {
 
     return json_encode([
         'status' => 'success',
-        'data' => array_map(function (FeedItem $feedItem) {
+        'data' => array_map(function(FeedItem $feedItem) {
             return [
                 'id' => $feedItem->getId(),
                 'title' => $feedItem->getTitle(),

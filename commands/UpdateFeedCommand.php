@@ -35,7 +35,7 @@ class UpdateFeedCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<comment>Importing feeds...</comment>');
-        $this->app['feedService']->import(function ($feedName) use ($output) {
+        $this->app['feedService']->import(function($feedName) use ($output) {
             $output->writeln('<fg=cyan>Feed imported: ' . $feedName . '</>');
         });
 

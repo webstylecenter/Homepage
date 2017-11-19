@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Chrome Extension Import{% endblock %}
+
+{% block body %}
+    <div class="chromeImported">
+        <h1>Webpage pinned!</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <td><b>Title:</b></td>
+                    <td>{{ import.title }}</td>
+                </tr>
+                <tr>
+                    <td><b>Description:</b></td>
+                    <td class="userInput">{{ import.description }}</td>
+                </tr>
+                <tr>
+                    <td><b>Url:</b></td>
+                    <td>{{ import.url }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        setTimeout(function() {
+            //window.close();
+        }, 2000);
+    </script>
+{% endblock %}

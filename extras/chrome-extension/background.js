@@ -1,4 +1,5 @@
-chrome.browserAction.onClicked.addListener(function(activeTab){
+/** global: chrome */
+chrome.browserAction.onClicked.addListener(function(){
 
 	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 	    var url = tabs[0].url;
@@ -15,6 +16,8 @@ chrome.browserAction.onClicked.addListener(function(activeTab){
 		    var response = JSON.parse(this.responseText);
 			var title = response.status === 'success' ? response.data.title : 'Error occurred';
 			var body = response.status === 'success' ? response.data.description : response.message;
+
+            /** global: Notification */
 			new Notification(title, {icon: 'feednews.png', body: body});
 
 		};

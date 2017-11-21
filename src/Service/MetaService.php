@@ -28,7 +28,7 @@ class MetaService
 
         $doc = $this->loadContent($url);
         $meta->setUrl($url);
-        $meta->setTitle($this->findTitle($doc));
+        $meta->setTitle($this->findTitle($doc) ?: $url);
         $meta->setMetaDescription($this->findMetaDescription($doc));
 
         return $meta;
@@ -47,19 +47,21 @@ class MetaService
             ]
         ];
 
-        $html = '';
-        $html .= @file_get_contents($url, false, stream_context_create($options));
-        return @\DOMDocument::loadHTML($html);
+        $html = @file_get_contents($url, false, stream_context_create($options));
+        return @\DOMDocument::loadHTML((string) $html);
     }
 
     /**
      * @param \DOMDocument $doc
      *
-     * @return string
+     * @return string|null
      */
     protected function findTitle(\DOMDocument $doc)
     {
-        return $doc->getElementsByTagName('title')->item(0)->nodeValue;
+        $titleNode = $doc->getElementsByTagName('title');
+        $titleContents = $titleNode ? $titleNode->item(0) : null;
+
+        return $titleContents ? $titleContents->nodeValue : null;
     }
 
     /**

@@ -58,11 +58,6 @@ $(function() {
        $('.mainContent, .widget').fadeIn();
     });
 
-    $('.page--homepage .header').animate({
-        height: '30vh'
-    }, 500);
-    $('.mainContent, .widget').fadeIn();
-
     $('.js-homepage-showpage').on('click', function() {
        $('.view').slideUp().delay(100);
        $('.mainContent nav span').removeClass('active');

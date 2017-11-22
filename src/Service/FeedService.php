@@ -125,7 +125,7 @@ class FeedService
             ON feed_data.feed = feeds.id 
             WHERE feed IN (" . (str_repeat('?,', count($sites) - 1) . '?') . ")
             ORDER BY feed_data.pinned DESC, feed_data.dateAdded DESC
-            LIMIT 50",
+            LIMIT 100",
             $sites
         );
 
@@ -229,6 +229,20 @@ class FeedService
 
         $this->database->delete('feed_data', ['feed' => $feedId]);
         return $this->database->delete('feeds', ['id' => $feedId]);
+    }
+
+    /**
+     * @return array
+     */
+    public function getFeedOveriew()
+    {
+        $feedOverview = [];
+        $feeds = $this->getFeeds();
+        foreach ($feeds as $feed) {
+            $feedOverview[$feed->getName()] = $this->getFeedItemsBySites([$feed->getId()]);
+        }
+        ksort($feedOverview);
+        return $feedOverview;
     }
 
     /**

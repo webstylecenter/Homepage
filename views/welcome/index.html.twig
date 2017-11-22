@@ -6,10 +6,23 @@
             {% include 'widgets/weather.html.twig' %}
         </div>
 
-        <div class="widgets">
-            {% include 'widgets/notes.html.twig' with {'notes':notes }  %}
-            {% include 'widgets/checklist.html.twig' with {'todos': todos } %}
-            {% include 'widgets/custom-items-list.html.twig' with { 'addedLinks': addedLinks } %}
+        <div class="mainContent">
+            <nav>
+                <span class="js-homepage-showpage active" data-page="widgets">Notes</span>
+                <span class="js-homepage-showpage" data-page="feeds">Feed overview</span>
+            </nav>
+
+            <div class="views">
+                <div class="view widgets">
+                    {% include 'widgets/notes.html.twig' with {'notes':notes }  %}
+                    <div class="checklist-widget">{% include 'widgets/checklist.html.twig' with {'todos': todos } %}</div>
+                </div>
+
+                <div class="view feeds">
+                    Loading feeds...
+                </div>
+            </div>
+
         </div>
     </div>
 {% endblock %}

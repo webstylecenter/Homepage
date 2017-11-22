@@ -75,3 +75,15 @@ $app->get('/feed/search/{startIndex}', function($startIndex) use ($app) {
         }, $feedItems)
     ]);
 });
+
+
+$app->get('/feeds/overview/', function() use($app) {
+
+    /** @var \Service\FeedService $feedService */
+    $feedService = $app['feedService'];
+
+    return $app['twig']->render('widgets/feed-overview.html.twig', [
+        'feeds' => $feedService->getFeedOveriew()
+    ]);
+
+});

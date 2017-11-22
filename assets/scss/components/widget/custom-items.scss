@@ -1,6 +1,11 @@
 .widget-custom-items {
-  width: 100%;
-  clear: both;
+  width: 30%;
+  display: inline-block;
+
+  h2 {
+    color: $blue;
+    margin-bottom: 10px;
+  }
 }
 .widget-custom-item {
     width: 100%;
@@ -22,4 +27,20 @@
       color: #292929;
       opacity: 0.5;
     }
+}
+
+.quickjump {
+  display: block;
+  position: fixed;
+  top: 40vh;
+  right: 0;
+  width: 150px;
+  background-color: whitesmoke;
+  padding: 10px;
+
+  a {
+    color: $blue;
+    display:block;
+    margin-bottom: 5px;
+  }
 }

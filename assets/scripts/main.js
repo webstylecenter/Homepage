@@ -53,9 +53,22 @@ $(function() {
 
     $('.page--homepage').on('click', function() {
        $('.page--homepage .header').animate({
-           height: '400px'
+           height: '30vh'
        }, 500);
-       $('.widget').fadeIn();
+       $('.mainContent, .widget').fadeIn();
+    });
+
+    $('.page--homepage .header').animate({
+        height: '30vh'
+    }, 500);
+    $('.mainContent, .widget').fadeIn();
+
+    $('.js-homepage-showpage').on('click', function() {
+       $('.view').slideUp().delay(100);
+       $('.mainContent nav span').removeClass('active');
+       $('.' + $(this).data('page')).slideDown();
+       $(this).addClass('active');
+       $('.page--homepage .feeds').load('/feeds/overview/');
     });
 
     $('.js-toggle-fullscreen').on('dblclick', function() {

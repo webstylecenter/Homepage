@@ -9,6 +9,10 @@
     padding: 0;
   }
 
+  .checklist--form {
+    margin-left: 10px;
+  }
+
   .checklist--form input {
     font-size: 9pt;
   }
@@ -29,5 +33,15 @@
 
   .checklist--list h2 {
     display: none;
+  }
+}
+.checklist-widget {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  .widget--checklist {
+    width: 30vw;
+    height: auto;
   }
 }

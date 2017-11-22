@@ -1,0 +1,16 @@
+<div class="quickjump">
+    {% for feedname, feed in feeds %}
+        <a href="#feedOverview{{ feedname|slugify }}">{{ feedname }}</a>
+    {% endfor %}
+</div>
+
+{% for feedname, feed in feeds %}
+    <div class="widget widget-custom-items" id="feedOverview{{ feedname|slugify }}">
+        <h2>{{ feedname }}</h2>
+        {% for item in feed %}
+            <div class="widget-custom-item" data-url="{{ item.url }}">
+                {{ item.title }} <span class="description">{{ item.description }}</span>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}

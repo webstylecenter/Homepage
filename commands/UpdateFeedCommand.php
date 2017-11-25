@@ -31,13 +31,18 @@ class UpdateFeedCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<comment>Importing feeds...</comment>');
-        $this->app['feedService']->import(function($feedName) use ($output) {
-            $output->writeln('<fg=cyan>Feed imported: ' . $feedName . '</>');
-        });
+        $this->app['feedService']->import(
+            function($feedName) use ($output) {
+                $output->writeln('<fg=cyan>Feed imported: ' . $feedName . '</>');
+            }, function($feedName, \Exception $exception) use ($output) {
+                $output->writeln('<error>Feed ' . $feedName . ' import failed with reason: ' . $exception->getMessage() . '</error>');
+            }
+        );
 
         $output->writeln('<info>Feeds imported!</info>');
     }

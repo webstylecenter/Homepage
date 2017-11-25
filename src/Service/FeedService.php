@@ -35,19 +35,23 @@ class FeedService
 
     /**
      * @param callable $onFeedImported
+     * @param callable $onFeedImportFailed
      */
-    public function import(callable $onFeedImported)
+    public function import(callable $onFeedImported, callable $onFeedImportFailed)
     {
         foreach ($this->getFeeds() as $feed) {
             if (!$feed->getFeedUrl()) {
                 continue;
             }
 
-            foreach ($this->read($feed) as $feedItem) {
-                $this->importFeedItem($feed, $feedItem);
+            try {
+                foreach ($this->read($feed) as $feedItem) {
+                    $this->importFeedItem($feed, $feedItem);
+                }
+                $onFeedImported($feed->getName());
+            } catch (\Exception $exception) {
+                $onFeedImportFailed($feed->getName(), $exception);
             }
-
-            $onFeedImported($feed->getName());
         }
     }
 

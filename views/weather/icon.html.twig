@@ -1,29 +1,30 @@
 {# @var forecast \Entity\WeatherForecastList #}
+{% if forecast %}
+    {% if 'partly_cloud' == forecast.current.type %}
+        <span class="fa fa-cloud"></span>
+    {% endif %}
 
-{% if 'partly_cloud' == forecast.current.type %}
-    <span class="fa fa-cloud"></span>
+    {% if 'thunderstorm' == forecast.current.type %}
+        <span class="fa fa-bolt"></span>
+    {% endif %}
+
+    {% if 'rain' == forecast.current.type %}
+        <span class="fa fa-tint"></span>
+    {% endif %}
+
+    {% if 'snow' == forecast.current.type %}
+        <span class="fa fa-snowflake-o"></span>
+    {% endif %}
+
+    {% if 'sun' == forecast.current.type %}
+        <span class="fa fa-sun-o"></span>
+    {% endif %}
+
+    {% if 'cloud' == forecast.current.type %}
+        <span class="fa fa-cloud"></span>
+    {% endif %}
+
+    <span class="temperature">
+        {{ forecast.current.temperature }}&deg;C
+    </span>
 {% endif %}
-
-{% if 'thunderstorm' == forecast.current.type %}
-    <span class="fa fa-bolt"></span>
-{% endif %}
-
-{% if 'rain' == forecast.current.type %}
-    <span class="fa fa-tint"></span>
-{% endif %}
-
-{% if 'snow' == forecast.current.type %}
-    <span class="fa fa-snowflake-o"></span>
-{% endif %}
-
-{% if 'sun' == forecast.current.type %}
-    <span class="fa fa-sun-o"></span>
-{% endif %}
-
-{% if 'cloud' == forecast.current.type %}
-    <span class="fa fa-cloud"></span>
-{% endif %}
-
-<span class="temperature">
-    {{ forecast.current.temperature }}&deg;C
-</span>

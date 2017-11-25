@@ -2,48 +2,53 @@
 
 namespace Service;
 
-use Doctrine\DBAL\Connection;
+use Entity\WeatherForecastList;
 use Service\Adapter\Weather\WeatherAdapterInterface;
 
-/**
- * Class WeatherService
- * @package Service
- */
 class WeatherService
 {
+    const WEATHER_CACHE_DURATION = 0;
+
     /**
      * @var WeatherAdapterInterface
      */
     protected $weatherAdapter;
 
     /**
-     * @var Connection
+     * @var \Memcached|null
      */
-    protected $database;
+    protected $cache = null;
 
     /**
      * @param WeatherAdapterInterface $weatherAdapter
-     * @param Connection $database
+     * @param \Memcached|null $cache
      */
-    public function __construct(WeatherAdapterInterface $weatherAdapter, Connection $database)
+    public function __construct(WeatherAdapterInterface $weatherAdapter, \Memcached $cache = null)
     {
         $this->weatherAdapter = $weatherAdapter;
-        $this->database = $database;
+        $this->cache = $cache;
     }
 
     /**
-     * @return \Entity\WeatherForecastList
+     * @return WeatherForecastList|null
      */
     public function getForecastList()
     {
-        return $this->weatherAdapter->getForecast();
+        return $this->cache
+            ? $this->cache->get('weather_forecast')
+            : $this->fetchForecast();
     }
 
     /**
-     * @return string
+     * @return WeatherForecastList|null
      */
-    public function updateForecast()
+    public function fetchForecast()
     {
-        return $this->weatherAdapter->updateForecast();
+        $weatherForecast = $this->weatherAdapter->fetchForecast();
+        if ($this->cache) {
+            $this->cache->set('weather_forecast', $weatherForecast, self::WEATHER_CACHE_DURATION);
+        }
+
+        return $weatherForecast;
     }
 }

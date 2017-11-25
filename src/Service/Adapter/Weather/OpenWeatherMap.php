@@ -2,15 +2,9 @@
 
 namespace Service\Adapter\Weather;
 
-use Doctrine\DBAL\Connection;
 use Entity\WeatherForecast;
 use Entity\WeatherForecastList;
-use function GuzzleHttp\Promise\exception_for;
 
-/**
- * Class OpenWeatherMap
- * @package Service\Adapter\Weather
- */
 class OpenWeatherMap implements WeatherAdapterInterface
 {
     const API_URL_PREFIX = 'http://api.openweathermap.org/data/2.5/';
@@ -24,23 +18,16 @@ class OpenWeatherMap implements WeatherAdapterInterface
      * @var string
      */
     protected $forecastUrl;
-
-    /**
-     * @var Connection
-     */
-    protected $database;
-
+    
     /**
      * @param array $config
-     * @param Connection $database
      */
-    public function __construct(array $config, Connection $database)
+    public function __construct(array $config)
     {
         $key = $config['openWeatherMap']['key'];
         $location = $config['openWeatherMap']['location'];
         $this->weatherUrl = self::API_URL_PREFIX . 'weather?q=' . $location . '&APPID=' . $key . '&units=metric';
         $this->forecastUrl = self::API_URL_PREFIX . 'forecast?q=' . $location . '&APPID=' . $key . '&units=metric';
-        $this->database = $database;
     }
 
     /**
@@ -48,26 +35,16 @@ class OpenWeatherMap implements WeatherAdapterInterface
      */
     public function getForecast()
     {
-        return unserialize($this->database->fetchAll('SELECT data FROM cache WHERE cache_id = "weather_forecast" LIMIT 1')[0]['data']);
+        return $this->cache ? $this->cache->get('weather_forecast') : null;
     }
 
     /**
-     * @return string
+     * @return WeatherForecastList
      */
-    public function updateForecast()
+    public function fetchForecast()
     {
         $forecastData = $this->downloadForecast();
-        $weatherForecastList = $this->createForecastList($forecastData['weather'], $forecastData['forecast']);
-
-        $this->database->update(
-            'cache', [
-                'data'=> serialize($weatherForecastList),
-                'updated_at'=> date('y-m-d H:i:s')
-            ], [
-                'cache_id' => 'weather_forecast'
-            ]
-        );
-        return 'Done';
+        return $this->createForecastList($forecastData['weather'], $forecastData['forecast']);
     }
 
     /**

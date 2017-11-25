@@ -31,11 +31,12 @@ class UpdateWeatherCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<comment>Importing weather...</comment>');
-        $this->app['weatherService']->updateForecast();
+        $this->app['weatherService']->fetchForecast();
         $output->writeln('<info>Weather imported!</info>');
     }
 }

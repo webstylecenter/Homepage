@@ -33,14 +33,6 @@ class OpenWeatherMap implements WeatherAdapterInterface
     /**
      * @return WeatherForecastList
      */
-    public function getForecast()
-    {
-        return $this->cache ? $this->cache->get('weather_forecast') : null;
-    }
-
-    /**
-     * @return WeatherForecastList
-     */
     public function fetchForecast()
     {
         $forecastData = $this->downloadForecast();

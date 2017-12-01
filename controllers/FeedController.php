@@ -24,6 +24,14 @@ $app->post('/feed/add-item/', function() use ($app) {
     return json_encode(['status' => 'success', 'message' => 'Item added']);
 });
 
+$app->post('/feed/pin/{id}', function($id) use($app) {
+    /** @var \Service\FeedService $feedService */
+    $feedService = $app['feedService'];
+    $feedService->pinItem($id);
+
+    return json_encode(['status' => 'success', 'message' => 'Pin toggled']);
+});
+
 $app->get('/feed/refresh/{date}', function($date) use ($app) {
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
@@ -75,7 +83,6 @@ $app->get('/feed/search/{startIndex}', function($startIndex) use ($app) {
         }, $feedItems)
     ]);
 });
-
 
 $app->get('/feeds/overview/', function() use($app) {
 

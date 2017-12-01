@@ -23,12 +23,12 @@ class ChecklistItem
      */
     protected $checked;
 
-
     /**
-     * @param $id
-     * @param $item
+     * @param integer|null $id
+     * @param string|null $item
+     * @param boolean $checked
      */
-    public function __construct($id = null, $item = null, $checked = null)
+    public function __construct($id = null, $item = null, $checked = false)
     {
         $this->id = $id;
         $this->item = $item;

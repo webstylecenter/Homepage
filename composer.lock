@@ -803,7 +803,7 @@
             ],
             "authors": [
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 }
             ],
@@ -1301,16 +1301,16 @@
         },
         {
             "name": "silex/silex",
-            "version": "v2.2.2",
+            "version": "v2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Silex.git",
-                "reference": "3fe50331f194c83ded2f824c47c1c24c20877a8c"
+                "reference": "90c80c3e5ef86c54b8769feca0320154c6e63f7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex/zipball/3fe50331f194c83ded2f824c47c1c24c20877a8c",
-                "reference": "3fe50331f194c83ded2f824c47c1c24c20877a8c",
+                "url": "https://api.github.com/repos/silexphp/Silex/zipball/90c80c3e5ef86c54b8769feca0320154c6e63f7c",
+                "reference": "90c80c3e5ef86c54b8769feca0320154c6e63f7c",
                 "shasum": ""
             },
             "require": {
@@ -1386,7 +1386,7 @@
             "keywords": [
                 "microframework"
             ],
-            "time": "2018-01-12T07:16:03+00:00"
+            "time": "2018-02-25T11:21:42+00:00"
         },
         {
             "name": "symfony/console",

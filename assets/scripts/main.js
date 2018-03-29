@@ -87,6 +87,10 @@ function getUrlMetaData() {
     var Url = $('.js-form-feed [name="url"]').val();
 
     if (Url.length > 0) {
+
+        $('.js-form-feed [name="title"]').val("Loading info...");
+        $('.js-form-feed [name="description"]').val("");
+
         $.ajax({
             method: "POST",
             url: "/meta/",
@@ -94,8 +98,14 @@ function getUrlMetaData() {
         })
             .done(function( data ) {
                 var json = $.parseJSON(data);
-                $('.js-form-feed [name="title"]').val(json.title);
-                $('.js-form-feed [name="description"]').val(json.description);
+                if (json.status == 'success') {
+                    $('.js-form-feed [name="title"]').val(json.data.title);
+                    $('.js-form-feed [name="description"]').val(json.data.description);
+                } else {
+                    $('.js-form-feed [name="title"]').val("");
+                    $('.js-form-feed [name="description"]').val("");
+                }
+
             });
     }
 }

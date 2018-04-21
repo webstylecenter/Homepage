@@ -29,9 +29,14 @@
          data-url="{{ item.url }}" data-share-id="{{ item.feedName|slugify }}/{{ item.id }}/" style="border-left-color:#{{ item.color }};">
         <div class="pin" data-pin-id="{{ item.id }}"></div>
         <p class="title ">{{ item.title|striptags }}</p>
-        <p class="description">{{ item.description|truncate(120, true) }}</p>
+        <p class="description">
+            {% if item.description|length > 0 %}
+                {{ item.description|truncate(120, true) }}
+            {% else %}
+                {{ item.feedName }}
+            {% endif %}
+        </p>
     </div>
-
 {% endfor %}
 
 {% if feedItems|length > 0 and nextPageNumber != 50000 %}

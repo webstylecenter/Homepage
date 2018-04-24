@@ -9,7 +9,7 @@
   left: 0;
   top: 0;
   z-index: 900;
-  color: white;
+  color: rgba(255, 255, 255, 0.8);
 
   @include  respond-to('mobile') {
     top: inherit;
@@ -56,7 +56,6 @@
   }
   &-actions {
     float: right;
-    color: white;
 
     @include  respond-to('mobile') {
       color:#000;
@@ -81,7 +80,6 @@
         background-color: rgba(255, 255, 255, 0.3);
         border: 0;
         padding: 5px 5px;
-        color: white;
 
         @include respond-to(mobile) {
           display: none;
@@ -92,7 +90,7 @@
       }
 
       input::-webkit-input-placeholder {
-        color: white;
+        color: rgba(255, 255, 255, 0.8);
       }
     }
 

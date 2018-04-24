@@ -106,9 +106,10 @@ function parseYoutubeUrl(url) {
 
     var videoId = url.replace('https://www.youtube.com/watch?v=', '');
     if (url !== videoId) {
+        $('.feed-list').switchClass('', 'darkTheme', 2000, 'easeInOutQuad');
         return 'https://www.youtube.com/embed/' + videoId + '?autoplay=true';
     }
-
+    $('.feed-list').switchClass('darkTheme', '', 2000, 'easeInOutQuad');
     return url;
 }
 

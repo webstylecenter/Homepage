@@ -96,11 +96,20 @@ function openPage(url, shareId) {
     $('.js-reload-page').addClass('hide-if-mobile hide-if-tablet');
     $('.js-return').addClass('show-if-mobile show-if-tablet');
     $('.header--bar').addClass('show-if-mobile');
-
-    $('iframe').attr('src', url);
+    $('iframe').attr('src', parseYoutubeUrl(url));
     $('.urlbar a').text('https://' + window.location.hostname + '/share/' + shareId).attr('href', url);
     $('.js-copy-to-clipboard').attr('data-clipboard-text', 'https://' + window.location.hostname + '/share/' + shareId).addClass('show-if-mobile show-if-tablet');
     $('.js-open-new-window').addClass('show-if-mobile show-if-tablet');
+}
+
+function parseYoutubeUrl(url) {
+
+    var videoId = url.replace('https://www.youtube.com/watch?v=', '');
+    if (url !== videoId) {
+        return 'https://www.youtube.com/embed/' + videoId + '?autoplay=true';
+    }
+
+    return url;
 }
 
 function hexToRgb(hex) {

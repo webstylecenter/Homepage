@@ -29,6 +29,11 @@ class Feed
     protected $color;
 
     /**
+     * @var string
+     */
+    protected $feedIcon;
+
+    /**
      * @var \DateTime
      */
     protected $created;
@@ -39,12 +44,13 @@ class Feed
      * @param $feedUrl
      * @param $color
      */
-    public function __construct($id, $name, $feedUrl, $color)
+    public function __construct($id, $name, $feedUrl, $color, $feedIcon)
     {
         $this->id           = $id;
         $this->name         = $name;
         $this->feedUrl      = $feedUrl;
         $this->color        = $color;
+        $this->feedIcon     = $feedIcon;
         $this->created      = new \DateTime;
     }
 
@@ -126,5 +132,23 @@ class Feed
     public function setCreated($created)
     {
         $this->created = $created;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFeedIcon()
+    {
+        return $this->feedIcon;
+    }
+
+    /**
+     * @param string $feedIcon
+     * @return Feed
+     */
+    public function setFeedIcon($feedIcon)
+    {
+        $this->feedIcon = $feedIcon;
+        return $this;
     }
 }

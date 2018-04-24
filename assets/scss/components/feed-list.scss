@@ -45,6 +45,7 @@
 .feed-list-item {
   padding: 10px;
   border-left: 5px solid #ffbe3f;
+  position: relative;
 
   &:nth-child(odd) {
     background: rgba(123, 123, 123, 0.05);
@@ -107,6 +108,27 @@
     right: 0;
     float: right;
   }
+
+  .feed-icon {
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    left: -5px;
+    bottom: 0;
+    color: white;
+    width: 35px;
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.hasIcon {
+  padding-left: 40px;
 }
 
 .darkTheme {

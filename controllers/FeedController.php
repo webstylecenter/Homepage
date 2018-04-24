@@ -77,6 +77,7 @@ $app->get('/feed/search/{startIndex}', function($startIndex) use ($app) {
                 'description' => $feedItem->getShortDescription(),
                 'url' => $feedItem->getUrl(),
                 'color' => $feedItem->getColor(),
+                'feedIcon' => $feedItem->getFeedIcon(),
                 'shareId' => $feedItem->getFeedName() . '/' . $feedItem->getId() . '/',
                 'pinned' => $feedItem->isPinned()
             ];

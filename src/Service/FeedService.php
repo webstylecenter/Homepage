@@ -63,7 +63,7 @@ class FeedService
         $feedList = $this->database->fetchAll('SELECT * FROM feeds');
 
         return array_map(function($feed) {
-            return new Feed($feed['id'], $feed['name'], $feed['feedUrl'], $feed['color']);
+            return new Feed($feed['id'], $feed['name'], $feed['feedUrl'], $feed['color'], $feed['feedIcon']);
         }, $feedList);
     }
 
@@ -100,7 +100,7 @@ class FeedService
         }
 
         $feedItems = $this->database->fetchAll("
-            SELECT feed_data.*, feeds.color as feedColor, feeds.name as feedName
+            SELECT feed_data.*, feeds.color as feedColor, feeds.name as feedName, feeds.icon as feedIcon
             FROM feed_data 
             LEFT JOIN feeds 
             ON feed_data.feed = feeds.id 
@@ -123,7 +123,7 @@ class FeedService
     public function getFeedItemsBySites(array $sites)
     {
         $feedItems = $this->database->fetchAll("
-            SELECT feed_data.*, feeds.color as feedColor, feeds.name as feedName
+            SELECT feed_data.*, feeds.color as feedColor, feeds.name as feedName, feeds.icon as feedIcon
             FROM feed_data 
             LEFT JOIN feeds 
             ON feed_data.feed = feeds.id 
@@ -200,13 +200,14 @@ class FeedService
     }
 
     /**
-     * @param string $name
-     * @param string $url
-     * @param string $color
-     *
+     * @param $name
+     * @param $url
+     * @param $color
+     * @param $feedIcon
      * @return int
+     * @throws \Doctrine\DBAL\DBALException
      */
-    public function addFeed($name, $url, $color)
+    public function addFeed($name, $url, $color, $feedIcon)
     {
         if (!$name || !$url || !$color) {
             throw new Exception('Not all feed data given');
@@ -216,6 +217,7 @@ class FeedService
             'name' => $name,
             'feedUrl' => $url,
             'color' => $color,
+            'feedIcon' => $feedIcon,
             'created' => (new \DateTime())->format('Y-m-d H:i:s')
         ]);
     }
@@ -300,6 +302,7 @@ class FeedService
             ->setDateAdded(new \DateTime($data['dateAdded']))
             ->setPinned($data['pinned'])
             ->setColor($data['feedColor'])
+            ->setFeedIcon($data['feedIcon'])
             ->setFeedName($data['feedName']);
     }
 }

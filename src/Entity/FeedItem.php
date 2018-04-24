@@ -56,6 +56,11 @@ class FeedItem
     /**
      * @var string
      */
+    protected $feedIcon;
+
+    /**
+     * @var string
+     */
     protected $feedName;
 
     /**
@@ -286,6 +291,24 @@ class FeedItem
     public function setFeedName($feedName)
     {
         $this->feedName = $feedName;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFeedIcon()
+    {
+        return $this->feedIcon;
+    }
+
+    /**
+     * @param string $feedIcon
+     * @return FeedItem
+     */
+    public function setFeedIcon($feedIcon)
+    {
+        $this->feedIcon = $feedIcon;
         return $this;
     }
 }

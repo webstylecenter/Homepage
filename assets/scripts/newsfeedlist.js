@@ -21,8 +21,8 @@ $(function() {
             requestNewFeedItems();
         })
         .on('click', '.js-open-url', function () {
-            openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'));
             $('.header--bar').css('backgroundColor', '#337dff');
+            openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'));
         })
         .on('click', '.js-action-feed-list-click', function() {
             $(this).addClass('animated pulse feed-list-item--state-selected');
@@ -107,6 +107,7 @@ function parseYoutubeUrl(url) {
     var videoId = url.replace('https://www.youtube.com/watch?v=', '');
     if (url !== videoId) {
         $('.feed-list').switchClass('', 'darkTheme', 2000, 'easeInOutQuad');
+        $('.header--bar').css('backgroundColor', '#1a1a1a');
         return 'https://www.youtube.com/embed/' + videoId + '?autoplay=true';
     }
     $('.feed-list').switchClass('darkTheme', '', 2000, 'easeInOutQuad');

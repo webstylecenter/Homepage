@@ -38,6 +38,7 @@ $(function() {
                     alert(data);
                 } else {
                     alert("RSS Feed added! It may take up to 20 minutes before your feed is displayed on your Homepage");
+                    location.reload();
                 }
             })
             .fail(function(data) {

@@ -63,7 +63,7 @@ class FeedService
         $feedList = $this->database->fetchAll('SELECT * FROM feeds');
 
         return array_map(function($feed) {
-            return new Feed($feed['id'], $feed['name'], $feed['feedUrl'], $feed['color'], $feed['feedIcon']);
+            return new Feed($feed['id'], $feed['name'], $feed['feedUrl'], $feed['color'], $feed['icon']);
         }, $feedList);
     }
 

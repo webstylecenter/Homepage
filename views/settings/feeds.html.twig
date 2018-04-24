@@ -10,7 +10,6 @@
     <table>
         <tbody>
             {% for feed in feeds %}
-
                 {% set amount = 0 %}
                 {% set lastUpdate = '' %}
 
@@ -29,6 +28,9 @@
                         {{ feed.name }}
                         <span>{{ feed.feedurl }}</span>
                     </td>
+                    <td class="feedIcon">
+                        <span class="fa fa-{{ feed.feedIcon }}"></span>
+                    </td>
                     <td class="feedAmount">
                         {{ amount }}
                     </td>
@@ -37,7 +39,7 @@
                     </td> #}
                     <td class="feedActions">
                         {# <button class="fa fa-edit"></button> #}
-                        <button class="js-settings-remove-feed fa fa-remove"></button>
+                        <button class="js-settings-remove-feed fa fa-trash"></button>
                     </td>
                 </tr>
             {% endfor %}

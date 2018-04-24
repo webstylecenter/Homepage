@@ -29,7 +29,7 @@
          data-url="{{ item.url }}" data-share-id="{{ item.feedName|slugify }}/{{ item.id }}/" style="border-left-color:#{{ item.color }};">
         <div class="pin" data-pin-id="{{ item.id }}"></div>
         {% if item.feedIcon|length > 0 %}
-            <div class="feed-icon wow slideInLeft" style="background-color:#{{ item.color }}">
+            <div class="feed-icon" style="background-color:#{{ item.color }}">
                 <span class="fa fa-{{ item.feedIcon }}"></span>
             </div>
         {% endif %}

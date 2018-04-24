@@ -1,4 +1,3 @@
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -8,6 +7,14 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+
+
+CREATE TABLE `cache` (
+  `id` int(11) NOT NULL,
+  `cache_id` varchar(255) NOT NULL,
+  `data` text NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `checklist` (
   `id` int(11) NOT NULL,
@@ -21,7 +28,8 @@ CREATE TABLE `feeds` (
   `name` varchar(128) NOT NULL,
   `feedUrl` varchar(255) DEFAULT NULL,
   `color` varchar(6) NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `icon` varchar(32) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `feed_data` (
@@ -33,7 +41,7 @@ CREATE TABLE `feed_data` (
   `url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `dateAdded` datetime NOT NULL,
   `viewed` tinyint(1) NOT NULL,
-  `pinned` tinyint(1) NOT NULL
+  `pinned` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `notes` (
@@ -60,32 +68,31 @@ ALTER TABLE `feed_data`
   ADD KEY `dateAdded` (`dateAdded`),
   ADD KEY `title` (`title`(191)),
   ADD KEY `feed` (`feed`),
-  ADD KEY `dateAdded_2` (`dateAdded`,`pinned`);
-ALTER TABLE `feed_data` ADD FULLTEXT KEY `description` (`description`,`title`);
+  ADD KEY `feed_2` (`feed`,`title`(191),`dateAdded`);
+ALTER TABLE `feed_data` ADD FULLTEXT KEY `full_text_search` (`description`,`title`);
 
 ALTER TABLE `notes`
   ADD PRIMARY KEY (`id`);
 
 
 ALTER TABLE `cache`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 ALTER TABLE `checklist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
 
 ALTER TABLE `feeds`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 ALTER TABLE `feed_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121785;
 
 ALTER TABLE `notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 
 ALTER TABLE `feed_data`
   ADD CONSTRAINT `feed_data_ibfk_1` FOREIGN KEY (`feed`) REFERENCES `feeds` (`id`) ON UPDATE CASCADE;
-SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

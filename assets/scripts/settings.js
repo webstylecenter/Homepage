@@ -27,11 +27,13 @@ $(function() {
        let name = $(this).parent().find("[name='name']").val();
        let url = $(this).parent().find("[name='url']").val();
        let color = $(this).parent().find("[name='color']").val();
+       let icon = $(this).parent().find("[name='icon']").val();
 
         $.post( "/settings/feeds/add/", {
             name: name,
             url: url,
-            color: color
+            color: color,
+            icon: icon
         })
             .done(function(data) {
                 if (data.replace('Error', '') !== data) {

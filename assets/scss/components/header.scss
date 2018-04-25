@@ -114,10 +114,45 @@
     z-index: 9999999;
     position: fixed;
     border: 1px solid gray;
-    box-shadow:  2px 2px 10px #2b2b2b;
-    background-color: whitesmoke;
+    border-radius: 15px;
+    box-shadow:  2px 2px 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 3px 3px 0 3px;
     margin-left: -200px;
     display: none;
+
+    img {
+      border-radius: 15px;
+    }
+
+    &-overview{
+      color: $blue;
+      .weather--current {
+        display: none;
+      }
+      .weather--forecast {
+        text-align: center;
+        width: 100%;
+      }
+      .icon_rain {
+        background-image: url('/assets/images/rain-blue.png');
+      }
+      .icon_cloud {
+        background-image: url('/assets/images/cloud-blue.png');
+      }
+      .icon_partly_cloud {
+        background-image: url('/assets/images/partly_cloud-blue.png');
+      }
+      .icon_snow {
+        background-image: url('/assets/images/snow-blue.png');
+      }
+      .icon_sun {
+        background-image: url('/assets/images/sun-blue.png');
+      }
+      .icon_thunderstorm {
+        background-image: url('/assets/images/thunder-blue.png');
+      }
+
+    }
   }
 }

@@ -1,14 +1,16 @@
 #  FeedNews.me
 ![alt text](https://pvd.onl/oy59sb.jpg)
-A powerfull dashboard tool to keep track of your favorite news sites, daily tasks, reminders, and so much more. FeedNews.me, previously calles "It's my Homepage" brings you a site that you can set as startpage of your browser, or use Electron to run it as an app. 
+A powerful dashboard tool to keep track of your favorite news sites, daily tasks, reminders, and so much more. FeedNews.me, previously called "It's my Homepage" brings you a site that you can set as startpage of your browser, or use Electron to run it as an app. I personally use it all day, with my news sources like Neowin, iDownloadblog and many more next to my Youtube subscriptions, todo-list and weather updates all in one place.
 
 # Functionality
 - Read and manage RSS Feeds
-    - Assign colors to different sites
+    - Assign colors to different sources
+    - Assign FontAwesome icons to each source (optional)
     - Search items
     - Pin items to read later
     - Add pages to view later
     - Share a page with friends
+    - Youtube support (theme switches to dark mode when watching video)
     
 - Screensaver functionality (image at the bottom of this readme)
     - Set [yourdomain]/screensaver/ as screensaver to any OS and display random images with your news
@@ -44,7 +46,7 @@ A powerfull dashboard tool to keep track of your favorite news sites, daily task
 - Documentation
 
 # Installation
-Use the config.php.dist file in the app directory to create your config file. You need to set your database config and enter you openWeatherMap API key. This is a required step for now.
+Use the config.php.dist file in the app directory to create your config file. You need to set your database config and enter you openWeatherMap API key. This is a required step for now. To setup your database, use the db-structure.sql file located in the database folder.
 
 After saving your config, make sure to run the following commands from your terminal. Currently all commands need to run on both dev and production env. This will probably change in the future.
 
@@ -55,8 +57,8 @@ After saving your config, make sure to run the following commands from your term
 In case the gulp command gives an error, "npm install --global gulp" will install gulp globally.
 
 You need to set two cronjobs so the feeds and weather data are imported. For DirectAdmin I've used:
-*/5	*	*	*	*	/usr/bin/wget -O /dev/null -q http://[yourdomain]/feed/update/
-*/15	*	*	*	*	/usr/bin/wget -O /dev/null -q http://[yourdomain]/weather/update
+*/5	*	*	*	*	/usr/local/bin/php /home/USERNAME/domains/YOUR_DOMAIN/public_html/index.php app:feed:update
+*/15	*	*	*	*	/usr/local/bin/php /home/USERNAME/domains/YOUR_DOMAIN/public_html/index.php app:weather:update
 
 
 #### Ignore X-Frame headers
@@ -65,7 +67,7 @@ For Google Chrome users, it's "recommended" to install Ignore X-Frame headers ex
 # Mobile support
 This tool with all it's beauty also runs on your mobile device. To get the best experience, use chrome for Android or Safari on iOS and save the page as icon to your homescreen. This way you get a fullscreen experience on your mobile device, and have quick access to it's functionality, like the checklist that is usefull for shoppinglists for example.
 
-Please not that some sites, that have the previous mentioned X-Frame headers might not open on your mobile device. Luckely, a button is placed to open the page in a browser view. On anroid, a simply hit on the back button brings you back to the app. Most site's will work!
+Please not that some sites, that have the previous mentioned X-Frame headers might not open on your mobile device. For that, a button is placed to open the page in a browser view. On Android, a simply hit on the back button brings you back to the app. Most site's will work!
 
 It's recommended to load the page on WIFI if your low on your data limit the first time you open it on your mobile after running gulp. If you do so, all css and javascripts will be cached until you run gulp again. It's not megabytes of a difference, but in case your developing this tool it's a usefull reminder.
 

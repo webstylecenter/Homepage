@@ -1,6 +1,18 @@
 .modal {
   display: none;
   margin: -70vh auto;
+  border-radius: 15px;
+
+  input, textarea, button {
+    border-radius: 15px;
+  }
+
+  button {
+    background-color: $blue;
+    color: white;
+    border: 0;
+    padding: 5px 10px;
+  }
 
   table td {
     vertical-align: top;

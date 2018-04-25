@@ -1,100 +1,100 @@
 .screensaver {
-  color:white;
-  background-color:black;
+  color: white;
+  background-color: black;
   text-shadow: 1px 1px #000;
 
   &--time {
     position: fixed;
-    right:30px;
-    bottom:20px;
-    font-size:72pt;
+    right: 30px;
+    bottom: 20px;
+    font-size: 72pt;
   }
 
   &--background {
-    position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    z-index:-1;
-    width:100vw;
-    height:100vh;
-    display:none;
-    background-size:cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     image-orientation: from-image;
   }
-
   .layer2 {
-    z-index:-2;
+    z-index: -2;
   }
-  .weather--icon-large {
-    position:fixed;
-    top:-25px;
-    right:200px;
+  .weather {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    font-size: 28pt;
   }
   .weather .weather--temperature {
     position: fixed;
-    top:40px;
-    right:40px;
-    font-size:36pt;
-    margin:0;
-    border-bottom:0;
-    width:auto;
-    padding-bottom:0;
-    text-shadow:
-      -1px -1px 0 #000,
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-      1px 1px 0 #000;
+    top: 40px;
+    right: 40px;
+    font-size: 36pt;
+    margin: 0;
+    border-bottom: 0;
+    width: auto;
+    padding-bottom: 0;
+    text-shadow: -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
   }
   &--newsticker {
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    overflow:hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
     text-overflow: ellipsis;
-    height:170px;
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 50%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 50%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to top,  rgba(0,0,0,0.65) 50%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+    height: 170px;
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6000000', endColorstr='#00000000', GradientType=0); /* IE6-9 */
 
     &-title {
       font-family: "Lato", "Helvetica Neue", "Arial", sans-serif;
       font-weight: 300;
-      font-size:48pt;
-      padding:40px 0 0 30px;
-      display:inline-block;
+      font-size: 48pt;
+      padding: 40px 0 0 30px;
+      display: inline-block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      margin-right:400px;
+      margin-right: 400px;
     }
     &-description {
-      font-size:16pt;
-      padding:0 10px 10px 30px;
-      display:block;
-      max-width:80%;
-      max-height:32px;
+      font-size: 16pt;
+      padding: 0 10px 10px 30px;
+      display: block;
+      max-width: 80%;
+      max-height: 32px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      margin-right:400px;
+      margin-right: 400px;
     }
     &-source {
-      color:white;
-      padding:5px 10px;
-      display:inline-block;
-      position:fixed;
-      bottom:135px;
-      font-size:16pt;
-      margin-left:30px;
+      color: white;
+      padding: 5px 10px;
+      display: inline-block;
+      position: fixed;
+      bottom: 135px;
+      font-size: 16pt;
+      margin-left: 30px;
+      border-radius: 35px;
     }
   }
   .hideOnStart {
-    display:none;
+    display: none;
   }
 }

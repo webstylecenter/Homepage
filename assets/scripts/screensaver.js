@@ -40,7 +40,7 @@ function updateTime() {
 }
 
 function updateWeather() {
-    $('.screensaver .weather').load('/weather/current/');
+    $('.screensaver .weather').load('/weather/icon/');
 }
 
 function showItems() {

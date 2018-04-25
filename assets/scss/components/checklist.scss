@@ -12,6 +12,7 @@
 
     &:nth-child(even) {
       background-color:whitesmoke;
+      border-radius: 25px;
     }
   }
 
@@ -47,10 +48,11 @@
 
   input[type="text"] {
     width:79%;
-    padding:5px;
+    padding:5px 15px;
     box-sizing: border-box;
     border:0;
     background-color: #e2e2e2;
+    border-radius: 15px;
   }
 
   input[type="checkbox"] {
@@ -61,7 +63,9 @@
     width:20%;
     padding:5px 5px;
     border:0px;
-    background-color: #cbcbcb;
+    border-radius: 15px;
+    color: white;
+    background-color: $blue;
     box-sizing: border-box;
     -webkit-appearance: none;
     float:right;

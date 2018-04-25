@@ -33,8 +33,9 @@
     position: fixed;
     z-index: 1000;
     width: $header-width-search;
-    margin-top: -5px;
+    margin-top: 4px;
     opacity: 0.8;
+    border-radius: 15px;
   }
 
   .jscroll-next {
@@ -108,16 +109,18 @@
     top: 0;
     right: 0;
     float: right;
+    font-size: 12pt;
   }
 
   .feed-icon {
     position: absolute;
     box-sizing: border-box;
-    top: 0;
-    left: -5px;
-    bottom: 0;
+    top: 13px;
+    left: 5px;
     color: white;
     width: 35px;
+    height: 35px;
+    border-radius: 50px;
 
     span {
       position: absolute;
@@ -129,7 +132,7 @@
 }
 
 .hasIcon {
-  padding-left: 40px;
+  padding-left: 50px;
 }
 
 .darkTheme {

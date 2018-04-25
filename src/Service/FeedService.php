@@ -217,7 +217,7 @@ class FeedService
             'name' => $name,
             'feedUrl' => $url,
             'color' => $color,
-            'feedIcon' => $feedIcon,
+            'icon' => $feedIcon,
             'created' => (new \DateTime())->format('Y-m-d H:i:s')
         ]);
     }

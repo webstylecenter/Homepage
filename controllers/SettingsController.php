@@ -39,5 +39,5 @@ $app->post('/settings/feeds/add/', function() use($app) {
 
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];
-    return $feedService->addFeed($_POST['name'], $_POST['url'], $_POST['color'], null);
+    return $feedService->addFeed($_POST['name'], $_POST['url'], $_POST['color'], $_POST['icon']);
 });

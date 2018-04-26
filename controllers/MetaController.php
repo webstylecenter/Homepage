@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/meta/', function() use($app) {
+$app->match('/meta/', function() use($app) {
     $meta = new \Service\MetaService();
     $metaData = $meta->getByUrl($_POST['url']);
 

@@ -1,6 +1,6 @@
 <?php
 
-$app->get('/settings/', function() use($app) {
+$app->match('/settings/', function() use($app) {
 
     /** @var \Service\FeedService $feedService */
     $feedService = $app['feedService'];

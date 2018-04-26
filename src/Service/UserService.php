@@ -24,11 +24,12 @@ class UserService
     /**
      * @param $username
      * @param $password
+     * @return int
      * @throws \Doctrine\DBAL\DBALException
      */
     public function createUser($username, $password)
     {
-        $this->database->insert('users', [
+        return $this->database->insert('users', [
             'username' => $username,
             'password' => $this->createPassword($password)
         ]);

@@ -8,7 +8,10 @@ $app->before(function() use ($app) {
         '/login/',
         '/contact/',
         '/screensaver/',
-        '/weather/icon/'
+        '/share/',
+        '/weather/',
+        '/meta/',
+        '/chrome/'
     ];
 
     foreach ($publicPages as $page) {

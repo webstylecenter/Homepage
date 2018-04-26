@@ -19,7 +19,7 @@ class UserServiceProvider implements ServiceProviderInterface
     public function register(Container $app)
     {
         $app['userService'] = function() use ($app) {
-            return new UserService();
+            return new UserService($app['db'], $app['config']);
         };
     }
 }

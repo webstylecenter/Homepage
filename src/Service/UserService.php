@@ -55,10 +55,7 @@ class UserService
      */
     public function signIn(Array $input)
     {
-        if (!isset($input['username']) || strlen($input['username']) === 0) {
-            return false;
-        }
-        if (!isset($input['password']) || strlen($input['password']) === 0) {
+        if (!isset($input['username']) || !isset($input['password']) === 0) {
             return false;
         }
 

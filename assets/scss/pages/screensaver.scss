@@ -6,8 +6,11 @@
   &--time {
     position: fixed;
     right: 30px;
-    bottom: 20px;
+    bottom: 40px;
     font-size: 72pt;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 90px;
+    padding: 14px 25px;
   }
 
   &--background {
@@ -30,9 +33,12 @@
   }
   .weather {
     position: fixed;
-    top: 30px;
-    right: 30px;
+    top: 25px;
+    right: 25px;
     font-size: 28pt;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50px;
+    padding: 20px;
   }
   .weather .weather--temperature {
     position: fixed;
@@ -43,52 +49,43 @@
     border-bottom: 0;
     width: auto;
     padding-bottom: 0;
-    text-shadow: -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
   }
   &--newsticker {
     position: fixed;
-    bottom: 0;
-    left: 0;
+    bottom: 15px;
+    left: 25px;
     right: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     height: 170px;
-    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6000000', endColorstr='#00000000', GradientType=0); /* IE6-9 */
 
     &-title {
       font-family: "Lato", "Helvetica Neue", "Arial", sans-serif;
       font-weight: 300;
       font-size: 48pt;
-      padding: 40px 0 0 30px;
+      padding: 20px 0 25px 30px;
       display: inline-block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       margin-right: 400px;
-    }
-    &-description {
-      font-size: 16pt;
-      padding: 0 10px 10px 30px;
-      display: block;
-      max-width: 80%;
-      max-height: 32px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      margin-right: 400px;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 90px;
+
+      span {
+        display: block;
+        font-size: 14pt;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 20px;
+      }
     }
     &-source {
       color: white;
       padding: 5px 10px;
       display: inline-block;
       position: fixed;
-      bottom: 135px;
+      bottom: 165px;
       font-size: 16pt;
       margin-left: 30px;
       border-radius: 35px;

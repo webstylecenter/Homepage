@@ -1,6 +1,6 @@
 <?php
 
-$app->get('/', function() use($app) {
+$app->match('/', function() use($app) {
 
     /** @var \Service\WeatherService $weatherService */
     $weatherService = $app['weatherService'];

@@ -27,10 +27,6 @@ $app['config'] = [
     'droplocation' => '[ENTER_URL]', // this url should return an array with images as path
 ];
 
-$app['users'] = [
-    'username' => 'password'
-];
-
 $app['weather.adapter'] = $app['debug']
     ? \Service\Adapter\Weather\Dummy::class
     : \Service\Adapter\Weather\OpenWeatherMap::class;

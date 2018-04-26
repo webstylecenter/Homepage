@@ -95,6 +95,17 @@ ALTER TABLE `feed_data`
   ADD CONSTRAINT `feed_data_ibfk_1` FOREIGN KEY (`feed`) REFERENCES `feeds` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `signup_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_login` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

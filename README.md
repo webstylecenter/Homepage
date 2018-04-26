@@ -53,6 +53,7 @@ After saving your config, make sure to run the following commands from your term
 - npm install
 - composer install
 - gulp
+- php index.php app:user:create
 
 In case the gulp command gives an error, "npm install --global gulp" will install gulp globally.
 

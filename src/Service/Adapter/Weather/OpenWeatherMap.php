@@ -27,11 +27,12 @@ class OpenWeatherMap implements WeatherAdapterInterface
         $key = $config['openWeatherMap']['key'];
         $location = $config['openWeatherMap']['location'];
         $this->weatherUrl = self::API_URL_PREFIX . 'weather?q=' . $location . '&APPID=' . $key . '&units=metric';
-        $this->forecastUrl = self::API_URL_PREFIX . 'forecast?q=' . $location . '&APPID=' . $key . '&units=metric';
+        $this->forecastUrl = self::API_URL_PREFIX . 'forecast/daily/?q=' . $location . '&APPID=' . $key . '&units=metric';
     }
 
     /**
-     * @return WeatherForecastList
+     * @return WeatherForecastList|null
+     * @throws \Exception
      */
     public function fetchForecast()
     {
@@ -67,15 +68,11 @@ class OpenWeatherMap implements WeatherAdapterInterface
     protected function createForecastList($weather, $forecast)
     {
         $weatherForecastList = new WeatherForecastList();
-        $weatherForecastList->setCurrent($this->mapForecast($weather));
+        $weatherForecastList->setCurrent($this->mapForecastOfToday($weather));
 
-        foreach ($forecast['list'] as $item) {
-            $date = new \DateTime($item['dt_txt']);
+        $forecastList = array_slice($forecast['list'], 0, 5);
 
-            if ($date->format('H') !== '15') {
-                continue;
-            }
-
+        foreach ($forecastList as $item) {
             $weatherForecastList->addUpcoming($this->mapForecast($item));
         }
         return $weatherForecastList;
@@ -86,12 +83,27 @@ class OpenWeatherMap implements WeatherAdapterInterface
      *
      * @return WeatherForecast
      */
-    protected function mapForecast(array $forecastArray)
+    protected function mapForecastOfToday(array $forecastArray)
     {
         $weatherForecast = new WeatherForecast();
         $weatherForecast->setTemperature($forecastArray['main']['temp']);
         $weatherForecast->setMaxTemperature($forecastArray['main']['temp_max']);
         $weatherForecast->setMinTemperature($forecastArray['main']['temp_min']);
+        $weatherForecast->setType($this->convertType($forecastArray['weather'][0]['main']));
+        $weatherForecast->setDescription($forecastArray['weather'][0]['description']);
+
+        return $weatherForecast;
+    }
+
+    /**
+     * @param array $forecastArray
+     * @return WeatherForecast
+     */
+    protected function mapForecast(array $forecastArray) {
+        $weatherForecast = new WeatherForecast();
+        $weatherForecast->setTemperature($forecastArray['temp']['day']);
+        $weatherForecast->setMaxTemperature($forecastArray['temp']['max']);
+        $weatherForecast->setMinTemperature($forecastArray['temp']['min']);
         $weatherForecast->setType($this->convertType($forecastArray['weather'][0]['main']));
         $weatherForecast->setDescription($forecastArray['weather'][0]['description']);
 

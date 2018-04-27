@@ -69,8 +69,8 @@ class FeedService
 
     /**
      * @param FeedItem $feedItem
-     *
      * @return bool
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function feedItemExists(FeedItem $feedItem)
     {
@@ -157,7 +157,8 @@ class FeedService
     }
 
     /**
-     * @param int $id
+     * @param $id
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function pinItem($id)
     {
@@ -175,7 +176,7 @@ class FeedService
             $this->database->insert('feed_data', [
                 'guid' => $feedItem->getId(),
                 'feed' => 0,
-                'title' => (strlen($feedItem->getTitle()) > 250 ? substr($feedItem->getTitle(), 0, 250).'...' : $feedItem->getTitle()),
+                'title' => (strlen($feedItem->getTitle()) > 250 ? substr($feedItem->getTitle(), 0, 250) . '...' : $feedItem->getTitle()),
                 'description' => $feedItem->getDescription(),
                 'url' => $feedItem->getUrl(),
                 'dateAdded' => $feedItem->getDateAdded()->format('Y-m-d H:i:s'),
@@ -224,8 +225,9 @@ class FeedService
 
     /**
      * @param $feedId
-     *
      * @return int
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
     public function removeFeed($feedId)
     {
@@ -281,7 +283,7 @@ class FeedService
             $this->database->insert('feed_data', [
                 'guid' => $feedItem->getId(),
                 'feed' => $feed->getId(),
-                'title' => (strlen($feedItem->getTitle()) > 250 ? substr($feedItem->getTitle(), 0, 250).'...' : $feedItem->getTitle()),
+                'title' => (strlen($feedItem->getTitle()) > 250 ? substr($feedItem->getTitle(), 0, 250) . '...' : $feedItem->getTitle()),
                 'description' => $feedItem->getDescription(),
                 'url' => $feedItem->getUrl(),
                 'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),

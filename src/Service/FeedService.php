@@ -269,6 +269,7 @@ class FeedService
     /**
      * @param Feed $feed
      * @param FeedItem $feedItem
+     * @throws \Doctrine\DBAL\DBALException
      */
     protected function importFeedItem(Feed $feed, FeedItem $feedItem)
     {
@@ -280,7 +281,7 @@ class FeedService
             $this->database->insert('feed_data', [
                 'guid' => $feedItem->getId(),
                 'feed' => $feed->getId(),
-                'title' => $feedItem->getTitle(),
+                'title' => (strlen($feedItem->getTitle()) > 250 ? substr($feedItem->getTitle(), 0, 250).'...' : $feedItem->getTitle()),
                 'description' => $feedItem->getDescription(),
                 'url' => $feedItem->getUrl(),
                 'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),

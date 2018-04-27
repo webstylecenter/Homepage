@@ -166,8 +166,8 @@ class FeedService
 
     /**
      * @param FeedItem $feedItem
-     *
-     * @return boolean
+     * @return bool
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function addItem(FeedItem $feedItem)
     {
@@ -175,7 +175,7 @@ class FeedService
             $this->database->insert('feed_data', [
                 'guid' => $feedItem->getId(),
                 'feed' => 0,
-                'title' => $feedItem->getTitle(),
+                'title' => (strlen($feedItem->getTitle()) > 250 ? substr($feedItem->getTitle(), 0, 250).'...' : $feedItem->getTitle()),
                 'description' => $feedItem->getDescription(),
                 'url' => $feedItem->getUrl(),
                 'dateAdded' => $feedItem->getDateAdded()->format('Y-m-d H:i:s'),

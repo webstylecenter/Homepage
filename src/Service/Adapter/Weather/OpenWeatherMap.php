@@ -68,12 +68,12 @@ class OpenWeatherMap implements WeatherAdapterInterface
     protected function createForecastList($weather, $forecast)
     {
         $weatherForecastList = new WeatherForecastList();
-        $weatherForecastList->setCurrent($this->mapForecastOfToday($weather));
+        $weatherForecastList->setCurrent($this->mapForecast($weather));
 
         $forecastList = array_slice($forecast['list'], 0, 5);
 
         foreach ($forecastList as $item) {
-            $weatherForecastList->addUpcoming($this->mapForecast($item));
+            $weatherForecastList->addUpcoming($this->mapForecast($item, 'week'));
         }
         return $weatherForecastList;
     }
@@ -83,30 +83,14 @@ class OpenWeatherMap implements WeatherAdapterInterface
      *
      * @return WeatherForecast
      */
-    protected function mapForecastOfToday(array $forecastArray)
+    protected function mapForecast(array $forecastArray, $type = 'today')
     {
         $weatherForecast = new WeatherForecast();
-        $weatherForecast->setTemperature($forecastArray['main']['temp']);
-        $weatherForecast->setMaxTemperature($forecastArray['main']['temp_max']);
-        $weatherForecast->setMinTemperature($forecastArray['main']['temp_min']);
+        $weatherForecast->setTemperature(($type === 'today' ? $forecastArray['main']['temp'] : $forecastArray['temp']['day']));
+        $weatherForecast->setMaxTemperature(($type === 'today' ? $forecastArray['main']['temp_max'] : $forecastArray['temp']['max']));
+        $weatherForecast->setMinTemperature(($type === 'today' ? $forecastArray['main']['temp_min'] : $forecastArray['temp']['min']));
         $weatherForecast->setType($this->convertType($forecastArray['weather'][0]['main']));
         $weatherForecast->setDescription($forecastArray['weather'][0]['description']);
-
-        return $weatherForecast;
-    }
-
-    /**
-     * @param array $forecastArray
-     * @return WeatherForecast
-     */
-    protected function mapForecast(array $forecastArray) {
-        $weatherForecast = new WeatherForecast();
-        $weatherForecast->setTemperature($forecastArray['temp']['day']);
-        $weatherForecast->setMaxTemperature($forecastArray['temp']['max']);
-        $weatherForecast->setMinTemperature($forecastArray['temp']['min']);
-        $weatherForecast->setType($this->convertType($forecastArray['weather'][0]['main']));
-        $weatherForecast->setDescription($forecastArray['weather'][0]['description']);
-
         return $weatherForecast;
     }
 

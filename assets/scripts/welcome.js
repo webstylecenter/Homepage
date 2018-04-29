@@ -4,7 +4,7 @@ $(function() {
         if (url === '') { url = '/nourl/'; }
 
         /** global: parent */
-        parent.$('iframe').attr('src', url);
+        parent.$('.content-frame').attr('src', url);
         parent.$('.urlbar a').text(url).attr('href', url);
         parent.$('.js-copy-to-clipboard').attr('data-clipboard-text', url).addClass('show-if-mobile');
     });

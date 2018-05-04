@@ -62,6 +62,7 @@ $(function() {
         .on('click', '.js-close-pip', function() {
             $('.content-pictureInPictureFrame').remove();
             $('.content-close-pip').hide();
+            $('.content-maximize-pip').hide();
         })
         .on('click', '.js-modal-trigger', function() {
             $($(this).data('modal-target')).modal({fadeDuration:100});
@@ -81,6 +82,9 @@ $(function() {
         })
         .on('click', '.js-send-to-pip', function() {
             switchToPicutreInPicture();
+        })
+        .on('click', '.js-send-from-pip', function() {
+            switchFromPictureInPicture();
         })
     ;
 
@@ -124,6 +128,13 @@ function openInPictureInPicture(url) {
     createIframe('content-pictureInPictureFrame', url);
 }
 
+function switchFromPictureInPicture() {
+    $('.content-frame').remove();
+    $('.content-pictureInPictureFrame').switchClass('content-pictureInPictureFrame', 'content-frame');
+    $('.content-close-pip').hide();
+    $('.content-maximize-pip').hide();
+}
+
 function createIframe(className, url) {
     var newFrame = document.createElement('iframe');
     newFrame.className = className;
@@ -132,6 +143,7 @@ function createIframe(className, url) {
     $(newFrame).attr('allowfullscreen', 'allowfullscreen');
     $('.iFramesContainer').append(newFrame);
     $('.content-close-pip').show();
+    $('.content-maximize-pip').show();
 }
 
 function parseYoutubeUrl(url, changeColors) {

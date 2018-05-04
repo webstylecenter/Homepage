@@ -56,9 +56,27 @@
   }
 
   &-close-pip {
+     display: none;
+     position: absolute;
+     right: 0;
+     bottom: 336px;
+     background-color: $blue;
+     color: white;
+     padding: 5px 5px 5px 10px;
+     box-sizing: border-box;
+     z-index: 3;
+     opacity: 0.3;
+
+     &:hover {
+       cursor: pointer;
+       opacity: 1;
+     }
+   }
+
+  &-maximize-pip {
     display: none;
     position: absolute;
-    right: 0;
+    right: 28px;
     bottom: 336px;
     background-color: $blue;
     border-bottom-left-radius: 15px;
@@ -73,5 +91,4 @@
       opacity: 1;
     }
   }
-
 }

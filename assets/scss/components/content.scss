@@ -91,4 +91,8 @@
       opacity: 1;
     }
   }
+
+  @include respond-to(mobile) {
+    bottom: 73px;
+  }
 }

@@ -17,7 +17,11 @@
     {% endif %}
 
     {% if 'sun' == forecast.current.type %}
-        <span class="fa fa-sun"></span>
+        {% if "now"|date("H") > 6 and "now"|date("H") < 21 %}
+            <span class="fa fa-sun"></span>
+        {% else %}
+            <span class="fa fa-moon"></span>
+        {% endif %}
     {% endif %}
 
     {% if 'cloud' == forecast.current.type %}

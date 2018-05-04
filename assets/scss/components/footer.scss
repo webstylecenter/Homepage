@@ -6,13 +6,27 @@
   color: whitesmoke;
   border-top: 1px solid gray;
   text-align: center;
-  font-size: 24pt;
+  font-size: 18pt;
   padding: 12px 0 20px 0;
-  background: linear-gradient(to bottom,  rgba(120, 120, 120, 0.9) 0%, rgba(16, 16, 16, 0.9) 100%);
+  background: linear-gradient(to bottom,  rgba(120, 120, 120, 0.8) 0%, rgba(16, 16, 16, 1) 100%);
   backdrop-filter: blur(10px);
 
   span {
-    margin: 0 25px;
+    margin: 0 18px;
     display: inline-block;
+  }
+
+  &-weather-icon {
+
+    margin: 0 0 0 10px !important;
+
+    span {
+      font-size: 16pt;
+      margin: 0;
+    }
+
+    .temperature {
+      left: 0;
+    }
   }
 }

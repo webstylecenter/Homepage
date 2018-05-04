@@ -22,7 +22,7 @@
                 </div>
             {% endif %}
 
-            <span class="js-send-to-pip fa fa-window-restore"></span>
+            <span class="js-send-to-pip fa fa-window-restore hide-if-mobile show-if-desktop"></span>
             <span class="js-open-new-window fa fa-external-link-alt fa-x4"></span>
             <span class="js-copy-to-clipboard fa fa-share-square fa-x4" data-clipboard-action="copy" data-clipboard-text="#"></span>
 
@@ -80,6 +80,7 @@
         <span data-url="/checklist/" class="js-open-url fa fa-check fa-x4"></span>
         <span class="fa fa-inbox js-open-url" data-url="/droplist/15"></span>
         <span data-modal-target=".js-mobile-search-button" class="js-visbility-toggle fa fa-search-plus fa-x4 hide-if-desktop hide-if-tablet" data-target=".mobile-search"></span>
+        <span class="js-open-url footer--bar-weather-icon" data-url="/weather/mobile-page/">{% include 'weather/icon.html.twig' %}</span>
     </footer>
 
     {% include 'modals/create.html.twig' %}

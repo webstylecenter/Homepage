@@ -52,9 +52,9 @@ class CreateUserCommand extends Command
         $userService = $this->app['userService'];
 
         if ($userService->createUser($username, $password)) {
-            $output->writeln('<info>User with username '.$username.' created!</info>');
+            $output->writeln('<info>User with username ' . $username . ' created!</info>');
         } else {
-            $output->writeln('<error>Cannot create user '.$username.', probably already in use</error>');
+            $output->writeln('<error>Cannot create user ' . $username . ', probably already in use</error>');
         }
     }
 }

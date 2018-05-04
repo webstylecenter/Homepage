@@ -44,8 +44,7 @@ class UserService
         if (isset($_SESSION['username']) && isset($_SESSION['password']) && isset($_SESSION['userid'])) {
             return $this->checkCredentials($_SESSION['username'], $_SESSION['password']);
         }
-
-       return false;
+        return false;
     }
 
     /**

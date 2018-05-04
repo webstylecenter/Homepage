@@ -1,7 +1,7 @@
 <?php
 
 chdir(__DIR__);
-ini_set('session.gc_maxlifetime', 86400*31*12);
+ini_set('session.gc_maxlifetime', 86400 * 31 * 12);
 
 session_start();
 

@@ -30,7 +30,7 @@ $app->before(function() use ($app) {
         return;
     }
 
-    if  ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($userService->signIn($_POST)) {
             if ($_SERVER['REQUEST_URI'] == '/login/') {
                 header('location: /');

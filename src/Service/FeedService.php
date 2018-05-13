@@ -63,7 +63,7 @@ class FeedService
         $feedList = $this->database->fetchAll('SELECT * FROM feeds');
 
         return array_map(function($feed) {
-            return new Feed($feed['id'], $feed['name'], $feed['feedUrl'], $feed['color'], $feed['icon']);
+            return new Feed($feed['id'], $feed['name'], $feed['feedUrl'], $feed['color'], $feed['icon'], $feed['autoPin']);
         }, $feedList);
     }
 
@@ -204,11 +204,12 @@ class FeedService
      * @param $name
      * @param $url
      * @param $color
+     * @param $autoPin
      * @param $feedIcon
      * @return int
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function addFeed($name, $url, $color, $feedIcon)
+    public function addFeed($name, $url, $color, $autoPin, $feedIcon)
     {
         if (!$name || !$url || !$color) {
             throw new Exception('Not all feed data given');
@@ -219,8 +220,24 @@ class FeedService
             'feedUrl' => $url,
             'color' => $color,
             'icon' => $feedIcon,
+            'autoPin' => $autoPin,
             'created' => (new \DateTime())->format('Y-m-d H:i:s')
         ]);
+    }
+
+    /**
+     * @param int $feedId
+     * @param string $setting
+     * @param string $value
+     * @return int
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function updateFeedSetting($feedId, $setting, $value)
+    {
+        return $this->database->update('feeds',
+            [$setting => $value],
+            ['id'=>$feedId]
+        );
     }
 
     /**
@@ -287,7 +304,8 @@ class FeedService
                 'description' => $feedItem->getDescription(),
                 'url' => $feedItem->getUrl(),
                 'dateAdded' => (new \DateTime())->format('Y-m-d H:i:s'),
-                'viewed' => 0
+                'viewed' => 0,
+                'pinned' => $feed->isAutoPin()
             ]);
         } catch (PDOException $e) {
             // do nothing.

@@ -1,12 +1,15 @@
 <h2>RSS Feed preferences</h2>
-<p>
-    <input type="text" name="name" value="" placeholder="Name" />
-    <input type="text" name="url" value="" placeholder="Insert RSS feed url" />
-    <input type="text" name="icon" value="" placeholder="FontAwesome icon (optional)" />
-    <input type="text" name="color" value="#000" placeholder="Insert RGB without the #" id="spectrum" />
-    <input type="submit" value="Add" class="js-settings-add-feed" />
-</p>
-
+<div class="form">
+    <h1>Add Feed</h1>
+    <p>
+        <input type="text" name="name" value="" placeholder="Name" /><br />
+        <input type="text" name="url" value="" placeholder="Insert RSS feed url" /><br />
+        <input type="text" name="icon" value="" placeholder="FontAwesome icon (optional)" /><br />
+        <input type="checkbox" name="autoPin" value="on" id="autoPin"/><label for="autoPin">Automaticly pin new items</label><br />
+        <input type="text" name="color" value="#000" placeholder="Insert RGB without the #" id="spectrum" /><br />
+        <input type="submit" value="Add" class="js-settings-add-feed" />
+    </p>
+</div>
 {% if feeds is not empty %}
     <table>
         <tbody>
@@ -28,6 +31,9 @@
                     <td class="feedName">
                         {{ feed.name }}
                         <span>{{ feed.feedurl }}</span>
+                    </td>
+                    <td class="feedIcon">
+                        <input class="js-update-auto-pin" type="checkbox" value="on" {% if feed.autoPin %}checked="checked"{% endif %}/>
                     </td>
                     <td class="feedIcon">
                         <span class="fa fa-{{ feed.feedIcon }}"></span>

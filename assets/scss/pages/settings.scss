@@ -5,20 +5,14 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url('/screensaver/images/Welcome.jpg');
+    background-image: url('/assets/images/background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    -webkit-filter: blur(10px);
-    -moz-filter: blur(10px);
-    -o-filter: blur(10px);
-    -ms-filter: blur(10px);
-    filter: blur(10px);
     z-index: -2;
   }
 
   &-background--overlay {
-    background-color: rgba(256, 256, 256, 0.6);
     z-index: -1;
     position: fixed;
     top: 0;
@@ -38,24 +32,67 @@
     padding-bottom: 20px;
   }
 
-  input {
-    font-size: 9pt;
-  }
+  .form {
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px;
+    width: 350px;
+    box-sizing: border-box;
+    margin-bottom: 50px;
 
-  input[type=text] {
-    background: rgba(0, 0, 0, 0.1);
-    border: 0;
-    padding: 3px;
-    width:300px;
-  }
+    h1 {
+      font-weight: lighter;
+      margin: 0;
+      border: 0;
+      padding: 0;
+    }
 
-  input[type=submit] {
-    background: rgba(0, 0, 0, 0.2);
-    border: 0;
+    input {
+      font-size: 12pt;
+      margin-bottom: 20px;
+    }
+
+    input[type=text] {
+      border: 0;
+      border-bottom: 1px solid $blue;
+      padding: 3px;
+      width:300px;
+      margin-bottom: 20px;
+    }
+
+    input[type=submit] {
+      background-color: $blue;
+      border: 0;
+      border-radius: 15px;
+      padding: 10px 30px;
+      color: white;
+      margin-top: -40px;
+      margin-right: 10px;
+      float: right;
+    }
   }
 
   table {
     width: 100%;
+    margin-bottom: 50px;
+
+    tr:first-child {
+      td:first-child {
+        border-top-left-radius: 15px;
+      }
+      td:last-child {
+        border-top-right-radius: 15px;
+      }
+    }
+
+    tr:last-child {
+      td:first-child {
+        border-bottom-left-radius: 15px;
+      }
+      td:last-child {
+        border-bottom-right-radius: 15px;
+      }
+    }
 
     td {
       margin: 0;
@@ -63,11 +100,11 @@
     }
 
     tr:nth-child(even) {
-      background-color: rgba(215, 215, 215, 0.5);
+      background-color: rgba(215, 215, 215, 0.8);
     }
 
     tr:nth-child(odd) {
-      background-color: rgba(256, 256, 256, 0.7);
+      background-color: rgba(256, 256, 256, 0.9);
     }
 
     tr:hover {

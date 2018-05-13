@@ -95,3 +95,25 @@ $app->get('/feeds/overview/', function() use($app) {
     ]);
 
 });
+
+$app->post('/feeds/settingsupdate/', function() use($app) {
+
+    /** @var \Service\FeedService $feedService */
+    $feedService = $app['feedService'];
+
+    if (!isset($_POST['setting']) || strlen($_POST['setting']) === 0) {
+        throw new Exception("Setting post data not set");
+    }
+    if (!isset($_POST['value']) || strlen($_POST['value']) === 0) {
+        throw new Exception("Value post data not set");
+    }
+    if (!isset($_POST['feedId']) || strlen($_POST['feedId']) === 0) {
+        throw new Exception("feedId post data not set");
+    }
+
+    if (!$feedService->updateFeedSetting($_POST['feedId'], $_POST['setting'], $_POST['value'])) {
+        return json_encode(['status' => 'fail', 'message' => 'Updating feedsetting failed']);
+    }
+
+    return json_encode(['status' => 'success', 'message' => 'Feedsetting updated']);
+});

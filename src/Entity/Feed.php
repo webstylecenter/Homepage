@@ -34,6 +34,11 @@ class Feed
     protected $feedIcon;
 
     /**
+     * @var bool
+     */
+    protected $autoPin;
+
+    /**
      * @var \DateTime
      */
     protected $created;
@@ -43,14 +48,17 @@ class Feed
      * @param $name
      * @param $feedUrl
      * @param $color
+     * @param $feedIcon
+     * @param $autoPin
      */
-    public function __construct($id, $name, $feedUrl, $color, $feedIcon)
+    public function __construct($id, $name, $feedUrl, $color, $feedIcon, $autoPin)
     {
         $this->id           = $id;
         $this->name         = $name;
         $this->feedUrl      = $feedUrl;
         $this->color        = $color;
         $this->feedIcon     = $feedIcon;
+        $this->autoPin      = $autoPin;
         $this->created      = new \DateTime;
     }
 
@@ -132,6 +140,24 @@ class Feed
     public function setCreated($created)
     {
         $this->created = $created;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAutoPin()
+    {
+        return $this->autoPin;
+    }
+
+    /**
+     * @param bool $autoPin
+     * @return Feed
+     */
+    public function setAutoPin($autoPin)
+    {
+        $this->autoPin = $autoPin;
+        return $this;
     }
 
     /**

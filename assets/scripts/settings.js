@@ -28,12 +28,14 @@ $(function() {
        let url = $(this).parent().find("[name='url']").val();
        let color = $(this).parent().find("[name='color']").val();
        let icon = $(this).parent().find("[name='icon']").val();
+       let autoPin = $(this).parent().find("[name='autoPin']").val();
 
         $.post( "/settings/feeds/add/", {
             name: name,
             url: url,
             color: color,
-            icon: icon
+            icon: icon,
+            autoPin: autoPin
         })
             .done(function(data) {
                 if (data.replace('Error', '') !== data) {
@@ -45,6 +47,31 @@ $(function() {
             })
             .fail(function(data) {
                 alert(data);
+            });
+    });
+
+    $('.js-update-auto-pin').on('click', function() {
+
+        let feedId = $(this).parent().parent().data('feed-id');
+        var autoPin = 1;
+        let that = $(this);
+
+        if (!$(this).prop('checked')) {
+            autoPin = 0;
+        }
+        $(that).hide();
+
+        $.post( "/feeds/settingsupdate/", {
+            feedId: feedId,
+            setting: 'autoPin',
+            value: autoPin
+        })
+            .done(function() {
+                $(that).show()
+            })
+            .fail(function(data) {
+                alert(data);
+                $(that).show()
             });
     });
 });

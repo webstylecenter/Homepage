@@ -8,7 +8,7 @@ $app->post('/feed/add-item/', function() use ($app) {
     }
 
     $feedItem = new FeedItem(
-        md5((new \DateTime())->format('Y-m-d H:i:s')),
+        intval(time()),
         $_POST['title'],
         $_POST['description'] ?: '',
         strpos($_POST['url'], 'http') === 0 ? $_POST['url'] : 'http://' . $_POST['url'],

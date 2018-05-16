@@ -13,7 +13,7 @@ $app->post('/chrome/import/', function() use($app) {
     $metaData = (new \Service\MetaService)->getByUrl($_POST['url']);
 
     $feedItem = new FeedItem(
-        md5((new \DateTime())->format('Y-m-d H:i:s')),
+        intval(time()),
         $metaData->getTitle(),
         $metaData->getMetaDescription() ?: '',
         $metaData->getUrl(),

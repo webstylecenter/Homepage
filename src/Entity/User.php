@@ -24,22 +24,22 @@ class User
     protected $password;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $signupDate;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $lastLogin;
 
     /**
-     * Feed constructor.
+     * User constructor.
      * @param $id
      * @param $username
      * @param $password
      * @param $signupDate
-     * @param null $lastLogin
+     * @param \DateTime|null $lastLogin
      */
     public function __construct($id, $username, $password, $signupDate, $lastLogin = null)
     {
@@ -60,7 +60,7 @@ class User
 
     /**
      * @param int $id
-     * @return Feed
+     * @return User
      */
     public function setId($id)
     {
@@ -78,7 +78,7 @@ class User
 
     /**
      * @param string $username
-     * @return Feed
+     * @return User
      */
     public function setUsername($username)
     {
@@ -96,7 +96,7 @@ class User
 
     /**
      * @param string $password
-     * @return Feed
+     * @return User
      */
     public function setPassword($password)
     {
@@ -105,7 +105,7 @@ class User
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getSignupDate()
     {
@@ -113,8 +113,8 @@ class User
     }
 
     /**
-     * @param DateTime $signupDate
-     * @return Feed
+     * @param \DateTime $signupDate
+     * @return User
      */
     public function setSignupDate($signupDate)
     {
@@ -123,7 +123,7 @@ class User
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getLastLogin()
     {
@@ -131,8 +131,8 @@ class User
     }
 
     /**
-     * @param DateTime $lastLogin
-     * @return Feed
+     * @param \DateTime $lastLogin
+     * @return User
      */
     public function setLastLogin($lastLogin)
     {

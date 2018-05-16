@@ -23,7 +23,7 @@ class DroplistService
     }
 
     /**
-     * @param null $limit
+     * @param integer|null $limit
      *
      * @return array
      */

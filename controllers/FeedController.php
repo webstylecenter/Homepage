@@ -91,7 +91,7 @@ $app->get('/feeds/overview/', function() use($app) {
     $feedService = $app['feedService'];
 
     return $app['twig']->render('widgets/feed-overview.html.twig', [
-        'feeds' => $feedService->getFeedOveriew()
+        'feeds' => $feedService->getFeedOverview()
     ]);
 
 });

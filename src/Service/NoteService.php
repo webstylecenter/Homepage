@@ -75,8 +75,9 @@ class NoteService
 
     /**
      * @param $id
-     *
-     * @return bool
+     * @return int
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
     public function removeNote($id)
     {

@@ -7,7 +7,6 @@ use Doctrine\DBAL\Driver\PDOException;
 use Entity\FeedItem;
 use Entity\Feed;
 use Guzzle\GuzzleClient;
-use Symfony\Component\Security\Acl\Exception\Exception;
 use Zend\Feed\Reader\Entry\EntryInterface;
 use Zend\Feed\Reader\Reader;
 
@@ -212,7 +211,7 @@ class FeedService
     public function addFeed($name, $url, $color, $autoPin, $feedIcon)
     {
         if (!$name || !$url || !$color) {
-            throw new Exception('Not all feed data given');
+            throw new \Exception('Not all feed data given');
         }
 
         return $this->database->insert('feeds', [
@@ -248,7 +247,7 @@ class FeedService
      */
     public function removeFeed($feedId)
     {
-        if (!isset($feedId) || empty($feedId)) {
+        if (!$feedId) {
             throw new Exception('No feed Id given to remove');
         }
 
@@ -259,7 +258,7 @@ class FeedService
     /**
      * @return array
      */
-    public function getFeedOveriew()
+    public function getFeedOverview()
     {
         $feedOverview = [];
         $feeds = $this->getFeeds();
@@ -281,7 +280,7 @@ class FeedService
             $content = strip_tags($entry->getDescription());
             $content = trim(str_replace('Read more...', '', $content));
 
-            return new FeedItem($entry->getId(), $entry->getTitle(), $content, $entry->getLink(), $feed->getId());
+            return new FeedItem(intval($entry->getId()), $entry->getTitle(), $content, $entry->getLink(), $feed->getId());
         }, $entries);
     }
 

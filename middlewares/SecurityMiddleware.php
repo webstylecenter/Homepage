@@ -33,8 +33,7 @@ $app->before(function() use ($app) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($userService->signIn($_POST)) {
             if ($_SERVER['REQUEST_URI'] == '/login/') {
-                header('location: /');
-                exit;
+                return $app->redirect('/');
             }
 
             return;
@@ -48,7 +47,5 @@ $app->before(function() use ($app) {
         ],
         'bodyClass' => 'error403'
     ]);
-
-    exit;
 
 }, Application::EARLY_EVENT);

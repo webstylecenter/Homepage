@@ -21,12 +21,6 @@ class MetaService
 
         $url = strpos($url, 'http') === 0 ? $url : 'http://' . $url;
         $doc = $this->loadContent($url);
-
-        if (!$doc) {
-            return $meta;
-        }
-
-        $doc = $this->loadContent($url);
         $meta->setUrl($url);
         $meta->setTitle($this->findTitle($doc) ?: $url);
         $meta->setMetaDescription($this->findMetaDescription($doc));
@@ -35,8 +29,8 @@ class MetaService
     }
 
     /**
-     * @param string $url
-     * @return \DOMDocument
+     * @param $url
+     * @return bool|string
      */
     protected function loadContent($url)
     {
@@ -59,9 +53,7 @@ class MetaService
     protected function findTitle(\DOMDocument $doc)
     {
         $titleNode = $doc->getElementsByTagName('title');
-        $titleContents = $titleNode ? $titleNode->item(0) : null;
-
-        return $titleContents ? $titleContents->nodeValue : null;
+        return $titleNode->item(0) ? $titleNode->item(0)->nodeValue : null;
     }
 
     /**

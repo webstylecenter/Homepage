@@ -21,7 +21,7 @@ $app->match('/settings/', function() use($app) {
 $app->post('/settings/feeds/remove/', function() use($app) {
 
     if (!isset($_POST['feedId']) || strlen($_POST['feedId']) === 0) {
-        exit ('No feed Id given');
+        throw new Exception('No feedId given');
     }
 
     /** @var \Service\FeedService $feedService */
@@ -32,7 +32,7 @@ $app->post('/settings/feeds/remove/', function() use($app) {
 $app->post('/settings/feeds/add/', function() use($app) {
 
     if (!isset($_POST['name']) || strlen($_POST['name']) === 0 || !isset($_POST['url']) || strlen($_POST['url']) === 0 || !isset($_POST['color']) || strlen($_POST['color']) === 0) {
-        exit ('Error: Not all feed details entered');
+        throw new Exception('Not all feed details are entered');
     }
 
     $_POST['color'] = substr($_POST['color'], 1);

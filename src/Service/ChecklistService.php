@@ -26,7 +26,7 @@ class ChecklistService
     }
 
     /**
-     * @param null $id
+     * @param integer|null $id
      *
      * @return ChecklistItem
      */

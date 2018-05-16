@@ -244,11 +244,12 @@ class FeedService
      * @return int
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws \Exception
      */
     public function removeFeed($feedId)
     {
         if (!$feedId) {
-            throw new Exception('No feed Id given to remove');
+            throw new \Exception('No feed Id given to remove');
         }
 
         $this->database->delete('feed_data', ['feed' => $feedId]);

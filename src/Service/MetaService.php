@@ -30,7 +30,7 @@ class MetaService
 
     /**
      * @param $url
-     * @return string
+     * @return boolean|string
      */
     protected function loadContent($url)
     {

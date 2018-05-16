@@ -281,7 +281,7 @@ class FeedService
             $content = strip_tags($entry->getDescription());
             $content = trim(str_replace('Read more...', '', $content));
 
-            return new FeedItem(intval($entry->getId()), $entry->getTitle(), $content, $entry->getLink(), $feed->getId());
+            return new FeedItem($entry->getId(), $entry->getTitle(), $content, $entry->getLink(), $feed->getId());
         }, $entries);
     }
 

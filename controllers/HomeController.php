@@ -45,3 +45,13 @@ $app->get('/offline/', function() use($app) {
         ],
     ]);
 });
+
+$app->get('/signin/', function() use($app) {
+    return $app['twig']->render('guests/index.html.twig', [
+        'lastUpdate' => [
+            'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
+            'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
+        ],
+        'bodyClass' => 'error403'
+    ]);
+});

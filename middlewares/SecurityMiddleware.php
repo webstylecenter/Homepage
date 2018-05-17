@@ -1,6 +1,7 @@
 <?php
 
 use \Silex\Application;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 $app->before(function() use ($app) {
 
@@ -10,7 +11,8 @@ $app->before(function() use ($app) {
         '/share/',
         '/weather/',
         '/meta/',
-        '/chrome/'
+        '/chrome/',
+        '/signin/'
     ];
 
     foreach ($publicPages as $page) {
@@ -35,17 +37,9 @@ $app->before(function() use ($app) {
             if ($_SERVER['REQUEST_URI'] == '/login/') {
                 return $app->redirect('/');
             }
-
             return;
         }
     }
 
-    echo $app['twig']->render('guests/index.html.twig', [
-        'lastUpdate' => [
-            'css_main' => filemtime(__DIR__ . '/../dist/css/style.css'),
-            'js_main' => filemtime(__DIR__ . '/../dist/js/app.js'),
-        ],
-        'bodyClass' => 'error403'
-    ]);
-
+    return $app->redirect('/signin/');
 }, Application::EARLY_EVENT);

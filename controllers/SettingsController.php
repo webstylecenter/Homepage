@@ -19,25 +19,9 @@ $app->match('/settings/', function() use($app) {
 });
 
 $app->post('/settings/feeds/remove/', function() use($app) {
-
-    if (!isset($_POST['feedId']) || strlen($_POST['feedId']) === 0) {
-        throw new Exception('No feedId given');
-    }
-
-    /** @var \Service\FeedService $feedService */
-    $feedService = $app['feedService'];
-    return $feedService->removeFeed($_POST['feedId']);
+    return $app['twig']->render('demo/notice.html.twig');
 });
 
 $app->post('/settings/feeds/add/', function() use($app) {
-
-    if (!isset($_POST['name']) || strlen($_POST['name']) === 0 || !isset($_POST['url']) || strlen($_POST['url']) === 0 || !isset($_POST['color']) || strlen($_POST['color']) === 0) {
-        throw new Exception('Not all feed details are entered');
-    }
-
-    $_POST['color'] = substr($_POST['color'], 1);
-
-    /** @var \Service\FeedService $feedService */
-    $feedService = $app['feedService'];
-    return $feedService->addFeed($_POST['name'], $_POST['url'], $_POST['color'], (isset($_POST['autoPin']) && $_POST['autoPin'] === 'on'), $_POST['icon']);
+    return $app['twig']->render('demo/notice.html.twig');
 });

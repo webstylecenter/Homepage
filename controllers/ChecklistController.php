@@ -22,12 +22,6 @@ $app->match('/checklist/add/', function() use($app) {
 
     /** @var \Service\ChecklistService $checklistService */
     $checklistService = $app['checklistService'];
-    $checklistService->saveChecklistItem(
-        isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : null,
-        isset($_POST['item']) && !empty($_POST['item']) ? $_POST['item'] : '',
-        isset($_POST['checked']) && $_POST['checked'] === 'true'
-    );
-
     $todos = $checklistService->getTodos();
     $finished = $checklistService->getFinished();
 

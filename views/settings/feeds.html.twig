@@ -7,7 +7,7 @@
         <input type="text" name="icon" value="" placeholder="FontAwesome icon (optional)" /><br />
         <input type="checkbox" name="autoPin" value="on" id="autoPin"/><label for="autoPin">Automaticly pin new items</label><br />
         <input type="text" name="color" value="#000" placeholder="Insert RGB without the #" id="spectrum" /><br />
-        <input type="submit" value="Add" class="js-settings-add-feed" />
+        <input type="submit" value="Add" class="js-settings-add-feed" disabled="disabled" />
     </p>
 </div>
 {% if feeds is not empty %}
@@ -33,7 +33,7 @@
                         <span>{{ feed.feedurl }}</span>
                     </td>
                     <td class="feedIcon">
-                        <input class="js-update-auto-pin" type="checkbox" value="on" {% if feed.autoPin %}checked="checked"{% endif %}/>
+                        <input class="js-update-auto-pin" type="checkbox" value="on" {% if feed.autoPin %}checked="checked"{% endif %} disabled="disabled"/>
                     </td>
                     <td class="feedIcon">
                         <span class="fa fa-{{ feed.feedIcon }}"></span>
@@ -46,7 +46,7 @@
                     </td> #}
                     <td class="feedActions">
                         {# <button class="fa fa-edit"></button> #}
-                        <button class="js-settings-remove-feed fa fa-trash"></button>
+                        <button class="js-settings-remove-feed fa fa-trash" disabled="disabled"></button>
                     </td>
                 </tr>
             {% endfor %}

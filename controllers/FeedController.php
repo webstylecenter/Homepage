@@ -3,25 +3,8 @@
 use Entity\FeedItem;
 
 $app->post('/feed/add-item/', function() use ($app) {
-    if (!isset($_POST['description']) || !isset($_POST['title']) || empty($_POST['title']) || !isset($_POST['url']) || empty($_POST['url'])) {
-        return json_encode(['status' => 'fail', 'message' => 'Missing parameter(s): title, description, url']);
-    }
 
-    $feedItem = new FeedItem(
-        intval(time()),
-        $_POST['title'],
-        $_POST['description'] ?: '',
-        strpos($_POST['url'], 'http') === 0 ? $_POST['url'] : 'http://' . $_POST['url'],
-        0
-    );
-
-    /** @var \Service\FeedService $feedService */
-    $feedService = $app['feedService'];
-    $feedItem->setPinned(true);
-    if (!$feedService->addItem($feedItem)) {
-        return $feedService->getLastError();
-    }
-    return json_encode(['status' => 'success', 'message' => 'Item added']);
+    return json_encode(['status' => 'fail', 'message' => 'Function not available in Demo mode']);
 });
 
 $app->post('/feed/pin/{id}', function($id) use($app) {
@@ -97,23 +80,5 @@ $app->get('/feeds/overview/', function() use($app) {
 });
 
 $app->post('/feeds/settingsupdate/', function() use($app) {
-
-    /** @var \Service\FeedService $feedService */
-    $feedService = $app['feedService'];
-
-    if (!isset($_POST['setting']) || strlen($_POST['setting']) === 0) {
-        throw new Exception("Setting post data not set");
-    }
-    if (!isset($_POST['value']) || strlen($_POST['value']) === 0) {
-        throw new Exception("Value post data not set");
-    }
-    if (!isset($_POST['feedId']) || strlen($_POST['feedId']) === 0) {
-        throw new Exception("feedId post data not set");
-    }
-
-    if (!$feedService->updateFeedSetting($_POST['feedId'], $_POST['setting'], $_POST['value'])) {
-        return json_encode(['status' => 'fail', 'message' => 'Updating feedsetting failed']);
-    }
-
-    return json_encode(['status' => 'success', 'message' => 'Feedsetting updated']);
+    return json_encode(['status' => 'fail', 'message' => 'Not available in Demo mode']);
 });

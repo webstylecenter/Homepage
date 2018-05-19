@@ -1,8 +1,11 @@
-# Created by .ignore support plugin (hsz.mobi)
-/app/config.php
-
-/vendor/
+/.env
+/public/bundles/
 /var/
-node_modules/
-dist/*
-views/update/
+/vendor/
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+.phpunit
+/phpunit.xml
+/.web-server-pid

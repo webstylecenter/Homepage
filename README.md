@@ -2,6 +2,11 @@
 ![alt text](https://pvd.onl/oy59sb.jpg)
 A powerful dashboard tool to keep track of your favorite news sites, daily tasks, reminders, and so much more. FeedNews.me, previously called "It's my Homepage" brings you a site that you can set as startpage of your browser, or use Electron to run it as an app. I personally use it all day, with my news sources like Neowin, iDownloadblog and many more next to my Youtube subscriptions, todo-list and weather updates all in one place.
 
+# Warning!
+This is the Symfony branch. This version doesn't work yet, and has limited to no functionality at all. Please use the master branch to play with FeedNews, unless you want to merge the master functionality into the Symfony version.
+
+The Symfony branch is used to transition between Silex to Symfony4. After completed, the master branch will have it's 2.0 release. Thank you!
+
 # Functionality
 - Read and manage RSS Feeds
     - Assign colors to different sources

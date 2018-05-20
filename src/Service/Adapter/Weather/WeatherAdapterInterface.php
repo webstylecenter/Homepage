@@ -6,10 +6,7 @@ use App\Entity\WeatherForecastList;
 
 interface WeatherAdapterInterface
 {
-    /**
-     * @param array $config
-     */
-    public function __construct(array $config);
+    public function __construct();
 
     /**
      * @return WeatherForecastList|null

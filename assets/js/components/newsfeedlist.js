@@ -92,6 +92,7 @@ $(function() {
         $(this).find('.pin').trigger('click');
     });
 
+    /** global: ClipboardJS */
     (new Clipboard('.js-copy-to-clipboard')).on('success', function(e) {
         e.clearSelection();
     });

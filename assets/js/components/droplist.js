@@ -35,7 +35,7 @@ function hideDropList() {
 
 function activateDropListEvents() {
 
-    /** global: Clipboard */
+    /** global: ClipboardJS */
     new Clipboard('.dropCopy');
 
     $('.dropOpen').on('click', function() {

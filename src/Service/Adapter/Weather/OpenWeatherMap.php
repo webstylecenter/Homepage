@@ -18,14 +18,11 @@ class OpenWeatherMap implements WeatherAdapterInterface
      * @var string
      */
     protected $forecastUrl;
-    
-    /**
-     * @param array $config
-     */
-    public function __construct(array $config)
+
+    public function __construct()
     {
-        $key = $config['openWeatherMap']['key'];
-        $location = $config['openWeatherMap']['location'];
+        $key = $_SERVER['OPEN_WEATHER_MAP_KEY'];
+        $location = $_SERVER['OPEN_WEATHER_MAP_LOCATION'];
         $this->weatherUrl = self::API_URL_PREFIX . 'weather?q=' . $location . '&APPID=' . $key . '&units=metric';
         $this->forecastUrl = self::API_URL_PREFIX . 'forecast/daily/?q=' . $location . '&APPID=' . $key . '&units=metric';
     }

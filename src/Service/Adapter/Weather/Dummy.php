@@ -21,10 +21,7 @@ class Dummy implements WeatherAdapterInterface
         WeatherForecast::TYPE_THUNDER
     ];
 
-    /**
-     * @param array $config
-     */
-    public function __construct(array $config)
+    public function __construct()
     {
         // Intentionally left empty
     }

@@ -1,12 +1,12 @@
+window.$ = window.jQuery = require('jquery');
 require('jquery-ui');
 require('jquery-jscroll');
 require('jquery-modal');
 require('spectrum-colorpicker');
-require('hammerjs');
-$.hammer = require('jquery-hammerjs');
+require('jquery-hammerjs');
+window.ClipboardJS = require('clipboard');
 
 import { WOW } from 'wowjs'
-window.WOW = WOW;
 
 import 'handlebars/dist/handlebars.min.js';
 

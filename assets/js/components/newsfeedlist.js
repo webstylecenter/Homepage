@@ -11,9 +11,12 @@ $(function() {
         }
     });
 
-    $('.header--bar').hammer().on("swiperight", function() {
-        $('.js-return').trigger('click');
-    });
+    $('.header--bar').each(function() {
+        var mc = new Hammer(this);
+        mc.on("swiperight", function() {
+            $('.js-return').trigger('click');
+        })
+    })
 
     $(document)
         .on('click', '.js-reload-page', function (event) {
@@ -88,12 +91,15 @@ $(function() {
         })
     ;
 
-    $('.js-action-feed-list-swipe').hammer().on("swiperight", function() {
-        $(this).find('.pin').trigger('click');
+    $('.js-action-feed-list-swipe').each(function() {
+        var mc = new Hammer(this);
+        mc.on("swiperight", function() {
+            $(this).find('.pin').trigger('click');
+        })
     });
 
     /** global: ClipboardJS */
-    (new Clipboard('.js-copy-to-clipboard')).on('success', function(e) {
+    (new ClipboardJS('.js-copy-to-clipboard')).on('success', function(e) {
         e.clearSelection();
     });
 });

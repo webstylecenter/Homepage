@@ -36,7 +36,7 @@ function hideDropList() {
 function activateDropListEvents() {
 
     /** global: ClipboardJS */
-    new Clipboard('.dropCopy');
+    new ClipboardJS('.dropCopy');
 
     $('.dropOpen').on('click', function() {
         var image = $(this).data('image');

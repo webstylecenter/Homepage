@@ -1,6 +1,6 @@
 <?php
 
-namespace Entity;
+namespace App\Entity;
 
 /**
  * Class WeatherForecast

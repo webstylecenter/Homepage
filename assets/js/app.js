@@ -3,7 +3,7 @@ require('jquery-jscroll');
 require('jquery-modal');
 require('spectrum-colorpicker');
 require('hammerjs');
-require('jquery-hammerjs');
+$.hammer = require('jquery-hammerjs');
 
 import { WOW } from 'wowjs'
 window.WOW = WOW;

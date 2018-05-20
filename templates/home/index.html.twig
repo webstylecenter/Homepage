@@ -14,12 +14,12 @@
         <div class="header--bar-actions wow slideInRight">
 
             {#{% if not device.isMobile %}#}
-                {#<div class="js-update-weather-icon header--bar-weather-icon">{% include 'weather/icon.html.twig' %}</div>#}
-                {#<div class="js-show-weather-radar header--bar-weather-radar"><img class="js-weather-radar" src="https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512" />#}
-                    {#<div class="header--bar-weather-radar-overview">#}
-                        {#{% include 'weather/detail.html.twig' %}#}
-                    {#</div>#}
-                {#</div>#}
+                <div class="js-update-weather-icon header--bar-weather-icon">{% include 'weather/icon.html.twig' %}</div>
+                <div class="js-show-weather-radar header--bar-weather-radar"><img class="js-weather-radar" src="https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512" />
+                    <div class="header--bar-weather-radar-overview">
+                        {% include 'weather/detail.html.twig' %}
+                    </div>
+                </div>
             {#{% endif %}#}
 
             <span class="js-send-to-pip fa fa-window-restore hide-if-mobile show-if-desktop"></span>

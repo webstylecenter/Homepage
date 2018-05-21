@@ -5,12 +5,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FeedRepository")
  */
 class Feed
 {
+    use  TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -42,11 +45,6 @@ class Feed
      * @ORM\Column(type="boolean")
      */
     private $autoPin;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $created;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="feedId", orphanRemoval=true)
@@ -119,18 +117,6 @@ class Feed
     public function setAutoPin(bool $autoPin): self
     {
         $this->autoPin = $autoPin;
-
-        return $this;
-    }
-
-    public function getCreated(): ?\DateTimeInterface
-    {
-        return $this->created;
-    }
-
-    public function setCreated(\DateTimeInterface $created): self
-    {
-        $this->created = $created;
 
         return $this;
     }

@@ -1,4 +1,7 @@
 {
+    "behat/transliterator": {
+        "version": "v1.2.0"
+    },
     "container-interop/container-interop": {
         "version": "1.2.0"
     },
@@ -74,6 +77,9 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "gedmo/doctrine-extensions": {
+        "version": "v2.4.35"
+    },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"
     },
@@ -136,6 +142,15 @@
     },
     "sentry/sentry": {
         "version": "1.9.0"
+    },
+    "stof/doctrine-extensions-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.2",
+            "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
+        }
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.0.2"

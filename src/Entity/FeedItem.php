@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FeedItemRepository")
  */
 class FeedItem
 {
+    use  TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -30,11 +33,6 @@ class FeedItem
      * @ORM\Column(type="string", length=255)
      */
     private $url;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateAdded;
 
     /**
      * @ORM\Column(type="boolean")
@@ -92,19 +90,7 @@ class FeedItem
 
         return $this;
     }
-
-    public function getDateAdded(): ?\DateTimeInterface
-    {
-        return $this->dateAdded;
-    }
-
-    public function setDateAdded(\DateTimeInterface $dateAdded): self
-    {
-        $this->dateAdded = $dateAdded;
-
-        return $this;
-    }
-
+    
     public function getViewed(): ?bool
     {
         return $this->viewed;

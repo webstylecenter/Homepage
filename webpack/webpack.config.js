@@ -1,7 +1,7 @@
 /* eslint-disable import/no-dynamic-require,global-require */
 const _ = require('lodash');
 
-const buildType = process.env.NODE_ENV || 'default';
+const buildType = process.env.NODE_ENV || 'prod';
 const config = require(`./config/${buildType}`);
 const fs = require('fs');
 

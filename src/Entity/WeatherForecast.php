@@ -2,10 +2,6 @@
 
 namespace App\Entity;
 
-/**
- * Class WeatherForecast
- * @package Entity
- */
 class WeatherForecast
 {
     const TYPE_CLOUD = 'cloud';

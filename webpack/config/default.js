@@ -13,7 +13,7 @@ const DEFAULT_CONFIG = {
   /**
    * Public folder prefix. This is usually the private path prefixed with /web or /public
    */
-  public: '/public',
+  public: '/build/',
 
   /**
    * Private build folder

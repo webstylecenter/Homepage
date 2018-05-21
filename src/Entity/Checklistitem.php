@@ -13,18 +13,24 @@ class Checklistitem
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @var string
      */
-    private $item;
+    protected $item;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @var boolean
      */
-    private $checked;
+    protected $checked = false;
 
     public function getId()
     {

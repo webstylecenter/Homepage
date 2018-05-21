@@ -1,16 +1,16 @@
 {
-  "parser": "babel-eslint",
-  "rules":{
-    "camelcase": 1,
-    "comma-dangle": 2,
-    "quotes": 0
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "plugins": [
-    "react"
-  ]
+	"extends": "airbnb-base",
+	"parser": "babel-eslint",
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"plugins": ["compat"],
+	"ecmaFeatures": {
+		"experimentalObjectRestSpread": true,
+	},
+	"rules": {
+		"linebreak-style": 0,
+		"compat/compat": 2
+	}
 }

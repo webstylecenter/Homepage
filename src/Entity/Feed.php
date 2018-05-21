@@ -147,7 +147,7 @@ class Feed
     {
         if (!$this->items->contains($pinned)) {
             $this->items[] = $pinned;
-            $pinned->setFeedId($this);
+            $pinned->setFeed($this);
         }
 
         return $this;
@@ -158,8 +158,8 @@ class Feed
         if ($this->items->contains($pinned)) {
             $this->items->removeElement($pinned);
             // set the owning side to null (unless already changed)
-            if ($pinned->getFeedId() === $this) {
-                $pinned->setFeedId(null);
+            if ($pinned->getFeed() === $this) {
+                $pinned->setFeed(null);
             }
         }
 

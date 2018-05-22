@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ChecklistItem;
 use App\Entity\Note;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,12 +18,13 @@ class WelcomeController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         $notes = $entityManager->getRepository(Note::class)->findAll();
+        $checklistItems = $entityManager->getRepository(ChecklistItem::class)->findBy(['checked'=>false], ['updatedAt'=> 'DESC']);
 
         return $this->render('welcome/index.html.twig', [
             'bodyClass' => 'welcome',
            // 'forecast' => $weatherService->getForecastList(),
             'notes'=> $notes,
-            'todos' => []
+            'todos' => $checklistItems
         ]);
     }
 }

@@ -14,8 +14,8 @@
 
             <div class="views">
                 <div class="view widgets">
-                    {#{% include 'widgets/notes.html.twig' with {'notes':notes }  %}#}
-                    {#<div class="checklist-widget">{% include 'widgets/checklist.html.twig' with {'todos': todos } %}</div>#}
+                    {% include 'widgets/notes.html.twig' with {'notes':notes }  %}
+                    <div class="checklist-widget">{% include 'widgets/checklist.html.twig' with {'todos': todos } %}</div>
                 </div>
 
                 <div class="view feeds">

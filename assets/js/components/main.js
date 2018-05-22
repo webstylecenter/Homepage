@@ -131,8 +131,7 @@ function saveNote($el) {
 
             $('.note-selector-' + id).text(name);
             if (id.length === 0) {
-                var info = $.parseJSON(data);
-                $el.attr('data-id', info.id);
+                $el.attr('data-id', data.id);
             }
         })
         .fail(function() {

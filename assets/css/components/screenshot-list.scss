@@ -10,6 +10,7 @@
   z-index: 1999;
   max-height: 80vh;
   overflow-y: scroll;
+  overflow-x: hidden;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 
   &--image {

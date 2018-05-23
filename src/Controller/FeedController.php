@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Feed;
 use App\Entity\FeedItem;
+use App\Service\MetaService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -141,6 +142,50 @@ class FeedController extends Controller
 
         return $this->render('widgets/feed-overview.html.twig', [
             'feeds' => $repository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/chrome/import/")
+     * @param Request $request
+     * @param MetaService $metaService
+     * @return JsonResponse
+     */
+    public function chromeImportAction(Request $request, MetaService $metaService)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $url = $request->get('url', '');
+
+        if (strlen($url) === 0) {
+            return new JsonResponse([
+                'status' => 'fail',
+                'message' => 'Missing parameter(s): url'
+            ]);
+        }
+
+        $metaData = $metaService->getByUrl($url);
+        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl'=>'']);
+
+        $feedItem = new FeedItem();
+        $feedItem
+            ->setFeed($feed)
+            ->setViewed(false)
+            ->setGuid(intval(time()))
+            ->setTitle($metaData->getTitle())
+            ->setDescription($metaData->getMetaDescription())
+            ->setPinned(true)
+            ->setUrl($metaData->getUrl());
+
+        $entityManager->persist($feedItem);
+        $entityManager->flush();
+
+        return new JsonResponse([
+            'status' => 'success',
+            'data' => [
+                'title' => $metaData->getTitle(),
+                'description' => $metaData->getMetaDescription() ?: '',
+                'url' => $metaData->getUrl(),
+            ]
         ]);
     }
 }

@@ -15,11 +15,11 @@ class DroplistService
     protected $images = [];
 
     /**
-     * @param array $config
+     * @param array
      */
-    public function __construct(array $config)
+    public function __construct()
     {
-        $this->images = (array) json_decode(file_get_contents($config['droplocation']), true);
+        $this->images = (array) json_decode(file_get_contents($_SERVER['DROP_LOCATION']), true);
     }
 
     /**

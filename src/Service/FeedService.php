@@ -135,21 +135,6 @@ class FeedService
         return array_map([$this, 'toFeedItemEntity'], $feedItems);
     }
 
-    /**
-     * @return array
-     */
-    public function getFeedItemTotals()
-    {
-        return $this->database->fetchAll("
-            SELECT feed, COUNT(*) as count, name, feed_data.dateAdded 
-            FROM feed_data 
-            LEFT JOIN feeds 
-            ON feed_data.feed = feeds.id 
-            GROUP BY feed 
-            ORDER BY count DESC
-        ");
-    }
-
     public function markAllViewed()
     {
         $this->database->update('feed_data', ['viewed' => 1], ['viewed' => 0]);

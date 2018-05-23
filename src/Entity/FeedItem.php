@@ -40,7 +40,7 @@ class FeedItem
     private $viewed;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="pinned")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items")
      * @ORM\JoinColumn(nullable=false)
      */
     private $feed;

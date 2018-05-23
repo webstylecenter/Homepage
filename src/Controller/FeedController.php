@@ -188,4 +188,31 @@ class FeedController extends Controller
             ]
         ]);
     }
+
+    /**
+     * @Route("/meta/")
+     * @param Request $request
+     * @param MetaService $metaService
+     * @return JsonResponse
+     */
+    public function MetaController(Request $request, MetaService $metaService)
+    {
+        $url = $request->get('url', '');
+        if (strlen($url) === 0) {
+            return new JsonResponse([
+                'status' => 'fail',
+                'message' => 'Missing parameter(s): url'
+            ]);
+        }
+
+        $metaData = $metaService->getByUrl($url);
+
+        return new JsonResponse([
+            'status' => 'success',
+            'data' => [
+                'title' => $metaData->getTitle(),
+                'description' => (!empty($metaData->getMetaDescription()) ? $metaData->getMetaDescription() : '')
+            ]
+        ]);
+    }
 }

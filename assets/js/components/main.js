@@ -93,11 +93,10 @@ function getUrlMetaData() {
             url: "/meta/",
             data: { url: Url}
         })
-            .done(function( data ) {
-                var json = $.parseJSON(data);
-                if (json.status == 'success') {
-                    $('.js-form-feed [name="title"]').val(json.data.title);
-                    $('.js-form-feed [name="description"]').val(json.data.description);
+            .done(function( response ) {
+                if (response.status == 'success') {
+                    $('.js-form-feed [name="title"]').val(response.data.title);
+                    $('.js-form-feed [name="description"]').val(response.data.description);
                 } else {
                     $('.js-form-feed [name="title"]').val("");
                     $('.js-form-feed [name="description"]').val("");

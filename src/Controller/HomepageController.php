@@ -31,10 +31,21 @@ class HomepageController extends Controller
         return $this->render('home/index.html.twig', [
             'bodyClass' => $bodyClass,
             'forecast' => $weatherService->getForecastList(),
-            'feedItems'=> $entityManager->getRepository(FeedItem::class)->findBy([], ['createdAt' => 'DESC'], 50),
+            'feedItems'=> $entityManager->getRepository(FeedItem::class)->findBy([], ['pinned' => 'DESC', 'createdAt' => 'DESC'], 50),
             'feeds' => $entityManager->getRepository(Feed::class)->findAll(),
             'device' => $device,
             'nextPageNumber' => 2,
+        ]);
+    }
+
+    /**
+     * @Route("/offline/")
+     * @return Response
+     */
+    public function offlinePage()
+    {
+        return $this->render('home/offline.html.twig', [
+            'bodyClass' => 'offline'
         ]);
     }
 }

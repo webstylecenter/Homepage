@@ -21,7 +21,6 @@ $(function() {
     $(document)
         .on('click', '.js-reload-page', function (event) {
             event.preventDefault();
-            requestNewFeedItems();
         })
         .on('click', '.js-open-url', function () {
             $('.header--bar').css('backgroundColor', '#337dff');
@@ -105,9 +104,8 @@ $(function() {
 });
 
 global.requestNewFeedItems = function() {
-    $.getJSON('/feed/refresh/' + encodeURI($('body').data('refresh-date')), function(data) {
-        var html = data.html;
-        $('.feed-list').prepend(html);
+    $.getJSON('/feed/refresh/', function(data) {
+        $('.feed-list').prepend(data.html);
         $('body').data('refresh-date', data.refreshDate);
         $('.js-form-feed').find("input[type=text], textarea").val("");
     });

@@ -49,7 +49,10 @@ class NoteController extends Controller
         $note = $entityManager->getRepository(Note::class)->find($request->get('id'));
 
         if (!$note) {
-            throw new \Exception('Note not found!');
+            return new JsonResponse([
+                'message'=> 'Note not found!',
+                'status'=> 'fail'
+            ]);
         }
 
         $entityManager->remove($note);

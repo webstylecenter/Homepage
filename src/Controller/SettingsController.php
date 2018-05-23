@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Feed;
+use App\Entity\FeedItem;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,29 +29,60 @@ class SettingsController extends Controller
     }
 
     /**
+     * @Route("/settings/feeds/update/")
      * @param Request $request
      * @return JsonResponse
      */
     public function addAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $feed = $entityManager->getRepository(Feed::class)->find($request->get('id'));
 
-        if (!$feed) {
+        if (strlen($request->get('id')) > 0) {
+            $feed = $entityManager->getRepository(Feed::class)->find($request->get('id'));
+            $feed->setName($request->get('name', $feed->getName()))
+                ->setColor($request->get('color', $feed->getColor()))
+                ->setFeedIcon($request->get('icon', $feed->getFeedIcon()))
+                ->setAutoPin(($request->get('autoPin', $feed->getAutoPin()) === 'on'))
+                ->setFeedUrl($request->get('url', $feed->getFeedUrl()));
+        } else {
             $feed = new Feed();
+            $feed->setName($request->get('name'))
+                ->setColor($request->get('color'))
+                ->setFeedIcon($request->get('icon', null))
+                ->setAutoPin(($request->get('autoPin') === 'on'))
+                ->setFeedUrl($request->get('url'));
         }
-
-        $feed->setName($request->get('name'))
-            ->setColor($request->get('color'))
-            ->setFeedIcon($request->get('icon', null))
-            ->setAutoPin($request->get('autoPin', false))
-            ->setFeedUrl($request->get('url'));
 
         $entityManager->persist($feed);
         $entityManager->flush();
 
         return new JsonResponse([
             'id'=> $feed->getId(),
+            'status'=> 'success'
+        ]);
+    }
+
+    /**
+     * @Route("/settings/feeds/remove/")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function removeAction(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $feed = $entityManager->getRepository(Feed::class)->find($request->get('feedId'));
+
+        if (!$feed) {
+            return new JsonResponse([
+                'message'=> 'Feed not found!',
+                'status'=> 'fail'
+            ]);
+        }
+
+        $entityManager->remove($feed);
+        $entityManager->flush();
+
+        return new JsonResponse([
             'status'=> 'success'
         ]);
     }

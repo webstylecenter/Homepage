@@ -34,7 +34,7 @@ $(function() {
             autoPin = 'on';
         }
 
-        $.post( "/settings/feeds/add/", {
+        $.post( "/settings/feeds/update/", {
             name: name,
             url: url,
             color: color,
@@ -57,18 +57,17 @@ $(function() {
     $('.js-update-auto-pin').on('click', function() {
 
         let feedId = $(this).parent().parent().data('feed-id');
-        var autoPin = 1;
+        var autoPin = 'on';
         let that = $(this);
 
         if (!$(this).prop('checked')) {
-            autoPin = 0;
+            autoPin = 'off';
         }
         $(that).hide();
 
-        $.post( "/feeds/settingsupdate/", {
-            feedId: feedId,
-            setting: 'autoPin',
-            value: autoPin
+        $.post( "/settings/feeds/update/", {
+            id: feedId,
+            autoPin: autoPin
         })
             .done(function() {
                 $(that).show()

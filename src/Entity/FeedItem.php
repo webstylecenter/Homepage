@@ -22,6 +22,11 @@ class FeedItem
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $guid;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $title;
 
     /**
@@ -123,6 +128,18 @@ class FeedItem
     public function setPinned(bool $pinned): self
     {
         $this->pinned = $pinned;
+
+        return $this;
+    }
+
+    public function getGuid(): ?string
+    {
+        return $this->guid;
+    }
+
+    public function setGuid(string $guid): self
+    {
+        $this->guid = $guid;
 
         return $this;
     }

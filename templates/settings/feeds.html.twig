@@ -15,11 +15,10 @@
         <tbody>
         {% for feed in feeds %}
             {% set amount = feed.items|length %}
-            {% set lastUpdate = feed.items.last.createdAt %}
 
             <tr data-feed-id="{{ feed.id }}" data-feed-name="{{ feed.name }}">
                 <td class="feedColor">
-                    <span style="background-color:#{{ feed.color }};"></span>
+                    <span style="background-color:{{ feed.color }};"></span>
                 </td>
                 <td class="feedName">
                     {{ feed.name }}
@@ -34,9 +33,6 @@
                 <td class="feedAmount">
                     {{ amount }}
                 </td>
-                {# <td class="feedLastUpdate">
-                    {{ lastUpdate }}
-                </td> #}
                 <td class="feedActions">
                     {# <button class="fa fa-edit"></button> #}
                     <button class="js-settings-remove-feed fa fa-trash"></button>

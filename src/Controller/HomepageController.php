@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Feed;
 use App\Entity\FeedItem;
+use App\Service\FeedService;
 use App\Service\WeatherService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,10 +16,11 @@ class HomepageController extends Controller
     /**
      * @Route("/")
      * @param WeatherService $weatherService
+     * @param FeedService $feedService
      * @return Response
      * @throws \Exception
      */
-    public function index(WeatherService $weatherService)
+    public function index(WeatherService $weatherService, FeedService $feedService)
     {
         // Setting temporally values
         $bodyClass = 'Homepage';
@@ -28,10 +30,13 @@ class HomepageController extends Controller
 
         $entityManager = $this->getDoctrine()->getManager();
 
+        $feedItems = $entityManager->getRepository(FeedItem::class)->findBy([], ['pinned' => 'DESC', 'createdAt' => 'DESC'], 50);
+        $feedService->markAllViewed();
+
         return $this->render('home/index.html.twig', [
             'bodyClass' => $bodyClass,
             'forecast' => $weatherService->getForecastList(),
-            'feedItems'=> $entityManager->getRepository(FeedItem::class)->findBy([], ['pinned' => 'DESC', 'createdAt' => 'DESC'], 50),
+            'feedItems'=> $feedItems,
             'feeds' => $entityManager->getRepository(Feed::class)->findAll(),
             'device' => $device,
             'nextPageNumber' => 2,

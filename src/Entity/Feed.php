@@ -47,7 +47,7 @@ class Feed
     private $autoPin;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="feed", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="feed", orphanRemoval=true, fetch="EAGER")
      */
     private $items;
 

@@ -25,7 +25,7 @@ var searchFeeds = function(searchQuery) {
         return;
     }
 
-    $.getJSON('/feed/search/0?query=' + encodeURIComponent(searchQuery), function (data) {
+    $.getJSON('/feed/search/?query=' + encodeURIComponent(searchQuery), function (data) {
         if (data.status !== 'success') {
             return;
         }

@@ -18,7 +18,6 @@ class FeedController extends Controller
      */
     public function addFeedAction(Request $request)
     {
-        // TODO: Probably not working yet, no "user" feed made yet
         $entityManager = $this->getDoctrine()->getManager();
 
         $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl'=>'']);
@@ -93,6 +92,55 @@ class FeedController extends Controller
             'feedItems'=> $entityManager->getRepository(FeedItem::class)->findBy([], ['createdAt' => 'DESC'], 50, ($startIndex-1)*50),
             'nextPageNumber' => $startIndex + 1,
             'addToChecklist' => '',
+        ]);
+    }
+
+    /**
+     * @Route("/feed/search/")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function searchAction(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $repository = $entityManager->getRepository(FeedItem::class);
+
+        $feedItems = $repository->createQueryBuilder('f')
+            ->where('f.title LIKE :query')
+            ->orWhere('f.description LIKE :query')
+            ->setParameter('query', '%'.$request->get('query').'%')
+            ->orderBy('f.pinned', 'DESC')
+            ->orderBy('f.createdAt', 'DESC')
+            ->getQuery()->getResult();
+
+        return new JsonResponse([
+            'status' => 'success',
+            'data' => array_map(function(FeedItem $feedItem) {
+                return [
+                    'id' => $feedItem->getId(),
+                    'title' => $feedItem->getTitle(),
+                    'description' => $feedItem->getDescription(),
+                    'url' => $feedItem->getUrl(),
+                    'color' => $feedItem->getFeed()->getColor(),
+                    'feedIcon' => $feedItem->getFeed()->getFeedIcon(),
+                    'shareId' => $feedItem->getFeed()->getName() . '/' . $feedItem->getId() . '/',
+                    'pinned' => $feedItem->getPinned()
+                ];
+            }, $feedItems)
+        ]);
+    }
+
+    /**
+     * @Route("/feeds/overview/")
+     * @return Response
+     */
+    public function overviewAction()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $repository = $entityManager->getRepository(Feed::class);
+
+        return $this->render('widgets/feed-overview.html.twig', [
+            'feeds' => $repository->findAll()
         ]);
     }
 }

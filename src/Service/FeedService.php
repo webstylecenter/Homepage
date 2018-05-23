@@ -97,4 +97,12 @@ class FeedService
             return null;
         }, $entries);
     }
+
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function markAllViewed()
+    {
+        $this->entityManager->getConnection()->update('feed_item', ['viewed' => 1], ['viewed'=>0]);
+    }
 }

@@ -1,0 +1,50 @@
+{% set hadNewItems = false %}
+{% set showedEarlierTodayMessage = false %}
+{% set hadYesterdayBefore = false %}
+
+{% if addToChecklist != '' and nextPageNumber == 1 %}
+    <div class="feed-list-item--state-button">
+        Add "<b>{{ addToChecklist }}</b>" to checklist
+    </div>
+{% endif %}
+
+{% for item in feedItems %}
+    {% if not item.viewed %}
+        {% set hadNewItems = true %}
+    {% endif %}
+
+    {% if item.viewed and hadNewItems and not showedEarlierTodayMessage and loop.index > 1 %}
+        <div class="feed-list--separator">
+            Earlier today
+        </div>
+        {% set showedEarlierTodayMessage = true %}
+    {% elseif item.viewed and not hadYesterdayBefore and item.createdAt|date('Y-m-d') == "yesterday"|date('Y-m-d') and loop.index > 1 %}
+        <div class="feed-list--separator">
+            Yesterday
+        </div>
+        {% set hadYesterdayBefore = true %}
+    {% endif %}
+
+    <div class="feed-list-item js-action-feed-list-click js-action-feed-list-swipe {% if not item.viewed %}feed-list-item--state-new{% endif %} {% if item.pinned %}feed-list-item--state-pinned{% endif %} {% if item.feed.feedIcon|length > 0 %}hasIcon{% endif %}"
+         data-url="{{ item.url }}" data-share-id="{{ item.feed.name|slugify }}/{{ item.id }}/" style="border-left-color:{{ item.feed.color }};">
+        <div class="pin" data-pin-id="{{ item.id }}"><span class="fa fa-thumbtack"></span></div>
+        <div class="pip"><span class="fa fa-window-restore"></span></div>
+        {% if item.feed.feedIcon|length > 0 %}
+            <div class="feed-icon" style="background-color:{{ item.feed.color }}">
+                <span class="fa fa-{{ item.feed.feedIcon }}"></span>
+            </div>
+        {% endif %}
+        <p class="title ">{{ item.title|striptags }}</p>
+        <p class="description">
+            {% if item.description|length > 0 %}
+                {{ item.description|truncate(120, true) }}
+            {% else %}
+                {{ item.feed.name }}
+            {% endif %}
+        </p>
+    </div>
+{% endfor %}
+
+{% if feedItems|length > 0 and nextPageNumber != 50000 %}
+    <a href="/feed/page/{{ nextPageNumber }}" class="feed-list-item jscroll-next">Next page</a>
+{% endif %}

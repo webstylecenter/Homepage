@@ -45,7 +45,7 @@ class FeedItem
     private $viewed;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $feed;

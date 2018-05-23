@@ -2,6 +2,9 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "cocur/slugify": {
+        "version": "v3.1"
+    },
     "container-interop/container-interop": {
         "version": "1.2.0"
     },

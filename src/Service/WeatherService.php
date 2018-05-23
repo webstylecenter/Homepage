@@ -11,6 +11,20 @@ class WeatherService
     const API_URL_PREFIX = 'http://api.openweathermap.org/data/2.5/';
 
     /**
+     * @var array
+     */
+    protected $types = [
+        WeatherForecast::TYPE_RAIN,
+        WeatherForecast::TYPE_CLOUD,
+        WeatherForecast::TYPE_CLOUD,
+        WeatherForecast::TYPE_CLOUD,
+        WeatherForecast::TYPE_PARTLY_CLOUD,
+        WeatherForecast::TYPE_SNOW,
+        WeatherForecast::TYPE_SUN,
+        WeatherForecast::TYPE_THUNDER
+    ];
+
+    /**
      * @var string
      */
     protected $weatherUrl;
@@ -19,11 +33,6 @@ class WeatherService
      * @var string
      */
     protected $forecastUrl;
-
-    /**
-     * @var WeatherAdapterInterface
-     */
-    protected $weatherAdapter;
 
     public function __construct()
     {
@@ -39,8 +48,36 @@ class WeatherService
      */
     public function fetchForecast()
     {
+        if ($_SERVER['APP_ENV'] === 'dev') {
+            return $this->dummyForecast();
+        }
+
         $forecastData = $this->downloadForecast();
         return $this->createForecastList($forecastData['weather'], $forecastData['forecast']);
+    }
+
+    /**
+     * @return WeatherForecastList
+     */
+    public function dummyForecast()
+    {
+        $weatherForecastList = new WeatherForecastList();
+        for ($i = 0; $i <= 5; $i++) {
+            $forecastItem = new WeatherForecast();
+            $forecastItem->setTemperature(mt_rand(5, 420) / 10);
+            $forecastItem->setMaxTemperature(mt_rand(5, 420) / 10);
+            $forecastItem->setMinTemperature(mt_rand(5, 420) / 10);
+            $forecastItem->setType($this->types[array_rand($this->types)]);
+            $forecastItem->setDescription('Dummy description');
+
+            if ($i === 0) {
+                $weatherForecastList->setCurrent($forecastItem);
+            } else {
+                $weatherForecastList->addUpcoming($forecastItem);
+            }
+        }
+
+        return $weatherForecastList;
     }
 
     /**

@@ -17,12 +17,11 @@ class WelcomeController extends Controller
     public function index()
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $notes = $entityManager->getRepository(Note::class)->findAll();
-        $checklistItems = $entityManager->getRepository(ChecklistItem::class)->findBy(['checked'=>false], ['updatedAt'=> 'DESC']);
+        $notes = $entityManager->getRepository(Note::class)->findBy(['user' => $this->getUser()]);
+        $checklistItems = $entityManager->getRepository(ChecklistItem::class)->findBy(['checked'=>false, 'user'=>$this->getUser()], ['updatedAt'=> 'DESC']);
 
         return $this->render('welcome/index.html.twig', [
             'bodyClass' => 'welcome',
-           // 'forecast' => $weatherService->getForecastList(),
             'notes'=> $notes,
             'todos' => $checklistItems
         ]);

@@ -2,10 +2,13 @@
 ![alt text](https://pvd.onl/oy59sb.jpg)
 A powerful dashboard tool to keep track of your favorite news sites, daily tasks, reminders, and so much more. FeedNews.me, previously called "It's my Homepage" brings you a site that you can set as startpage of your browser, or use Electron to run it as an app. I personally use it all day, with my news sources like Neowin, iDownloadblog and many more next to my Youtube subscriptions, todo-list and weather updates all in one place.
 
-# Warning!
-This is the Symfony branch. This version doesn't work yet, and has limited to no functionality at all. Please use the master branch to play with FeedNews, unless you want to merge the master functionality into the Symfony version.
+# Beta stage
+Please use the Master branch if you want to play with NewsFeed in a stable release. At this time all functionality from the Master version has been intergrated into a Symfony4 framework. With Silex End Of Life it was neccisary to upgrade to something better. 
 
-The Symfony branch is used to transition between Silex to Symfony4. After completed, the master branch will have it's 2.0 release. Thank you!
+The main new function in this release will be the support for multiple users (with each having their own feeds to follow, notes and checklist items). At this time, we have just implemented the login system. So it's probably not safe enough for public use just yet. 
+
+# Demo
+Want to see a Demo on what FeedNews is really about. Have a look at our [Demo Page](http://demo.feednews.me) - Please not that you might need the Google Ignore-X header plugin for best compatibility. 
 
 # Functionality
 - Read and manage RSS Feeds
@@ -45,27 +48,24 @@ The Symfony branch is used to transition between Silex to Symfony4. After comple
 - Themes
     - Design always has a different taste with each and everyone. So adding theme support would be nice.
 - Users
-    - Option to make the service open to public so visitors can sign up and use the too. Not only one person. (high prio)
     - Better way to sync feeds in case many people sign up. (prevention of double feeds, double data php timeouts etc)
 - Layout improvements
 - Documentation
+- Ignore X-Frame header extension for browsers that only ignore the headers while using FeedNews
 
 # Installation
 Use the config.php.dist file in the app directory to create your config file. You need to set your database config and enter you openWeatherMap API key. This is a required step for now. To setup your database, use the db-structure.sql file located in the database folder.
 
 After saving your config, make sure to run the following commands from your terminal. Currently all commands need to run on both dev and production env. This will probably change in the future.
 
-- npm install
 - composer install
-- gulp
-- php index.php app:user:create
-
-In case the gulp command gives an error, "npm install --global gulp" will install gulp globally.
+- yarn install
+- yarn build
+- bin/console doctrine:schema:create
+- bin/console fos:user:create
 
 You need to set two cronjobs so the feeds and weather data are imported. For DirectAdmin I've used:
-*/5	*	*	*	*	/usr/local/bin/php /home/USERNAME/domains/YOUR_DOMAIN/public_html/index.php app:feed:update
-*/15	*	*	*	*	/usr/local/bin/php /home/USERNAME/domains/YOUR_DOMAIN/public_html/index.php app:weather:update
-
+*/5	*	*	*	*	/usr/local/bin/php /home/USERNAME/domains/YOUR_DOMAIN/public_html/bin/console app:feeds:update
 
 #### Ignore X-Frame headers
 For Google Chrome users, it's "recommended" to install Ignore X-Frame headers extension. Some site's ask the browser to block the site if it's shown within an iframe. Because all the pages you open are within an iframe this might cause issues. I've been using this extension for over a year without a security problem. Just make sure you don't do any payments within an iframe from untrusted sources if you enable this.

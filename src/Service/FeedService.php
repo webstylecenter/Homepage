@@ -89,7 +89,8 @@ class FeedService
                     ->setUrl($entry->getLink())
                     ->setPinned($feed->getAutoPin())
                     ->setViewed(false)
-                    ->setFeed($feed);
+                    ->setFeed($feed)
+                    ->setUser($feed->getUser());
 
                 return $feedItem;
             }

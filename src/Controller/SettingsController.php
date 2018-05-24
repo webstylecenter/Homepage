@@ -20,7 +20,7 @@ class SettingsController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $feeds = $entityManager->getRepository(Feed::class)->findAll();
+        $feeds = $entityManager->getRepository(Feed::class)->findBy(['user' => $this->getUser()]);
 
         return $this->render('settings/index.html.twig', [
             'bodyClass' => 'settings',
@@ -38,7 +38,7 @@ class SettingsController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
 
         if (strlen($request->get('id')) > 0) {
-            $feed = $entityManager->getRepository(Feed::class)->find($request->get('id'));
+            $feed = $entityManager->getRepository(Feed::class)->findBy(['id' => $request->get('id'), 'user'=>$this->getUser()]);
             $feed->setName($request->get('name', $feed->getName()))
                 ->setColor($request->get('color', $feed->getColor()))
                 ->setFeedIcon($request->get('icon', $feed->getFeedIcon()))
@@ -50,7 +50,8 @@ class SettingsController extends Controller
                 ->setColor($request->get('color'))
                 ->setFeedIcon($request->get('icon', null))
                 ->setAutoPin(($request->get('autoPin') === 'on'))
-                ->setFeedUrl($request->get('url'));
+                ->setFeedUrl($request->get('url'))
+                ->setUser($this->getUser());
         }
 
         $entityManager->persist($feed);
@@ -70,7 +71,7 @@ class SettingsController extends Controller
     public function removeAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $feed = $entityManager->getRepository(Feed::class)->find($request->get('feedId'));
+        $feed = $entityManager->getRepository(Feed::class)->findBy(['id' => $request->get('feedId'), 'user'=>$this->getUser()]);
 
         if (!$feed) {
             return new JsonResponse([

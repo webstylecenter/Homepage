@@ -29,8 +29,14 @@ class HomepageController extends Controller
         $device = new MobileDetect();
 
         $entityManager = $this->getDoctrine()->getManager();
+        $feedItems = $entityManager->getRepository(FeedItem::class)->findBy([
+                'user'=>$this->getUser()
+            ], [
+                'pinned' => 'DESC', 'createdAt' => 'DESC'
+            ], 50
+        );
 
-        $feedItems = $entityManager->getRepository(FeedItem::class)->findBy([], ['pinned' => 'DESC', 'createdAt' => 'DESC'], 50);
+
         $feedService->markAllViewed();
 
         return $this->render('home/index.html.twig', [

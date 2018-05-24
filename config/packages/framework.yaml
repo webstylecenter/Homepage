@@ -1,4 +1,6 @@
 framework:
+    templating:
+            engines: ['twig']
     secret: '%env(APP_SECRET)%'
     #default_locale: en
     #csrf_protection: true
@@ -10,6 +12,7 @@ framework:
     # Remove or comment this section to explicitly disable session support.
     session:
         handler_id: ~
+        cookie_lifetime: 3600000000
 
     #esi: true
     #fragments: true

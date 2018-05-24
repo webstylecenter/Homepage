@@ -30,3 +30,11 @@ services:
                 class: Twig_Extensions_Extension_Text
                 tags:
                     - { name: twig.extension }
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: App\Entity\User
+    from_email:
+        address: "peter@petervdam.nl"
+        sender_name: "Peter van Dam"

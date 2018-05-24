@@ -15,13 +15,14 @@ class FeedController extends Controller
 {
     /**
      * @Route("/feed/add-item/")
+     * @param Request $request
      * @return JsonResponse
      */
     public function addFeedAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl'=>'']);
+        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl'=>'', 'user'=>$this->getUser()]);
 
         $feedItem = new FeedItem();
         $feedItem
@@ -31,7 +32,8 @@ class FeedController extends Controller
             ->setTitle($request->get('title'))
             ->setDescription($request->get('description', null))
             ->setPinned(true)
-            ->setUrl($request->get('url'));
+            ->setUrl($request->get('url'))
+            ->setUser($this->getUser());
 
         $entityManager->persist($feedItem);
         $entityManager->flush();
@@ -51,7 +53,7 @@ class FeedController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $feedItem = $entityManager->getRepository(FeedItem::class)->find(['id'=> $id]);
+        $feedItem = $entityManager->getRepository(FeedItem::class)->findOneBy(['id'=> $id, 'user' => $this->getUser()]);
         $feedItem->setPinned((!$feedItem->getPinned()));
 
         $entityManager->persist($feedItem);
@@ -73,7 +75,7 @@ class FeedController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         return new JsonResponse([
             'html' => $this->render('home/newsfeed.html.twig', [
-                'feedItems'=> $entityManager->getRepository(FeedItem::class)->findBy(['viewed'=>false], ['createdAt' => 'DESC'], 50),
+                'feedItems'=> $entityManager->getRepository(FeedItem::class)->findBy(['viewed'=>false, 'user'=> $this->getUser()], ['createdAt' => 'DESC'], 50),
                 'nextPageNumber' => 50000,
                 'addToChecklist' => '',
             ]),
@@ -90,7 +92,7 @@ class FeedController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         return $this->render('home/newsfeed.html.twig', [
-            'feedItems'=> $entityManager->getRepository(FeedItem::class)->findBy([], ['createdAt' => 'DESC'], 50, ($startIndex-1)*50),
+            'feedItems'=> $entityManager->getRepository(FeedItem::class)->findBy(['user'=>$this->getUser()], ['createdAt' => 'DESC'], 50, ($startIndex-1)*50),
             'nextPageNumber' => $startIndex + 1,
             'addToChecklist' => '',
         ]);
@@ -109,7 +111,9 @@ class FeedController extends Controller
         $feedItems = $repository->createQueryBuilder('f')
             ->where('f.title LIKE :query')
             ->orWhere('f.description LIKE :query')
+            ->andWhere('f.user = :user')
             ->setParameter('query', '%'.$request->get('query').'%')
+            ->setParameter('user', $this->getUser())
             ->orderBy('f.pinned', 'DESC')
             ->orderBy('f.createdAt', 'DESC')
             ->getQuery()->getResult();
@@ -125,7 +129,8 @@ class FeedController extends Controller
                     'color' => $feedItem->getFeed()->getColor(),
                     'feedIcon' => $feedItem->getFeed()->getFeedIcon(),
                     'shareId' => $feedItem->getFeed()->getName() . '/' . $feedItem->getId() . '/',
-                    'pinned' => $feedItem->getPinned()
+                    'pinned' => $feedItem->getPinned(),
+                    'user'=> $this->getUser()
                 ];
             }, $feedItems)
         ]);
@@ -141,7 +146,7 @@ class FeedController extends Controller
         $repository = $entityManager->getRepository(Feed::class);
 
         return $this->render('widgets/feed-overview.html.twig', [
-            'feeds' => $repository->findAll()
+            'feeds' => $repository->findBy(['user'=>$this->getUser()])
         ]);
     }
 
@@ -164,7 +169,7 @@ class FeedController extends Controller
         }
 
         $metaData = $metaService->getByUrl($url);
-        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl'=>'']);
+        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl'=>'', 'user'=>$this->getUser()]);
 
         $feedItem = new FeedItem();
         $feedItem
@@ -174,7 +179,8 @@ class FeedController extends Controller
             ->setTitle($metaData->getTitle())
             ->setDescription($metaData->getMetaDescription())
             ->setPinned(true)
-            ->setUrl($metaData->getUrl());
+            ->setUrl($metaData->getUrl())
+            ->setUser($this->getUser());
 
         $entityManager->persist($feedItem);
         $entityManager->flush();

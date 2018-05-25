@@ -70,10 +70,28 @@ class FeedService
     }
 
     /**
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function markAllViewed()
+    {
+        $this->entityManager->getConnection()->update('feed_item', ['viewed' => 1], ['viewed'=>0]);
+    }
+
+    /**
+     * @param Feed $feed
+     * @return string
+     */
+    public function getFeedName(Feed $feed)
+    {
+        $feed = ((new Reader)->importRemoteFeed($feed->getFeedUrl(), new GuzzleClient));
+        return $feed->getTitle();
+    }
+
+    /**
      * @param Feed $feed
      * @return FeedItem[]
      */
-    protected function read(Feed $feed)
+    public function read(Feed $feed)
     {
         $entries = iterator_to_array((new Reader)->importRemoteFeed($feed->getFeedUrl(), new GuzzleClient));
         return array_map(function(EntryInterface $entry) use ($feed) {
@@ -97,13 +115,5 @@ class FeedService
 
             return null;
         }, $entries);
-    }
-
-    /**
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    public function markAllViewed()
-    {
-        $this->entityManager->getConnection()->update('feed_item', ['viewed' => 1], ['viewed'=>0]);
     }
 }

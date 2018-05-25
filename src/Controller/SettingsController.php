@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Feed;
 use App\Entity\FeedItem;
+use App\Service\FeedService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,29 +34,35 @@ class SettingsController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function addAction(Request $request)
+    public function addAction(Request $request, FeedService $feedService)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
         if (strlen($request->get('id')) > 0) {
-            $feed = $entityManager->getRepository(Feed::class)->findBy(['id' => $request->get('id'), 'user'=>$this->getUser()]);
-            $feed->setName($request->get('name', $feed->getName()))
-                ->setColor($request->get('color', $feed->getColor()))
-                ->setFeedIcon($request->get('icon', $feed->getFeedIcon()))
-                ->setAutoPin(($request->get('autoPin', $feed->getAutoPin()) === 'on'))
-                ->setFeedUrl($request->get('url', $feed->getFeedUrl()));
+            $feed = $entityManager->getRepository(Feed::class)->findOneBy(['id' => $request->get('id'), 'user'=>$this->getUser()]);
         } else {
             $feed = new Feed();
-            $feed->setName($request->get('name'))
-                ->setColor($request->get('color'))
-                ->setFeedIcon($request->get('icon', null))
-                ->setAutoPin(($request->get('autoPin') === 'on'))
-                ->setFeedUrl($request->get('url'))
-                ->setUser($this->getUser());
+        }
+
+        $feed
+            ->setColor($request->get('color', $feed->getColor()))
+            ->setFeedIcon($request->get('icon', $feed->getFeedIcon()))
+            ->setAutoPin(($request->get('autoPin', $feed->getAutoPin()) === 'on'))
+            ->setFeedUrl($request->get('url', $feed->getFeedUrl()))
+            ->setUser($this->getUser());
+
+        if (strlen($request->get('id')) === 0) {
+            $feedName = $feedService->getFeedName($feed);
+            $feed->setName($feedName);
         }
 
         $entityManager->persist($feed);
         $entityManager->flush();
+
+        foreach ($feedService->read($feed) as $feedItem) {
+            $entityManager->persist($feedItem);
+            $entityManager->flush();
+        }
 
         return new JsonResponse([
             'id'=> $feed->getId(),

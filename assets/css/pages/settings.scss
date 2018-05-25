@@ -5,10 +5,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url('/images/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-color: #e5e5e5;
     z-index: -2;
   }
 
@@ -28,7 +25,8 @@
   }
 
   h1 {
-    border-bottom: 1px solid gray;
+    color: $blue;
+    font-weight: lighter;
     padding-bottom: 20px;
   }
 
@@ -41,8 +39,9 @@
     margin-bottom: 50px;
 
     h1 {
+      color: black;
       font-weight: lighter;
-      margin: 0;
+      margin: 10px 0 0 0;
       border: 0;
       padding: 0;
     }

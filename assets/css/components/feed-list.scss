@@ -17,7 +17,7 @@
 
   &--separator {
     padding: 10px;
-    text-align:center;
+    text-align: center;
     border-left: 5px solid lightgray;
     color: $blue;
   }
@@ -40,6 +40,10 @@
 
   .jscroll-next {
     display: none;
+  }
+
+  .noFeedItems {
+    padding: 10px;
   }
 }
 
@@ -68,14 +72,14 @@
   }
 
   &--state-button {
-    border-left:5px solid black;
-    padding:10px;
-    background:linear-gradient(to right, #f5f5f5 0%, #e3e3e3 100%);
-    border-bottom:1px solid gray;
+    border-left: 5px solid black;
+    padding: 10px;
+    background: linear-gradient(to right, #f5f5f5 0%, #e3e3e3 100%);
+    border-bottom: 1px solid gray;
     cursor: pointer;
 
     &:hover {
-      background-color:white;
+      background-color: white;
       background: linear-gradient(to right, #f5f5f5 0%, #f4f4f4 100%);
       cursor: pointer;
     }
@@ -89,7 +93,7 @@
   }
 
   &--state-selected {
-    background: linear-gradient(to right, #eeeeee 0%,#aad3e0 100%);
+    background: linear-gradient(to right, #eeeeee 0%, #aad3e0 100%);
   }
 
   .title {

@@ -8,6 +8,12 @@
     </div>
 {% endif %}
 
+{% if feedItems|length == 0 and addToChecklist == '' %}
+    <div class="noFeedItems">
+        {% include 'home/welcome-text.html.twig' %}
+    </div>
+{% endif %}
+
 {% for item in feedItems %}
     {% if not item.viewed %}
         {% set hadNewItems = true %}

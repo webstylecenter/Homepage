@@ -56,7 +56,7 @@
                 <iframe
                         id="welcomeFrame"
                         class="content-frame"
-                        src="/welcome"
+                        src="{% if feedItems|length == 0 %}/settings/{% else %}/welcome{% endif %}"
                         sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-modals"
                         allowfullscreen="allowfullscreen"
                         mozallowfullscreen="mozallowfullscreen"

@@ -32,34 +32,19 @@ class Feed
     private $feedUrl;
 
     /**
-     * @ORM\Column(type="string", length=7)
-     */
-    private $color;
-
-    /**
-     * @ORM\Column(type="string", length=128, nullable=true)
-     */
-    private $feedIcon;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $autoPin;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="feed", orphanRemoval=true, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="feed", orphanRemoval=true)
      */
     private $items;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="feeds")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="App\Entity\FeedSetting", mappedBy="feed", orphanRemoval=true, fetch="EAGER")
      */
-    private $user;
+    private $feedSettings;
 
     public function __construct()
     {
         $this->items = new ArrayCollection();
+        $this->feedSettings = new ArrayCollection();
     }
 
     public function getId()
@@ -87,42 +72,6 @@ class Feed
     public function setFeedUrl(string $feedUrl): self
     {
         $this->feedUrl = $feedUrl;
-
-        return $this;
-    }
-
-    public function getColor(): ?string
-    {
-        return $this->color;
-    }
-
-    public function setColor(string $color): self
-    {
-        $this->color = $color;
-
-        return $this;
-    }
-
-    public function getFeedIcon(): ?string
-    {
-        return $this->feedIcon;
-    }
-
-    public function setFeedIcon(?string $feedIcon): self
-    {
-        $this->feedIcon = $feedIcon;
-
-        return $this;
-    }
-
-    public function getAutoPin(): ?bool
-    {
-        return $this->autoPin;
-    }
-
-    public function setAutoPin(bool $autoPin): self
-    {
-        $this->autoPin = $autoPin;
 
         return $this;
     }
@@ -158,14 +107,33 @@ class Feed
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return Collection|FeedSetting[]
+     */
+    public function getFeedSettings(): Collection
     {
-        return $this->user;
+        return $this->feedSettings;
     }
 
-    public function setUser(?User $user): self
+    public function addFeedSetting(FeedSetting $feedSetting): self
     {
-        $this->user = $user;
+        if (!$this->feedSettings->contains($feedSetting)) {
+            $this->feedSettings[] = $feedSetting;
+            $feedSetting->setFeed($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedSetting(FeedSetting $feedSetting): self
+    {
+        if ($this->feedSettings->contains($feedSetting)) {
+            $this->feedSettings->removeElement($feedSetting);
+            // set the owning side to null (unless already changed)
+            if ($feedSetting->getFeed() === $this) {
+                $feedSetting->setFeed(null);
+            }
+        }
 
         return $this;
     }

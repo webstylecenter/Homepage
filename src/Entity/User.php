@@ -21,11 +21,6 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Feed", mappedBy="user", orphanRemoval=true)
-     */
-    private $feeds;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ChecklistItem", mappedBy="user", orphanRemoval=true)
      */
     private $checklistItems;
@@ -36,9 +31,14 @@ class User extends BaseUser
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FeedSetting", mappedBy="user", orphanRemoval=true)
      */
-    private $feedItems;
+    private $feedSettings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FeedItemStatus", mappedBy="user", orphanRemoval=true)
+     */
+    private $feedItemStatuses;
 
     public function __construct()
     {
@@ -46,39 +46,9 @@ class User extends BaseUser
         $this->feeds = new ArrayCollection();
         $this->checklistItems = new ArrayCollection();
         $this->notes = new ArrayCollection();
-        $this->feedItems = new ArrayCollection();
+        $this->feedSettings = new ArrayCollection();
+        $this->feedItemStatuses = new ArrayCollection();
         // your own logic
-    }
-
-    /**
-     * @return Collection|Feed[]
-     */
-    public function getFeeds(): Collection
-    {
-        return $this->feeds;
-    }
-
-    public function addFeed(Feed $feed): self
-    {
-        if (!$this->feeds->contains($feed)) {
-            $this->feeds[] = $feed;
-            $feed->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFeed(Feed $feed): self
-    {
-        if ($this->feeds->contains($feed)) {
-            $this->feeds->removeElement($feed);
-            // set the owning side to null (unless already changed)
-            if ($feed->getUser() === $this) {
-                $feed->setUser(null);
-            }
-        }
-
-        return $this;
     }
 
     /**
@@ -144,30 +114,61 @@ class User extends BaseUser
     }
 
     /**
-     * @return Collection|FeedItem[]
+     * @return Collection|FeedSetting[]
      */
-    public function getFeedItems(): Collection
+    public function getFeedSettings(): Collection
     {
-        return $this->feedItems;
+        return $this->feedSettings;
     }
 
-    public function addFeedItem(FeedItem $feedItem): self
+    public function addFeedSetting(FeedSetting $feedSetting): self
     {
-        if (!$this->feedItems->contains($feedItem)) {
-            $this->feedItems[] = $feedItem;
-            $feedItem->setUser($this);
+        if (!$this->feedSettings->contains($feedSetting)) {
+            $this->feedSettings[] = $feedSetting;
+            $feedSetting->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeFeedItem(FeedItem $feedItem): self
+    public function removeFeedSetting(FeedSetting $feedSetting): self
     {
-        if ($this->feedItems->contains($feedItem)) {
-            $this->feedItems->removeElement($feedItem);
+        if ($this->feedSettings->contains($feedSetting)) {
+            $this->feedSettings->removeElement($feedSetting);
             // set the owning side to null (unless already changed)
-            if ($feedItem->getUser() === $this) {
-                $feedItem->setUser(null);
+            if ($feedSetting->getUser() === $this) {
+                $feedSetting->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FeedItemStatus[]
+     */
+    public function getFeedItemStatuses(): Collection
+    {
+        return $this->feedItemStatuses;
+    }
+
+    public function addFeedItemStatus(FeedItemStatus $feedItemStatus): self
+    {
+        if (!$this->feedItemStatuses->contains($feedItemStatus)) {
+            $this->feedItemStatuses[] = $feedItemStatus;
+            $feedItemStatus->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedItemStatus(FeedItemStatus $feedItemStatus): self
+    {
+        if ($this->feedItemStatuses->contains($feedItemStatus)) {
+            $this->feedItemStatuses->removeElement($feedItemStatus);
+            // set the owning side to null (unless already changed)
+            if ($feedItemStatus->getUser() === $this) {
+                $feedItemStatus->setUser(null);
             }
         }
 

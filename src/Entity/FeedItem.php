@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -40,26 +42,20 @@ class FeedItem
     private $url;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $viewed;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $feed;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\OneToMany(targetEntity="App\Entity\FeedItemStatus", mappedBy="feedItem", orphanRemoval=true, fetch="EAGER")
      */
-    private $pinned;
+    private $FeedItemStatus;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="feedItems")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
+    public function __construct()
+    {
+        $this->FeedItemStatus = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -101,18 +97,6 @@ class FeedItem
 
         return $this;
     }
-    
-    public function getViewed(): ?bool
-    {
-        return $this->viewed;
-    }
-
-    public function setViewed(bool $viewed): self
-    {
-        $this->viewed = $viewed;
-
-        return $this;
-    }
 
     public function getFeed(): ?Feed
     {
@@ -122,18 +106,6 @@ class FeedItem
     public function setFeed(?Feed $feed): self
     {
         $this->feed = $feed;
-
-        return $this;
-    }
-
-    public function getPinned(): ?bool
-    {
-        return $this->pinned;
-    }
-
-    public function setPinned(bool $pinned): self
-    {
-        $this->pinned = $pinned;
 
         return $this;
     }
@@ -150,14 +122,33 @@ class FeedItem
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return Collection|FeedItemStatus[]
+     */
+    public function getFeedItemStatus(): Collection
     {
-        return $this->user;
+        return $this->FeedItemStatus;
     }
 
-    public function setUser(?User $user): self
+    public function addFeedItemStatus(FeedItemStatus $feedItemStatus): self
     {
-        $this->user = $user;
+        if (!$this->FeedItemStatus->contains($feedItemStatus)) {
+            $this->FeedItemStatus[] = $feedItemStatus;
+            $feedItemStatus->setFeedItem($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedItemStatus(FeedItemStatus $feedItemStatus): self
+    {
+        if ($this->FeedItemStatus->contains($feedItemStatus)) {
+            $this->FeedItemStatus->removeElement($feedItemStatus);
+            // set the owning side to null (unless already changed)
+            if ($feedItemStatus->getFeedItem() === $this) {
+                $feedItemStatus->setFeedItem(null);
+            }
+        }
 
         return $this;
     }

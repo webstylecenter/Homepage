@@ -19,6 +19,28 @@ class FeedItemRepository extends ServiceEntityRepository
         parent::__construct($registry, FeedItem::class);
     }
 
+    public function findByUser($user)
+    {
+//        return $this->createQueryBuilder('user')
+//            ->from('App:FeedItem');
+
+//        return $this->createQueryBuilder('feed_item')
+//            ->join('feed_item.feed', 'feed', 'ON', 'feed.id = feed_item.feed')
+//            ->getQuery();
+
+        return $this->createQueryBuilder('feed_item')
+            ->getQuery()
+            ->execute();
+//            ->where('f.title LIKE :query')
+//            ->orWhere('f.description LIKE :query')
+//            ->andWhere('f.user = :user')
+//            ->setParameter('query', '%'.$request->get('query').'%')
+//            ->setParameter('user', $this->getUser())
+//            ->orderBy('f.pinned', 'DESC')
+//            ->orderBy('f.createdAt', 'DESC')
+//            ->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return FeedItem[] Returns an array of FeedItem objects
 //     */

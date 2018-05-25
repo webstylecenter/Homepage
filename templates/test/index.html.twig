@@ -1,0 +1,18 @@
+{% set hadNewItems = false %}
+{% set showedEarlierTodayMessage = false %}
+{% set hadYesterdayBefore = false %}
+
+{% if addToChecklist != '' and nextPageNumber == 1 %}
+    <div class="feed-list-item--state-button">
+        Add "<b>{{ addToChecklist }}</b>" to checklist
+    </div>
+{% endif %}
+
+{% for item in feedItems %}
+
+    {{ dump(item) }}
+{% endfor %}
+
+{% if feedItems|length > 0 and nextPageNumber != 50000 %}
+    <a href="/feed/page/{{ nextPageNumber }}" class="feed-list-item jscroll-next">Next page</a>
+{% endif %}

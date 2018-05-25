@@ -1,31 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block header %}
-    <title>FeedNews.me | Read the news at a glance &amp; run it as screensaver / iOS App</title>
+{% block title %}
+    {{ parent() }} - Read and manage News, Todo's and notes cross-platform
 {% endblock %}
 
 {% block body %}
-    <div class="guestsWelcomePage">
-
+    <div class="infoBlock">
+        <div class="contentbox">
+            <img src="/images/FeedNewsPreview.png" alt="FeedNews preview" />
+            <p>Create an account (soon available) or <a href="http://demo.feednews.me/" target="_blank" title="FeedNews Demo site">play with the demo</a><br />
+                Contribute at <a href="https://github.com/webstylecenter/Homepage" target="_blank">GitHub</a></p>
+        </div>
+    </div>
+    <div class="loginBlock">
         <div class="contentbox">
 
-            <h1>Feednews.me</h1>
-
-            <p>Sign in below to access Feednews.me</p>
+            <div class="header">
+                <h1>Feednews.me</h1>
+            </div>
+            <p>Please sign in below</p>
 
             <div class="signinBox">
                 <form method="post">
-                    <label for="username">Username:</label><input type="text" name="username" id="username" />
-                    <label for="password">Password:</label><input type="password" name="password" id="password" />
+                    <input type="text" name="username" id="username" />
+                    <input type="password" name="password" id="password" />
                     <input type="submit" value="Login" />
                 </form>
             </div>
-
-            <p>Don't have an account? <br />Or want to know more about Feednews.me? <br />
-                Find my repo at <a href="https://github.com/webstylecenter/Homepage" target="_blank">GitHub</a></p>
-
-            <p>For questions, send me a message at  <span class="specialTxt"></span></p>
-
         </div>
     </div>
 {% endblock %}

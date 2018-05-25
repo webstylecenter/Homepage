@@ -1,4 +1,3 @@
-
 $(function() {
 
     $('.js-button-parse-url').on('click', function() {

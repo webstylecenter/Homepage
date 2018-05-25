@@ -8,7 +8,7 @@
     <div class="infoBlock">
         <div class="contentbox">
             <img src="/images/FeedNewsPreview.png" alt="FeedNews preview" />
-            <p>Create an account (soon available) or <a href="http://demo.feednews.me/" target="_blank" title="FeedNews Demo site">play with the demo</a><br />
+            <p><a href="http://demo.feednews.me/" target="_blank" title="FeedNews Demo site">Play with the demo</a> |
                 Contribute at <a href="https://github.com/webstylecenter/Homepage" target="_blank">GitHub</a></p>
         </div>
     </div>
@@ -22,9 +22,9 @@
 
             <div class="signinBox">
                 <form method="post">
-                    <input type="text" name="username" id="username" />
-                    <input type="password" name="password" id="password" />
-                    <input type="submit" value="Login" />
+                    <input type="text" name="username" id="username" placeholder="username" />
+                    <input type="password" name="password" id="password" placeholder="password" />
+                    <input type="submit" value="Login" /> <a class="createAccount" href="{{ path('register') }}">Create account</a>
                 </form>
             </div>
         </div>

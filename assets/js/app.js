@@ -26,3 +26,4 @@ require('./components/screensaver');
 require('./components/searchbox');
 require('./components/settings');
 require('./components/welcome');
+require('./components/register');

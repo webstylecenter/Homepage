@@ -67,6 +67,39 @@ class UserController extends Controller
         $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
         return new RedirectResponse('/');
-
     }
+
+    /**
+     * @Route("/register", name="register")
+     * @param Request $request
+     * @return Response
+     */
+    public function registerAction(Request $request)
+    {
+        if ($request->get('username', null) === null) {
+            return $this->render('user/register.html.twig', [
+                'bodyClass' => 'register'
+            ]);
+        }
+
+        $userManager = $this->get('fos_user.user_manager');
+
+        if ($userManager->findUserByEmail($request->get('email'))) {
+            return $this->render('user/register.html.twig', [
+                'bodyClass' => 'register',
+                'error' => 'Email address already used'
+            ]);
+        }
+
+        $user = $userManager->createUser();
+        $user->setUsername($request->get('username'));
+        $user->setEmail($request->get('email'));
+        $user->setEmailCanonical($request->get('email'));
+        $user->setEnabled(true);
+        $user->setPlainPassword($request->get('password'));
+        $userManager->updateUser($user);
+
+        return new RedirectResponse('/login');
+    }
+
 }

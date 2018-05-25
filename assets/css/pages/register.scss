@@ -1,0 +1,90 @@
+.register {
+  height: 100vh;
+  font-size: 12pt;
+  background-color: whitesmoke;
+
+  .header {
+    height: 80px;
+    background-image: url("/images/FeedNews Logo.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+    margin-bottom: 50px;
+
+    h1 {
+      color: $blue;
+      padding: 20px 0 0 100px;
+    }
+  }
+
+  a {
+    color: $blue;
+    text-decoration: underline;
+
+    &:hover {
+      color: $blue;
+    }
+  }
+
+
+  .contentbox {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    right: 30%;
+    margin: -300px auto 0 auto;
+    padding: 50px;
+  }
+
+  @include respond-to(tablet) {
+    .contentbox {
+      padding: 20px;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  @include respond-to(mobile) {
+    .contentbox {
+      padding: 20px;
+      left: 0;
+      right: 0;
+    }
+
+    .header {
+      height: 60px;
+
+      h1 {
+        padding: 5px 0 0 73px;
+      }
+    }
+  }
+
+  input[type="text"], input[type="password"] {
+    border: 1px solid $blue;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: $blue;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16pt;
+  }
+
+  input[type="submit"] {
+    background-color: $blue;
+    color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: 1px solid $blue;
+    font-size: 16pt;
+
+    &:hover {
+      background-color: white;
+      color: $blue;
+      cursor: pointer;
+    }
+
+  }
+
+}

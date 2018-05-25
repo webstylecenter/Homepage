@@ -68,7 +68,7 @@ You need to set two cronjobs so the feeds and weather data are imported. For Dir
 */5	*	*	*	*	/usr/local/bin/php /home/USERNAME/domains/YOUR_DOMAIN/public_html/bin/console app:feeds:update
 
 #### Ignore X-Frame headers
-For Google Chrome users, it's "recommended" to install Ignore X-Frame headers extension. Some site's ask the browser to block the site if it's shown within an iframe. Because all the pages you open are within an iframe this might cause issues. I've been using this extension for over a year without a security problem. Just make sure you don't do any payments within an iframe from untrusted sources if you enable this.
+For Google Chrome users, it's "recommended" to install our chrome-extension located within the public/downloads/ folder using "load unload package". You can add any page as feedItem by pressing the button, and it will also prevent X-Frame blocks so every site can be visited within an iframe. Note that this removed the security for every site you visit, even outside FeedNews. I haven't experienced any issues.
 
 # Mobile support
 This tool with all it's beauty also runs on your mobile device. To get the best experience, use chrome for Android or Safari on iOS and save the page as icon to your homescreen. This way you get a fullscreen experience on your mobile device, and have quick access to it's functionality, like the checklist that is usefull for shoppinglists for example.

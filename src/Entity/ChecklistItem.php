@@ -39,7 +39,7 @@ class ChecklistItem
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="checklistItems")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    protected $user;
 
     public function getId()
     {

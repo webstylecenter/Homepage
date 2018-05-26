@@ -17,49 +17,49 @@ class FeedItem
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $guid;
+    protected $guid;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    protected $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    protected $url;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $viewed;
+    protected $viewed;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $feed;
+    protected $feed;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $pinned;
+    protected $pinned;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="feedItems")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    protected $user;
 
     public function getId()
     {

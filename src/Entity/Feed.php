@@ -19,43 +19,43 @@ class Feed
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $feedUrl;
+    protected $feedUrl;
 
     /**
      * @ORM\Column(type="string", length=7)
      */
-    private $color;
+    protected $color;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
      */
-    private $feedIcon;
+    protected $feedIcon;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $autoPin;
+    protected $autoPin;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="feed", orphanRemoval=true, fetch="EAGER")
      */
-    private $items;
+    protected $items;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="feeds")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    protected $user;
 
     public function __construct()
     {

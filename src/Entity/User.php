@@ -23,27 +23,27 @@ class User extends BaseUser
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Feed", mappedBy="user", orphanRemoval=true)
      */
-    private $feeds;
+    protected $feeds;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ChecklistItem", mappedBy="user", orphanRemoval=true)
      */
-    private $checklistItems;
+    protected $checklistItems;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="user", orphanRemoval=true)
      */
-    private $notes;
+    protected $notes;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="user", orphanRemoval=true)
      */
-    private $feedItems;
+    protected $feedItems;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $hideXframeNotice = false;
+    protected $hideXframeNotice = false;
 
     public function __construct()
     {

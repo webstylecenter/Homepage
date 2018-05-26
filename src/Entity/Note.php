@@ -17,28 +17,28 @@ class Note
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $content;
+    protected $content;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $position;
+    protected $position;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="notes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    protected $user;
 
     public function getId()
     {

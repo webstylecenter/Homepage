@@ -37,6 +37,10 @@
                 <input class="js-search-feed" type="text" name="q" placeholder="Search feeds or add items to checklist" autocomplete="off" />
                 <div style="display: none;" class="js-search-list feed-list feed-list--type-search"></div>
             </div>
+
+            <span class="action-user hide-if-mobile">
+                {{ user.username }}
+            </span>
             {% if not app.request.server.get("DROP_LOCATION") == null  %}
                 <div style="display: none;" class="screenshot-list js-screenshot-list" data-target="/droplist/"></div>
             {% endif %}

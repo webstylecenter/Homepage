@@ -155,4 +155,15 @@
 
     }
   }
+
+  .action-user {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    margin: -22px -20px -20px 20px;
+    padding: 12px 50px 9px 50px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

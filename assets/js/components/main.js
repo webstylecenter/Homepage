@@ -1,43 +1,43 @@
-$(function() {
+$(function () {
 
-    $('.js-button-parse-url').on('click', function() {
+    $('.js-button-parse-url').on('click', function () {
         getUrlMetaData();
     });
 
-    $('.js-form-feed [name="url"]').on('blur', function() {
+    $('.js-form-feed [name="url"]').on('blur', function () {
         getUrlMetaData();
     });
 
-    $('.widget-note textarea').on('blur', function() {
+    $('.widget-note textarea').on('blur', function () {
         saveNote($(this));
     });
 
-    $('.widget-note input').on('blur', function() {
+    $('.widget-note input').on('blur', function () {
         $(this).parent().find('textarea').trigger('blur');
     });
 
-    setInterval(function() {
+    setInterval(function () {
         $('.js-update-weahter-icon').load('/weather/icon/');
         $('.js-weather-radar').attr('src', 'https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512&time=' + Math.random());
     }, 5 * 60 * 1000);
 
-    $(document).on('click', '.js-open-note', function() {
+    $(document).on('click', '.js-open-note', function () {
         $('.widget-note--notes > div').hide();
         $('.note-data-' + $(this).data('note-id')).show();
     })
-        .on('click', '.js-remove-note', function() {
+        .on('click', '.js-remove-note', function () {
             removeNote($(this).data('id'));
         })
-        .on('click', '.js-update-weather-icon', function() {
+        .on('click', '.js-update-weather-icon', function () {
             $('.content-overlay').fadeIn();
             $('.js-show-weather-radar').slideDown();
         })
-        .on('click', '.content-overlay, .feed-list', function() {
+        .on('click', '.content-overlay, .feed-list', function () {
             $('.content-overlay').fadeOut();
             $('.js-show-weather-radar').slideUp();
         });
 
-    $('.specialTxt').each(function() {
+    $('.specialTxt').each(function () {
         var p1 = 'peter';
         var p3 = 'vdam';
         var p2 = '.nl';
@@ -47,14 +47,14 @@ $(function() {
         $(this).html('<a href="' + p4 + p6 + ':' + p1 + p5 + p1 + p3 + p2 + '">' + p1 + p5 + p1 + p3 + p2 + '</a>');
     });
 
-    $('.page--homepage').on('click', function() {
+    $('.page--homepage').on('click', function () {
         $('.page--homepage .header').animate({
             height: '30vh'
         }, 500);
         $('.mainContent, .widget').fadeIn();
     });
 
-    $('.js-homepage-showpage').on('click', function() {
+    $('.js-homepage-showpage').on('click', function () {
         $('.view').slideUp().delay(100);
         $('.mainContent nav span').removeClass('active');
         $('.' + $(this).data('page')).slideDown();
@@ -62,7 +62,7 @@ $(function() {
         $('.page--homepage .feeds').load('/feeds/overview/');
     });
 
-    $('.js-toggle-fullscreen').on('dblclick', function() {
+    $('.js-toggle-fullscreen').on('dblclick', function () {
         var sidebarWidth = $('.container .feed-list').css('width');
         var headerColor = '#337dff';
 
@@ -90,9 +90,9 @@ function getUrlMetaData() {
         $.ajax({
             method: "POST",
             url: "/meta/",
-            data: { url: Url}
+            data: {url: Url}
         })
-            .done(function( response ) {
+            .done(function (response) {
                 if (response.status == 'success') {
                     $('.js-form-feed [name="title"]').val(response.data.title);
                     $('.js-form-feed [name="description"]').val(response.data.description);
@@ -120,11 +120,11 @@ function saveNote($el) {
             name: name,
             note: note
         },
-        beforeSend: function() {
+        beforeSend: function () {
             $el.css('color', '#303030');
         }
     })
-        .done(function(data) {
+        .done(function (data) {
             $el.css('color', 'black');
 
             $('.note-selector-' + id).text(name);
@@ -132,7 +132,7 @@ function saveNote($el) {
                 $el.attr('data-id', data.id);
             }
         })
-        .fail(function() {
+        .fail(function () {
             $el.css('color', 'red');
         });
 }
@@ -142,9 +142,9 @@ function removeNote(id) {
         $.ajax({
             method: "POST",
             url: "/note/remove/",
-            data: { id: id}
+            data: {id: id}
         })
-            .done(function() {
+            .done(function () {
                 $('.note-selector-' + id).hide();
                 $('.note-data-' + id).hide();
             });

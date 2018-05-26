@@ -19,7 +19,7 @@ class NoteController extends Controller
     public function addAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $note = $entityManager->getRepository(Note::class)->findBy(['id' => $request->get('id'), 'user'=> $this->getUser()]);
+        $note = $entityManager->getRepository(Note::class)->findBy(['id' => $request->get('id'), 'user' => $this->getUser()]);
 
         if (!$note) {
             $note = new Note();
@@ -34,7 +34,7 @@ class NoteController extends Controller
         $entityManager->flush();
 
         return new JsonResponse([
-            'id'=> $note->getId()
+            'id' => $note->getId()
         ]);
     }
 
@@ -51,8 +51,8 @@ class NoteController extends Controller
 
         if (!$note) {
             return new JsonResponse([
-                'message'=> 'Note not found!',
-                'status'=> 'fail'
+                'message' => 'Note not found!',
+                'status' => 'fail'
             ]);
         }
 
@@ -60,7 +60,7 @@ class NoteController extends Controller
         $entityManager->flush();
 
         return new JsonResponse([
-            'status'=> 'success'
+            'status' => 'success'
         ]);
     }
 }

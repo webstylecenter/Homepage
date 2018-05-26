@@ -31,20 +31,20 @@ class HomepageController extends Controller
 
         $entityManager = $this->getDoctrine()->getManager();
         $feedItems = $entityManager->getRepository(FeedItem::class)->findBy([
-                'user'=>$this->getUser()
+                'user' => $this->getUser()
             ], [
                 'pinned' => 'DESC', 'createdAt' => 'DESC'
             ], 50
         );
 
-        $user = $entityManager->getRepository(User::class)->findOneBy(['id'=> $this->getUser()]);
+        $user = $entityManager->getRepository(User::class)->findOneBy(['id' => $this->getUser()]);
 
         $feedService->markAllViewed($user);
 
         return $this->render('home/index.html.twig', [
             'bodyClass' => $bodyClass,
             'forecast' => $weatherService->getForecastList(),
-            'feedItems'=> $feedItems,
+            'feedItems' => $feedItems,
             'feeds' => $entityManager->getRepository(Feed::class)->findAll(),
             'device' => $device,
             'user' => $user,

@@ -26,7 +26,7 @@ class SettingsController extends Controller
 
         return $this->render('settings/index.html.twig', [
             'bodyClass' => 'settings',
-            'feeds'=> $feeds
+            'feeds' => $feeds
         ]);
     }
 
@@ -40,7 +40,7 @@ class SettingsController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
 
         if (strlen($request->get('id')) > 0) {
-            $feed = $entityManager->getRepository(Feed::class)->findOneBy(['id' => $request->get('id'), 'user'=>$this->getUser()]);
+            $feed = $entityManager->getRepository(Feed::class)->findOneBy(['id' => $request->get('id'), 'user' => $this->getUser()]);
         } else {
             $feed = new Feed();
         }
@@ -66,8 +66,8 @@ class SettingsController extends Controller
         }
 
         return new JsonResponse([
-            'id'=> $feed->getId(),
-            'status'=> 'success'
+            'id' => $feed->getId(),
+            'status' => 'success'
         ]);
     }
 
@@ -79,12 +79,12 @@ class SettingsController extends Controller
     public function removeAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $feed = $entityManager->getRepository(Feed::class)->findBy(['id' => $request->get('feedId'), 'user'=>$this->getUser()]);
+        $feed = $entityManager->getRepository(Feed::class)->findBy(['id' => $request->get('feedId'), 'user' => $this->getUser()]);
 
         if (!$feed) {
             return new JsonResponse([
-                'message'=> 'Feed not found!',
-                'status'=> 'fail'
+                'message' => 'Feed not found!',
+                'status' => 'fail'
             ]);
         }
 
@@ -92,7 +92,7 @@ class SettingsController extends Controller
         $entityManager->flush();
 
         return new JsonResponse([
-            'status'=> 'success'
+            'status' => 'success'
         ]);
     }
 
@@ -103,7 +103,7 @@ class SettingsController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $user = $entityManager->getRepository(User::class)->findOneBy(['id'=>$this->getUser()]);
+        $user = $entityManager->getRepository(User::class)->findOneBy(['id' => $this->getUser()]);
         $user->setHideXframeNotice(true);
         $entityManager->persist($user);
         $entityManager->flush();

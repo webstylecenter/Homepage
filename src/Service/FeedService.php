@@ -76,7 +76,7 @@ class FeedService
      */
     public function markAllViewed(User $user)
     {
-        $this->entityManager->getConnection()->update('feed_item', ['viewed' => 1], ['viewed'=>0, 'user_id'=>$user->getId()]);
+        $this->entityManager->getConnection()->update('feed_item', ['viewed' => 1], ['viewed' => 0, 'user_id' => $user->getId()]);
     }
 
     /**
@@ -96,7 +96,7 @@ class FeedService
     public function read(Feed $feed)
     {
         $entries = iterator_to_array((new Reader)->importRemoteFeed($feed->getFeedUrl(), new GuzzleClient));
-        return array_map(function(EntryInterface $entry) use ($feed) {
+        return array_map(function (EntryInterface $entry) use ($feed) {
             $content = strip_tags($entry->getDescription());
             $content = trim(str_replace('Read more...', '', $content));
 

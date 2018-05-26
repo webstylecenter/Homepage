@@ -19,12 +19,12 @@ class ScreensaverController extends Controller
     public function indexAction(WeatherService $weatherService)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $feedItems = $entityManager->getRepository(FeedItem::class)->findBy([], ['createdAt'=>'DESC'], 30);
+        $feedItems = $entityManager->getRepository(FeedItem::class)->findBy([], ['createdAt' => 'DESC'], 30);
 
         return $this->render('screensaver/index.html.twig', [
             'bodyClass' => 'screensaver',
             'forecast' => $weatherService,
-            'feedItems'=> $feedItems
+            'feedItems' => $feedItems
         ]);
     }
 

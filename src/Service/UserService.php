@@ -66,7 +66,8 @@ class UserService
      * @param $hash
      * @return bool
      */
-    public function checkPassword($password, $hash) {
+    public function checkPassword($password, $hash)
+    {
         return password_verify($password, $hash);
     }
 

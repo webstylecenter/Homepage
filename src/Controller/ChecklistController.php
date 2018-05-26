@@ -20,8 +20,8 @@ class ChecklistController extends Controller
 
         return $this->render('checklist/index.html.twig', [
             'bodyClass' => 'checklist',
-            'todos' => $entityManager->getRepository(ChecklistItem::class)->findBy(['checked'=>false, 'user'=>$this->getUser()], ['updatedAt'=> 'DESC']),
-            'finished' => $entityManager->getRepository(ChecklistItem::class)->findBy(['checked'=>true, 'user'=>$this->getUser()], ['updatedAt'=> 'DESC'], 50)
+            'todos' => $entityManager->getRepository(ChecklistItem::class)->findBy(['checked' => false, 'user' => $this->getUser()], ['updatedAt' => 'DESC']),
+            'finished' => $entityManager->getRepository(ChecklistItem::class)->findBy(['checked' => true, 'user' => $this->getUser()], ['updatedAt' => 'DESC'], 50)
         ]);
     }
 
@@ -36,7 +36,7 @@ class ChecklistController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
 
         if (strlen($request->get('id')) > 0) {
-            $checklistItem = $entityManager->getRepository(ChecklistItem::class)->findBy(['id'=>$request->get('id'), 'user'=>$this->getUser()]);
+            $checklistItem = $entityManager->getRepository(ChecklistItem::class)->findBy(['id' => $request->get('id'), 'user' => $this->getUser()]);
             $checklistItem->setChecked($request->get('checked') === 'true');
         } else {
             $checklistItem = new checklistItem();
@@ -50,8 +50,8 @@ class ChecklistController extends Controller
         $entityManager->flush();
 
         return $this->render('checklist/checklist.html.twig', [
-            'todos' => $entityManager->getRepository(ChecklistItem::class)->findBy(['checked'=>false, 'user'=>$this->getUser()], ['updatedAt'=> 'DESC']),
-            'finished' => $entityManager->getRepository(ChecklistItem::class)->findBy(['checked'=>true, 'user'=>$this->getUser()], ['updatedAt'=> 'DESC'], 50)
+            'todos' => $entityManager->getRepository(ChecklistItem::class)->findBy(['checked' => false, 'user' => $this->getUser()], ['updatedAt' => 'DESC']),
+            'finished' => $entityManager->getRepository(ChecklistItem::class)->findBy(['checked' => true, 'user' => $this->getUser()], ['updatedAt' => 'DESC'], 50)
         ]);
     }
 }

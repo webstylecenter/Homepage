@@ -1,24 +1,24 @@
-$(function() {
-    $('.js-search-feed').on('keyup', function() {
+$(function () {
+    $('.js-search-feed').on('keyup', function () {
         searchFeeds($(this).val());
-    }).on('click', function() {
+    }).on('click', function () {
         if ($(this).val() !== '') {
             $('.js-search-list').slideDown();
         }
-    }).on('blur', function() {
+    }).on('blur', function () {
         $('.js-search-list:not(.doNotHide)').slideUp()
-    }).on('keydown', function(e) {
+    }).on('keydown', function (e) {
         if (e.which === 13) {
             searchAutoRun($(this));
         }
     });
 
-    $('.js-search-list').on('click', '.feed-list-item--state-button', function() {
+    $('.js-search-list').on('click', '.feed-list-item--state-button', function () {
         addToChecklistFromSearch(this);
     });
 });
 
-var searchFeeds = function(searchQuery) {
+var searchFeeds = function (searchQuery) {
     $('.js-search-list').html('').slideDown();
 
     if (searchQuery === '' || searchQuery.substring(0, 4) === 'http') {
@@ -41,32 +41,32 @@ var searchFeeds = function(searchQuery) {
     });
 }
 
-var addToChecklist = function(value) {
-    postToChecklist({item:value});
+var addToChecklist = function (value) {
+    postToChecklist({item: value});
 }
 
-var postToChecklist = function(data) {
-    $.post("/checklist/add/", data).then(function(data) {
+var postToChecklist = function (data) {
+    $.post("/checklist/add/", data).then(function (data) {
         $('.checklist--list').html(data);
         $('.checklist--form input[type="text"]').val('');
 
-        $('.js-checklist-item').on('click', function() {
+        $('.js-checklist-item').on('click', function () {
             checkItem(this);
         });
-    }).catch(function() {
+    }).catch(function () {
         alert('Updating checklist failed!');
         return false;
     });
 }
 
-var addToChecklistFromSearch = function(el) {
+var addToChecklistFromSearch = function (el) {
     var value = $(el).find('b').html();
     addToChecklist(value);
     $(el).html('<b>' + value + ' added to checklist!');
     $('.s-search-feed').val('');
 }
 
-var searchAutoRun = function(el) {
+var searchAutoRun = function (el) {
     let value = $(el).val();
     $('.js-search-list').hide();
 
@@ -77,7 +77,7 @@ var searchAutoRun = function(el) {
 
     $(el).val("Fetching meta data...");
 
-    $.post('/meta/', {url: value}, function(result) {
+    $.post('/meta/', {url: value}, function (result) {
         $(el).val("Adding data to feed...");
         $('.js-search-list').hide();
         if (!result.data.title) {
@@ -91,7 +91,7 @@ var searchAutoRun = function(el) {
             url: value,
             title: result.data.title,
             description: result.data.description
-        }, function(data) {
+        }, function (data) {
             if (data.status !== 'success') {
                 $(el).val(value);
                 alert('Failed to add item due to a server error.');

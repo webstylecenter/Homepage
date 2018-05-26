@@ -1,19 +1,19 @@
-$(function() {
+$(function () {
     // Endless scroll
     $('.feed-list').jscroll({
         padding: 150,
         nextSelector: 'a.jscroll-next:last',
         contentSelector: '.feed-list-item',
-        callback: function() {
-            $('.jscroll-added:last-of-type .js-action-feed-list-swipe').hammer().on("swiperight", function() {
+        callback: function () {
+            $('.jscroll-added:last-of-type .js-action-feed-list-swipe').hammer().on("swiperight", function () {
                 $(this).find('.pin').trigger('click');
             });
         }
     });
 
-    $('.header--bar').each(function() {
+    $('.header--bar').each(function () {
         var mc = new Hammer(this);
-        mc.on("swiperight", function() {
+        mc.on("swiperight", function () {
             $('.js-return').trigger('click');
         })
     })
@@ -26,7 +26,7 @@ $(function() {
             $('.header--bar').css('backgroundColor', '#337dff');
             openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'));
         })
-        .on('click', '.js-action-feed-list-click', function() {
+        .on('click', '.js-action-feed-list-click', function () {
             $(this).addClass('animated pulse feed-list-item--state-selected');
             $('.feed-list-item').removeClass('feed-list-item--state-selected');
             $('.header--bar').css('backgroundColor', $(this).css('borderLeftColor'));
@@ -43,68 +43,68 @@ $(function() {
             $('.js-open-new-window').removeClass('show-if-mobile show-if-tablet');
             $('.header--bar').removeClass('show-if-mobile');
         })
-        .on ('click', '.js-reload-page', function() {
+        .on('click', '.js-reload-page', function () {
             $('.content-frame').attr('src', '/welcome/');
             $('.urlbar a').text('').attr('data-clipboard-text', '');
             $('.header--bar').css('backgroundColor', '#337dff');
             requestNewFeedItems();
         })
-        .on('click', '.pin', function(e) {
+        .on('click', '.pin', function (e) {
             e.stopImmediatePropagation();
             var that = this;
-            $.post("/feed/pin/" + $(this).data('pin-id'), function() {
+            $.post("/feed/pin/" + $(this).data('pin-id'), function () {
                 $(that).parent().addClass('animated shake');
                 $(that).parent().toggleClass('feed-list-item--state-pinned');
             }, 'json');
         })
-        .on('click', '.pip', function(e) {
+        .on('click', '.pip', function (e) {
             e.stopImmediatePropagation();
             openInPictureInPicture(parseYoutubeUrl($(this).parent().data('url'), false));
         })
-        .on('click', '.js-close-pip', function() {
+        .on('click', '.js-close-pip', function () {
             $('.content-pictureInPictureFrame').remove();
             $('.content-close-pip').hide();
             $('.content-maximize-pip').hide();
         })
-        .on('click', '.js-modal-trigger', function() {
-            $($(this).data('modal-target')).modal({fadeDuration:100});
+        .on('click', '.js-modal-trigger', function () {
+            $($(this).data('modal-target')).modal({fadeDuration: 100});
         })
-        .on('click', '.js-form-feed button', function() {
-            $.post('/feed/add-item/', $('.js-form-feed').serialize(), function(data) {
+        .on('click', '.js-form-feed button', function () {
+            $.post('/feed/add-item/', $('.js-form-feed').serialize(), function (data) {
                 data.status === 'success'
                     ? $.modal.close()
                     : alert('Failed to add item due to a server error.');
             }, 'json');
         })
-        .on('click', '.js-open-new-window', function() {
+        .on('click', '.js-open-new-window', function () {
             window.open($('.urlbar a').attr('href'));
         })
-        .on('click', '.js-visbility-toggle', function() {
+        .on('click', '.js-visbility-toggle', function () {
             $($(this).data('target')).toggle();
         })
-        .on('click', '.js-send-to-pip', function() {
+        .on('click', '.js-send-to-pip', function () {
             switchToPicutreInPicture();
         })
-        .on('click', '.js-send-from-pip', function() {
+        .on('click', '.js-send-from-pip', function () {
             switchFromPictureInPicture();
         })
     ;
 
-    $('.js-action-feed-list-swipe').each(function() {
+    $('.js-action-feed-list-swipe').each(function () {
         var mc = new Hammer(this);
-        mc.on("swiperight", function() {
+        mc.on("swiperight", function () {
             $(this).find('.pin').trigger('click');
         })
     });
 
     /** global: ClipboardJS */
-    (new ClipboardJS('.js-copy-to-clipboard')).on('success', function(e) {
+    (new ClipboardJS('.js-copy-to-clipboard')).on('success', function (e) {
         e.clearSelection();
     });
 });
 
-global.requestNewFeedItems = function() {
-    $.getJSON('/feed/refresh/', function(data) {
+global.requestNewFeedItems = function () {
+    $.getJSON('/feed/refresh/', function (data) {
         $('.feed-list').prepend(data.html);
         $('body').data('refresh-date', data.refreshDate);
         $('.js-form-feed').find("input[type=text], textarea").val("");
@@ -127,7 +127,7 @@ function openPage(url, shareId) {
 }
 
 function hasXFrameHeader(url, shareId) {
-    $.post('/feed/check-header/', {url:url}).then(function( data ) {
+    $.post('/feed/check-header/', {url: url}).then(function (data) {
         if (data.found === true) {
             openInNewWindow(url);
         } else {
@@ -149,7 +149,7 @@ function openInFrame(url, shareId) {
 
 function openInNewWindow(url) {
     window.open(url);
-    $('.content-frame').attr('src','/feed/opened-in-popup/');
+    $('.content-frame').attr('src', '/feed/opened-in-popup/');
 }
 
 function switchToPicutreInPicture() {
@@ -202,7 +202,7 @@ function parseYoutubeUrl(url, changeColors) {
 function hexToRgb(hex) {
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
     var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+    hex = hex.replace(shorthandRegex, function (m, r, g, b) {
         return r + r + g + g + b + b;
     });
 

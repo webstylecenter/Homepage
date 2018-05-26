@@ -22,7 +22,7 @@ class FeedController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl'=>'', 'user'=>$this->getUser()]);
+        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl' => '', 'user' => $this->getUser()]);
 
         $feedItem = new FeedItem();
         $feedItem
@@ -39,7 +39,7 @@ class FeedController extends Controller
         $entityManager->flush();
 
         return new JsonResponse([
-            'status'=> 'success',
+            'status' => 'success',
             'message' => 'Item added'
         ]);
     }
@@ -53,14 +53,14 @@ class FeedController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $feedItem = $entityManager->getRepository(FeedItem::class)->findOneBy(['id'=> $id, 'user' => $this->getUser()]);
+        $feedItem = $entityManager->getRepository(FeedItem::class)->findOneBy(['id' => $id, 'user' => $this->getUser()]);
         $feedItem->setPinned((!$feedItem->getPinned()));
 
         $entityManager->persist($feedItem);
         $entityManager->flush();
 
         return new JsonResponse([
-            'status'=> 'success',
+            'status' => 'success',
             'message' => 'Pin toggled'
         ]);
     }
@@ -75,7 +75,8 @@ class FeedController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         return new JsonResponse([
             'html' => $this->render('home/newsfeed.html.twig', [
-                'feedItems'=> $entityManager->getRepository(FeedItem::class)->findBy(['viewed'=>false, 'user'=> $this->getUser()], ['createdAt' => 'DESC'], 50),
+                'feedItems' => $entityManager->getRepository(FeedItem::class)
+                    ->findBy(['viewed' => false, 'user' => $this->getUser()], ['createdAt' => 'DESC'], 50),
                 'nextPageNumber' => 50000,
                 'addToChecklist' => '',
             ]),
@@ -92,7 +93,8 @@ class FeedController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         return $this->render('home/newsfeed.html.twig', [
-            'feedItems'=> $entityManager->getRepository(FeedItem::class)->findBy(['user'=>$this->getUser()], ['createdAt' => 'DESC'], 50, ($startIndex-1)*50),
+            'feedItems' => $entityManager->getRepository(FeedItem::class)
+                ->findBy(['user' => $this->getUser()], ['createdAt' => 'DESC'], 50, ($startIndex - 1) * 50),
             'nextPageNumber' => $startIndex + 1,
             'addToChecklist' => '',
         ]);
@@ -112,7 +114,7 @@ class FeedController extends Controller
             ->where('f.title LIKE :query')
             ->orWhere('f.description LIKE :query')
             ->andWhere('f.user = :user')
-            ->setParameter('query', '%'.$request->get('query').'%')
+            ->setParameter('query', '%' . $request->get('query') . '%')
             ->setParameter('user', $this->getUser())
             ->orderBy('f.pinned', 'DESC')
             ->orderBy('f.createdAt', 'DESC')
@@ -120,7 +122,7 @@ class FeedController extends Controller
 
         return new JsonResponse([
             'status' => 'success',
-            'data' => array_map(function(FeedItem $feedItem) {
+            'data' => array_map(function (FeedItem $feedItem) {
                 return [
                     'id' => $feedItem->getId(),
                     'title' => $feedItem->getTitle(),
@@ -130,7 +132,7 @@ class FeedController extends Controller
                     'feedIcon' => $feedItem->getFeed()->getFeedIcon(),
                     'shareId' => $feedItem->getFeed()->getName() . '/' . $feedItem->getId() . '/',
                     'pinned' => $feedItem->getPinned(),
-                    'user'=> $this->getUser()
+                    'user' => $this->getUser()
                 ];
             }, $feedItems)
         ]);
@@ -146,7 +148,7 @@ class FeedController extends Controller
         $repository = $entityManager->getRepository(Feed::class);
 
         return $this->render('widgets/feed-overview.html.twig', [
-            'feeds' => $repository->findBy(['user'=>$this->getUser()])
+            'feeds' => $repository->findBy(['user' => $this->getUser()])
         ]);
     }
 
@@ -169,7 +171,7 @@ class FeedController extends Controller
         }
 
         $metaData = $metaService->getByUrl($url);
-        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl'=>'', 'user'=>$this->getUser()]);
+        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl' => '', 'user' => $this->getUser()]);
 
         $feedItem = new FeedItem();
         $feedItem

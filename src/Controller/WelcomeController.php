@@ -18,11 +18,12 @@ class WelcomeController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
         $notes = $entityManager->getRepository(Note::class)->findBy(['user' => $this->getUser()]);
-        $checklistItems = $entityManager->getRepository(ChecklistItem::class)->findBy(['checked'=>false, 'user'=>$this->getUser()], ['updatedAt'=> 'DESC']);
+        $checklistItems = $entityManager->getRepository(ChecklistItem::class)
+            ->findBy(['checked' => false, 'user' => $this->getUser()], ['updatedAt' => 'DESC']);
 
         return $this->render('welcome/index.html.twig', [
             'bodyClass' => 'welcome',
-            'notes'=> $notes,
+            'notes' => $notes,
             'todos' => $checklistItems
         ]);
     }

@@ -19,6 +19,15 @@ class FeedRepository extends ServiceEntityRepository
         parent::__construct($registry, Feed::class);
     }
 
+    /**
+     * @param Feed $feed
+     */
+    public function persist(Feed $feed)
+    {
+        $this->getEntityManager()->persist($feed);
+        $this->getEntityManager()->flush();
+    }
+
 //    /**
 //     * @return Feed[] Returns an array of Feed objects
 //     */

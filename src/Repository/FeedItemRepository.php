@@ -19,32 +19,13 @@ class FeedItemRepository extends ServiceEntityRepository
         parent::__construct($registry, FeedItem::class);
     }
 
-//    /**
-//     * @return FeedItem[] Returns an array of FeedItem objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?FeedItem
+    /**
+     * @param FeedItem $feedItem
+     */
+    public function persist(FeedItem $feedItem)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $this->getEntityManager()->persist($feedItem);
+        $this->getEntityManager()->flush();
     }
-    */
 }

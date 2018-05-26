@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Note;
+use App\Service\NoteService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,29 +13,38 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class NoteController extends Controller
 {
     /**
+     * @var NoteService
+     */
+    protected $noteService;
+
+    /**
+     * @param NoteService $noteService
+     */
+    public function __construct(NoteService $noteService)
+    {
+        $this->noteService = $noteService;
+    }
+
+    /**
      * @Route("/note/save/")
      * @param Request $request
      * @return Response
      */
-    public function addAction(Request $request)
+    public function saveAction(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $note = $entityManager->getRepository(Note::class)->findBy(['id' => $request->get('id'), 'user' => $this->getUser()]);
+        $note = $this->noteService->getByIdAndUser($request->get('id'), $this->getUser()) ?: new Note;
+        $note->setUser($this->getUser());
+        $note->setName($request->get('name'));
+        $note->setContent($request->get('note'));
+        $note->setPosition((int) $request->get('position', 0));
 
-        if (!$note) {
-            $note = new Note();
-            $note->setUser($this->getUser());
-        }
-
-        $note->setName($request->get('name', ''))
-            ->setContent($request->get('note', ''))
-            ->setPosition((int)$request->get('position', null));
-
-        $entityManager->persist($note);
-        $entityManager->flush();
+        $this->noteService->persist($note);
 
         return new JsonResponse([
-            'id' => $note->getId()
+            'status' => 'success',
+            'data' => [
+                'id' => $note->getId()
+            ]
         ]);
     }
 
@@ -46,21 +56,11 @@ class NoteController extends Controller
      */
     public function removeAction(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $note = $entityManager->getRepository(Note::class)->findBy(['id' => $request->get('id'), 'user' => $this->getUser()]);
-
-        if (!$note) {
-            return new JsonResponse([
-                'message' => 'Note not found!',
-                'status' => 'fail'
-            ]);
-        }
-
-        $entityManager->remove($note);
-        $entityManager->flush();
+        $note = $this->noteService->getByIdAndUser($request->get('id'), $this->getUser());
+        !$note ?: $this->noteService->remove($note);
 
         return new JsonResponse([
-            'status' => 'success'
+            'status' => 'success',
         ]);
     }
 }

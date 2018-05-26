@@ -16,80 +16,117 @@ class Note
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @var integer
      */
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @var string
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
+     *
+     * @var string
      */
     protected $content;
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @var integer
      */
-    protected $position;
+    protected $position = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="notes")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @var User
      */
     protected $user;
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    public function getContent(): ?string
+    /**
+     * @return string
+     */
+    public function getContent()
     {
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    /**
+     * @param string $content
+     */
+    public function setContent(string $content)
     {
         $this->content = $content;
-
-        return $this;
     }
 
-    public function getPosition(): ?int
+    /**
+     * @return int
+     */
+    public function getPosition()
     {
         return $this->position;
     }
 
-    public function setPosition(int $position): self
+    /**
+     * @param int $position
+     */
+    public function setPosition(int $position)
     {
         $this->position = $position;
-
-        return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return User
+     */
+    public function getUser()
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
     {
         $this->user = $user;
-
-        return $this;
     }
 }

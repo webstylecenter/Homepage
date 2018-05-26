@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\ChecklistItem;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,32 +20,12 @@ class ChecklistItemRepository extends ServiceEntityRepository
         parent::__construct($registry, ChecklistItem::class);
     }
 
-//    /**
-//     * @return ChecklistItem[] Returns an array of ChecklistItem objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param User $user
+     * @return ChecklistItem[]
+     */
+    public function getUncheckedItemsForUser(User $user)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findBy(['checked' => false, 'user' => $user]);
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?ChecklistItem
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

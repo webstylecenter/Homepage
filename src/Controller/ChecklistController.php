@@ -19,12 +19,6 @@ class ChecklistController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        /** @var UserFeedItem[] $userFeedItems */
-        foreach ($userFeedItems as $userFeedItem) {
-            $userFeedItem->getUserFeed()->setFeed();
-            $userFeedItem->getFeedItem()->getFeed();
-        }
-
         return $this->render('checklist/index.html.twig', [
             'bodyClass' => 'checklist',
             'todos' => $entityManager->getRepository(ChecklistItem::class)->findBy(['checked' => false, 'user' => $this->getUser()], ['updatedAt' => 'DESC']),
@@ -42,16 +36,10 @@ class ChecklistController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        if (strlen($request->get('id')) > 0) {
-            $checklistItem = $entityManager->getRepository(ChecklistItem::class)->findBy(['id' => $request->get('id'), 'user' => $this->getUser()]);
-            $checklistItem->setChecked($request->get('checked') === 'true');
-        } else {
-            $checklistItem = new checklistItem();
-            $checklistItem
-                ->setItem($request->get('item'))
-                ->setChecked(false)
-                ->setUser($this->getUser());
-        }
+        $checklistItem = $entityManager->getRepository(ChecklistItem::class)->findBy(['id' => $request->get('id'), 'user' => $this->getUser()]) ?: new checklistItem;
+        $checklistItem->setChecked($request->get('checked') === 'true');
+        $checklistItem->setItem($request->get('item'));
+        $checklistItem->setUser($this->getUser());
 
         $entityManager->persist($checklistItem);
         $entityManager->flush();

@@ -61,7 +61,7 @@ class UserFeed
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserFeedItem", mappedBy="userFeed", cascade={"persist", "remove"})
-     * @var ArrayCollection
+     * @var ArrayCollection|UserFeedItem[]
      */
     protected $items = [];
 
@@ -168,7 +168,7 @@ class UserFeed
     }
 
     /**
-     * @return ArrayCollection
+     * @return ArrayCollection|UserFeedItem[]
      */
     public function getItems()
     {

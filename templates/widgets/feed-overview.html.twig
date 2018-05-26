@@ -1,15 +1,17 @@
 <div class="quickjump">
-    {% for feed in feeds %}
+    {% for userFeed in userFeeds %}
+        {% set feed = userFeed.feed %}
         <a href="#feedOverview{{ feed.name|slugify }}">{{ feed.name }}</a>
     {% endfor %}
 </div>
 
-{% for feed in feeds %}
+{% for userFeed in userFeeds %}
+    {% set feed = userFeed.feed %}
     <div class="widget widget-custom-items" id="feedOverview{{ feed.name|slugify }}">
         <h2>{{ feed.name }}</h2>
-        {% for item in feed.items %}
-            <div class="widget-custom-item" data-url="{{ item.url }}">
-                {{ item.title }} <span class="description">{{ item.description }}</span>
+        {% for item in userFeed.items[10:] %}
+            <div class="widget-custom-item" data-url="{{ item.feedItem.url }}">
+                {{ item.feedItem.title }} <span class="description">{{ item.feedItem.description }}</span>
             </div>
         {% endfor %}
     </div>

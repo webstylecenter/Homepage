@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Feed;
 use App\Entity\FeedItem;
+use App\Entity\FeedListFilter;
 use App\Entity\User;
+use App\Entity\UserFeedItem;
 use App\Service\FeedService;
 use App\Service\WeatherService;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,39 +18,44 @@ use Detection\MobileDetect;
 class HomepageController extends Controller
 {
     /**
-     * @Route("/")
-     * @param WeatherService $weatherService
+     * @var FeedService
+     */
+    protected $feedService;
+
+    /**
+     * @var WeatherService
+     */
+    protected $weatherService;
+
+    /**
      * @param FeedService $feedService
+     * @param WeatherService $weatherService
+     */
+    public function __construct(FeedService $feedService, WeatherService $weatherService)
+    {
+        $this->feedService = $feedService;
+        $this->weatherService = $weatherService;
+    }
+
+    /**
+     * @Route("/")
+     * @param Request $request
      * @return Response
      * @throws \Exception
      */
-    public function index(WeatherService $weatherService, FeedService $feedService)
+    public function index(Request $request)
     {
-        // Setting temporally values
-        $bodyClass = 'Homepage';
-
-        /** @var $device */
-        $device = new MobileDetect();
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $feedItems = $entityManager->getRepository(FeedItem::class)->findBy([
-                'user' => $this->getUser()
-            ], [
-                'pinned' => 'DESC', 'createdAt' => 'DESC'
-            ], 50
+        $userFeedItems = $this->feedService->getUserFeedItemsWithFilter((new FeedListFilter())
+            ->setUser($this->getUser())
         );
 
-        $user = $entityManager->getRepository(User::class)->findOneBy(['id' => $this->getUser()]);
-
-        $feedService->markAllViewed($user);
+        $this->feedService->setViewedForUser($this->getUser());
 
         return $this->render('home/index.html.twig', [
-            'bodyClass' => $bodyClass,
-            'forecast' => $weatherService->getForecastList(),
-            'feedItems' => $feedItems,
-            'feeds' => $entityManager->getRepository(Feed::class)->findAll(),
-            'device' => $device,
-            'user' => $user,
+            'bodyClass' => 'Homepage',
+            'forecast' => $this->weatherService->getForecastList(),
+            'userFeedItems' => $userFeedItems,
+            'device' => new MobileDetect(),
             'nextPageNumber' => 2,
         ]);
     }

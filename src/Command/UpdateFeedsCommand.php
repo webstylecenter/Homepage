@@ -3,30 +3,33 @@
 namespace App\Command;
 
 use App\Service\FeedService;
+use App\Service\ImportService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateFeedsCommand extends Command
 {
-    protected $feedService;
+    /**
+     * @var ImportService
+     */
+    protected $importService;
 
     /**
      * UpdateFeedsCommand constructor.
-     * @param FeedService $feedService
+     * @param ImportService $importService
      */
-    public function __construct(FeedService $feedService)
+    public function __construct(ImportService $importService)
     {
         parent::__construct();
-        $this->feedService = $feedService;
+        $this->importService = $importService;
     }
 
     protected function configure()
     {
         $this
             ->setName('app:feeds:update')
-            ->setDescription('Loads new contents from the feeds')
-            ->setHelp('This will download each feed and add new items to the database');
+            ->setDescription('Loads new contents from the feeds');
     }
 
     /**
@@ -37,7 +40,7 @@ class UpdateFeedsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<comment>Importing feeds...</comment>');
-        $this->feedService->import(
+        $this->importService->import(
             function($feedName) use ($output) {
                 $output->writeln('<fg=cyan>Feed imported: ' . $feedName . '</>');
             }, function($feedName, \Exception $exception) use ($output) {

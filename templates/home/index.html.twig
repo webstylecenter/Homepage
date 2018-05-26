@@ -39,7 +39,7 @@
             </div>
 
             <span class="action-user hide-if-mobile">
-                {{ user.username }}
+                {{ app.user.username }}
             </span>
             {% if not app.request.server.get("DROP_LOCATION") == null  %}
                 <div style="display: none;" class="screenshot-list js-screenshot-list" data-target="/droplist/"></div>
@@ -49,8 +49,8 @@
     <section class="container">
         {% block content %}{% endblock %}
 
-        <aside data-is-mobile="{{ device.isMobile }}" data-hideXframe="{{ user.hideXframeNotice }}" class="feed-list feed-list--type-sidebar wow fadeIn {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
-            {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems, 'addToChecklist': '', 'feeds': feeds} %}
+        <aside data-is-mobile="{{ device.isMobile }}" data-hideXframe="{{ app.user.hideXframeNotice }}" class="feed-list feed-list--type-sidebar wow fadeIn {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
+            {% include 'home/newsfeed.html.twig' with {'userFeedItems': userFeedItems} %}
         </aside>
 
         <div class="content">
@@ -60,7 +60,7 @@
                 <iframe
                         id="welcomeFrame"
                         class="content-frame"
-                        src="{% if feedItems|length == 0 %}/settings/{% else %}/welcome{% endif %}"
+                        src="{% if not userFeedItems %}/settings/{% else %}/welcome{% endif %}"
                         sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-modals"
                         allowfullscreen="allowfullscreen"
                         mozallowfullscreen="mozallowfullscreen"
@@ -100,7 +100,7 @@
             <div class="feed-list-item--state-button">Add "<b>{{query}}</b>" to checklist</div>
             {{#each results}}
                 <div class="feed-list-item js-action-feed-list-click js-action-feed-list-swipe {{#if pinned}}feed-list-item--state-pinned{{/if}}"
-                     data-url="{{url}}" data-share-id="{{shareId}}" style="border-left-color:#{{color}};">
+                     data-url="{{url}}" data-share-id="{{shareId}}" style="border-left-color:{{color}};">
                     <div class="pin" data-pin-id="{{id}}"></div>
                     <p class="title">{{title}}</p>
                     <p class="description">{{description}}</p>

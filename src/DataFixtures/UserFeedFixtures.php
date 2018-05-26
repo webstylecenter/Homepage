@@ -22,6 +22,8 @@ class UserFeedFixtures extends Fixture implements DependentFixtureInterface
         $userFeed = new UserFeed;
         $userFeed->setFeed($this->getReference('feed_nos'));
         $userFeed->setUser($this->getReference('user_1'));
+        $userFeed->setColor('#c3c3c3');
+        $userFeed->setIcon('video');
         $this->populateItems($userFeed, 'feed_nos');
 
         $this->objectManager->persist($userFeed);
@@ -29,6 +31,8 @@ class UserFeedFixtures extends Fixture implements DependentFixtureInterface
         $userFeed = new UserFeed;
         $userFeed->setFeed($this->getReference('feed_ed'));
         $userFeed->setUser($this->getReference('user_1'));
+        $userFeed->setColor('#d6d6d6');
+        $userFeed->setIcon('trash');
         $this->populateItems($userFeed, 'feed_ed');
 
         $this->objectManager->persist($userFeed);
@@ -47,6 +51,7 @@ class UserFeedFixtures extends Fixture implements DependentFixtureInterface
             $userFeedItem->setPinned(rand(1, 9) % 9 === 0);
             $userFeedItem->setViewed(rand(1, 25) % 3);
             $userFeedItem->setUser($userFeed->getUser());
+            $userFeedItem->setUserFeed($userFeed);
             $userFeedItem->setFeedItem($this->getReference($reference . '_' . $i));
             $userFeed->getItems()->add($userFeedItem);
         }

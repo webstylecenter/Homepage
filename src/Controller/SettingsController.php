@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Feed;
 use App\Entity\FeedItem;
 use App\Entity\User;
+use App\Entity\UserFeed;
 use App\Service\FeedService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ class SettingsController extends Controller
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $feeds = $entityManager->getRepository(Feed::class)->findBy(['user' => $this->getUser()]);
+        $feeds = $entityManager->getRepository(UserFeed::class)->findBy(['user' => $this->getUser()]);
 
         return $this->render('settings/index.html.twig', [
             'bodyClass' => 'settings',

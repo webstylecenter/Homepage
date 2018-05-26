@@ -129,7 +129,7 @@ function saveNote($el) {
 
             $('.note-selector-' + id).text(name);
             if (id.length === 0) {
-                $el.attr('data-id', data.id);
+                $el.attr('data-id', data.data.id);
             }
         })
         .fail(function () {

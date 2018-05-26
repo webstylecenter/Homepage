@@ -4,6 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Feed;
 use App\Entity\FeedItem;
+use App\Entity\FeedListFilter;
+use App\Entity\Meta;
+use App\Entity\User;
+use App\Entity\UserFeedItem;
+use App\Service\FeedService;
 use App\Service\MetaService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,50 +19,103 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class FeedController extends Controller
 {
     /**
+     * @var FeedService
+     */
+    protected $feedService;
+
+    /**
+     * @var MetaService
+     */
+    protected $metaService;
+
+    /**
+     * @param FeedService $feedService
+     * @param MetaService $metaService
+     */
+    public function __construct(FeedService $feedService, MetaService $metaService)
+    {
+        $this->feedService = $feedService;
+        $this->metaService = $metaService;
+    }
+
+    /**
      * @Route("/feed/add-item/")
      * @param Request $request
      * @return JsonResponse
      */
-    public function addFeedAction(Request $request)
+    public function addFeedItemAction(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        $metaData = new Meta;
+        $metaData->setTitle($request->get('title'));
+        $metaData->setMetaDescription($request->get('description'));
+        $metaData->setUrl($request->get('url'));
 
-        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl' => '', 'user' => $this->getUser()]);
+        if (
+            // $metaData will override if no title is set
+            !$request->get('title')
+            && !$metaData = $this->metaService->getByUrl($request->get('url'))
+        ) {
+            return new JsonResponse([
+                'status' => 'fail',
+                'message' => 'No metadata found for url "' . $request->get('url') . '"'
+            ]);
+        }
 
         $feedItem = new FeedItem();
-        $feedItem
-            ->setFeed($feed)
-            ->setViewed(false)
-            ->setGuid(intval(time()))
-            ->setTitle($request->get('title'))
-            ->setDescription($request->get('description', null))
-            ->setPinned(true)
-            ->setUrl($request->get('url'))
-            ->setUser($this->getUser());
+        $feedItem->setGuid(intval(time()));
+        $feedItem->setTitle($metaData->getTitle());
+        $feedItem->setDescription($metaData->getMetaDescription());
+        $feedItem->setUrl($metaData->getUrl());
 
-        $entityManager->persist($feedItem);
-        $entityManager->flush();
+        $userFeedItem = new UserFeedItem();
+        $userFeedItem->setFeedItem($feedItem);
+        $userFeedItem->setUser($this->getUser());
+        $userFeedItem->setPinned(true);
+
+        $this->feedService->persistUserFeedItem($userFeedItem);
 
         return new JsonResponse([
             'status' => 'success',
-            'message' => 'Item added'
+            'data' => [
+                'title' => $metaData->getTitle(),
+                'description' => $metaData->getMetaDescription(),
+                'url' => $metaData->getUrl(),
+            ]
         ]);
     }
 
     /**
-     * @Route("/feed/pin/{id}")
-     * @param $id
+     * @Route("/meta/")
+     * @param Request $request
      * @return JsonResponse
      */
-    public function pinAction($id)
+    public function MetaController(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
+        $metaData = $this->metaService->getByUrl($request->get('url'));
+        if (!$metaData) {
+            return new JsonResponse([
+                'status' => 'fail',
+                'message' => 'No metadata found for url "' . $request->get('url') . '"'
+            ]);
+        }
+        return new JsonResponse([
+            'status' => 'success',
+            'data' => [
+                'title' => $metaData->getTitle(),
+                'description' => $metaData->getMetaDescription()
+            ]
+        ]);
+    }
 
-        $feedItem = $entityManager->getRepository(FeedItem::class)->findOneBy(['id' => $id, 'user' => $this->getUser()]);
-        $feedItem->setPinned((!$feedItem->getPinned()));
-
-        $entityManager->persist($feedItem);
-        $entityManager->flush();
+    /**
+     * @Route("/feed/pin/{userFeedItem}")
+     * @param UserFeedItem $userFeedItem
+     * @return JsonResponse
+     */
+    public function pinAction(UserFeedItem $userFeedItem)
+    {
+        $userFeedItem->setPinned(!$userFeedItem->isPinned());
+        $this->feedService->persistUserFeedItem($userFeedItem);
 
         return new JsonResponse([
             'status' => 'success',
@@ -71,32 +129,31 @@ class FeedController extends Controller
      */
     public function refreshAction()
     {
-        // TODO: Currently broken
-        $entityManager = $this->getDoctrine()->getManager();
+        // $entityManager->getRepository(FeedItem::class)->findBy(['viewed' => false, 'user' => $this->getUser()], ['createdAt' => 'DESC'], 50)
+
         return new JsonResponse([
             'html' => $this->render('home/newsfeed.html.twig', [
-                'feedItems' => $entityManager->getRepository(FeedItem::class)
-                    ->findBy(['viewed' => false, 'user' => $this->getUser()], ['createdAt' => 'DESC'], 50),
-                'nextPageNumber' => 50000,
-                'addToChecklist' => '',
+                'userFeedItems' => $this->feedService->getUserFeedItemsWithFilter((new FeedListFilter())
+                    ->setUser($this->getUser())
+                    ->setNewOnly(true)
+                ),
             ]),
-            'refreshDate' => (new \DateTime())->format('Y-m-d H:i:s'),
         ]);
     }
 
     /**
-     * @Route("/feed/page/{startIndex}")
-     * @param $startIndex
+     * @Route("/feed/page/{page}")
+     * @param integer $page
      * @return Response
      */
-    public function loadExtraAction($startIndex)
+    public function loadExtraAction($page)
     {
-        $entityManager = $this->getDoctrine()->getManager();
         return $this->render('home/newsfeed.html.twig', [
-            'feedItems' => $entityManager->getRepository(FeedItem::class)
-                ->findBy(['user' => $this->getUser()], ['createdAt' => 'DESC'], 50, ($startIndex - 1) * 50),
-            'nextPageNumber' => $startIndex + 1,
-            'addToChecklist' => '',
+            'userFeedItems' => $this->feedService->getUserFeedItemsWithFilter((new FeedListFilter())
+                ->setUser($this->getUser())
+                ->setPage((int) $page)
+            ),
+            'nextPageNumber' => $page + 1,
         ]);
     }
 
@@ -107,34 +164,27 @@ class FeedController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $repository = $entityManager->getRepository(FeedItem::class);
-
-        $feedItems = $repository->createQueryBuilder('f')
-            ->where('f.title LIKE :query')
-            ->orWhere('f.description LIKE :query')
-            ->andWhere('f.user = :user')
-            ->setParameter('query', '%' . $request->get('query') . '%')
-            ->setParameter('user', $this->getUser())
-            ->orderBy('f.pinned', 'DESC')
-            ->orderBy('f.createdAt', 'DESC')
-            ->getQuery()->getResult();
+        $userFeedItems = $this->feedService->getUserFeedItemsWithFilter((new FeedListFilter())
+            ->setUser($this->getUser())
+            ->setSearchQuery($request->get('query'))
+        );
 
         return new JsonResponse([
             'status' => 'success',
-            'data' => array_map(function (FeedItem $feedItem) {
+            'data' => array_map(function (UserFeedItem $userFeedItem) {
+                $feedItem = $userFeedItem->getFeedItem();
                 return [
-                    'id' => $feedItem->getId(),
+                    'id' => $userFeedItem->getId(),
                     'title' => $feedItem->getTitle(),
                     'description' => $feedItem->getDescription(),
                     'url' => $feedItem->getUrl(),
-                    'color' => $feedItem->getFeed()->getColor(),
-                    'feedIcon' => $feedItem->getFeed()->getFeedIcon(),
-                    'shareId' => $feedItem->getFeed()->getName() . '/' . $feedItem->getId() . '/',
-                    'pinned' => $feedItem->getPinned(),
+                    'color' => $userFeedItem->getUserFeed()->getColor(),
+                    'feedIcon' => $userFeedItem->getUserFeed()->getIcon(),
+                    'shareId' => $userFeedItem->getUserFeed()->getFeed()->getName() . '/' . $userFeedItem->getId() . '/',
+                    'pinned' => $userFeedItem->isPinned(),
                     'user' => $this->getUser()
                 ];
-            }, $feedItems)
+            }, $userFeedItems)
         ]);
     }
 
@@ -144,83 +194,8 @@ class FeedController extends Controller
      */
     public function overviewAction()
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $repository = $entityManager->getRepository(Feed::class);
-
         return $this->render('widgets/feed-overview.html.twig', [
-            'feeds' => $repository->findBy(['user' => $this->getUser()])
-        ]);
-    }
-
-    /**
-     * @Route("/chrome/import/")
-     * @param Request $request
-     * @param MetaService $metaService
-     * @return JsonResponse
-     */
-    public function chromeImportAction(Request $request, MetaService $metaService)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $url = $request->get('url', '');
-
-        if (strlen($url) === 0) {
-            return new JsonResponse([
-                'status' => 'fail',
-                'message' => 'Missing parameter(s): url'
-            ]);
-        }
-
-        $metaData = $metaService->getByUrl($url);
-        $feed = $entityManager->getRepository(Feed::class)->findOneBy(['feedUrl' => '', 'user' => $this->getUser()]);
-
-        $feedItem = new FeedItem();
-        $feedItem
-            ->setFeed($feed)
-            ->setViewed(false)
-            ->setGuid(intval(time()))
-            ->setTitle($metaData->getTitle())
-            ->setDescription($metaData->getMetaDescription())
-            ->setPinned(true)
-            ->setUrl($metaData->getUrl())
-            ->setUser($this->getUser());
-
-        $entityManager->persist($feedItem);
-        $entityManager->flush();
-
-        return new JsonResponse([
-            'status' => 'success',
-            'data' => [
-                'title' => $metaData->getTitle(),
-                'description' => $metaData->getMetaDescription() ?: '',
-                'url' => $metaData->getUrl(),
-            ]
-        ]);
-    }
-
-    /**
-     * @Route("/meta/")
-     * @param Request $request
-     * @param MetaService $metaService
-     * @return JsonResponse
-     */
-    public function MetaController(Request $request, MetaService $metaService)
-    {
-        $url = $request->get('url', '');
-        if (strlen($url) === 0) {
-            return new JsonResponse([
-                'status' => 'fail',
-                'message' => 'Missing parameter(s): url'
-            ]);
-        }
-
-        $metaData = $metaService->getByUrl($url);
-
-        return new JsonResponse([
-            'status' => 'success',
-            'data' => [
-                'title' => $metaData->getTitle(),
-                'description' => (!empty($metaData->getMetaDescription()) ? $metaData->getMetaDescription() : '')
-            ]
+            'userFeeds' => $this->feedService->getAllUserFeedsForUser($this->getUser())
         ]);
     }
 
@@ -231,10 +206,9 @@ class FeedController extends Controller
      */
     public function checkForXFrameHeader(Request $request)
     {
-        $header = get_headers($request->get('url'), 1);
-
+        $header = @get_headers($request->get('url'), 1);
         return new JsonResponse([
-            'found' => (array_key_exists("X-Frame-Options", $header)),
+            'found' => isset($header['X-Frame-Options']),
         ]);
     }
 
@@ -244,8 +218,6 @@ class FeedController extends Controller
      */
     public function popupAction()
     {
-        return $this->render('widgets/opened-in-popup.html.twig', [
-            'bodyClass' => 'popup',
-        ]);
+        return $this->render('widgets/opened-in-popup.html.twig');
     }
 }

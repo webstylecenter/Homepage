@@ -106,7 +106,6 @@ $(function () {
 global.requestNewFeedItems = function () {
     $.getJSON('/feed/refresh/', function (data) {
         $('.feed-list').prepend(data.html);
-        $('body').data('refresh-date', data.refreshDate);
         $('.js-form-feed').find("input[type=text], textarea").val("");
     });
 };

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Feed;
 use App\Entity\FeedItem;
+use App\Entity\User;
 use App\Service\FeedService;
 use App\Service\WeatherService;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +37,7 @@ class HomepageController extends Controller
             ], 50
         );
 
+        $user = $entityManager->getRepository(User::class)->findOneBy(['id'=> $this->getUser()]);
 
         $feedService->markAllViewed();
 
@@ -45,6 +47,7 @@ class HomepageController extends Controller
             'feedItems'=> $feedItems,
             'feeds' => $entityManager->getRepository(Feed::class)->findAll(),
             'device' => $device,
+            'user' => $user,
             'nextPageNumber' => 2,
         ]);
     }

@@ -40,6 +40,11 @@ class User extends BaseUser
      */
     private $feedItems;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hideXframeNotice = false;
+
     public function __construct()
     {
         parent::__construct();
@@ -170,6 +175,18 @@ class User extends BaseUser
                 $feedItem->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getHideXframeNotice(): ?bool
+    {
+        return $this->hideXframeNotice;
+    }
+
+    public function setHideXframeNotice(bool $hideXframeNotice): self
+    {
+        $this->hideXframeNotice = $hideXframeNotice;
 
         return $this;
     }

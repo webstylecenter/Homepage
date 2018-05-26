@@ -45,7 +45,7 @@
     <section class="container">
         {% block content %}{% endblock %}
 
-        <aside class="feed-list feed-list--type-sidebar wow fadeIn {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
+        <aside data-is-mobile="{{ device.isMobile }}" data-hideXframe="{{ user.hideXframeNotice }}" class="feed-list feed-list--type-sidebar wow fadeIn {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
             {% include 'home/newsfeed.html.twig' with {'feedItems': feedItems, 'addToChecklist': '', 'feeds': feeds} %}
         </aside>
 

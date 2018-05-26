@@ -221,4 +221,29 @@ class FeedController extends Controller
             ]
         ]);
     }
+
+    /**
+     * @Route("/feed/check-header/", name="checkHeader")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function checkForXFrameHeader(Request $request)
+    {
+        $header = get_headers($request->get('url'), 1);
+
+        return new JsonResponse([
+            'found' => (array_key_exists("X-Frame-Options", $header)),
+        ]);
+    }
+
+    /**
+     * @Route("/feed/opened-in-popup/")
+     * @return Response
+     */
+    public function popupAction()
+    {
+        return $this->render('widgets/opened-in-popup.html.twig', [
+            'bodyClass' => 'popup',
+        ]);
+    }
 }

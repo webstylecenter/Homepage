@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Feed;
 use App\Entity\FeedItem;
+use App\Entity\User;
 use App\Service\FeedService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,5 +94,21 @@ class SettingsController extends Controller
         return new JsonResponse([
             'status'=> 'success'
         ]);
+    }
+
+    /**
+     * @Route("/feed/disable-xframe/")
+     */
+    public function disableXframeNotice()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $user = $entityManager->getRepository(User::class)->findOneBy(['id'=>$this->getUser()]);
+        $user->setHideXframeNotice(true);
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        echo 'Message disabled';
+        exit;
     }
 }

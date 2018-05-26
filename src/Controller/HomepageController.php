@@ -39,7 +39,7 @@ class HomepageController extends Controller
 
         $user = $entityManager->getRepository(User::class)->findOneBy(['id'=> $this->getUser()]);
 
-        $feedService->markAllViewed();
+        $feedService->markAllViewed($user);
 
         return $this->render('home/index.html.twig', [
             'bodyClass' => $bodyClass,

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\User;
 use App\Repository\FeedItemRepository;
 use App\Repository\FeedRepository;
 use App\Entity\Feed;
@@ -70,11 +71,12 @@ class FeedService
     }
 
     /**
+     * @param User $user
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function markAllViewed()
+    public function markAllViewed(User $user)
     {
-        $this->entityManager->getConnection()->update('feed_item', ['viewed' => 1], ['viewed'=>0]);
+        $this->entityManager->getConnection()->update('feed_item', ['viewed' => 1], ['viewed'=>0, 'user_id'=>$user->getId()]);
     }
 
     /**

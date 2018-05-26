@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -14,159 +13,124 @@ class Feed
 {
     use  TimestampableEntity;
 
+    const COLOR_BLACK = '#000';
+    const COLOR_DEFAULT = self::COLOR_BLACK;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * @var  integer
      */
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string")
+     * @var string
      */
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
+     * @var string
      */
-    protected $feedUrl;
+    protected $url;
 
     /**
-     * @ORM\Column(type="string", length=7)
+     * @ORM\Column(type="string")
+     * @var string
      */
-    protected $color;
+    protected $color = self::COLOR_DEFAULT;
 
     /**
-     * @ORM\Column(type="string", length=128, nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="feed", cascade={"persist", "remove"})
+     * @var ArrayCollection
      */
-    protected $feedIcon;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    protected $autoPin;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="feed", orphanRemoval=true, fetch="EAGER")
-     */
-    protected $items;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="feeds")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    protected $user;
+    protected $items = [];
 
     public function __construct()
     {
-        $this->items = new ArrayCollection();
+        $this->items = $items = new ArrayCollection;
     }
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    public function getFeedUrl(): ?string
+    /**
+     * @return string
+     */
+    public function getUrl()
     {
-        return $this->feedUrl;
+        return $this->url;
     }
 
-    public function setFeedUrl(string $feedUrl): self
+    /**
+     * @param string $url
+     */
+    public function setUrl(string $url)
     {
-        $this->feedUrl = $feedUrl;
-
-        return $this;
+        $this->url = $url;
     }
 
-    public function getColor(): ?string
+    /**
+     * @return string
+     */
+    public function getColor()
     {
         return $this->color;
     }
 
-    public function setColor(string $color): self
+    /**
+     * @param string $color
+     */
+    public function setColor(string $color)
     {
         $this->color = $color;
-
-        return $this;
-    }
-
-    public function getFeedIcon(): ?string
-    {
-        return $this->feedIcon;
-    }
-
-    public function setFeedIcon(?string $feedIcon): self
-    {
-        $this->feedIcon = $feedIcon;
-
-        return $this;
-    }
-
-    public function getAutoPin(): ?bool
-    {
-        return $this->autoPin;
-    }
-
-    public function setAutoPin(bool $autoPin): self
-    {
-        $this->autoPin = $autoPin;
-
-        return $this;
     }
 
     /**
-     * @return Collection|FeedItem[]
+     * @return ArrayCollection
      */
-    public function getItems(): Collection
+    public function getItems()
     {
         return $this->items;
     }
 
-    public function addItems(FeedItem $pinned): self
+    /**
+     * @param ArrayCollection $items
+     */
+    public function setItems(ArrayCollection $items)
     {
-        if (!$this->items->contains($pinned)) {
-            $this->items[] = $pinned;
-            $pinned->setFeed($this);
-        }
-
-        return $this;
-    }
-
-    public function removeItems(FeedItem $pinned): self
-    {
-        if ($this->items->contains($pinned)) {
-            $this->items->removeElement($pinned);
-            // set the owning side to null (unless already changed)
-            if ($pinned->getFeed() === $this) {
-                $pinned->setFeed(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
+        $this->items = $items;
     }
 }

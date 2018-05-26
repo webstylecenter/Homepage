@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ChecklistItem;
+use App\Entity\UserFeedItem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +18,12 @@ class ChecklistController extends Controller
     public function index()
     {
         $entityManager = $this->getDoctrine()->getManager();
+
+        /** @var UserFeedItem[] $userFeedItems */
+        foreach ($userFeedItems as $userFeedItem) {
+            $userFeedItem->getUserFeed()->setFeed();
+            $userFeedItem->getFeedItem()->getFeed();
+        }
 
         return $this->render('checklist/index.html.twig', [
             'bodyClass' => 'checklist',

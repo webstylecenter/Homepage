@@ -6,6 +6,7 @@
         "ext-iconv": "*",
         "cocur/slugify": "^3.1",
         "friendsofsymfony/user-bundle": "~2.0",
+        "fzaninotto/faker": "^1.7",
         "guzzlehttp/guzzle": "^6.3",
         "mobiledetect/mobiledetectlib": "^2.8",
         "sensio/framework-extra-bundle": "^5.1",
@@ -33,6 +34,7 @@
         "zendframework/zend-http": "^2.8"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.0",
         "symfony/browser-kit": "^4.0",
         "symfony/css-selector": "^4.0",
         "symfony/debug-pack": "*",

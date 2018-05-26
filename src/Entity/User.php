@@ -21,173 +21,161 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Feed", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\UserFeed", mappedBy="user", cascade={"persist", "remove"})
+     * @var UserFeed[]
      */
-    protected $feeds;
+    protected $userFeeds;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ChecklistItem", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ChecklistItem", mappedBy="user", cascade={"persist", "remove"})
+     * @var ChecklistItem[]
      */
     protected $checklistItems;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="user", cascade={"persist", "remove"})
+     * @var Note[]
      */
     protected $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FeedItem", mappedBy="user", orphanRemoval=true)
+     * @ORM\Column(type="boolean")
+     * @var boolean
      */
-    protected $feedItems;
+    protected $hideXFrameNotice = false;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string")
+     * @var string
      */
-    protected $hideXframeNotice = false;
+    protected $ipAddress;
+
+    /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    protected $userAgent;
 
     public function __construct()
     {
         parent::__construct();
-        $this->feeds = new ArrayCollection();
-        $this->checklistItems = new ArrayCollection();
-        $this->notes = new ArrayCollection();
-        $this->feedItems = new ArrayCollection();
-        // your own logic
+
+        $this->ipAddress = $_SERVER['X-Forwarded-For'] ?? $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
+        $this->userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
+        $this->userFeeds = new ArrayCollection;
+        $this->checklistItems = new ArrayCollection;
+        $this->notes = new ArrayCollection;
     }
 
     /**
-     * @return Collection|Feed[]
+     * @return ChecklistItem[]
      */
-    public function getFeeds(): Collection
-    {
-        return $this->feeds;
-    }
-
-    public function addFeed(Feed $feed): self
-    {
-        if (!$this->feeds->contains($feed)) {
-            $this->feeds[] = $feed;
-            $feed->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFeed(Feed $feed): self
-    {
-        if ($this->feeds->contains($feed)) {
-            $this->feeds->removeElement($feed);
-            // set the owning side to null (unless already changed)
-            if ($feed->getUser() === $this) {
-                $feed->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|ChecklistItem[]
-     */
-    public function getChecklistItems(): Collection
+    public function getChecklistItems()
     {
         return $this->checklistItems;
     }
 
-    public function addChecklistItem(ChecklistItem $checklistItem): self
+    /**
+     * @param ChecklistItem[] $checklistItems
+     */
+    public function setChecklistItems(array $checklistItems)
     {
-        if (!$this->checklistItems->contains($checklistItem)) {
-            $this->checklistItems[] = $checklistItem;
-            $checklistItem->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChecklistItem(ChecklistItem $checklistItem): self
-    {
-        if ($this->checklistItems->contains($checklistItem)) {
-            $this->checklistItems->removeElement($checklistItem);
-            // set the owning side to null (unless already changed)
-            if ($checklistItem->getUser() === $this) {
-                $checklistItem->setUser(null);
-            }
-        }
-
-        return $this;
+        $this->checklistItems = $checklistItems;
     }
 
     /**
-     * @return Collection|Note[]
+     * @return mixed
      */
-    public function getNotes(): Collection
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return UserFeed[]
+     */
+    public function getUserFeeds()
+    {
+        return $this->userFeeds;
+    }
+
+    /**
+     * @param UserFeed[] $userFeeds
+     */
+    public function setUserFeeds(array $userFeeds)
+    {
+        $this->userFeeds = $userFeeds;
+    }
+
+    /**
+     * @return Note[]
+     */
+    public function getNotes()
     {
         return $this->notes;
     }
 
-    public function addNote(Note $note): self
+    /**
+     * @param Note[] $notes
+     */
+    public function setNotes(array $notes)
     {
-        if (!$this->notes->contains($note)) {
-            $this->notes[] = $note;
-            $note->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNote(Note $note): self
-    {
-        if ($this->notes->contains($note)) {
-            $this->notes->removeElement($note);
-            // set the owning side to null (unless already changed)
-            if ($note->getUser() === $this) {
-                $note->setUser(null);
-            }
-        }
-
-        return $this;
+        $this->notes = $notes;
     }
 
     /**
-     * @return Collection|FeedItem[]
+     * @return bool
      */
-    public function getFeedItems(): Collection
+    public function isHideXFrameNotice()
     {
-        return $this->feedItems;
+        return $this->hideXFrameNotice;
     }
 
-    public function addFeedItem(FeedItem $feedItem): self
+    /**
+     * @param bool $hideXFrameNotice
+     */
+    public function setHideXFrameNotice(bool $hideXFrameNotice)
     {
-        if (!$this->feedItems->contains($feedItem)) {
-            $this->feedItems[] = $feedItem;
-            $feedItem->setUser($this);
-        }
-
-        return $this;
+        $this->hideXFrameNotice = $hideXFrameNotice;
     }
 
-    public function removeFeedItem(FeedItem $feedItem): self
+    /**
+     * @return string
+     */
+    public function getIpAddress()
     {
-        if ($this->feedItems->contains($feedItem)) {
-            $this->feedItems->removeElement($feedItem);
-            // set the owning side to null (unless already changed)
-            if ($feedItem->getUser() === $this) {
-                $feedItem->setUser(null);
-            }
-        }
-
-        return $this;
+        return $this->ipAddress;
     }
 
-    public function getHideXframeNotice(): ?bool
+    /**
+     * @param string $ipAddress
+     */
+    public function setIpAddress(string $ipAddress)
     {
-        return $this->hideXframeNotice;
+        $this->ipAddress = $ipAddress;
     }
 
-    public function setHideXframeNotice(bool $hideXframeNotice): self
+    /**
+     * @return string
+     */
+    public function getUserAgent()
     {
-        $this->hideXframeNotice = $hideXframeNotice;
+        return $this->userAgent;
+    }
 
-        return $this;
+    /**
+     * @param string $userAgent
+     */
+    public function setUserAgent(string $userAgent)
+    {
+        $this->userAgent = $userAgent;
     }
 }

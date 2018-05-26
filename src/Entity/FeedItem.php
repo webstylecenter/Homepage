@@ -20,145 +20,168 @@ class FeedItem
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string")
+     * @var string
      */
     protected $guid;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string")
+     * @var string
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
-    protected $description;
+    protected $description = null;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
+     * @var string
      */
     protected $url;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    protected $viewed;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items", fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Feed", inversedBy="items")
+     * @ORM\JoinColumn(name="feed_id", referencedColumnName="id", onDelete="CASCADE")
+     *
+     * @var Feed
      */
     protected $feed;
 
     /**
      * @ORM\Column(type="boolean")
+     * @var boolean
      */
-    protected $pinned;
+    protected $pinned = false;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="feedItems")
-     * @ORM\JoinColumn(nullable=false)
+     * @return mixed
      */
-    protected $user;
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
     {
-        return $this->title;
+        $this->id = $id;
     }
 
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): self
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-    
-    public function getViewed(): ?bool
-    {
-        return $this->viewed;
-    }
-
-    public function setViewed(bool $viewed): self
-    {
-        $this->viewed = $viewed;
-
-        return $this;
-    }
-
-    public function getFeed(): ?Feed
-    {
-        return $this->feed;
-    }
-
-    public function setFeed(?Feed $feed): self
-    {
-        $this->feed = $feed;
-
-        return $this;
-    }
-
-    public function getPinned(): ?bool
-    {
-        return $this->pinned;
-    }
-
-    public function setPinned(bool $pinned): self
-    {
-        $this->pinned = $pinned;
-
-        return $this;
-    }
-
-    public function getGuid(): ?string
+    /**
+     * @return string
+     */
+    public function getGuid()
     {
         return $this->guid;
     }
 
-    public function setGuid(string $guid): self
+    /**
+     * @param string $guid
+     */
+    public function setGuid(string $guid)
     {
         $this->guid = $guid;
-
-        return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return string
+     */
+    public function getTitle()
     {
-        return $this->user;
+        return $this->title;
     }
 
-    public function setUser(?User $user): self
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title)
     {
-        $this->user = $user;
+        $this->title = $title;
+    }
 
-        return $this;
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl(string $url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isViewed()
+    {
+        return $this->viewed;
+    }
+
+    /**
+     * @param bool $viewed
+     */
+    public function setViewed(bool $viewed)
+    {
+        $this->viewed = $viewed;
+    }
+
+    /**
+     * @return Feed
+     */
+    public function getFeed()
+    {
+        return $this->feed;
+    }
+
+    /**
+     * @param Feed $feed
+     */
+    public function setFeed(Feed $feed)
+    {
+        $this->feed = $feed;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPinned()
+    {
+        return $this->pinned;
+    }
+
+    /**
+     * @param bool $pinned
+     */
+    public function setPinned(bool $pinned)
+    {
+        $this->pinned = $pinned;
     }
 }

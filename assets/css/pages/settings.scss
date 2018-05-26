@@ -18,10 +18,37 @@
     left: 0;
   }
 
-  .container {
+  header {
+    background-image: url("/images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 20vh;
+    display: block;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    h1 {
+      position: relative;
+      left: 10%;
+      right: 10%;
+      top: 4vh;
+      font-size: 38pt;
+      color: white;
+    }
+  }
+
+  .settingsContainer {
     width:80%;
     margin:auto;
     padding: 20px;
+    position: fixed;
+    top: 20vh;
+    left: 10%;
+    right: 10%;
+    bottom: 0;
   }
 
   h1 {

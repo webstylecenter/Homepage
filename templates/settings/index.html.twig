@@ -7,9 +7,14 @@
         <div class="page--settings-background"></div>
         <div class="page--settings-background--overlay"></div>
 
-        <div class="container">
+        <header>
             <h1>Settings</h1>
+            <div class="weather">
+                {% include 'widgets/weather.html.twig' %}
+            </div>
+        </header>
 
+        <div class="settingsContainer">
             {% include 'settings/feeds.html.twig' %}
         </div>
 

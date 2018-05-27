@@ -41,14 +41,14 @@
   }
 
   .settingsContainer {
-    width:80%;
     margin:auto;
-    padding: 20px;
+    padding: 20px 10% 20px 10%;
     position: fixed;
     top: 20vh;
-    left: 10%;
-    right: 10%;
+    left: 0;
+    right: 0;
     bottom: 0;
+    overflow-y: auto;
   }
 
   h1 {

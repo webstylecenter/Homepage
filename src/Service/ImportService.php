@@ -118,7 +118,7 @@ class ImportService
         $feedItem = new FeedItem();
         $feedItem->setTitle($entry->getTitle());
         $feedItem->setGuid($entry->getId());
-        $feedItem->setDescription($content);
+        $feedItem->setDescription(strlen($content) > 250 ? substr($content,0,250)."..." : $content);
         $feedItem->setUrl($entry->getLink());
         $feedItem->setFeed($feed);
 

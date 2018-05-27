@@ -1,0 +1,27 @@
+{
+  "short_name": "Feednews.me",
+  "name": "Feednews.me",
+  "icons": [
+    {
+      "src": "images/launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "images/launcher-icon-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "images/launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#FFDAB3",
+  "display": "standalone",
+  "theme_color": "#eeeeee",
+  "lang": "en-US",
+  "dir": "ltr"
+}

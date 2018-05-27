@@ -64,12 +64,25 @@ class FeedService
         return $this->userFeedItemRepository->getWithFilter($feedListFilter);
     }
 
+    /**
+     * @param $url
+     * @return Feed|null
+     */
     public function findOrCreateFeedByUrl($url)
     {
         if ($feed = $this->feedRepository->findOneBy(['url' => $url])) {
             return $feed;
         }
         return new Feed();
+    }
+
+    /**
+     * @param $id
+     * @return UserFeedItem
+     */
+    public function findUserFeedItemUrl($id)
+    {
+        return $this->userFeedItemRepository->findOneBy(['id' => $id]);
     }
 
     /**

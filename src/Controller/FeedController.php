@@ -10,6 +10,7 @@ use App\Entity\User;
 use App\Entity\UserFeedItem;
 use App\Service\FeedService;
 use App\Service\MetaService;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -219,5 +220,17 @@ class FeedController extends Controller
     public function popupAction()
     {
         return $this->render('widgets/opened-in-popup.html.twig');
+    }
+
+    /**
+     * @Route("/share/{feedName}/{id}/")
+     * @param $feedname
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function openSharedFeedItem($feedname = null, $id)
+    {
+        $userFeedItem = $this->feedService->findUserFeedItemUrl($id);
+        return new RedirectResponse($userFeedItem->getFeedItem()->getUrl());
     }
 }

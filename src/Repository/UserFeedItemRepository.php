@@ -10,10 +10,10 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Feed|null find($id, $lockMode = null, $lockVersion = null)
- * @method Feed|null findOneBy(array $criteria, array $orderBy = null)
- * @method Feed[]    findAll()
- * @method Feed[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method UserFeedItem|null find($id, $lockMode = null, $lockVersion = null)
+ * @method UserFeedItem|null findOneBy(array $criteria, array $orderBy = null)
+ * @method UserFeedItem[]    findAll()
+ * @method UserFeedItem[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class UserFeedItemRepository extends ServiceEntityRepository
 {

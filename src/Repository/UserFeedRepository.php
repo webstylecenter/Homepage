@@ -28,4 +28,13 @@ class UserFeedRepository extends ServiceEntityRepository
     {
         return $this->findBy(['user' => $user]);
     }
+
+    /**
+     * @param UserFeed $userFeed
+     */
+    public function persist(UserFeed $userFeed)
+    {
+        $this->getEntityManager()->persist($userFeed);
+        $this->getEntityManager()->flush();
+    }
 }

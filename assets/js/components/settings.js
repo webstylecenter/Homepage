@@ -30,7 +30,7 @@ $(function () {
 
         let autoPin = $(this).parent().find("[name='autoPin']").prop('checked');
 
-        $.post("/settings/feeds/update/", {
+        $.post("/settings/feeds/add/", {
             url: url,
             color: color,
             icon: icon,

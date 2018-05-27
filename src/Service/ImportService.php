@@ -2,11 +2,14 @@
 
 namespace App\Service;
 
+use App\Entity\UserFeedItem;
 use App\Repository\FeedItemRepository;
 use App\Repository\FeedRepository;
 use App\Entity\Feed;
 use App\Entity\FeedItem;
 use App\Guzzle\GuzzleClient;
+use App\Repository\UserFeedItemRepository;
+use App\Repository\UserFeedRepository;
 use Zend\Feed\Reader\Entry\EntryInterface;
 use Zend\Feed\Reader\Reader;
 
@@ -23,13 +26,27 @@ class ImportService
     protected $feedItemRepository;
 
     /**
+     * @var UserFeedRepository
+     */
+    protected $userFeedRepository;
+
+    /**
+     * @var UserFeedItemRepository
+     */
+    protected $userFeedItemRepository;
+
+    /**
      * @param FeedRepository $feedRepository
      * @param FeedItemRepository $feedItemRepository
+     * @param UserFeedRepository $userFeedRepository
+     * @param UserFeedItemRepository $userFeedItemRepository
      */
-    public function __construct(FeedRepository $feedRepository, FeedItemRepository $feedItemRepository)
+    public function __construct(FeedRepository $feedRepository, FeedItemRepository $feedItemRepository, UserFeedRepository $userFeedRepository, UserFeedItemRepository $userFeedItemRepository)
     {
         $this->feedRepository = $feedRepository;
         $this->feedItemRepository = $feedItemRepository;
+        $this->userFeedRepository = $userFeedRepository;
+        $this->userFeedItemRepository = $userFeedItemRepository;
     }
 
     /**
@@ -83,6 +100,8 @@ class ImportService
     }
 
     /**
+     * Note: This will only add new feed-items to every user. If a user just subscribed, old items won't be added
+     *
      * @param EntryInterface $entry
      * @param Feed $feed
      * @return FeedItem|null
@@ -102,6 +121,23 @@ class ImportService
         $feedItem->setDescription($content);
         $feedItem->setUrl($entry->getLink());
         $feedItem->setFeed($feed);
+
+        //$users = $this->use->findOneBy(['id' => $feed->getId()]);
+        $userFeeds = $this->userFeedRepository->findBy(['feed'=> $feed]);
+
+        foreach ($userFeeds as $userFeed) {
+            $userFeedItem = new UserFeedItem();
+            $userFeedItem->setUserFeed($userFeed);
+            $userFeedItem->setUser($userFeed->getUser());
+            $userFeedItem->setPinned($userFeed->isAutoPin());
+            $userFeedItem->setFeedItem($feedItem);
+            $userFeedItem->setViewed(false);
+
+            $this->userFeedItemRepository->persist($userFeedItem);
+        }
+
         return $feedItem;
     }
+
+
 }

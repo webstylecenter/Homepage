@@ -28,7 +28,7 @@ class UserFeedItem
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\FeedItem")
+     * @ORM\ManyToOne(targetEntity="App\Entity\FeedItem", cascade={"persist"})
      * @ORM\JoinColumn(name="feed_item_id", referencedColumnName="id")
      *
      * @var FeedItem

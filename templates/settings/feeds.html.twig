@@ -8,25 +8,25 @@
         <input type="submit" value="Add" class="js-settings-add-feed" />
     </p>
 </div>
-{% if feeds is not empty %}
+{% if userFeeds is not empty %}
     <table>
         <tbody>
-        {% for feed in feeds %}
+        {% for feed in userFeeds %}
             {% set amount = feed.items|length %}
 
-            <tr data-feed-id="{{ feed.id }}" data-feed-name="{{ feed.name }}">
+            <tr data-feed-id="{{ feed.id }}" data-feed-name="{{ feed.feed.name }}">
                 <td class="feedColor">
                     <span style="background-color:{{ feed.color }};"></span>
                 </td>
                 <td class="feedName">
-                    {{ feed.name }}
-                    <span>{{ feed.feedurl }}</span>
+                    {{ feed.feed.name }}
+                    <span>{{ feed.feed.url }}</span>
                 </td>
                 <td class="feedIcon">
                     <input class="js-update-auto-pin" type="checkbox" value="1" {% if feed.autoPin %}checked="checked"{% endif %}/>
                 </td>
                 <td class="feedIcon">
-                    <span class="fa fa-{{ feed.feedIcon }}"></span>
+                    <span class="fa fa-{{ feed.icon }}"></span>
                 </td>
                 <td class="feedAmount">
                     {{ amount }}

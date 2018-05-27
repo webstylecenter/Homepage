@@ -9,6 +9,24 @@
 {% endif %}
 
 {% for item in userFeedItems %}
+    {% if item.userFeed.icon is not defined %}
+        {% set feedIcon = '' %}
+    {% else %}
+        {% set feedIcon = item.userFeed.icon %}
+    {% endif %}
+
+    {% if item.feedItem.feed.name is not defined %}
+        {% set feedName = '' %}
+    {% else %}
+        {% set feedName = item.feedItem.feed.name %}
+    {% endif %}
+
+    {% if item.userFeed.color is not defined %}
+        {% set feedColor = '#f0d714' %}
+    {% else %}
+        {% set feedColor = item.userFeed.color %}
+    {% endif %}
+
     {% if not item.viewed %}
         {% set hadNewItems = true %}
     {% endif %}
@@ -25,13 +43,13 @@
         {% set hadYesterdayBefore = true %}
     {% endif %}
 
-    <div class="feed-list-item js-action-feed-list-click js-action-feed-list-swipe {% if not item.viewed %}feed-list-item--state-new{% endif %} {% if item.pinned %}feed-list-item--state-pinned{% endif %} {% if item.userFeed.icon %}hasIcon{% endif %}"
-         data-url="{{ item.feedItem.url }}" data-share-id="{{ item.feedItem.feed.name|slugify }}/{{ item.id }}/" style="border-left-color:{{ item.userFeed.color }};">
+    <div class="feed-list-item js-action-feed-list-click js-action-feed-list-swipe {% if not item.viewed %}feed-list-item--state-new{% endif %} {% if item.pinned %}feed-list-item--state-pinned{% endif %} {% if feedIcon %}hasIcon{% endif %}"
+         data-url="{{ item.feedItem.url }}" data-share-id="{{ feedName|slugify }}/{{ item.id }}/" style="border-left-color:{{ feedColor }};">
         <div class="pin" data-pin-id="{{ item.id }}"><span class="fa fa-thumbtack"></span></div>
         <div class="pip"><span class="fa fa-window-restore"></span></div>
-        {% if item.userFeed.icon %}
-            <div class="feed-icon" style="background-color:{{ item.userFeed.color }}">
-                <span class="fa fa-{{ item.userFeed.icon }}"></span>
+        {% if feedIcon %}
+            <div class="feed-icon" style="background-color:{{ feedColor }}">
+                <span class="fa fa-{{ feedIcon }}"></span>
             </div>
         {% endif %}
         <p class="title ">{{ item.feedItem.title|striptags }}</p>

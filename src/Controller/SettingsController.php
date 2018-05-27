@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Feed;
-use App\Entity\FeedItem;
 use App\Entity\User;
 use App\Entity\UserFeed;
+use App\Repository\FeedItemRepository;
+use App\Repository\UserFeedItemRepository;
+use App\Repository\UserFeedRepository;
 use App\Service\FeedService;
+use App\Service\ImportService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,18 +19,80 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class SettingsController extends Controller
 {
     /**
+     * @var FeedService
+     */
+    protected $feedService;
+
+    /**
+     * @var ImportService
+     */
+    protected $importService;
+
+    /**
+     * @var UserFeedRepository
+     */
+    protected $userFeedRepository;
+
+    /**
+     * @var FeedItemRepository
+     */
+    protected $feedItemRepository;
+
+    /**
+     * @param FeedService $feedService
+     * @param ImportService $importService
+     * @param UserFeedRepository $userFeedRepository
+     * @param FeedItemRepository $feedItemRepository
+     */
+    public function __construct(FeedService $feedService, ImportService $importService, UserFeedRepository $userFeedRepository, FeedItemRepository $feedItemRepository)
+    {
+        $this->feedService = $feedService;
+        $this->importService = $importService;
+        $this->userFeedRepository  = $userFeedRepository;
+        $this->feedItemRepository = $feedItemRepository;
+    }
+
+    /**
      * @Route("/settings/")
      * @return Response
      */
     public function index()
     {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $feeds = $entityManager->getRepository(UserFeed::class)->findBy(['user' => $this->getUser()]);
+        $userFeeds = $this->feedService->getUserFeeds($this->getUser());
 
         return $this->render('settings/index.html.twig', [
             'bodyClass' => 'settings',
-            'feeds' => $feeds
+            'userFeeds' => $userFeeds
+        ]);
+    }
+
+    /**
+     * @Route("/settings/feeds/add/")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addAction(Request $request)
+    {
+        $feed = $this->feedService->findOrCreateFeedByUrl($request->get('url'));
+        $feed->setUrl($request->get('url'));
+        $feed->setName($this->importService->getFeedName($feed));
+        $feed->setColor($request->get('color'));
+
+        $this->feedService->persistFeed($feed);
+
+        $userFeed = new UserFeed();
+        $userFeed->setFeed($feed);
+        $userFeed->setUser($this->getUser());
+        $userFeed->setColor($request->get('color'));
+        $userFeed->setIcon($request->get('icon'));
+        $userFeed->setAutoPin(($request->get('autoPin') === "true"));
+
+        $this->feedService->persistUserFeed($userFeed);
+        $this->importService->read($feed);
+
+        return new JsonResponse([
+            'id' => $userFeed->getId(),
+            'status' => 'success'
         ]);
     }
 
@@ -36,38 +101,14 @@ class SettingsController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function addAction(Request $request, FeedService $feedService)
+    public function updateAction(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        if (strlen($request->get('id')) > 0) {
-            $feed = $entityManager->getRepository(Feed::class)->findOneBy(['id' => $request->get('id'), 'user' => $this->getUser()]);
-        } else {
-            $feed = new Feed();
-        }
-
-        $feed
-            ->setColor($request->get('color', $feed->getColor()))
-            ->setFeedIcon($request->get('icon', $feed->getFeedIcon()))
-            ->setAutoPin(!!$request->get('autoPin', $feed->getAutoPin()))
-            ->setFeedUrl($request->get('url', $feed->getFeedUrl()))
-            ->setUser($this->getUser());
-
-        if (strlen($request->get('id')) === 0) {
-            $feedName = $feedService->getFeedName($feed);
-            $feed->setName($feedName);
-        }
-
-        $entityManager->persist($feed);
-        $entityManager->flush();
-
-        foreach ($feedService->read($feed) as $feedItem) {
-            $entityManager->persist($feedItem);
-            $entityManager->flush();
-        }
+        $userFeed = $this->userFeedRepository->findOneBy(['id' => $request->get('id')]);
+        $userFeed->setAutoPin(($request->get('autoPin') === "on"));
+        $this->feedService->persistUserFeed($userFeed);
 
         return new JsonResponse([
-            'id' => $feed->getId(),
+            'id' => $userFeed->getId(),
             'status' => 'success'
         ]);
     }

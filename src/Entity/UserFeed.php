@@ -140,7 +140,7 @@ class UserFeed
      */
     public function getColor()
     {
-        return $this->color;
+        return $this->color ?: $this->feed->getColor();
     }
 
     /**

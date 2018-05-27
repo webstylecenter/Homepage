@@ -124,12 +124,15 @@ function saveNote($el) {
             $el.css('color', '#303030');
         }
     })
-        .done(function (data) {
+        .done(function (response) {
             $el.css('color', 'black');
+
+            console.log(response);
+            console.log('data-id', response.data.id);
 
             $('.note-selector-' + id).text(name);
             if (id.length === 0) {
-                $el.attr('data-id', data.data.id);
+                $el.attr('data-id', response.data.id);
             }
         })
         .fail(function () {

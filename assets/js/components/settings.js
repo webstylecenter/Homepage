@@ -27,17 +27,14 @@ $(function () {
         let url = $(this).parent().find("[name='url']").val();
         let color = $(this).parent().find("[name='color']").val();
         let icon = $(this).parent().find("[name='icon']").val();
-        let autoPin = 'off';
 
-        if ($(this).parent().find("[name='autoPin']").prop('checked')) {
-            autoPin = 'on';
-        }
+        let autoPin = $(this).parent().find("[name='autoPin']").prop('checked');
 
         $.post("/settings/feeds/update/", {
             url: url,
             color: color,
             icon: icon,
-            autoPin: autoPin
+            autoPin: !!autoPin
         })
             .done(function (data) {
                 if (data.status === 'success') {

@@ -38,4 +38,22 @@ class NoteRepository extends ServiceEntityRepository
     {
         return $this->findOneBy(['id' => $id, 'user' => $user]);
     }
+
+    /**
+     * @param Note $note
+     */
+    public function persist(Note $note)
+    {
+        $this->getEntityManager()->persist($note);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param Note $note
+     */
+    public function remove(Note $note)
+    {
+        $this->getEntityManager()->remove($note);
+        $this->getEntityManager()->flush();
+    }
 }

@@ -49,7 +49,7 @@ class SettingsController extends Controller
         $feed
             ->setColor($request->get('color', $feed->getColor()))
             ->setFeedIcon($request->get('icon', $feed->getFeedIcon()))
-            ->setAutoPin(($request->get('autoPin', $feed->getAutoPin()) === 'on'))
+            ->setAutoPin(!!$request->get('autoPin', $feed->getAutoPin()))
             ->setFeedUrl($request->get('url', $feed->getFeedUrl()))
             ->setUser($this->getUser());
 

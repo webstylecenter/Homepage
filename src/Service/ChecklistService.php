@@ -31,4 +31,15 @@ class ChecklistService
             ->checklistItemRepository
             ->getUncheckedItemsForUser($user);
     }
+
+    /**
+     * @param User $user
+     * @return ChecklistItem[]
+     */
+    public function getCheckedItemsForUser(User $user)
+    {
+        return $this
+            ->checklistItemRepository
+            ->getCheckedItemsForUser($user);
+    }
 }

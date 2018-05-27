@@ -3,7 +3,7 @@
     <p>
         <input type="text" name="url" value="" placeholder="Insert RSS feed url" /><br />
         <input type="text" name="icon" value="" placeholder="FontAwesome icon (optional)" /><br />
-        <input type="checkbox" name="autoPin" value="on" id="autoPin"/><label for="autoPin">Automaticly pin new items</label><br />
+        <input type="checkbox" name="autoPin" value="1" id="autoPin"/><label for="autoPin">Automaticly pin new items</label><br />
         <input type="text" name="color" value="#000" placeholder="Insert RGB without the #" id="spectrum" /><br />
         <input type="submit" value="Add" class="js-settings-add-feed" />
     </p>
@@ -23,7 +23,7 @@
                     <span>{{ feed.feedurl }}</span>
                 </td>
                 <td class="feedIcon">
-                    <input class="js-update-auto-pin" type="checkbox" value="on" {% if feed.autoPin %}checked="checked"{% endif %}/>
+                    <input class="js-update-auto-pin" type="checkbox" value="1" {% if feed.autoPin %}checked="checked"{% endif %}/>
                 </td>
                 <td class="feedIcon">
                     <span class="fa fa-{{ feed.feedIcon }}"></span>

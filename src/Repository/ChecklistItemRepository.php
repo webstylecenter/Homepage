@@ -26,6 +26,15 @@ class ChecklistItemRepository extends ServiceEntityRepository
      */
     public function getUncheckedItemsForUser(User $user)
     {
-        return $this->findBy(['checked' => false, 'user' => $user]);
+        return $this->findBy(['checked' => false, 'user' => $user], ['updatedAt'=> 'DESC']);
+    }
+
+    /**
+     * @param User $user
+     * @return ChecklistItem[]
+     */
+    public function getCheckedItemsForUser(User $user)
+    {
+        return $this->findBy(['checked' => true, 'user' => $user], ['updatedAt'=> 'DESC'], 50);
     }
 }

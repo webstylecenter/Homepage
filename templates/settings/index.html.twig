@@ -1,22 +1,20 @@
-{% extends "base.html.twig" %}
+{% extends "multi-tab-view.html.twig" %}
 
 {% block title %}{{ parent() }} - Settings{% endblock %}
+{% block headerTitle %}Settings{% endblock %}
 
-{% block body %}
+{% block tabs %}
+    <span class="js-homepage-showpage active" data-page="feeds">Feeds</span>
+    {% if isAdmin %}<span class="js-homepage-showpage" data-page="admin">Admin</span>{% endif %}
+{% endblock %}
+
+{% block content %}
     <div class="page--settings">
-        <div class="page--settings-background"></div>
-        <div class="page--settings-background--overlay"></div>
-
-        <header>
-            <h1>Settings</h1>
-            <div class="weather">
-                {% include 'widgets/weather.html.twig' %}
-            </div>
-        </header>
-
-        <div class="settingsContainer">
+        <div class="view active-view feeds">
             {% include 'settings/feeds.html.twig' %}
         </div>
-
+        <div class="view admin">
+            {% include 'settings/admin.html.twig' %}
+        </div>
     </div>
 {% endblock %}

@@ -1,44 +1,4 @@
 .page--settings {
-  &-background {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: #e5e5e5;
-    z-index: -2;
-  }
-
-  &-background--overlay {
-    z-index: -1;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
-  header {
-    background-image: url("/images/background.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 20vh;
-    display: block;
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-
-    h1 {
-      position: relative;
-      left: 10%;
-      right: 10%;
-      top: 4vh;
-      font-size: 38pt;
-      color: white;
-    }
-  }
 
   .settingsContainer {
     margin:auto;
@@ -58,7 +18,7 @@
   }
 
   .form {
-    background-color: white;
+    border: 1px solid $blue;
     border-radius: 15px;
     padding: 10px;
     width: 350px;
@@ -66,7 +26,7 @@
     margin-bottom: 50px;
 
     h1 {
-      color: black;
+      color: $blue;
       font-weight: lighter;
       margin: 10px 0 0 0;
       border: 0;
@@ -102,30 +62,22 @@
     width: 100%;
     margin-bottom: 50px;
 
-    tr:first-child {
-      td:first-child {
-        border-top-left-radius: 15px;
-      }
-      td:last-child {
-        border-top-right-radius: 15px;
-      }
-    }
-
-    tr:last-child {
-      td:first-child {
-        border-bottom-left-radius: 15px;
-      }
-      td:last-child {
-        border-bottom-right-radius: 15px;
-      }
-    }
-
     td {
       margin: 0;
       padding: 5px 10px;
     }
 
     tr:nth-child(even) {
+
+      td:first-child {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+      }
+      td:last-child {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+
       background-color: rgba(215, 215, 215, 0.8);
     }
 
@@ -154,6 +106,8 @@
 
     .feedName {
       width: 78%;
+      font-size: 12pt;
+      padding: 8px;
 
       span {
         display: block;
@@ -185,5 +139,13 @@
     }
   }
 
+  .admin {
+    table {
+      th {
+        text-align: left;
+        padding: 0 10px;
+      }
+    }
+  }
 
 }

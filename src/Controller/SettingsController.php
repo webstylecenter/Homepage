@@ -10,6 +10,7 @@ use App\Repository\UserFeedItemRepository;
 use App\Repository\UserFeedRepository;
 use App\Service\FeedService;
 use App\Service\ImportService;
+use App\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,17 +40,23 @@ class SettingsController extends Controller
     protected $feedItemRepository;
 
     /**
+     * @var UserService
+     */
+    protected $userService;
+
+    /**
      * @param FeedService $feedService
      * @param ImportService $importService
      * @param UserFeedRepository $userFeedRepository
      * @param FeedItemRepository $feedItemRepository
      */
-    public function __construct(FeedService $feedService, ImportService $importService, UserFeedRepository $userFeedRepository, FeedItemRepository $feedItemRepository)
+    public function __construct(FeedService $feedService, ImportService $importService, UserFeedRepository $userFeedRepository, FeedItemRepository $feedItemRepository, UserService $userService)
     {
         $this->feedService = $feedService;
         $this->importService = $importService;
         $this->userFeedRepository  = $userFeedRepository;
         $this->feedItemRepository = $feedItemRepository;
+        $this->userService = $userService;
     }
 
     /**
@@ -59,10 +66,12 @@ class SettingsController extends Controller
     public function index()
     {
         $userFeeds = $this->feedService->getUserFeeds($this->getUser());
+        $users = $this->userService->getAllUsers();
 
         return $this->render('settings/index.html.twig', [
             'bodyClass' => 'settings',
-            'userFeeds' => $userFeeds
+            'userFeeds' => $userFeeds,
+            'users' => $users
         ]);
     }
 

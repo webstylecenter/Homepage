@@ -1,0 +1,24 @@
+{% if isAdmin %}
+<h1>Number of users: {{ users|length }}</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Last Login</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.lastLogin|date }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}

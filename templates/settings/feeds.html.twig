@@ -1,10 +1,12 @@
+{% set values = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']%}
+
 <div class="form">
     <h1>Add RSS Feed</h1>
     <p>
         <input type="text" name="url" value="" placeholder="Insert RSS feed url" /><br />
         <input type="text" name="icon" value="" placeholder="FontAwesome icon (optional)" /><br />
         <input type="checkbox" name="autoPin" value="1" id="autoPin"/><label for="autoPin">Automaticly pin new items</label><br />
-        <input type="text" name="color" value="#000" placeholder="Insert RGB without the #" id="spectrum" /><br />
+        <input type="text" name="color" value="#{{random(values)~ random(values)~ random(values)~ random(values)~ random(values)~ random(values)  }}" placeholder="Insert RGB without the #" id="spectrum" /><br />
         <input type="submit" value="Add" class="js-settings-add-feed" />
     </p>
 </div>
@@ -20,7 +22,6 @@
                 </td>
                 <td class="feedName">
                     {{ feed.feed.name }}
-                    <span>{{ feed.feed.url }}</span>
                 </td>
                 <td class="feedIcon">
                     <input class="js-update-auto-pin" type="checkbox" value="1" {% if feed.autoPin %}checked="checked"{% endif %}/>

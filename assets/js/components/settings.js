@@ -18,7 +18,7 @@ $(function () {
     });
 
     $("#spectrum").spectrum({
-        color: "#000",
+        color: $("#spectrum").val(),
         allowEmpty: false,
         preferredFormat: "hex"
     });

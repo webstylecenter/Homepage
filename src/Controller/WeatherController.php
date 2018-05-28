@@ -19,6 +19,7 @@ class WeatherController extends Controller
     public function index($type, WeatherService $weatherService)
     {
         return $this->render('weather/' . $type . '.html.twig', [
+            'bodyClass' => 'WeatherMobilePage',
             'forecast' => $weatherService->getForecastList()
         ]);
     }

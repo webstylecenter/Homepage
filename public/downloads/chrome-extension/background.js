@@ -4,20 +4,14 @@ chrome.browserAction.onClicked.addListener(function(){
     chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
         var url = tabs[0].url;
 
-        console.log(url);
-
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'https://feednews.me/chrome/import/', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-
-
-        xhr.onreadystatechange = function (data) { console.log(data);
+        xhr.onreadystatechange = function (data) {
             if (xhr.readyState !== XMLHttpRequest.DONE) {
                 return;
             }
-
-            console.log(this.responseText);
 
             var response = JSON.parse(this.responseText);
             var title = response.status === 'success' ? response.data.title : 'Error occurred';

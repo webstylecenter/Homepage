@@ -92,7 +92,8 @@ class FeedController extends Controller
      */
     public function addFeedItemFromExtensionAction(Request $request)
     {
-        $metaData = $this->metaService->getByUrl($request['url']);
+        //$metaData = $this->metaService->getByUrl($request['url']);
+        $metaData = $this->metaService->getByUrl('https://www.joelonsoftware.com/2001/12/11/back-to-basics/');
 
         if (!$metaData) {
             return new JsonResponse([

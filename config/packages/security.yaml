@@ -26,5 +26,6 @@ security:
         - { path: ^/screensaver/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/weather/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/share/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/chrome/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/droplist/*, role: ROLE_ADMIN }
         - { path: ^/, role: ROLE_USER }

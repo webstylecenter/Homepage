@@ -9,15 +9,7 @@
   {
     "scripts": ["background.js"]
   },
-  "permissions": [
-    "tabs",
-    "notifications",
-    "https://feednews.me/chrome/import/",
-    "webRequest",
-    "webRequestBlocking",
-    "debugger",
-    "<all_urls>"
-  ],
+  "permissions": ["tabs","notifications", "https://feednews.me/chrome/import/"],
   "web_accessible_resources": [
     "feednews.png"
   ],

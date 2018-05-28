@@ -102,7 +102,7 @@ class FeedItem
      */
     public function setTitle(string $title)
     {
-        $this->title = $title;
+        $this->title = strlen($title) > 250 ? substr($title,0,250)."..." : $title;;
     }
 
     /**
@@ -118,7 +118,7 @@ class FeedItem
      */
     public function setDescription(string $description)
     {
-        $this->description = $description;
+        $this->description = strlen($description) > 250 ? substr($description,0,250)."..." : $description;
     }
 
     /**

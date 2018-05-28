@@ -86,6 +86,45 @@ class FeedController extends Controller
     }
 
     /**
+     * @Route("/chrome/import/")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addFeedItemFromExtensionAction(Request $request)
+    {
+        $metaData = $this->metaService->getByUrl($request['url']);
+
+        if (!$metaData) {
+            return new JsonResponse([
+                'status' => 'fail',
+                'message' => 'No metadata found for url "' . $request->get('url') . '"'
+            ]);
+        }
+
+        $feedItem = new FeedItem();
+        $feedItem->setGuid(intval(time()));
+        $feedItem->setTitle($metaData->getTitle());
+        $feedItem->setDescription($metaData->getMetaDescription());
+        $feedItem->setUrl($metaData->getUrl());
+
+        $userFeedItem = new UserFeedItem();
+        $userFeedItem->setFeedItem($feedItem);
+        $userFeedItem->setUser($this->getUser());
+        $userFeedItem->setPinned(true);
+
+        $this->feedService->persistUserFeedItem($userFeedItem);
+
+        return new JsonResponse([
+            'status' => 'success',
+            'data' => [
+                'title' => $metaData->getTitle(),
+                'description' => $metaData->getMetaDescription(),
+                'url' => $metaData->getUrl(),
+            ]
+        ]);
+    }
+
+    /**
      * @Route("/meta/")
      * @param Request $request
      * @return JsonResponse

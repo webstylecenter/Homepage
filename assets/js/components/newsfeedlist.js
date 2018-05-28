@@ -5,7 +5,9 @@ $(function () {
         nextSelector: 'a.jscroll-next:last',
         contentSelector: '.feed-list-item',
         callback: function () {
-            $('.jscroll-added:last-of-type .js-action-feed-list-swipe').hammer().on("swiperight", function () {
+            //var mc = new Hammer($('.jscroll-added:last-of-type .js-action-feed-list-swipe'));
+            var mc = new Hammer(this);
+            mc.on("swiperight", function () {
                 $(this).find('.pin').trigger('click');
             });
         }

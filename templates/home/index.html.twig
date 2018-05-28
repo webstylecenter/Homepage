@@ -41,7 +41,7 @@
             <span class="action-user hide-if-mobile">
                 {{ app.user.username }}
             </span>
-            {% if not app.request.server.get("DROP_LOCATION") == null  %}
+            {% if not app.request.server.get("DROP_LOCATION") == null and isAdmin  %}
                 <div style="display: none;" class="screenshot-list js-screenshot-list" data-target="/droplist/"></div>
             {% endif %}
         </div>
@@ -86,7 +86,7 @@
     <footer class="footer--bar hide-if-tablet hide-if-desktop">
         <span data-modal-target=".js-form-feed" class="js-modal-trigger fa fa-file fa-x4"></span>
         <span data-url="/checklist/" class="js-open-url fa fa-check fa-x4"></span>
-        {% if not app.request.server.get("DROP_LOCATION") == null  %}
+        {% if not app.request.server.get("DROP_LOCATION") == null and isAdmin  %}
         <span class="fa fa-inbox js-open-url" data-url="/droplist/15"></span>
         {% endif %}
         <span data-modal-target=".js-mobile-search-button" class="js-visbility-toggle fa fa-search-plus fa-x4 hide-if-desktop hide-if-tablet" data-target=".mobile-search"></span>

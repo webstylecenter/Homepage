@@ -27,11 +27,13 @@ $(function () {
         let url = $(this).parent().find("[name='url']").val();
         let color = $(this).parent().find("[name='color']").val();
         let icon = $(this).parent().find("[name='icon']").val();
+        let website = $(this).parent().find("[name='website']").val();
 
         let autoPin = $(this).parent().find("[name='autoPin']").prop('checked');
 
         $.post("/settings/feeds/add/", {
             url: url,
+            website: website,
             color: color,
             icon: icon,
             autoPin: !!autoPin

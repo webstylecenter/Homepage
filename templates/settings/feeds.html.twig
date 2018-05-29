@@ -4,12 +4,16 @@
     <h1>Add RSS Feed</h1>
     <p>
         <input type="text" name="url" value="" placeholder="Insert RSS feed url" /><br />
+        or
+        <input type="text" name="website" value="" placeholder="Insert website url" /><br />
+
         <input type="text" name="icon" value="" placeholder="FontAwesome icon (optional)" /><br />
         <input type="checkbox" name="autoPin" value="1" id="autoPin"/><label for="autoPin">Automaticly pin new items</label><br />
         <input type="text" name="color" value="#{{random(values)~ random(values)~ random(values)~ random(values)~ random(values)~ random(values)  }}" placeholder="Insert RGB without the #" id="spectrum" /><br />
         <input type="submit" value="Add" class="js-settings-add-feed" />
     </p>
 </div>
+
 {% if userFeeds is not empty %}
     <table>
         <tbody>

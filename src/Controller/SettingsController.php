@@ -82,7 +82,16 @@ class SettingsController extends Controller
      */
     public function addAction(Request $request)
     {
-        $feed = $this->feedService->findOrCreateFeedByUrl($request->get('url'));
+        if (
+            strlen($request->get('url')) == 0
+            && strlen($request->get('website')) > 0
+        ) {
+            $url = $this->importService->findRSSFeed($request->get('website'));
+        } else {
+            $url = $request->get('url');
+        }
+
+        $feed = $this->feedService->findOrCreateFeedByUrl($url);
         $feed->setUrl($request->get('url'));
         $feed->setName($this->importService->getFeedName($feed));
         $feed->setColor($request->get('color'));

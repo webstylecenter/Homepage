@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Feed;
 use App\Entity\FeedItem;
 use App\Entity\FeedListFilter;
 use App\Entity\Meta;
-use App\Entity\User;
 use App\Entity\UserFeedItem;
 use App\Service\FeedService;
 use App\Service\MetaService;

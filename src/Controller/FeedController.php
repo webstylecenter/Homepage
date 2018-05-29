@@ -99,18 +99,26 @@ class FeedController extends Controller
             ]);
         }
 
-        $feedItem = new FeedItem();
-        $feedItem->setGuid(intval(time()));
-        $feedItem->setTitle($metaData->getTitle());
-        $feedItem->setDescription($metaData->getMetaDescription());
-        $feedItem->setUrl($metaData->getUrl());
+        try {
+            $feedItem = new FeedItem();
+            $feedItem->setGuid(intval(time()));
+            $feedItem->setTitle($metaData->getTitle());
+            $feedItem->setDescription((strlen($metaData->getMetaDescription()) > 0 ? $metaData->getMetaDescription() : ''));
+            $feedItem->setUrl($metaData->getUrl());
 
-        $userFeedItem = new UserFeedItem();
-        $userFeedItem->setFeedItem($feedItem);
-        $userFeedItem->setUser($this->getUser());
-        $userFeedItem->setPinned(true);
+            $userFeedItem = new UserFeedItem();
+            $userFeedItem->setFeedItem($feedItem);
+            $userFeedItem->setUser($this->getUser());
+            $userFeedItem->setPinned(true);
 
-        $this->feedService->persistUserFeedItem($userFeedItem);
+            $this->feedService->persistUserFeedItem($userFeedItem);
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => $exception
+            ]);
+        }
+
 
         return new JsonResponse([
             'status' => 'success',

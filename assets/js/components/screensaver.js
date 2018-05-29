@@ -71,7 +71,7 @@ function showNextNewsItem() {
     $('.screensaver--newsticker-source').html(newsItems[currentNewsItemKey][0])
         .attr('class', 'screensaver--newsticker-source')
         .fadeToggle('slow')
-        .css('backgroundColor', '#' + newsItems[currentNewsItemKey][3]);
+        .css('backgroundColor', newsItems[currentNewsItemKey][3]);
 
     $('.screensaver--newsticker-title').html(newsItems[currentNewsItemKey][1] + '<span>' + newsItems[currentNewsItemKey][2] + '</span>').fadeToggle('slow');
 }

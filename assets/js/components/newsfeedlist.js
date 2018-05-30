@@ -106,8 +106,9 @@ $(function () {
 });
 
 global.requestNewFeedItems = function () {
-    $.getJSON('/feed/refresh/', function (data) {
-        $('.feed-list').prepend(data.html);
+    $.getJSON('/feed/refresh/', function (html) {
+        $('.feed-list').prepend(html);
+        $('.noFeedItems').html(html).addClass('feed-list').removeClass('noFeedItems');
         $('.js-form-feed').find("input[type=text], textarea").val("");
     });
 };

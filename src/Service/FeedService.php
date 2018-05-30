@@ -95,6 +95,14 @@ class FeedService
     }
 
     /**
+     * @return Feed[]
+     */
+    public function getFeeds()
+    {
+        return $this->feedRepository->findBy([], ['name' => 'ASC']);
+    }
+
+    /**
      * @param Feed $feed
      */
     public function persistFeed(Feed $feed)

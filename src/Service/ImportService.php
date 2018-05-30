@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\UserFeed;
 use App\Entity\UserFeedItem;
 use App\Repository\FeedItemRepository;
 use App\Repository\FeedRepository;
@@ -139,12 +140,34 @@ class ImportService
         return $feedItem;
     }
 
+    public function addOldItems(Feed $feed, UserFeed $userFeed)
+    {
+        $feedItems = $this->feedItemRepository->findBy(['feed' => $feed], ['createdAt' => 'DESC'], 25);
+
+        foreach ($feedItems as $feedItem) {
+            $userFeedItem = new UserFeedItem();
+            $userFeedItem->setUserFeed($userFeed);
+            $userFeedItem->setUser($userFeed->getUser());
+            $userFeedItem->setPinned($userFeed->isAutoPin());
+            $userFeedItem->setFeedItem($feedItem);
+            $userFeedItem->setViewed(false);
+
+            $this->userFeedItemRepository->persist($userFeedItem);
+        }
+    }
+
     /**
      * @param $url
      * @return bool|string
      */
     public function findRSSFeed($url)
     {
+        if (strpos($url, 'youtube.com/user/')) {
+            return 'https://www.youtube.com/feeds/videos.xml?user=' . str_replace(['https', 'http', '://', 'www.', 'youtube.com/user/'], '', $url);
+        } elseif (strpos($url, 'youtube.com/channel/')) {
+            return 'https://www.youtube.com/feeds/videos.xml?channel_id=' . str_replace(['https', 'http', '://', 'www.', 'youtube.com/channel/'], '', $url);
+        }
+
         $html = file_get_contents($url);
         preg_match_all('/<link\s+(.*?)\s*\/?>/si', $html, $matches);
         $links = $matches[1];

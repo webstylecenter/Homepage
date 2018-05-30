@@ -67,11 +67,13 @@ class SettingsController extends Controller
     {
         $userFeeds = $this->feedService->getUserFeeds($this->getUser());
         $users = $this->userService->getAllUsers();
+        $feeds = $this->feedService->getFeeds();
 
         return $this->render('settings/index.html.twig', [
             'bodyClass' => 'settings',
             'userFeeds' => $userFeeds,
-            'users' => $users
+            'users' => $users,
+            'feeds' => $feeds
         ]);
     }
 
@@ -106,7 +108,7 @@ class SettingsController extends Controller
         }
 
         $feed = $this->feedService->findOrCreateFeedByUrl($url);
-        $feed->setUrl($request->get('url'));
+        $feed->setUrl($url);
         $feed->setColor($request->get('color'));
 
         try {
@@ -120,6 +122,13 @@ class SettingsController extends Controller
 
         $this->feedService->persistFeed($feed);
 
+        if ($this->userFeedRepository->findOneBy(['user'=> $this->getUser(), 'feed'=> $feed])) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'This feed is already added to your account. Please refresh the browser if you\'re not seeing the feed. It might take some time before items show up, depending on feed updates.'
+            ]);
+        }
+
         $userFeed = new UserFeed();
         $userFeed->setFeed($feed);
         $userFeed->setUser($this->getUser());
@@ -128,6 +137,8 @@ class SettingsController extends Controller
         $userFeed->setAutoPin(($request->get('autoPin') === "true"));
 
         $this->feedService->persistUserFeed($userFeed);
+
+        $this->importService->addOldItems($feed, $userFeed);
         $this->importService->read($feed);
 
         return new JsonResponse([

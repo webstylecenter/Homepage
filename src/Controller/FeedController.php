@@ -171,19 +171,15 @@ class FeedController extends Controller
 
     /**
      * @Route("/feed/refresh/")
-     * @return JsonResponse
+     * @return Response
      */
     public function refreshAction()
     {
-        // $entityManager->getRepository(FeedItem::class)->findBy(['viewed' => false, 'user' => $this->getUser()], ['createdAt' => 'DESC'], 50)
-
-        return new JsonResponse([
-            'html' => $this->render('home/newsfeed.html.twig', [
-                'userFeedItems' => $this->feedService->getUserFeedItemsWithFilter((new FeedListFilter())
-                    ->setUser($this->getUser())
-                    ->setNewOnly(true)
-                ),
-            ]),
+        return $this->render('home/newsfeed.html.twig', [
+            'userFeedItems' => $this->feedService->getUserFeedItemsWithFilter((new FeedListFilter())
+                ->setUser($this->getUser())
+                ->setNewOnly(true)
+            ),
         ]);
     }
 

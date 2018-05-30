@@ -126,10 +126,6 @@ function saveNote($el) {
     })
         .done(function (response) {
             $el.css('color', 'black');
-
-            console.log(response);
-            console.log('data-id', response.data.id);
-
             $('.note-selector-' + id).text(name);
             if (id.length === 0) {
                 $el.attr('data-id', response.data.id);

@@ -49,7 +49,7 @@ class UserFeedFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= 25; $i++) {
             $userFeedItem = new UserFeedItem;
             $userFeedItem->setPinned(rand(1, 9) % 9 === 0);
-            $userFeedItem->setViewed(rand(1, 25) % 3);
+            $userFeedItem->setViewed((rand(1, 25) % 3));
             $userFeedItem->setUser($userFeed->getUser());
             $userFeedItem->setUserFeed($userFeed);
             $userFeedItem->setFeedItem($this->getReference($reference . '_' . $i));

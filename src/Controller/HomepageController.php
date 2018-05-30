@@ -39,11 +39,10 @@ class HomepageController extends Controller
 
     /**
      * @Route("/")
-     * @param Request $request
      * @return Response
      * @throws \Exception
      */
-    public function index(Request $request)
+    public function index()
     {
         $userFeedItems = $this->feedService->getUserFeedItemsWithFilter((new FeedListFilter())
             ->setUser($this->getUser())

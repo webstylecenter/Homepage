@@ -237,7 +237,7 @@ class FeedController extends Controller
     public function overviewAction()
     {
         return $this->render('widgets/feed-overview.html.twig', [
-            'userFeeds' => $this->feedService->getAllUserFeedsForUser($this->getUser())
+            'userFeeds' => $this->feedService->getUserFeeds($this->getUser())
         ]);
     }
 

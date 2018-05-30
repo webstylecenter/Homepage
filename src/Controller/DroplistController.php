@@ -25,7 +25,7 @@ class DroplistController extends Controller
 
     /**
      * @Route("/droplist/{limit}")
-     * @param null $limit
+     * @param null|$limit
      * @return Response
      */
     public function limitedIndex($limit = null)

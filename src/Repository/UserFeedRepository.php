@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\UserFeed;
+use App\Entity\UserFeedItem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -35,6 +36,15 @@ class UserFeedRepository extends ServiceEntityRepository
     public function persist(UserFeed $userFeed)
     {
         $this->getEntityManager()->persist($userFeed);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param UserFeed $userFeed
+     */
+    public function remove(UserFeed $userFeed)
+    {
+        $this->getEntityManager()->remove($userFeed);
         $this->getEntityManager()->flush();
     }
 }

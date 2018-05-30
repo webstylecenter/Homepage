@@ -33,7 +33,7 @@ class UserFeed
     /**
      * @var Feed
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Feed")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Feed", cascade={"persist"})
      * @ORM\JoinColumn(name="feed_id", referencedColumnName="id")
      */
     protected $feed;

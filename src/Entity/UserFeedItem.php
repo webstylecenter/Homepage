@@ -37,7 +37,7 @@ class UserFeedItem
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\UserFeed", inversedBy="items")
-     * @ORM\JoinColumn(name="user_feed_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     * @ORM\JoinColumn(name="user_feed_id", referencedColumnName="id", nullable=true)
      *
      * @var UserFeed
      */

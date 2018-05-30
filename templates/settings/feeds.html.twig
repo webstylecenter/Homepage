@@ -26,6 +26,7 @@
                 </td>
                 <td class="feedName">
                     {{ feed.feed.name }}
+                    <span style="display: none;">{{ feed.feed.url }}</span>
                 </td>
                 <td class="feedIcon">
                     <input class="js-update-auto-pin" type="checkbox" value="1" {% if feed.autoPin %}checked="checked"{% endif %}/>

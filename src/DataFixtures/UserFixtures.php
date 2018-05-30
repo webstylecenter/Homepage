@@ -39,6 +39,15 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
         $this->userManager->updateUser($user);
         $this->setReference('user_1', $user);
+
+        $testUser = $this->userManager->createUser();
+        $testUser->setUsername('test');
+        $testUser->setEmail('test@petervdam.nl');
+        $testUser->setPlainPassword('test');
+        $testUser->setEnabled(true);
+
+        $this->userManager->updateUser($testUser);
+        $this->setReference('user_2', $testUser);
         $manager->flush();
     }
 

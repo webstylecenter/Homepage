@@ -138,18 +138,16 @@ class SettingsController extends Controller
      */
     public function removeAction(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $feed = $entityManager->getRepository(Feed::class)->findBy(['id' => $request->get('feedId'), 'user' => $this->getUser()]);
+        $userFeed = $this->userFeedRepository->findOneBy(['id' => $request->get('feedId')]);
 
-        if (!$feed) {
+        if (!$userFeed) {
             return new JsonResponse([
-                'message' => 'Feed not found!',
-                'status' => 'fail'
+                'status' => 'fail',
+                'message' => 'Feed not found'
             ]);
         }
 
-        $entityManager->remove($feed);
-        $entityManager->flush();
+        $this->feedService->removeUserFeed($userFeed);
 
         return new JsonResponse([
             'status' => 'success'

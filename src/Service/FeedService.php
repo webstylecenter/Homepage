@@ -109,4 +109,17 @@ class FeedService
     {
         return $this->userFeedRepository->persist($userFeed);
     }
+
+    /**
+     * @param UserFeed $userFeed
+     */
+    public function removeUserFeed(UserFeed $userFeed)
+    {
+        $this->userFeedRepository->remove($userFeed);
+
+        $users = $this->userFeedRepository->findBy(['feed' => $userFeed->getFeed()]);
+        if (count($users) === 0) {
+            $this->feedRepository->remove($userFeed->getFeed());
+        }
+    }
 }

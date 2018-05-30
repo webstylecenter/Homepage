@@ -35,10 +35,15 @@ class UserController extends Controller
             ]);
         }
 
-        $user = $this->validateUser($request->get('username'), $request->get('password'));
-        $this->signInUser($user, $request);
-
-        return new RedirectResponse('/');
+        if ($user = $this->validateUser($request->get('username'), $request->get('password'))) {
+            $this->signInUser($user, $request);
+            return new RedirectResponse('/');
+        } else {
+            return $this->render('user/login.html.twig', [
+                'bodyClass' => 'error403',
+                'error' => 'User not found!'
+            ]);
+        }
     }
 
     /**
@@ -93,7 +98,7 @@ class UserController extends Controller
     /**
      * @param $username
      * @param $password
-     * @return \FOS\UserBundle\Model\UserInterface|null|Response
+     * @return \FOS\UserBundle\Model\UserInterface|boolean
      */
     private function validateUser($username, $password)
     {
@@ -101,10 +106,7 @@ class UserController extends Controller
         $user = $userManager->findUserByUsername($username);
 
         if (!$user) {
-            return $this->render('user/login.html.twig', [
-                'bodyClass' => 'error403',
-                'error' => 'User not found!'
-            ]);
+            return false;
         }
 
         $factory = $this->encoderFactory;
@@ -112,10 +114,7 @@ class UserController extends Controller
         $salt = $user->getSalt();
 
         if (!$encoder->isPasswordValid($user->getPassword(), $password, $salt)) {
-            return $this->render('user/login.html.twig', [
-                'bodyClass' => 'error403',
-                'error' => 'Invalid credentials'
-            ]);
+            return false;
         }
 
         return $user;

@@ -2,13 +2,11 @@
 ![alt text](https://pvd.onl/oy59sb.jpg)
 A powerful dashboard tool to keep track of your favorite news sites, daily tasks, reminders, and so much more. FeedNews.me, previously called "It's my Homepage" brings you a site that you can set as startpage of your browser, or use Electron to run it as an app. I personally use it all day, with my news sources like Neowin, iDownloadblog and many more next to my Youtube subscriptions, todo-list and weather updates all in one place.
 
+# Use online version
+In case you wish to use the functionality, or just have a look around but you don't want to go through all the installation hussle. Visit [Feednews.me](http://feednews.me) and create a account.
+
 # Beta stage
-Please use the Master branch if you want to play with NewsFeed in a stable release. At this time all functionality from the Master version has been intergrated into a Symfony4 framework. With Silex End Of Life it was neccisary to upgrade to something better. 
-
-The main new function in this release will be the support for multiple users (with each having their own feeds to follow, notes and checklist items). At this time, we have just implemented the login system. So it's probably not safe enough for public use just yet. 
-
-# Demo
-Want to see a Demo on what FeedNews is really about. Have a look at our [Demo Page](http://demo.feednews.me) - Please not that you might need the Google Ignore-X header plugin for best compatibility. 
+Until our 2.0 release, some functionality may be added, changed or removed. At it's current state, it's stable enough to use but it might contain a bug or two. No showstoppers. If you want a more stable release, use our old Silex version from our 1.5 release.
 
 # Functionality
 - Read and manage RSS Feeds
@@ -47,35 +45,27 @@ Want to see a Demo on what FeedNews is really about. Have a look at our [Demo Pa
     - Plugin share aka Play Store?
 - Themes
     - Design always has a different taste with each and everyone. So adding theme support would be nice.
-- Users
-    - Better way to sync feeds in case many people sign up. (prevention of double feeds, double data php timeouts etc)
-- Layout improvements
 - Documentation
-- Ignore X-Frame header extension for browsers that only ignore the headers while using FeedNews
+
 
 # Installation
 Use the config.php.dist file in the app directory to create your config file. You need to set your database config and enter you openWeatherMap API key. This is a required step for now. To setup your database, use the db-structure.sql file located in the database folder.
 
 After saving your config, make sure to run the following commands from your terminal. Currently all commands need to run on both dev and production env. This will probably change in the future.
 
+- fill .env file with server settings
 - composer install
 - yarn install
 - yarn build
 - bin/console doctrine:schema:create
 - bin/console fos:user:create
 
-You need to set two cronjobs so the feeds and weather data are imported. For DirectAdmin I've used:
+You need to set one cronjobs so the feed data can be imported. For DirectAdmin I've used:
 */5	*	*	*	*	/usr/local/bin/php /home/USERNAME/domains/YOUR_DOMAIN/public_html/bin/console app:feeds:update
 
-#### Ignore X-Frame headers
-For Google Chrome users, it's "recommended" to install our chrome-extension located within the public/downloads/ folder using "load unload package". You can add any page as feedItem by pressing the button, and it will also prevent X-Frame blocks so every site can be visited within an iframe. Note that this removed the security for every site you visit, even outside FeedNews. I haven't experienced any issues.
 
 # Mobile support
 This tool with all it's beauty also runs on your mobile device. To get the best experience, use chrome for Android or Safari on iOS and save the page as icon to your homescreen. This way you get a fullscreen experience on your mobile device, and have quick access to it's functionality, like the checklist that is usefull for shoppinglists for example.
-
-Please not that some sites, that have the previous mentioned X-Frame headers might not open on your mobile device. For that, a button is placed to open the page in a browser view. On Android, a simply hit on the back button brings you back to the app. Most site's will work!
-
-It's recommended to load the page on WIFI if your low on your data limit the first time you open it on your mobile after running gulp. If you do so, all css and javascripts will be cached until you run gulp again. It's not megabytes of a difference, but in case your developing this tool it's a usefull reminder.
 
 # Idea's?
 I wish to hear your thoughts and idea's for this project. I've been working on this project for a year now, and love to improve it a lot more. It's not ready for multiusers yet. But if you know how to work with git, composer, npm this tool can be used daily. It's been my browsers homepage for a year now, can't live without! I have so many ideas poping in every day and I hope I can make something that many people will enjoy! Any help is appreciated. So if you want to help, code away and submit a pull request! If it's good I'm sure to add it!

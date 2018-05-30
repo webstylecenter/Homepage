@@ -18,3 +18,6 @@ Changelog is last updated on May 26, 2018 and may be outdated. Check for the lat
 - Added popup/information page for websites that block iframe usage
 - Added basic welcome expierence after registering
 - Added changelog
+- Feeds can be shared between users with each having it's own setup
+- Automaticly find feedurl of website (if compatible)
+- Automatlicy generate Youtube feed-url if youtube link is entered

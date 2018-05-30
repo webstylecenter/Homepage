@@ -17,6 +17,12 @@ new WOW({
     mobile: false
 }).init();
 
+window.showDialog = function(title, description) {
+    $('.dialog .title').html(title);
+    $('.dialog .description').html(description);
+    $('.dialog').modal({fadeDuration: 100});
+}
+
 require('./components/main');
 require('./components/checklist');
 require('./components/droplist');

@@ -82,19 +82,41 @@ class SettingsController extends Controller
      */
     public function addAction(Request $request)
     {
-        if (
-            strlen($request->get('url')) == 0
-            && strlen($request->get('website')) > 0
-        ) {
-            $url = $this->importService->findRSSFeed($request->get('website'));
-        } else {
+        if (strlen($request->get('url'))) {
             $url = $request->get('url');
+        } else {
+            try {
+                $url = $this->importService->findRSSFeed($request->get('website'));
+            } catch (\Exception $exception) {
+                return new JsonResponse([
+                    'status' => 'error',
+                    'message' => '<b>Error reading website</b><br />
+                     Please look manually on the website for a link to a RSS feed.<br /><br />
+                    <small>' . $exception . '</small>'
+                ]);
+            }
+        }
+
+        if ($url == '') {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => '<b>No RSS Feed found on website</b><br />
+                     Please look manually on the website for a link to a RSS feed.'
+            ]);
         }
 
         $feed = $this->feedService->findOrCreateFeedByUrl($url);
         $feed->setUrl($request->get('url'));
-        $feed->setName($this->importService->getFeedName($feed));
         $feed->setColor($request->get('color'));
+
+        try {
+            $feed->setName($this->importService->getFeedName($feed));
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => '<b>Not a valid feed ('.$url.')</b><br /><small>' . $exception . '</small>'
+            ]);
+        }
 
         $this->feedService->persistFeed($feed);
 

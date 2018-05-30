@@ -75,7 +75,7 @@ $(function () {
             $.post('/feed/add-item/', $('.js-form-feed').serialize(), function (data) {
                 data.status === 'success'
                     ? $.modal.close()
-                    : alert('Failed to add item due to a server error.');
+                    : showDialog('Adding item failed!', 'Failed to add item due to a server error.');
             }, 'json');
         })
         .on('click', '.js-open-new-window', function () {

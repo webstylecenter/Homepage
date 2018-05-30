@@ -32,7 +32,7 @@ function postToChecklist(data) {
             checkItem(this);
         });
     }).catch(function () {
-        alert('Updating checklist failed!');
+        showDialog('Error', 'Updating checklist has failed! Please try again in a moment.');
         return false;
     });
 }

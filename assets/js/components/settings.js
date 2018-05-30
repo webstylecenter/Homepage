@@ -12,7 +12,7 @@ $(function () {
                     $(button).parent().parent().addClass('removed');
                 })
                 .fail(function (data) {
-                    alert(data);
+                    showDialog('Error', 'Cannot remove feed. Please try again later.<br /><br />' + data.toString().substr(0, 200))
                 });
         }
     });
@@ -31,6 +31,11 @@ $(function () {
 
         let autoPin = $(this).parent().find("[name='autoPin']").prop('checked');
 
+        if (url.length === 0 && website.length === 0) {
+            showDialog('Invalid input', 'Please enter a website url or RSS feed-url');
+            return;
+        }
+
         $.post("/settings/feeds/add/", {
             url: url,
             website: website,
@@ -42,11 +47,11 @@ $(function () {
                 if (data.status === 'success') {
                     location.reload();
                 } else {
-                    alert(data);
+                    showDialog('Cannot add Feed', 'An error occured while adding the feed:<br /><br />' + data.message.substr(0, 300));
                 }
             })
             .fail(function (data) {
-                alert(data);
+                showDialog('Cannot add Feed', 'An error occured while adding the feed:<br /><br />' + data.toString().substr(0, 300));
             });
     });
 
@@ -69,7 +74,7 @@ $(function () {
                 $(that).show()
             })
             .fail(function (data) {
-                alert(data);
+                showDialog('Failed to update setting', 'Your auto pin setting cannot be changed at the moment because of a server error. Please try again later.<br /><br /><small>' + data.toString().substr(0, 200) + '</small>')
                 $(that).show()
             });
     });

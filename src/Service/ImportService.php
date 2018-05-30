@@ -167,10 +167,10 @@ class ImportService
                 if (strtolower($final_links[$n]['type']) == 'application/rss+xml') {
                     $href = $final_links[$n]['href'];
                 }
-                if (!$href and strtolower($final_links[$n]['type']) == 'text/xml') {
+                if (!isset($href) and strtolower($final_links[$n]['type']) == 'text/xml') {
                     $href = $final_links[$n]['href'];
                 }
-                if ($href) {
+                if (isset($href)) {
                     if (strstr($href, "http://") !== false) {
                         $full_url = $href;
                     } elseif (substr($href, 0, 2) == '//') {

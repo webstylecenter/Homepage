@@ -17,6 +17,7 @@
 <body class="{{ bodyClass }}" data-refresh-date="{{ "now"|date('Y-m-d H:i:s') }}">
 {% block body %}
 {% endblock %}
+{% include 'modals/dialog.html.twig' %}
 {% block javascripts %}{% endblock %}
 <script src="{{ asset('build/js/js-app.js') }}"></script>
 </body>

@@ -54,7 +54,7 @@ var postToChecklist = function (data) {
             checkItem(this);
         });
     }).catch(function () {
-        alert('Updating checklist failed!');
+        showDialog('Error ', 'Updating checklist failed. Please try again later.');
         return false;
     });
 }
@@ -94,7 +94,7 @@ var searchAutoRun = function (el) {
         }, function (data) {
             if (data.status !== 'success') {
                 $(el).val(value);
-                alert('Failed to add item due to a server error.');
+                showDialog('Failed to add item!', 'Failed to add item due to a server error.');
             } else {
                 $(el).val('');
                 requestNewFeedItems();

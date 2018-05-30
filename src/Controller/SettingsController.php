@@ -12,6 +12,7 @@ use App\Service\FeedService;
 use App\Service\ImportService;
 use App\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -84,26 +85,11 @@ class SettingsController extends Controller
      */
     public function addAction(Request $request)
     {
-        if (strlen($request->get('url'))) {
-            $url = $request->get('url');
-        } else {
-            try {
-                $url = $this->importService->findRSSFeed($request->get('website'));
-            } catch (\Exception $exception) {
-                return new JsonResponse([
-                    'status' => 'error',
-                    'message' => '<b>Error reading website</b><br />
-                     Please look manually on the website for a link to a RSS feed.<br /><br />
-                    <small>' . $exception . '</small>'
-                ]);
-            }
-        }
-
-        if ($url == '') {
+        $url = $this->validateUrl($request);
+        if (strpos($url, 'Error') > 0) {
             return new JsonResponse([
                 'status' => 'error',
-                'message' => '<b>No RSS Feed found on website</b><br />
-                     Please look manually on the website for a link to a RSS feed.'
+                'message' => $url
             ]);
         }
 
@@ -129,17 +115,7 @@ class SettingsController extends Controller
             ]);
         }
 
-        $userFeed = new UserFeed();
-        $userFeed->setFeed($feed);
-        $userFeed->setUser($this->getUser());
-        $userFeed->setColor($request->get('color'));
-        $userFeed->setIcon($request->get('icon'));
-        $userFeed->setAutoPin(($request->get('autoPin') === "true"));
-
-        $this->feedService->persistUserFeed($userFeed);
-
-        $this->importService->addOldItems($feed, $userFeed);
-        $this->importService->read($feed);
+        $userFeed = $this->createUserFeed($feed, $request);
 
         return new JsonResponse([
             'id' => $userFeed->getId(),
@@ -189,6 +165,7 @@ class SettingsController extends Controller
 
     /**
      * @Route("/feed/disable-xframe/")
+     * @return RedirectResponse
      */
     public function disableXframeNotice()
     {
@@ -199,7 +176,50 @@ class SettingsController extends Controller
         $entityManager->persist($user);
         $entityManager->flush();
 
-        echo 'Message disabled';
-        exit;
+        return new RedirectResponse('/welcome/');
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    protected function validateUrl(Request $request)
+    {
+        if (strlen($request->get('url'))) {
+            $url = $request->get('url');
+        } else {
+            try {
+                $url = $this->importService->findRSSFeed($request->get('website'));
+            } catch (\Exception $exception) {
+                return 'Error reading website';
+            }
+        }
+
+        if ($url == '') {
+            return 'Error: No RSS Feed found on website';
+        }
+
+        return $url;
+    }
+
+    /**
+     * @param Feed $feed
+     * @param Request $request
+     * @return UserFeed|JsonResponse
+     */
+    protected function createUserFeed(Feed $feed, Request $request)
+    {
+        $userFeed = new UserFeed();
+        $userFeed->setFeed($feed);
+        $userFeed->setUser($this->getUser());
+        $userFeed->setColor($request->get('color'));
+        $userFeed->setIcon($request->get('icon'));
+        $userFeed->setAutoPin(($request->get('autoPin') === "true"));
+
+        $this->feedService->persistUserFeed($userFeed);
+
+        $this->importService->addOldItems($feed, $userFeed);
+        $this->importService->read($feed);
+        return $userFeed;
     }
 }

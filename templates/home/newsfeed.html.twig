@@ -57,7 +57,9 @@
             {% if item.feedItem.description %}
                 {{ item.feedItem.description|truncate(120, true) }}
             {% else %}
-                {{ item.userFeed.feed.name }}
+                {% if item.userFeed is not null %}
+                    {{ item.userFeed.feed.name }}
+                {% endif %}
             {% endif %}
         </p>
     </div>

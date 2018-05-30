@@ -28,7 +28,7 @@ class UserFeedItemRepository extends ServiceEntityRepository
     public function setViewedForUser(User $user)
     {
         $this->createQueryBuilder('ufi')->update()
-            ->set('ufi.viewed', true)
+            ->set('ufi.viewed', 1)
             ->where('ufi.user = :user')
             ->setParameter('user', $user->getId())
             ->getQuery()

@@ -138,22 +138,6 @@ class FeedItem
     }
 
     /**
-     * @return bool
-     */
-    public function isViewed()
-    {
-        return $this->viewed;
-    }
-
-    /**
-     * @param bool $viewed
-     */
-    public function setViewed(bool $viewed)
-    {
-        $this->viewed = $viewed;
-    }
-
-    /**
      * @return Feed
      */
     public function getFeed()

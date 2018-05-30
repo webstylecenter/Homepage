@@ -51,7 +51,7 @@ class Feed
 
     public function __construct()
     {
-        $this->items = $items = new ArrayCollection;
+        $this->items = new ArrayCollection;
     }
 
     /**

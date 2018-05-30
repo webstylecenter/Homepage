@@ -57,7 +57,7 @@ class NoteController extends Controller
     public function removeAction(Request $request)
     {
         $note = $this->noteService->getByIdAndUser($request->get('id'), $this->getUser());
-        !$note ?: $this->noteService->remove($note);
+        $this->noteService->remove($note);
 
         return new JsonResponse([
             'status' => 'success',

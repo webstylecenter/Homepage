@@ -35,9 +35,68 @@ class UserController extends Controller
             ]);
         }
 
-        $username = $request->get('username');
-        $password = $request->get('password');
+        $user = $this->validateUser($request->get('username'), $request->get('password'));
+        $this->signInUser($user, $request);
 
+        return new RedirectResponse('/');
+    }
+
+    /**
+     * @Route("/register", name="register")
+     * @param Request $request
+     * @return Response
+     */
+    public function registerAction(Request $request)
+    {
+        if ($request->get('username', null) === null) {
+            return $this->render('user/register.html.twig', [
+                'bodyClass' => 'register'
+            ]);
+        }
+
+        $this->validateRegister($request);
+        $this->createUser($request);
+
+        return new RedirectResponse('/login');
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    private function validateRegister(Request $request)
+    {
+        $userManager = $this->get('fos_user.user_manager');
+        if ($userManager->findUserByEmail($request->get('email'))) {
+            return $this->render('user/register.html.twig', [
+                'bodyClass' => 'register',
+                'error' => 'Email address already used'
+            ]);
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function createUser(Request $request)
+    {
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->createUser();
+        $user->setUsername($request->get('username'));
+        $user->setEmail($request->get('email'));
+        $user->setEmailCanonical($request->get('email'));
+        $user->setEnabled(true);
+        $user->setPlainPassword($request->get('password'));
+        $userManager->updateUser($user);
+    }
+
+    /**
+     * @param $username
+     * @param $password
+     * @return \FOS\UserBundle\Model\UserInterface|null|Response
+     */
+    private function validateUser($username, $password)
+    {
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->findUserByUsername($username);
 
@@ -59,47 +118,20 @@ class UserController extends Controller
             ]);
         }
 
+        return $user;
+    }
+
+    /**
+     * @param $user
+     * @param Request $request
+     */
+    private function signInUser($user, Request $request)
+    {
         $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
         $this->get('security.token_storage')->setToken($token);
 
         $this->get('session')->set('_security_main', serialize($token));
         $event = new InteractiveLoginEvent($request, $token);
         $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
-
-        return new RedirectResponse('/');
     }
-
-    /**
-     * @Route("/register", name="register")
-     * @param Request $request
-     * @return Response
-     */
-    public function registerAction(Request $request)
-    {
-        if ($request->get('username', null) === null) {
-            return $this->render('user/register.html.twig', [
-                'bodyClass' => 'register'
-            ]);
-        }
-
-        $userManager = $this->get('fos_user.user_manager');
-
-        if ($userManager->findUserByEmail($request->get('email'))) {
-            return $this->render('user/register.html.twig', [
-                'bodyClass' => 'register',
-                'error' => 'Email address already used'
-            ]);
-        }
-
-        $user = $userManager->createUser();
-        $user->setUsername($request->get('username'));
-        $user->setEmail($request->get('email'));
-        $user->setEmailCanonical($request->get('email'));
-        $user->setEnabled(true);
-        $user->setPlainPassword($request->get('password'));
-        $userManager->updateUser($user);
-
-        return new RedirectResponse('/login');
-    }
-
 }

@@ -49,29 +49,11 @@ class FeedController extends Controller
         $metaData->setMetaDescription($request->get('description'));
         $metaData->setUrl($request->get('url'));
 
-        if (
-            // $metaData will override if no title is set
-            !$request->get('title')
-            && !$metaData = $this->metaService->getByUrl($request->get('url'))
-        ) {
-            return new JsonResponse([
-                'status' => 'fail',
-                'message' => 'No metadata found for url "' . $request->get('url') . '"'
-            ]);
+        if (!$request->get('title')) {
+            $metaData = $this->metaService->getByUrl($request->get('url'));
         }
 
-        $feedItem = new FeedItem();
-        $feedItem->setGuid(intval(time()));
-        $feedItem->setTitle($metaData->getTitle());
-        $feedItem->setDescription($metaData->getMetaDescription());
-        $feedItem->setUrl($metaData->getUrl());
-
-        $userFeedItem = new UserFeedItem();
-        $userFeedItem->setFeedItem($feedItem);
-        $userFeedItem->setUser($this->getUser());
-        $userFeedItem->setPinned(true);
-
-        $this->feedService->persistUserFeedItem($userFeedItem);
+        $this->createFeedItem($metaData);
 
         return new JsonResponse([
             'status' => 'success',
@@ -100,25 +82,13 @@ class FeedController extends Controller
         }
 
         try {
-            $feedItem = new FeedItem();
-            $feedItem->setGuid(intval(time()));
-            $feedItem->setTitle($metaData->getTitle());
-            $feedItem->setDescription((strlen($metaData->getMetaDescription()) > 0 ? $metaData->getMetaDescription() : ''));
-            $feedItem->setUrl($metaData->getUrl());
-
-            $userFeedItem = new UserFeedItem();
-            $userFeedItem->setFeedItem($feedItem);
-            $userFeedItem->setUser($this->getUser());
-            $userFeedItem->setPinned(true);
-
-            $this->feedService->persistUserFeedItem($userFeedItem);
+           $this->createFeedItem($metaData);
         } catch (\Exception $exception) {
             return new JsonResponse([
                 'status' => 'error',
                 'message' => $exception
             ]);
         }
-
 
         return new JsonResponse([
             'status' => 'success',
@@ -273,5 +243,24 @@ class FeedController extends Controller
     {
         $userFeedItem = $this->feedService->findUserFeedItemUrl($id);
         return new RedirectResponse($userFeedItem->getFeedItem()->getUrl());
+    }
+
+    /**
+     * @param Meta $meta
+     */
+    private function createFeedItem(Meta $meta)
+    {
+        $feedItem = new FeedItem();
+        $feedItem->setGuid(intval(time()));
+        $feedItem->setTitle($meta->getTitle());
+        $feedItem->setDescription((strlen($meta->getMetaDescription()) > 0 ? $meta->getMetaDescription() : ''));
+        $feedItem->setUrl($meta->getUrl());
+
+        $userFeedItem = new UserFeedItem();
+        $userFeedItem->setFeedItem($feedItem);
+        $userFeedItem->setUser($this->getUser());
+        $userFeedItem->setPinned(true);
+
+        $this->feedService->persistUserFeedItem($userFeedItem);
     }
 }

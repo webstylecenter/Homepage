@@ -109,21 +109,11 @@ class ImportService
      */
     protected function getFeedItemForEntry(EntryInterface $entry, Feed $feed)
     {
-        $content = strip_tags($entry->getDescription());
-        $content = trim(str_replace('Read more...', '', $content));
-
-        if ($this->feedItemRepository->findBy(['guid' => $entry->getId()])) {
+        $feedItem = $this->generateFeedItem($entry, $feed);
+        if ($feedItem === null) {
             return null;
-        }
+        };
 
-        $feedItem = new FeedItem();
-        $feedItem->setTitle($entry->getTitle());
-        $feedItem->setGuid($entry->getId());
-        $feedItem->setDescription(strlen($content) > 250 ? substr($content, 0, 250) . "..." : $content);
-        $feedItem->setUrl($entry->getLink());
-        $feedItem->setFeed($feed);
-
-        //$users = $this->use->findOneBy(['id' => $feed->getId()]);
         $userFeeds = $this->userFeedRepository->findBy(['feed' => $feed]);
 
         foreach ($userFeeds as $userFeed) {
@@ -136,6 +126,30 @@ class ImportService
 
             $this->userFeedItemRepository->persist($userFeedItem);
         }
+
+        return $feedItem;
+    }
+
+    /**
+     * @param EntryInterface $entry
+     * @param Feed $feed
+     * @return FeedItem|null
+     */
+    protected function generateFeedItem(EntryInterface $entry, Feed $feed)
+    {
+        $content = strip_tags($entry->getDescription());
+        $content = trim(str_replace('Read more...', '', $content));
+
+        if ($this->feedItemRepository->findOneBy(['guid' => $entry->getId()])) {
+            return null;
+        }
+
+        $feedItem = new FeedItem();
+        $feedItem->setTitle($entry->getTitle());
+        $feedItem->setGuid($entry->getId());
+        $feedItem->setDescription(strlen($content) > 250 ? substr($content, 0, 250) . "..." : $content);
+        $feedItem->setUrl($entry->getLink());
+        $feedItem->setFeed($feed);
 
         return $feedItem;
     }
@@ -217,6 +231,6 @@ class ImportService
             }
         }
 
-        return false;
+        return '';
     }
 }

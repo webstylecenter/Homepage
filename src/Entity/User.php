@@ -62,9 +62,6 @@ class User extends BaseUser
 
         $this->ipAddress = $_SERVER['X-Forwarded-For'] ?? $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
         $this->userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
-        $this->userFeeds = new ArrayCollection;
-        $this->checklistItems = new ArrayCollection;
-        $this->notes = new ArrayCollection;
     }
 
     /**

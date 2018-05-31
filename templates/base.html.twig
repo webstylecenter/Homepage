@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('build/css/css-app.css') }}">
     {% block header %}{% endblock %}
 </head>
-<body class="{{ bodyClass }}" data-refresh-date="{{ "now"|date('Y-m-d H:i:s') }}">
+<body class="{% if bodyClass is defined %}{{ bodyClass }}{% endif %}" data-refresh-date="{{ "now"|date('Y-m-d H:i:s') }}">
 {% block body %}
 {% endblock %}
 {% include 'modals/dialog.html.twig' %}

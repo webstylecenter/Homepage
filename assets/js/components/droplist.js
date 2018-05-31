@@ -17,6 +17,7 @@ $('.js-more-droplist').on('click', function () {
 
 $('.content-overlay, .feed-list').on('click', function () {
     hideDropList();
+    $('.profileMenu').slideUp();
 });
 
 $(function () {

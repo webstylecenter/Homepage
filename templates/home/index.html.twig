@@ -32,13 +32,12 @@
             <span data-url="/checklist/" class="js-open-url fa fa-check fa-x4 hide-if-mobile"></span>
             <span data-modal-target=".js-form-feed" class="js-modal-trigger fa fa-file fa-x4 hide-if-mobile"></span>
 
-            <span data-url="/settings/" class="js-open-url fa fa-cog fa-x4 hide-if-mobile"></span>
             <div class="action-search--wrapper hide-if-mobile">
                 <input class="js-search-feed" type="text" name="q" placeholder="Search feeds or add items to checklist" autocomplete="off" />
                 <div style="display: none;" class="js-search-list feed-list feed-list--type-search"></div>
             </div>
 
-            <span class="action-user hide-if-mobile">
+            <span class="action-user js-open-profile-menu hide-if-mobile">
                 {{ app.user.username }}
             </span>
             {% if not app.request.server.get("DROP_LOCATION") == null and isAdmin  %}
@@ -46,6 +45,15 @@
             {% endif %}
         </div>
     </header>
+
+    <div class="profileMenu">
+        <ul>
+            <li><a class="js-open-url" data-url="/settings/">Settings</a></li>
+            <li><a class="js-open-url" data-url="/feedback/">Leave Feedback</a></li>
+            <li class="logout"><a href="/logout/">Logout</a></li>
+        </ul>
+    </div>
+
     <section class="container">
         {% block content %}{% endblock %}
 

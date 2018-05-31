@@ -94,6 +94,9 @@ $(function () {
         .on('click', '.js-send-from-pip', function () {
             switchFromPictureInPicture();
         })
+        .on('click', '.js-open-profile-menu', function() {
+            $('.profileMenu').slideToggle();
+        })
     ;
 
     $('.js-action-feed-list-swipe').each(function () {
@@ -121,6 +124,7 @@ global.requestNewFeedItems = function () {
 function openPage(url, shareId) {
     let isMobile = $('.feed-list--type-sidebar').attr('data-is-mobile');
     let disableXcheck = $('.feed-list--type-sidebar').attr('data-hideXframe');
+    $('.profileMenu').slideUp();
 
     if (isMobile === "1") {
         hasXFrameHeader(url, shareId);

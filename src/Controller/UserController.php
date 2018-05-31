@@ -47,6 +47,16 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/logout/")
+     * @return RedirectResponse
+     */
+    public function logout()
+    {
+        session_destroy();
+        return new RedirectResponse('/');
+    }
+
+    /**
      * @Route("/register", name="register")
      * @param Request $request
      * @return Response

@@ -5,20 +5,24 @@ $(function () {
         nextSelector: 'a.jscroll-next:last',
         contentSelector: '.feed-list-item',
         callback: function () {
-            //var mc = new Hammer($('.jscroll-added:last-of-type .js-action-feed-list-swipe'));
-            var mc = new Hammer(this);
-            mc.on("swiperight", function () {
-                $(this).find('.pin').trigger('click');
+            $('.jscroll-added:last-of-type .js-action-feed-list-swipe').each(function() {
+                var mc = new Hammer(this);
+                var that = $(this);
+                mc.on('swiperight', function(ev) {
+                    $(that).find('.pin').trigger('click');
+                });
             });
+
+
         }
     });
 
     $('.header--bar').each(function () {
         var mc = new Hammer(this);
-        mc.on("swiperight", function () {
+        mc.on('swiperight', function(ev) {
             $('.js-return').trigger('click');
-        })
-    })
+        });
+    });
 
     $(document)
         .on('click', '.js-reload-page', function (event) {
@@ -94,9 +98,10 @@ $(function () {
 
     $('.js-action-feed-list-swipe').each(function () {
         var mc = new Hammer(this);
-        mc.on("swiperight", function () {
-            $(this).find('.pin').trigger('click');
-        })
+        var that = $(this);
+        mc.on('swiperight', function(ev) {
+            $(that).find('.pin').trigger('click');
+        });
     });
 
     /** global: ClipboardJS */

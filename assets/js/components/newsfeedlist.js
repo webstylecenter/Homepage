@@ -156,7 +156,10 @@ function openInFrame(url, shareId) {
 
 function openInNewWindow(url) {
     window.open(url);
-    $('.content-frame').attr('src', '/feed/opened-in-popup/');
+
+    if (!$('.feed-list--type-sidebar').attr('data-is-mobile')) {
+        $('.content-frame').attr('src', '/feed/opened-in-popup/');
+    }
 }
 
 function switchToPicutreInPicture() {

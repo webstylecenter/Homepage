@@ -190,9 +190,9 @@ class FeedController extends Controller
                     'title' => $feedItem->getTitle(),
                     'description' => $feedItem->getDescription(),
                     'url' => $feedItem->getUrl(),
-                    'color' => $userFeedItem->getUserFeed()->getColor(),
-                    'feedIcon' => $userFeedItem->getUserFeed()->getIcon(),
-                    'shareId' => $userFeedItem->getUserFeed()->getFeed()->getName() . '/' . $userFeedItem->getId() . '/',
+                    'color' => ($userFeedItem->getUserFeed() !== null ? $userFeedItem->getUserFeed()->getColor() : ''),
+                    'feedIcon' => ($userFeedItem->getUserFeed() !== null ? $userFeedItem->getUserFeed()->getIcon() : ''),
+                    'shareId' => ($userFeedItem->getUserFeed() !== null ? $userFeedItem->getUserFeed()->getFeed()->getName() : 'item') . '/' . $userFeedItem->getId() . '/',
                     'pinned' => $userFeedItem->isPinned(),
                     'user' => $this->getUser()
                 ];

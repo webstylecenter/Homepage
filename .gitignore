@@ -9,3 +9,4 @@ yarn-error.log
 .phpunit
 /phpunit.xml
 /.web-server-pid
+/.build

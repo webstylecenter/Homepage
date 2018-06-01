@@ -46,10 +46,12 @@
                     </td>
                     <td class="feedName">
                         {{ feed.feed.name }}
-                        <span style="display: none;">{{ feed.feed.url }}</span>
+                    </td>
+                    <td class="feedUrl">
+                        {{ feed.feed.url }}
                     </td>
                     <td class="feedIcon">
-                        <input class="js-update-auto-pin" type="checkbox" value="1" {% if feed.autoPin %}checked="checked"{% endif %}/>
+                        <input title="Autopin new items" class="js-update-auto-pin" type="checkbox" value="1" {% if feed.autoPin %}checked="checked"{% endif %}/>
                     </td>
                     <td class="feedIcon">
                         <span class="fa fa-{{ feed.icon }}"></span>

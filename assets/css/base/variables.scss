@@ -9,6 +9,7 @@ $max-width-tablet: 1050px;
 $min-width-desktop: $max-width-tablet + 1px;
 
 $blue: #337dff;
+$blue-highlight: #80abff;
 
 @mixin respond-to($media) {
   @if $media == mobile {

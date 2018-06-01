@@ -71,12 +71,18 @@
       margin-top: -40px;
       margin-right: 10px;
       float: right;
+
+      &:hover {
+        background-color: $blue-highlight;
+        cursor: pointer;
+      }
     }
   }
 
   table {
     width: 100%;
     margin-bottom: 50px;
+    border-spacing: 0;
 
     td {
       margin: 0;
@@ -102,7 +108,16 @@
     }
 
     tr:hover {
-      background-color: rgba(256, 256, 256, 0.8);
+      background-color: rgba(127, 182, 255, 0.4);
+
+      td:first-child {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+      }
+      td:last-child {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
     }
 
     .removed {
@@ -124,17 +139,16 @@
       width: 78%;
       font-size: 12pt;
       padding: 8px;
+    }
 
-      span {
-        display: block;
-        color: gray;
-        font-style:italic;
-        overflow:hidden;
-        overflow-wrap: break-word;
-        max-width:400px;
-        white-space:nowrap;
-        text-overflow: ellipsis;
-      }
+    .feedUrl {
+      color: gray;
+      font-style:italic;
+      overflow:hidden;
+      overflow-wrap: break-word;
+      max-width:400px;
+      white-space:nowrap;
+      text-overflow: ellipsis;
     }
 
     .feedAmount {

@@ -82,7 +82,7 @@ class UserController extends Controller
     private function validateRegister(Request $request)
     {
         $userManager = $this->get('fos_user.user_manager');
-        if ($userManager->findUserByEmail($request->get('email'))) {
+        if ($userManager->findUserByEmail(strtolower($request->get('email')))) {
             return $this->render('user/register.html.twig', [
                 'bodyClass' => 'register',
                 'error' => 'Email address already used'
@@ -97,8 +97,8 @@ class UserController extends Controller
     {
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
-        $user->setUsername($request->get('username'));
-        $user->setEmail($request->get('email'));
+        $user->setUsername(strtolower($request->get('username')));
+        $user->setEmail(strtolower($request->get('email')));
         $user->setEmailCanonical($request->get('email'));
         $user->setEnabled(true);
         $user->setPlainPassword($request->get('password'));
@@ -113,7 +113,7 @@ class UserController extends Controller
     private function validateUser($username, $password)
     {
         $userManager = $this->get('fos_user.user_manager');
-        $user = $userManager->findUserByUsername($username);
+        $user = $userManager->findUserByUsername(strtolower($username));
 
         if (!$user) {
             return false;

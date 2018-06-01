@@ -1,40 +1,73 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/symfony.php';
 
-// Project repository
+// Configuration
+set('ssh_type', 'native');
+set('ssh_multiplexing', true);
+
 set('repository', 'git@github.com:webstylecenter/Homepage.git');
 
-// [Optional] Allocate tty for git clone. Default value is false.
-set('git_tty', true); 
+set('bin_dir', 'bin');
+set('var_dir', 'var');
 
-// Shared files/dirs between deploys 
-add('shared_files', []);
-add('shared_dirs', []);
+set('shared_dirs', ['var/logs']);
+set('writable_dirs', ['var/cache', 'var/logs']);
 
-// Writable dirs by web server 
-add('writable_dirs', []);
-set('allow_anonymous_stats', false);
-
-// Hosts
-
+// Servers
 host('feednews.me')
+    ->user('peter')
+    ->forwardAgent()
+    ->stage('production')
     ->set('deploy_path', '/home/peter/domains/feednews.me')
-    ->user('name')
-    ->forwardAgent(true)
-    ->addSshOption('StrictHostKeyChecking', 'no');
-    
-// Tasks
+    ->set('prefix', 'prod');
 
 task('build', function () {
-    run('cd {{release_path}} && build');
+    set('deploy_path', __DIR__ . '/.build');
+    invoke('deploy:prepare');
+    invoke('deploy:release');
+    invoke('deploy:update_code');
+    invoke('deploy:symlink');
+})->local();
+
+task('release', [
+    'deploy:prepare',
+    'deploy:release',
+    'upload',
+    'deploy:clear_paths',
+    'deploy:create_cache_dir',
+    //'copy_parameters',
+    'deploy:vendors',
+    'update_database',
+    'deploy:shared',
+    'deploy:assets',
+    'deploy:vendors',
+    'deploy:cache:clear',
+    'deploy:cache:warmup',
+    'deploy:writable',
+    'deploy:symlink',
+]);
+
+task('deploy', [
+    'build',
+    'release',
+    'cleanup',
+    'success'
+]);
+
+// =========RECIPES========== \\
+
+task('update_database', function () {
+    run('{{bin/php}} {{bin/console}} doctrine:migrations:migrate {{console_options}}');
+})->desc('Update database schema');
+
+//task('copy_parameters', function () {
+//    run('/usr/bin/cp -rf {{release_path}}/.env.{{prefix}} {{release_path}}/.env');
+//})->desc('Copy parameters.yml to build target');
+
+
+task('upload', function () {
+    upload(__DIR__ . "/.build/current/", '{{release_path}}');
 });
-
-// [Optional] if deploy fails automatically unlock.
-after('deploy:failed', 'deploy:unlock');
-
-// Migrate database before symlink new release.
-
-before('deploy:symlink', 'database:migrate');
-

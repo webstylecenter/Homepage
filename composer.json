@@ -31,6 +31,7 @@
         "symfony/yaml": "^4.0",
         "twig/extensions": "^1.5",
         "zendframework/zend-feed": "^2.9",
+        "symfony/dotenv": "^4.0",
         "zendframework/zend-http": "^2.8"
     },
     "require-dev": {
@@ -38,7 +39,6 @@
         "symfony/browser-kit": "^4.0",
         "symfony/css-selector": "^4.0",
         "symfony/debug-pack": "*",
-        "symfony/dotenv": "^4.0",
         "symfony/maker-bundle": "^1.5",
         "symfony/phpunit-bridge": "^4.0",
         "symfony/profiler-pack": "^1.0",

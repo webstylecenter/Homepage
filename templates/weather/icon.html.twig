@@ -29,6 +29,6 @@
     {% endif %}
 
     <span class="temperature">
-        {{ forecast.current.temperature }}&deg;C
+        {{ forecast.current.temperature|number_format(0, '.', ',') }}&deg;C
     </span>
 {% endif %}

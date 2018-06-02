@@ -18,6 +18,12 @@
     background-color: #b1b1b1;
     z-index:9;
 
+    @include  respond-to('mobile') {
+      .weather {
+        display: none;
+      }
+    }
+
     h1 {
       position: relative;
       left: 10%;
@@ -25,6 +31,10 @@
       top: 4vh;
       font-size: 38pt;
       color: white;
+
+      @include  respond-to('mobile') {
+        top: -1vh;
+      }
     }
   }
 
@@ -93,6 +103,10 @@
     overflow: auto;
     margin-top: 62px;
     padding: 50px;
+
+    @include  respond-to('mobile') {
+      padding: 16px;
+    }
   }
 
   .active-view {

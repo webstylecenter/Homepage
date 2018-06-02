@@ -23,5 +23,9 @@
   "display": "standalone",
   "theme_color": "#337dff",
   "lang": "en-US",
-  "dir": "ltr"
+  "dir": "ltr",
+  "css-app.css": "/build/css/css-app.css?h=e19f80",
+  "css-app.js": "/build/js/css-app.js?v=e19f80",
+  "js-vendor.js": "/build/js/js-vendor.js?v=e19f80",
+  "js-app.js": "/build/js/js-app.js?v=e19f80"
 }

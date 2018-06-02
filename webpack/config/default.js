@@ -30,6 +30,7 @@ const DEFAULT_CONFIG = {
    */
   entries: {
     'js-app': `${BASE_PATH}/assets/js/app.js`,
+    'js-vendor': `${BASE_PATH}/assets/js/vendor.js`,
     'css-app': `${BASE_PATH}/assets/css/app.scss`,
   },
 

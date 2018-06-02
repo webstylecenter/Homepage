@@ -29,30 +29,30 @@ $(function () {
             event.preventDefault();
         })
         .on('click', '.js-open-url', function () {
-            $('.header--bar').css('backgroundColor', '#337dff');
+            $('.header--bar, footer').css('backgroundColor', '#337dff');
             openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'));
         })
         .on('click', '.js-action-feed-list-click', function () {
             $(this).addClass('animated pulse feed-list-item--state-selected');
             $('.feed-list-item').removeClass('feed-list-item--state-selected');
-            $('.header--bar').css('backgroundColor', $(this).css('borderLeftColor'));
+            $('.header--bar, footer').css('backgroundColor', $(this).css('borderLeftColor'));
             openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'));
         })
         .on('click', '.js-return', function (e) {
             e.preventDefault();
-
+            $('.header--bar, footer').css('backgroundColor', '#337dff');
             $('.content iframe').prop('src', '/welcome/');
-            $('.content').hide();
-            $('.js-reload-page').removeClass('hide-if-mobile hide-if-tablet');
-            $('.js-return').removeClass('show-if-mobile show-if-tablet');
-            $('.js-copy-to-clipboard').removeClass('show-if-mobile show-if-tablet');
-            $('.js-open-new-window').removeClass('show-if-mobile show-if-tablet');
-            $('.header--bar').removeClass('show-if-mobile');
+            $('.content').addClass('hide-if-mobile');
+            $('aside').removeClass('hide-if-mobile');
+            $('.Homepage').removeClass('pageOpen');
+            $('footer .pageView').hide();
+            $('footer .defaultView').show();
+
         })
         .on('click', '.js-reload-page', function () {
             $('.content-frame').attr('src', '/welcome/');
             $('.urlbar a').text('').attr('data-clipboard-text', '');
-            $('.header--bar').css('backgroundColor', '#337dff');
+            $('.header--bar, footer').css('backgroundColor', '#337dff');
             requestNewFeedItems();
         })
         .on('click', '.pin', function (e) {
@@ -96,6 +96,9 @@ $(function () {
         })
         .on('click', '.js-open-profile-menu', function() {
             $('.profileMenu').slideToggle();
+        })
+        .on('click', '.profileMenu', function() {
+            $('.profileMenu').slideUp();
         })
     ;
 
@@ -148,14 +151,14 @@ function hasXFrameHeader(url, shareId) {
 }
 
 function openInFrame(url, shareId) {
-    $('.content').show();
-    $('.js-reload-page').addClass('hide-if-mobile hide-if-tablet');
-    $('.js-return').addClass('show-if-mobile show-if-tablet');
-    $('.header--bar').addClass('show-if-mobile');
+    $('.content').removeClass('hide-if-mobile');
+    $('aside').addClass('hide-if-mobile');
+    $('.Homepage').addClass('pageOpen');
+    $('footer .defaultView').hide();
+    $('footer .pageView').show();
     $('.content-frame').attr('src', parseYoutubeUrl(url, true));
     $('.urlbar a').text('https://' + window.location.hostname + '/share/' + shareId).attr('href', url);
-    $('.js-copy-to-clipboard').attr('data-clipboard-text', 'https://' + window.location.hostname + '/share/' + shareId).addClass('show-if-mobile show-if-tablet');
-    $('.js-open-new-window').addClass('show-if-mobile show-if-tablet');
+    $('.js-copy-to-clipboard').attr('data-clipboard-text', 'https://' + window.location.hostname + '/share/' + shareId);
 }
 
 function openInNewWindow(url) {
@@ -202,7 +205,7 @@ function parseYoutubeUrl(url, changeColors) {
         if (changeColors) {
             $('.feed-list').addClass('darkTheme', 2000, 'easeInOutQuad');
         }
-        $('.header--bar').css('backgroundColor', '#1a1a1a');
+        $('.header--bar, footer').css('backgroundColor', '#1a1a1a');
         return 'https://www.youtube.com/embed/' + videoId + '?autoplay=true';
     }
 

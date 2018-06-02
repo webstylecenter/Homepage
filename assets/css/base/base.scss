@@ -21,6 +21,35 @@ a {
   }
 }
 
+
+.background {
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+  filter: blur(10px);
+  z-index: -2;
+}
+
+.background--overlay {
+  background-color: rgba(256, 256, 256, 0.6);
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.js-settings-remove-feed {
+  border: 0;
+  background: transparent;
+}
+
+.hide {
+  display: none;
+}
+
 .wow {
   visibility: hidden;
 }
@@ -43,9 +72,5 @@ a {
   }
 }
 
-.js-settings-remove-feed {
-  border: 0;
-  background: transparent;
-}
 
 

@@ -6,3 +6,28 @@
   }
 }
 
+input[type="text"], input[type="password"] {
+  border: 1px solid $blue;
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: $blue;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16pt;
+}
+
+input[type="submit"] {
+  background-color: $blue;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 15px;
+  border: 1px solid $blue;
+  font-size: 16pt;
+
+  &:hover {
+    background-color: $lightblue;
+    color: white;
+    cursor: pointer;
+  }
+}

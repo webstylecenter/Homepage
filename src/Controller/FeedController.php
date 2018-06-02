@@ -145,7 +145,7 @@ class FeedController extends Controller
      */
     public function refreshAction()
     {
-        return $this->render('home/newsfeed.html.twig', [
+        return $this->render('home/components/newsfeed.html.twig', [
             'userFeedItems' => $this->feedService->getUserFeedItemsWithFilter((new FeedListFilter())
                 ->setUser($this->getUser())
                 ->setNewOnly(true)
@@ -160,7 +160,7 @@ class FeedController extends Controller
      */
     public function loadExtraAction($page)
     {
-        return $this->render('home/newsfeed.html.twig', [
+        return $this->render('home/components/newsfeed.html.twig', [
             'userFeedItems' => $this->feedService->getUserFeedItemsWithFilter((new FeedListFilter())
                 ->setUser($this->getUser())
                 ->setPage((int) $page)

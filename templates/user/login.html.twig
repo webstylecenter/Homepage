@@ -1,35 +1,25 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/splitscreen.html.twig' %}
 
 {% block title %}
     {{ parent() }} - Read and manage News, Todo's and notes cross-platform
 {% endblock %}
 
-{% block body %}
-    <div class="infoBlock">
-        <div class="contentbox">
-            <img src="/images/FeedNewsPreview.png" alt="FeedNews preview" />
-            <p><a href="http://demo.feednews.me/" target="_blank" title="FeedNews Demo site">Play with the demo</a> |
-                Contribute at <a href="https://github.com/webstylecenter/Homepage" target="_blank">GitHub</a></p>
-        </div>
+{% block leftContent %}
+    {% include '/user/leftcontent.html.twig' %}
+{% endblock %}
+
+{% block rightContent %}
+    <div class="header">
+        <h1>Feednews.me</h1>
     </div>
-    <div class="loginBlock">
-        <div class="contentbox">
+    <h2>Public Beta</h2>
 
-            <div class="header">
-                <h1>Feednews.me</h1>
-            </div>
-
-            <h2>BETA VERSION!</h2>
-
-            <p>Please sign in below</p>
-
-            <div class="signinBox">
-                <form method="post">
-                    <input type="text" name="username" id="username" placeholder="username" />
-                    <input type="password" name="password" id="password" placeholder="password" />
-                    <input type="submit" value="Login" /> <a class="createAccount" href="{{ path('register') }}">Create account</a>
-                </form>
-            </div>
-        </div>
+    <p>Please sign in below</p>
+    <div class="signinBox">
+        <form method="post">
+            <input type="text" name="username" id="username" placeholder="username" />
+            <input type="password" name="password" id="password" placeholder="password" />
+            <input type="submit" value="Login" /> <a class="createAccount" href="{{ path('register') }}">Create account</a>
+        </form>
     </div>
 {% endblock %}

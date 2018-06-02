@@ -1,130 +1,20 @@
-.error403 {
-  height: 100vh;
-  font-size: 12pt;
+.error403, .register {
+  .header {
+    height: 80px;
+    background-image: url("/images/FeedNews-Logo.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+    margin-bottom: 10px;
+
+    h1 {
+      color: $blue;
+      padding: 20px 0 0 100px;
+    }
+  }
 
   .createAccount {
-    font-size: 12pt;
-    margin-left: 25px;
-  }
-
-  .infoBlock {
-    color: white;
-    background-color: $blue;
-    position: fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    width: 50%;
-    box-sizing: border-box;
-
-    a {
-      text-decoration: underline;
-    }
-
-    img {
-      width: 80%;
-    }
-
-    @include respond-to(mobile) {
-      display: none;
-    }
-  }
-
-  .contentbox {
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    right: 25%;
-    margin-top:-300px;
-    padding: 50px;
-  }
-
-  .loginBlock {
-    position: fixed;
-    top:0;
-    right:0;
-    bottom:0;
-    width: 50%;
-    background-color: whitesmoke;
-
-    font-size: 16pt;
-
-    a {
-      color: $blue;
-
-      &:hover {
-        color: $blue;
-      }
-    }
-
-    input[type="text"], input[type="password"] {
-      border: 1px solid $blue;
-      background-color: white;
-      padding: 5px 10px;
-      border-radius: 20px;
-      color: $blue;
-      display: block;
-      margin-bottom: 10px;
-      font-size: 16pt;
-    }
-
-    input[type="submit"] {
-      background-color: $blue;
-      color: white;
-      border-radius: 20px;
-      padding: 5px 10px;
-      border: 1px solid $blue;
-      font-size: 16pt;
-
-      &:hover {
-        background-color: white;
-        color: $blue;
-        cursor: pointer;
-      }
-    }
-
-    .header {
-      height: 80px;
-      background-image: url("/images/FeedNews Logo.png");
-      background-repeat: no-repeat;
-      background-position: left;
-      background-size: contain;
-      margin-bottom: 50px;
-
-      h1 {
-        color: $blue;
-        padding: 20px 0 0 100px;
-      }
-    }
-
-    @include respond-to(tablet) {
-      .contentbox {
-        padding: 20px;
-        left: 0;
-        right: 0;
-      }
-    }
-
-    @include respond-to(mobile) {
-      left:0;
-      width: 100%;
-      padding: 20px;
-
-      .contentbox {
-        padding: 20px;
-        left: 0;
-        right: 0;
-      }
-
-      .header {
-        height: 60px;
-
-        h1 {
-          padding: 5px 0 0 73px;
-        }
-      }
-    }
-
+    margin-left: 20px;
   }
 
 }

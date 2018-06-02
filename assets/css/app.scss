@@ -5,13 +5,14 @@
 
 @import "base/font-face";
 @import "base/variables";
+@import "base/form";
 @import "base/display";
 @import "base/base";
+@import "base/splitscreen";
 
 @import "components/profile-menu";
 @import "components/modal";
 @import "components/header";
-@import "components/container";
 @import "components/content";
 @import "components/feed-list";
 @import "components/weather";
@@ -25,6 +26,7 @@
 @import "components/screenshot-list";
 @import "components/mobile-search";
 
+@import "pages/index";
 @import "pages/multitab";
 @import "pages/homepage";
 @import "pages/screensaver";
@@ -32,4 +34,3 @@
 @import "pages/settings";
 @import "pages/chrome-import";
 @import "pages/login";
-@import "pages/register";

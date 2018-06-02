@@ -1,0 +1,23 @@
+<aside>
+    <div data-is-mobile="{{ device.isMobile }}" data-hideXframe="{{ app.user.hideXframeNotice }}" class="feed-list feed-list--type-sidebar {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
+        {% include 'home/components/newsfeed.html.twig' with {'userFeedItems': userFeedItems} %}
+    </div>
+</aside>
+
+<div class="content iFramesContainer hide-if-mobile">
+    <iframe
+            id="welcomeFrame"
+            class="content-frame"
+            src="{% if not userFeedItems %}/settings/{% else %}/welcome{% endif %}"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-modals"
+            allowfullscreen="allowfullscreen"
+            mozallowfullscreen="mozallowfullscreen"
+            msallowfullscreen="msallowfullscreen"
+            oallowfullscreen="oallowfullscreen"
+            webkitallowfullscreen="webkitallowfullscreen"
+    ></iframe>
+</div>
+
+<div class="urlbar hide">
+    <a href="/welcome/" target="_blank">/welcome/</a>
+</div>

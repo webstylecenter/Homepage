@@ -1,33 +1,10 @@
 .header--bar {
   transition: background-color 1500ms;
   background-color: $blue;
-  padding: 5px 20px;
   box-sizing: border-box;
   height: $header-height;
-  position: fixed;
-  right: 0;
-  left: 0;
-  top: 0;
   z-index: 900;
   color: rgba(255, 255, 255, 0.8);
-
-  @include  respond-to('mobile') {
-    top: inherit;
-    bottom: 0;
-    border-top: 1px solid gray;
-    font-size: 1.8em;
-    padding: 12px 0 20px 0;
-    height: $footer-height;
-    background: linear-gradient(to bottom,  rgba(256, 256, 256, 0.5) 0%, rgba(184, 184, 184, 0.5) 100%);
-    backdrop-filter: blur(10px);
-
-    span {
-      margin: 0 30px;
-    }
-    a {
-      color: black;
-    }
-  }
 
   .fa {
     font-size: 1.5em;
@@ -43,11 +20,7 @@
 
   &-site {
     .title {
-      padding-top: 5px;
-
-      @include  respond-to('mobile') {
-        padding-top:0;
-      }
+      padding: 10px;
 
       &--back {
         display: none;
@@ -57,13 +30,9 @@
   &-actions {
     float: right;
 
-    @include  respond-to('mobile') {
-      color:#000;
-    }
-
     span {
       display: inline-block;
-      margin-top: 3px;
+      margin-top: 8px;
 
       &:hover {
         cursor: pointer;
@@ -82,6 +51,7 @@
         border: 0;
         padding: 5px 10px;
         border-radius: 15px;
+        font-size: 10pt;
 
         @include respond-to(mobile) {
           display: none;
@@ -160,9 +130,10 @@
   .action-user {
     background-color: rgba(0, 0, 0, 0.4);
     color: white;
-    margin: -22px -20px -20px 20px;
+    margin-left: 20px;
     padding: 12px 50px 9px 50px;
     text-transform: capitalize;
+    display: inline-block;
 
     &:hover {
       cursor: pointer;

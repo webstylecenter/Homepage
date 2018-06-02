@@ -1,13 +1,34 @@
 .footer--bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
   color: whitesmoke;
   text-align: center;
-  font-size: 18pt;
-  padding: 12px 0 20px 0;
   background: $blue;
+  font-size: 1.8em;
+  padding: 10px;
+  box-sizing: border-box;
+
+  .defaultView {
+    .grid-container {
+      display: grid;
+      grid-template-columns: 160px auto;
+      grid-template-areas: "large small";
+    }
+  }
+
+  .pageView {
+    display: none;
+    .grid-container {
+      display: grid;
+      grid-template-columns: 160px auto;
+      grid-template-areas: "large small";
+    }
+  }
+
+  .first {
+    grid-area: large;
+  }
+  .other {
+    grid-area: small;
+  }
 
   span {
     margin: 0 18px;

@@ -1,4 +1,9 @@
 .content {
+
+  .iFramesContainer {
+    -webkit-overflow-scrolling: touch;
+  }
+
   &-frame {
     border: 0;
     position: absolute;

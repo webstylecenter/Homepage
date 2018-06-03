@@ -20,7 +20,7 @@
         <span class="js-open-new-window fa fa-external-link-alt fa-x4 hide-if-mobile"></span>
         <span class="js-copy-to-clipboard fa fa-share-square fa-x4 hide-if-mobile" data-clipboard-action="copy" data-clipboard-text="#"></span>
 
-        {% if not app.request.server.get("DROP_LOCATION") == null  %}
+        {% if not app.request.server.get("DROP_LOCATION") == null and isAdmin %}
             <span class="fa fa-inbox header--bar-droplist-icon js-toggle hide-if-tablet hide-if-mobile" data-toggle-element=".screenshot-list"></span>
         {% endif %}
         <span data-url="/checklist/" class="js-open-url fa fa-check fa-x4 hide-if-mobile"></span>

@@ -1,7 +1,5 @@
-<aside>
-    <div data-is-mobile="{{ device.isMobile }}" data-hideXframe="{{ app.user.hideXframeNotice }}" class="feed-list feed-list--type-sidebar {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
+<aside data-is-mobile="{{ device.isMobile }}" data-hideXframe="{{ app.user.hideXframeNotice }}" class="feed-list feed-list--type-sidebar {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
         {% include 'home/components/newsfeed.html.twig' with {'userFeedItems': userFeedItems} %}
-    </div>
 </aside>
 
 <div class="content iFramesContainer hide-if-mobile">
@@ -21,3 +19,6 @@
 <div class="urlbar hide">
     <a href="/welcome/" target="_blank">/welcome/</a>
 </div>
+
+<div class="content-close-pip js-close-pip fa fa-window-close"></div>
+<div class="content-maximize-pip js-send-from-pip fa fa-window-restore"></div>

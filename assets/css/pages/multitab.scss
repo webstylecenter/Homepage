@@ -83,16 +83,6 @@
     z-index: -2;
   }
 
-  &-background--overlay {
-    background-color: rgba(256, 256, 256, 0.6);
-    z-index: -1;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
   .view {
     display:none;
     position: fixed;

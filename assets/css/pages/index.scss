@@ -1,46 +1,73 @@
 .pageOpen {
   @include respond-to(mobile) {
-    grid-template-rows: $header-height 0 auto $footer-height !important;
+    aside, .mobile-search {
+      display: none !important;
+    }
+    .content {
+      display: block !important;
+    }
   }
 }
 .Homepage {
-  display: grid;
-  grid-template-columns: $sidebar-width auto;
-  grid-template-rows: $header-height auto;
-  grid-template-areas: "header header"
-  "sidebar container";
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
 
-
-  @include respond-to(tablet) {
-    grid-template-columns: 300px auto;
-  }
-
-  @include respond-to(mobile) {
-    grid-template-columns: 100vw;
-    grid-template-rows: $header-height auto 0 $footer-height;
-    grid-template-areas: "header"
-    "sidebar"
-    "container"
-    "footer";
+  .content-overlay {
+    display: none;
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background-color: rgba(256, 256, 256, 0.5);
+    z-index: 5;
   }
 
   header {
-    grid-area: header;
+    positioin: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: $header-height;
   }
   .profileMenu {
     display:none;
   }
   aside {
-    grid-area: sidebar;
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    width: $sidebar-width;
+    bottom: 0;
     overflow-y: auto;
+
+    @include respond-to(tablet) {
+      width: 35%;
+    }
+
+    @include respond-to(mobile) {
+      width: 100%;
+      bottom: $footer-height;
+    }
   }
   .content {
-    grid-area: container;
+    position: fixed;
+    top: $header-height;
+    right: 0;
+    bottom: 0;
+    left: $sidebar-width;
 
-    iframe {
+    @include respond-to(tablet) {
+      left: 35%;
+    }
+
+    @include respond-to(mobile) {
+      display: none;
+      left: 0;
+      bottom: $footer-height;
+    }
+
+    .content-frame {
       width: 100%;
       height: 100%;
       border: 0;
@@ -50,6 +77,15 @@
     display: none;
   }
   .footer--bar {
-    grid-area: footer;
+    display: none;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: $footer-height;
+
+    @include respond-to(mobile) {
+      display: block;
+    }
   }
 }

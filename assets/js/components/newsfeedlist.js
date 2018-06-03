@@ -25,9 +25,6 @@ $(function () {
     });
 
     $(document)
-        .on('click', '.js-reload-page', function (event) {
-            event.preventDefault();
-        })
         .on('click', '.js-open-url', function () {
             $('.header--bar, footer').css('backgroundColor', '#337dff');
             openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'));
@@ -50,9 +47,11 @@ $(function () {
 
         })
         .on('click', '.js-reload-page', function () {
+            event.preventDefault();
             $('.content-frame').attr('src', '/welcome/');
             $('.urlbar a').text('').attr('data-clipboard-text', '');
             $('.header--bar, footer').css('backgroundColor', '#337dff');
+            $('aside').scrollTop(0);
             requestNewFeedItems();
         })
         .on('click', '.pin', function (e) {
@@ -96,9 +95,11 @@ $(function () {
         })
         .on('click', '.js-open-profile-menu', function() {
             $('.profileMenu').slideToggle();
+            $('.content-overlay').fadeIn();
         })
         .on('click', '.profileMenu', function() {
             $('.profileMenu').slideUp();
+            $('.content-overlay').fadeOut();
         })
     ;
 

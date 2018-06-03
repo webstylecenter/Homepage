@@ -52,6 +52,7 @@
         padding: 5px 10px;
         border-radius: 15px;
         font-size: 10pt;
+        color: black;
 
         @include respond-to(mobile) {
           display: none;

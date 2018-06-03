@@ -35,6 +35,7 @@ $(function () {
         .on('click', '.content-overlay, .feed-list', function () {
             $('.content-overlay').fadeOut();
             $('.js-show-weather-radar').slideUp();
+            $('.profileMenu').slideUp();
         });
 
     $('.specialTxt').each(function () {

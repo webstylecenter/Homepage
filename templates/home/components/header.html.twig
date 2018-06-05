@@ -2,13 +2,13 @@
     <div class="header--bar-site  wow slideInLeft">
         <div class="title">
             <a href="/" class="title--back noselect js-return"><span class="fa fa-chevron-circle-left"></span></a>
-            <a href="/" class="js-reload-page"><b>FEEDNEWS</b><em>.me</em></a>
+            <a data-balloon="Click to refresh feedlist" data-balloon-pos="down" href="/" class="js-reload-page"><b>FEEDNEWS</b><em>.me</em></a>
         </div>
     </div>
     <div class="header--bar-actions wow slideInRight">
 
         {% if not device.isMobile %}
-            <div class="js-update-weather-icon header--bar-weather-icon hide-if-tablet hide-if-mobile">{% include 'weather/icon.html.twig' %}</div>
+            <div data-balloon="Click to see weather forecast" data-balloon-pos="down" class="js-update-weather-icon header--bar-weather-icon hide-if-tablet hide-if-mobile">{% include 'weather/icon.html.twig' %}</div>
             <div class="js-show-weather-radar header--bar-weather-radar"><img class="js-weather-radar" src="https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512" />
                 <div class="header--bar-weather-radar-overview">
                     {% include 'weather/detail.html.twig' %}
@@ -16,23 +16,23 @@
             </div>
         {% endif %}
 
-        <span class="js-send-to-pip fa fa-window-restore hide-if-mobile show-if-desktop"></span>
-        <span class="js-open-new-window fa fa-external-link-alt fa-x4 hide-if-mobile"></span>
-        <span class="js-copy-to-clipboard fa fa-share-square fa-x4 hide-if-mobile" data-clipboard-action="copy" data-clipboard-text="#"></span>
+        <span data-balloon="Send current page to popup" data-balloon-pos="down" class="js-send-to-pip hide-if-mobile show-if-desktop"><span class="fa fa-window-restore"></span></span>
+        <span data-balloon="Open new window" data-balloon-pos="down" class="js-open-new-window hide-if-mobile"><span class="fa fa-external-link-alt fa-x4"></span></span>
+        <span data-balloon="Copy link to clipboard" data-balloon-pos="down" class="js-copy-to-clipboard hide-if-mobile" data-clipboard-action="copy" data-clipboard-text="#"><span class="fa fa-share-square fa-x4"></span></span>
 
         {% if not app.request.server.get("DROP_LOCATION") == null and isAdmin %}
             <span class="fa fa-inbox header--bar-droplist-icon js-toggle hide-if-tablet hide-if-mobile" data-toggle-element=".screenshot-list"></span>
         {% endif %}
-        <span data-url="/checklist/" class="js-open-url fa fa-check fa-x4 hide-if-mobile"></span>
-        <span data-modal-target=".js-form-feed" class="js-modal-trigger fa fa-file fa-x4 hide-if-mobile"></span>
-        <span data-url="/settings/" class="js-open-url fa fa-cog fa-x4 hide-if-mobile"></span>
+        <span data-balloon="Open your todo list" data-balloon-pos="down" data-url="/checklist/" class="js-open-url hide-if-mobile"><span class="fa fa-check fa-x4"></span></span>
+        <span data-balloon="Add new item to your feed" data-balloon-pos="down" data-modal-target=".js-form-feed" class="js-modal-trigger hide-if-mobile"><span class="fa fa-file fa-x4"></span></span>
+        <span data-balloon="Open settings" data-balloon-pos="down" data-url="/settings/" class="js-open-url hide-if-mobile"><span class="fa fa-cog fa-x4"></span></span>
 
         <div class="action-search--wrapper hide-if-mobile">
             <input class="js-search-feed" type="text" name="q" placeholder="Search feeds or add items to checklist" autocomplete="off" />
             <div style="display: none;" class="js-search-list feed-list feed-list--type-search"></div>
         </div>
 
-        <div class="action-user js-open-profile-menu">
+        <div data-balloon="Click to open menu" data-balloon-pos="down" class="action-user js-open-profile-menu">
                 {{ app.user.username }}
             </div>
         {% if not app.request.server.get("DROP_LOCATION") == null and isAdmin  %}

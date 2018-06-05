@@ -45,8 +45,8 @@
 
     <div class="feed-list-item js-action-feed-list-click js-action-feed-list-swipe {% if not item.viewed %}feed-list-item--state-new{% endif %} {% if item.pinned %}feed-list-item--state-pinned{% endif %} {% if feedIcon %}hasIcon{% endif %}"
          data-url="{{ item.feedItem.url }}" data-share-id="{{ feedName|slugify }}/{{ item.id }}/" style="border-left-color:{{ feedColor }};">
-        <div class="pin" data-pin-id="{{ item.id }}"><span class="fa fa-thumbtack"></span></div>
-        <div class="pip hide-if-mobile"><span class="fa fa-window-restore"></span></div>
+        <div data-balloon="Pin item" data-balloon-pos="left" class="pin" data-pin-id="{{ item.id }}"><span class="fa fa-thumbtack"></span></div>
+        <div data-balloon="Open in popup" data-balloon-pos="left" class="pip hide-if-mobile"><span class="fa fa-window-restore"></span></div>
         {% if feedIcon %}
             <div class="feed-icon" style="background-color:{{ feedColor }}">
                 <span class="fa fa-{{ feedIcon }}"></span>

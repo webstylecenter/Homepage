@@ -42,7 +42,7 @@
 
                 <tr data-feed-id="{{ feed.id }}" data-feed-name="{{ feed.feed.name }}">
                     <td class="feedColor">
-                        <span style="background-color:{{ feed.color }};"></span>
+                        <span data-balloon="Items from this feed will show a left border in this color" data-balloon-pos="right" style="background-color:{{ feed.color }};"></span>
                     </td>
                     <td class="feedName">
                         {{ feed.feed.name }}
@@ -51,7 +51,7 @@
                         {{ feed.feed.url }}
                     </td>
                     <td class="feedIcon">
-                        <input title="Autopin new items" class="js-update-auto-pin" type="checkbox" value="1" {% if feed.autoPin %}checked="checked"{% endif %}/>
+                        <input data-balloon="Automaticly pin new items" data-balloon-pos="left" title="Autopin new items" class="js-update-auto-pin" type="checkbox" value="1" {% if feed.autoPin %}checked="checked"{% endif %}/>
                     </td>
                     <td class="feedIcon">
                         <span class="fa fa-{{ feed.icon }}"></span>

@@ -24,8 +24,8 @@
   "theme_color": "#337dff",
   "lang": "en-US",
   "dir": "ltr",
-  "css-app.css": "/build/css/css-app.css?h=es1s9f802",
-  "css-app.js": "/build/js/css-app.js?v=e19sfs802",
-  "js-vendor.js": "/build/js/js-vendor.js?v=e19sfs820",
-  "js-app.js": "/build/js/js-app.js?v=es1s9f280"
+  "css-app.css": "/build/css/css-app.css?h=esf802",
+  "css-app.js": "/build/js/css-app.js?v=e19sfs2",
+  "js-vendor.js": "/build/js/js-vendor.js?v=e19s820",
+  "js-app.js": "/build/js/js-app.js?v=es1s9280"
 }

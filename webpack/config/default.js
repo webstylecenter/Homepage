@@ -8,7 +8,7 @@ const DEFAULT_CONFIG = {
   /**
    * Debug mode (true|false). Should be disabled on production builds
    */
-  debug: true,
+  debug: false,
 
   /**
    * Public folder prefix. This is usually the private path prefixed with /web or /public

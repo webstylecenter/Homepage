@@ -23,8 +23,8 @@ Until our 2.0 release, some functionality may be added, changed or removed. At i
     - Option to combine images from services like Unsplash with your own image gallery services
     - Show current weather condition and temperature
     
-- Checklist
-    - Need to keep track of things? Simply use the searchbar to add items, or use the checklist page to manage your list. Quick and easy
+- Todo list
+    - Need to keep track of things? Simply use the searchbar to add items, or use the todo page to manage your list. Quick and easy
     
 - Weather radar
     - It currently displays just weather of the Netherlands, but  will add support for more countries later
@@ -55,17 +55,20 @@ After saving your config, make sure to run the following commands from your term
 
 - fill .env file with server settings
 - composer install
-- yarn install
-- yarn build
 - bin/console doctrine:schema:create
 - bin/console fos:user:create
+
+If you want to change styling, also run:
+- yarn install
+- yarn build
+
 
 You need to set one cronjobs so the feed data can be imported. For DirectAdmin I've used:
 */5	*	*	*	*	/usr/local/bin/php /home/USERNAME/domains/YOUR_DOMAIN/public_html/bin/console app:feeds:update
 
 
 # Mobile support
-This tool with all it's beauty also runs on your mobile device. To get the best experience, use chrome for Android or Safari on iOS and save the page as icon to your homescreen. This way you get a fullscreen experience on your mobile device, and have quick access to it's functionality, like the checklist that is usefull for shoppinglists for example.
+This tool with all it's beauty also runs on your mobile device. To get the best experience, use chrome for Android or Safari on iOS and save the page as icon to your homescreen. This way you get a fullscreen experience on your mobile device, and have quick access to it's functionality, like the todo that is usefull for shoppinglists for example.
 
 # Idea's?
 I wish to hear your thoughts and idea's for this project. I've been working on this project for a year now, and love to improve it a lot more. It's not ready for multiusers yet. But if you know how to work with git, composer, npm this tool can be used daily. It's been my browsers homepage for a year now, can't live without! I have so many ideas poping in every day and I hope I can make something that many people will enjoy! Any help is appreciated. So if you want to help, code away and submit a pull request! If it's good I'm sure to add it!

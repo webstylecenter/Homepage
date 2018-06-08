@@ -3,6 +3,10 @@
 parameters:
     locale: 'en'
 
+framework:
+  assets:
+    json_manifest_path: '%kernel.root_dir%/../public/build/manifest.json'
+
 services:
     # default configuration for services in *this* file
     _defaults:

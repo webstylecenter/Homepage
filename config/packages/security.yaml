@@ -27,5 +27,6 @@ security:
         - { path: ^/weather/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/share/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/chrome/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/privacy-policy/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/droplist/*, role: ROLE_ADMIN }
         - { path: ^/, role: ROLE_USER }

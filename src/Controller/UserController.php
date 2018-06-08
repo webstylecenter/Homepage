@@ -143,4 +143,15 @@ class UserController extends Controller
         $event = new InteractiveLoginEvent($request, $token);
         $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
     }
+
+    /**
+     * @Route("/privacy-policy/")
+     * @return Response
+     */
+    public function privacyPolicy()
+    {
+        return $this->render('user/privacy-policy.html.twig', [
+            'bodyClass' => 'privacy',
+        ]);
+    }
 }

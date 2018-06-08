@@ -55,6 +55,22 @@ $(function () {
             });
     });
 
+    $('.js-update-feed-color').on('change', function() {
+        let newColor = $(this).val();
+        let userFeedId = $(this).parent().parent().parent().data('feed-id');
+
+        $.post("/settings/feeds/update/", {
+            id: userFeedId,
+            color: newColor
+        })
+            .done(function () {
+                // Do nothing
+            })
+            .fail(function (data) {
+                showDialog('Failed to update color', 'Your color setting cannot be changed at the moment because of a server error. Please try again later.<br /><br /><small>' + data.toString().substr(0, 200) + '</small>');
+            });
+    });
+
     $('.js-update-auto-pin').on('click', function () {
 
         let feedId = $(this).parent().parent().data('feed-id');
@@ -77,5 +93,33 @@ $(function () {
                 showDialog('Failed to update setting', 'Your auto pin setting cannot be changed at the moment because of a server error. Please try again later.<br /><br /><small>' + data.toString().substr(0, 200) + '</small>')
                 $(that).show()
             });
+    });
+
+    var IconToBeReplaced;
+    $('.js-open-icon-selector').on('click', function() {
+        $('.iconSelector input').val($(this).parent().parent().data('feed-id'));
+        $('.iconSelector').modal({fadeDuration: 100});
+        IconToBeReplaced = $(this);
+    });
+
+    $('.iconSelector .fa').on('click', function() {
+        let name = $(this).attr('class').replace('fa fa-', '');
+        let id = $(this).parent().parent().find('input').val();
+
+        if (parseInt(id) > 0) {
+            $.post("/settings/feeds/update/", {
+                id: id,
+                icon: name
+            })
+                .done(function () {
+                    $('.iconSelector input').val('');
+                    $('.iconSelector').hide();
+                    $('.jquery-modal').hide();
+                    $(IconToBeReplaced).attr('class', 'fa fa-' + name);
+                })
+                .fail(function (data) {
+                    showDialog('Failed to update setting', 'Your auto pin setting cannot be changed at the moment because of a server error. Please try again later.<br /><br /><small>' + data.toString().substr(0, 200) + '</small>');
+                });
+        }
     });
 });

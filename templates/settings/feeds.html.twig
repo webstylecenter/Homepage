@@ -9,7 +9,7 @@
             <input class="websiteurl" type="text" name="website" value="" placeholder="Insert website url" /><br />
 
             <input type="text" name="icon" value="" placeholder="FontAwesome icon (optional)" /><br />
-            <input type="checkbox" name="autoPin" value="1" id="autoPin"/><label for="autoPin">Automaticly pin new items</label><br />
+            <input type="checkbox" name="autoPin" value="1" id="autoPin"/><label for="autoPin">Automatically pin new items</label><br />
             <input type="text" name="color" class="spectrum" value="#{{random(values)~ random(values)~ random(values)~ random(values)~ random(values)~ random(values)  }}" placeholder="Insert RGB without the #" /><br />
             <input type="submit" value="Add" class="js-settings-add-feed" />
         </p>
@@ -26,7 +26,7 @@
             </select>
 
             <input type="text" name="icon" value="" placeholder="FontAwesome icon (optional)" /><br />
-            <input type="checkbox" name="autoPin" value="1" id="autoPin"/><label for="autoPin">Automaticly pin new items</label><br />
+            <input type="checkbox" name="autoPin" value="1" id="autoPin"/><label for="autoPin">Automatically pin new items</label><br />
             <input type="text" class="spectrum" name="color" value="#{{random(values)~ random(values)~ random(values)~ random(values)~ random(values)~ random(values)  }}" placeholder="Insert RGB without the #" /><br />
             <input type="submit" value="Add" class="js-settings-add-feed" />
         </p>
@@ -34,6 +34,7 @@
 </div>
 
 <div class="userFeeds">
+    <h2>Currently following:</h2>
     {% if userFeeds is not empty %}
         <table>
             <tbody>
@@ -41,20 +42,22 @@
                 {% set amount = feed.items|length %}
 
                 <tr data-feed-id="{{ feed.id }}" data-feed-name="{{ feed.feed.name }}">
-                    <td class="feedColor">
-                        <span data-balloon="Items from this feed will show a left border in this color" data-balloon-pos="right" style="background-color:{{ feed.color }};"></span>
+                    <td>
+                        <div class="feedColor">
+                            <input type="text" class="spectrum js-update-feed-color" name="color" value="{{ feed.color }}" />
+                        </div>
                     </td>
                     <td class="feedName">
                         {{ feed.feed.name }}
                     </td>
+                    <td class="feedIcon" data-balloon="Click to set feed icon" data-balloon-pos="left">
+                        <span class="fa fa-{% if feed.icon == '' %}plus emptyIcon{% else %}{{ feed.icon }}{% endif %} js-open-icon-selector"></span>
+                    </td>
                     <td class="feedUrl">
-                        {{ feed.feed.url }}
+                        <a href="{{ feed.feed.url }}" target="_blank">{{ feed.feed.url }}</a>
                     </td>
                     <td class="feedIcon">
                         <input data-balloon="Automaticly pin new items" data-balloon-pos="left" title="Autopin new items" class="js-update-auto-pin" type="checkbox" value="1" {% if feed.autoPin %}checked="checked"{% endif %}/>
-                    </td>
-                    <td class="feedIcon">
-                        <span class="fa fa-{{ feed.icon }}"></span>
                     </td>
                     <td class="feedAmount">
                         {{ amount }}

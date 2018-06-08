@@ -131,7 +131,15 @@ class SettingsController extends Controller
     public function updateAction(Request $request)
     {
         $userFeed = $this->userFeedRepository->findOneBy(['id' => $request->get('id')]);
-        $userFeed->setAutoPin(($request->get('autoPin') === "on"));
+
+        if (strlen($request->get('color')) > 0) {
+            $userFeed->setColor($request->get('color'));
+        } elseif (strlen($request->get('icon')) > 0) {
+            $userFeed->setIcon($request->get('icon'));
+        } else {
+            $userFeed->setAutoPin(($request->get('autoPin') === "on"));
+        }
+
         $this->feedService->persistUserFeed($userFeed);
 
         return new JsonResponse([

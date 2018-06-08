@@ -120,13 +120,21 @@
     }
 
     .feedColor {
-      width: 1%;
+      width: 45px;
+    }
 
-      span {
-        width: 10px;
-        height: 10px;
-        display: block;
-        border-radius: 2px;
+    .feedIcon {
+      cursor: pointer;
+
+      &:hover {
+        color: $blue;
+      }
+    }
+
+    .emptyIcon {
+      color: #cecece;
+      &:hover {
+        color: $blue;
       }
     }
 
@@ -144,6 +152,10 @@
       max-width:400px;
       white-space:nowrap;
       text-overflow: ellipsis;
+
+      a {
+        color: gray;
+      }
     }
 
     .feedAmount {

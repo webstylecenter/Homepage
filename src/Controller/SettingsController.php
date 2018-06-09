@@ -135,7 +135,8 @@ class SettingsController extends Controller
         if (strlen($request->get('color')) > 0) {
             $userFeed->setColor($request->get('color'));
         } elseif (strlen($request->get('icon')) > 0) {
-            $userFeed->setIcon($request->get('icon'));
+            $icon = $request->get('icon');
+            $userFeed->setIcon($icon === 'plus emptyIcon' ? '' : $icon);
         } else {
             $userFeed->setAutoPin(($request->get('autoPin') === "on"));
         }

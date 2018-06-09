@@ -102,9 +102,13 @@ $(function () {
         IconToBeReplaced = $(this);
     });
 
-    $('.iconSelector .fa').on('click', function() {
+    $('.iconSelector .fa, .iconSelector button').on('click', function() {
         let name = $(this).attr('class').replace('fa fa-', '');
         let id = $(this).parent().parent().find('input').val();
+
+        if (name === '') {
+            name = 'plus emptyIcon';
+        }
 
         if (parseInt(id) > 0) {
             $.post("/settings/feeds/update/", {
@@ -115,6 +119,7 @@ $(function () {
                     $('.iconSelector input').val('');
                     $('.iconSelector').hide();
                     $('.jquery-modal').hide();
+
                     $(IconToBeReplaced).attr('class', 'fa fa-' + name);
                 })
                 .fail(function (data) {

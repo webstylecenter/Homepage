@@ -40,8 +40,13 @@ class UserFeedItemRepository extends ServiceEntityRepository
      */
     public function persist(UserFeedItem $userFeedItem)
     {
-        $this->getEntityManager()->persist($userFeedItem);
-        $this->getEntityManager()->flush();
+        try {
+            $this->getEntityManager()->persist($userFeedItem);
+            $this->getEntityManager()->flush();
+        } catch (\Exception $e) {
+            echo '### Message ### \n'.$e->getMessage().'\n### Trace ### \n'.$e->getTraceAsString() . PHP_EOL;
+        }
+
     }
 
     /**

@@ -37,14 +37,11 @@ class UserFeedItemRepository extends ServiceEntityRepository
 
     /**
      * @param UserFeedItem $userFeedItem
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function persist(UserFeedItem $userFeedItem)
     {
-        $em = $this->createNewEntityManager();
-        $em->persist($userFeedItem);
-        $em->flush();
+        $this->getEntityManager()->persist($userFeedItem);
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -90,19 +87,6 @@ class UserFeedItemRepository extends ServiceEntityRepository
                 $queryBuilder->expr()->like('ufifi.title', ':query'),
                 $queryBuilder->expr()->like('ufifi.description', ':query')
             )
-        );
-    }
-
-    /**
-     * @return \Doctrine\ORM\EntityManager
-     * @throws \Doctrine\ORM\ORMException
-     */
-    protected function createNewEntityManager()
-    {
-        return $this->getEntityManager()->create(
-            $this->getEntityManager()->getConnection(),
-            $this->getEntityManager()->getConfiguration(),
-            $this->getEntityManager()->getEventManager()
         );
     }
 }

@@ -25,7 +25,21 @@ class FeedItemRepository extends ServiceEntityRepository
      */
     public function persist(FeedItem $feedItem)
     {
+        $this->createNewEntityManager();
         $this->getEntityManager()->persist($feedItem);
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     * @throws \Doctrine\ORM\ORMException
+     */
+    protected function createNewEntityManager()
+    {
+        return $this->getEntityManager()->create(
+            $this->getEntityManager()->getConnection(),
+            $this->getEntityManager()->getConfiguration(),
+            $this->getEntityManager()->getEventManager()
+        );
     }
 }

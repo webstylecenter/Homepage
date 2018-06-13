@@ -42,9 +42,9 @@ class UserFeedItemRepository extends ServiceEntityRepository
      */
     public function persist(UserFeedItem $userFeedItem)
     {
-        $this->createNewEntityManager();
-        $this->getEntityManager()->persist($userFeedItem);
-        $this->getEntityManager()->flush();
+        $em = $this->createNewEntityManager();
+        $em->persist($userFeedItem);
+        $em->flush();
     }
 
     /**

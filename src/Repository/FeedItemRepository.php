@@ -25,9 +25,9 @@ class FeedItemRepository extends ServiceEntityRepository
      */
     public function persist(FeedItem $feedItem)
     {
-        $this->createNewEntityManager();
-        $this->getEntityManager()->persist($feedItem);
-        $this->getEntityManager()->flush();
+        $em = $this->createNewEntityManager();
+        $em->persist($feedItem);
+        $$em->flush();
     }
 
     /**

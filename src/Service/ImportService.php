@@ -64,11 +64,7 @@ class ImportService
             }
 
             try {
-                foreach ($this->read($feed) as $feedItem) {
-                    if ($feedItem !== null) {
-                        $this->feedItemRepository->persist($feedItem);
-                    }
-                }
+                $this->read($feed);
                 $onFeedImported($feed->getName());
             } catch (\Exception $exception) {
                 $onFeedImportFailed($feed->getName(), $exception);
@@ -147,7 +143,7 @@ class ImportService
         $feedItem = new FeedItem();
         $feedItem->setTitle($entry->getTitle());
         $feedItem->setGuid($entry->getId());
-        $feedItem->setDescription(strlen($content) > 250 ? substr($content, 0, 250) . "..." : $content);
+        $feedItem->setDescription(mb_strlen($content) > 150 ? mb_substr($content, 0, 150) . "..." : $content);
         $feedItem->setUrl($entry->getLink());
         $feedItem->setFeed($feed);
 

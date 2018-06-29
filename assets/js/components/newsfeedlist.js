@@ -191,6 +191,11 @@ function switchFromPictureInPicture() {
 function createIframe(className, url) {
     var newFrame = document.createElement('iframe');
     newFrame.className = className;
+
+    if (location.protocol === 'https:') {
+        url = url.replace('http://', 'https://');
+    }
+
     newFrame.src = url;
     $(newFrame).attr('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-modals');
     $(newFrame).attr('allowfullscreen', 'allowfullscreen');

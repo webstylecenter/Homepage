@@ -90,7 +90,7 @@ class ImportService
     public function read(Feed $feed)
     {
         $entries = iterator_to_array((new Reader)->importRemoteFeed($feed->getUrl(), new GuzzleClient));
-        return array_map(function (EntryInterface $entry) use ($feed) {
+        return array_map(function(EntryInterface $entry) use ($feed) {
             $feedItem = $this->getFeedItemForEntry($entry, $feed);
             !$feedItem ?: $this->feedItemRepository->persist($feedItem);
         }, $entries);
@@ -207,7 +207,7 @@ class ImportService
                     if (strstr($href, "http://") !== false) {
                         $full_url = $href;
                     } elseif (substr($href, 0, 2) == '//') {
-                        $full_url = 'http:'.$href;
+                        $full_url = 'http:' . $href;
                     } else {
                         $url_parts = parse_url($url);
                         $full_url = "http://$url_parts[host]";

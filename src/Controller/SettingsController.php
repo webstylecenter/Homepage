@@ -55,7 +55,7 @@ class SettingsController extends Controller
     {
         $this->feedService = $feedService;
         $this->importService = $importService;
-        $this->userFeedRepository  = $userFeedRepository;
+        $this->userFeedRepository = $userFeedRepository;
         $this->feedItemRepository = $feedItemRepository;
         $this->userService = $userService;
     }
@@ -102,7 +102,7 @@ class SettingsController extends Controller
         } catch (\Exception $exception) {
             return new JsonResponse([
                 'status' => 'error',
-                'message' => '<b>Not a valid feed ('.$url.')</b><br /><small>' . $exception . '</small>'
+                'message' => '<b>Not a valid feed (' . $url . ')</b><br /><small>' . $exception . '</small>'
             ]);
         }
 

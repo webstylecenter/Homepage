@@ -19,7 +19,7 @@ class DroplistService
      */
     public function __construct()
     {
-        $this->images = (array)json_decode(file_get_contents($_SERVER['DROP_LOCATION']), true);
+        $this->images = (array) json_decode(file_get_contents($_SERVER['DROP_LOCATION']), true);
     }
 
     /**

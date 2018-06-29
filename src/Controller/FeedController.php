@@ -82,7 +82,7 @@ class FeedController extends Controller
         }
 
         try {
-           $this->createFeedItem($metaData);
+            $this->createFeedItem($metaData);
         } catch (\Exception $exception) {
             return new JsonResponse([
                 'status' => 'error',
@@ -183,7 +183,7 @@ class FeedController extends Controller
 
         return new JsonResponse([
             'status' => 'success',
-            'data' => array_map(function (UserFeedItem $userFeedItem) {
+            'data' => array_map(function(UserFeedItem $userFeedItem) {
                 $feedItem = $userFeedItem->getFeedItem();
                 return [
                     'id' => $userFeedItem->getId(),

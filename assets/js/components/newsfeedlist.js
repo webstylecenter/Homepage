@@ -64,7 +64,7 @@ $(function () {
         })
         .on('click', '.pip', function (e) {
             e.stopImmediatePropagation();
-            openInPictureInPicture(parseYoutubeUrl($(this).parent().data('url'), false));
+            openInPictureInPicture(parseUrl($(this).parent().data('url'), false));
         })
         .on('click', '.js-close-pip', function () {
             $('.content-pictureInPictureFrame').remove();
@@ -157,7 +157,7 @@ function openInFrame(url, shareId) {
     $('.Homepage').addClass('pageOpen');
     $('footer .defaultView').hide();
     $('footer .pageView').show();
-    $('.content-frame').attr('src', parseYoutubeUrl(url, true));
+    $('.content-frame').attr('src', parseUrl(url, true));
     $('.urlbar a').text('https://' + window.location.hostname + '/share/' + shareId).attr('href', url);
     $('.js-copy-to-clipboard').attr('data-clipboard-text', 'https://' + window.location.hostname + '/share/' + shareId);
 }
@@ -199,7 +199,7 @@ function createIframe(className, url) {
     $('.content-maximize-pip').show();
 }
 
-function parseYoutubeUrl(url, changeColors) {
+function parseUrl(url, changeColors) {
 
     var videoId = url.replace('https://www.youtube.com/watch?v=', '');
     if (url !== videoId) {
@@ -212,6 +212,10 @@ function parseYoutubeUrl(url, changeColors) {
 
     if (changeColors) {
         $('.feed-list').removeClass('darkTheme', '', 2000, 'easeInOutQuad');
+    }
+
+    if (location.protocol === 'https:') {
+        url = url.replace('http://', 'https://');
     }
 
     return url;

@@ -5,12 +5,11 @@ namespace App\Controller;
 use App\Entity\FeedItem;
 use App\Entity\FeedListFilter;
 use App\Entity\Meta;
-use App\Entity\User;
 use App\Entity\UserFeedItem;
 use App\Service\FeedService;
 use App\Service\MetaService;
-use App\Service\UserService;
 use FOS\UserBundle\Doctrine\UserManager;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,9 +37,9 @@ class FeedController extends Controller
     /**
      * @param FeedService $feedService
      * @param MetaService $metaService
-     * @param UserManager $userManager
+     * @param UserManagerInterface $userManager
      */
-    public function __construct(FeedService $feedService, MetaService $metaService, UserManager $userManager)
+    public function __construct(FeedService $feedService, MetaService $metaService, UserManagerInterface $userManager)
     {
         $this->feedService = $feedService;
         $this->metaService = $metaService;

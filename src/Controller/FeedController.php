@@ -35,6 +35,11 @@ class FeedController extends Controller
     protected $userManager;
 
     /**
+     * @var bool
+     */
+    protected $postAsPeter = false;
+
+    /**
      * @param FeedService $feedService
      * @param MetaService $metaService
      * @param UserManagerInterface $userManager
@@ -116,6 +121,7 @@ class FeedController extends Controller
      */
     public function addFeedItemFromAppAction(Request $request)
     {
+        $this->postAsPeter = true;
         $metaData = $this->metaService->getByUrl($request->get('url'));
 
         if (!$metaData) {
@@ -301,7 +307,7 @@ class FeedController extends Controller
         $userFeedItem->setFeedItem($feedItem);
 
         $user = $this->getUser();
-        if (!$user && isset($_GET['temporally_user_override'])) {
+        if (!$user && $this->postAsPeter) {
             $user = $this->userManager->findUserByEmail('peter@petervdam.nl');
         }
 

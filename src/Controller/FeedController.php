@@ -111,6 +111,38 @@ class FeedController extends Controller
     }
 
     /**
+     * @Route("/chrome/import-from-app/")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addFeedItemFromAppAction(Request $request)
+    {
+        $metaData = $this->metaService->getByUrl($request->get('url'));
+
+        if (!$metaData) {
+            return new JsonResponse([
+                'title' => 'fail',
+                'description' => 'No metadata found for url "' . $request->get('url') . '"',
+            ]);
+        }
+
+        try {
+            $this->createFeedItem($metaData);
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'title' => 'error',
+                'description' => 'No metadata found for url "' . $request->get('url') . '"',
+            ]);
+        }
+
+        return new JsonResponse([
+            'title' => $metaData->getTitle(),
+            'description' => $metaData->getMetaDescription(),
+            'url' => $metaData->getUrl(),
+        ]);
+    }
+
+    /**
      * @Route("/meta/")
      * @param Request $request
      * @return JsonResponse

@@ -19,7 +19,6 @@
     "bourbon": "4.3.3",
     "bourbon-neat": "1.8.0",
     "clean-webpack-plugin": "^0.1.17",
-    "clipboard": "^2.0.1",
     "css-loader": "^0.28.7",
     "cssnano": "^3.10.0",
     "eslint": "^4.10.0",

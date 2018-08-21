@@ -1,4 +1,5 @@
 require('./components/main');
+require('./components/clipboard');
 require('./components/checklist');
 require('./components/droplist');
 require('./components/newsfeedlist');
@@ -7,7 +8,6 @@ require('./components/searchbox');
 require('./components/settings');
 require('./components/welcome');
 require('./components/register');
-
 
 window.showDialog = function(title, description) {
     $('.dialog .title').html(title);

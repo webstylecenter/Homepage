@@ -110,11 +110,6 @@ $(function () {
             $(that).find('.pin').trigger('click');
         });
     });
-
-    /** global: ClipboardJS */
-    (new ClipboardJS('.js-copy-to-clipboard')).on('success', function (e) {
-        e.clearSelection();
-    });
 });
 
 global.requestNewFeedItems = function () {

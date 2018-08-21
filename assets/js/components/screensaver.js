@@ -63,7 +63,7 @@ function nextNewsItem() {
 
 function showNextNewsItem() {
     currentNewsItemKey++;
-    if (currentNewsItemKey > 49) {
+    if (currentNewsItemKey > 29) {
         currentNewsItemKey = 0;
     }
 

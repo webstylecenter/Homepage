@@ -5,7 +5,6 @@ require('jquery-modal');
 require('spectrum-colorpicker');
 require('jquery-hammerjs');
 window.Handlebars = require('handlebars/dist/handlebars.min.js');
-window.ClipboardJS = require('clipboard');
 
 import { WOW } from 'wowjs';
 

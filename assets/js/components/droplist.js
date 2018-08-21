@@ -35,10 +35,6 @@ function hideDropList() {
 }
 
 function activateDropListEvents() {
-
-    /** global: ClipboardJS */
-    new ClipboardJS('.dropCopy');
-
     $('.dropOpen').on('click', function () {
         var image = $(this).data('image');
         var tab = window.open(dropDomain + image, '_blank');

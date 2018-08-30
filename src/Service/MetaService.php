@@ -96,6 +96,6 @@ class MetaService
             $currentMeta[$name] = $meta->getAttribute('content');
         }
 
-        return $currentMeta[$name];
+        return str_replace('null', '', $currentMeta[$name]);
     }
 }

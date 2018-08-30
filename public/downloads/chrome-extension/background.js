@@ -5,7 +5,7 @@ chrome.browserAction.onClicked.addListener(function(){
         var url = tabs[0].url;
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://feednews.me/chrome/import/', true);
+        xhr.open('POST', 'https://feednews.me/chrome/import', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
         xhr.onreadystatechange = function (data) {
@@ -14,8 +14,8 @@ chrome.browserAction.onClicked.addListener(function(){
             }
 
             var response = JSON.parse(this.responseText);
-            var title = response.status === 'success' ? response.data.title : 'Error occurred';
-            var body = response.status === 'success' ? response.data.description : response.message;
+            var title = response.status === 'success' ? response.title : 'Error occurred';
+            var body = response.status === 'success' ? response.description : response.message;
 
             /** global: Notification */
             new Notification(title, {icon: 'feednews.png', body: body});

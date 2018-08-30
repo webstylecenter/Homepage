@@ -35,9 +35,9 @@ class FeedController extends Controller
     protected $userManager;
 
     /**
-     * @var bool
+     * @var null|string
      */
-    protected $postAsPeter = false;
+    protected $postByEmail;
 
     /**
      * @param FeedService $feedService
@@ -80,12 +80,17 @@ class FeedController extends Controller
     }
 
     /**
-     * @Route("/chrome/import/")
+     * @Route("/chrome/import/{email}", defaults={"email"=0})
      * @param Request $request
+     * @param null $email
      * @return JsonResponse
      */
-    public function addFeedItemFromExtensionAction(Request $request)
+    public function addFeedItemFromExtensionAction(Request $request, $email)
     {
+        if (strlen($email) > 0) {
+            $this->postByEmail = $email;
+        }
+
         $metaData = $this->metaService->getByUrl($request->get('url'));
 
         if (!$metaData) {
@@ -106,41 +111,6 @@ class FeedController extends Controller
 
         return new JsonResponse([
             'status' => 'success',
-            'data' => [
-                'title' => $metaData->getTitle(),
-                'description' => $metaData->getMetaDescription(),
-                'url' => $metaData->getUrl(),
-            ]
-        ]);
-    }
-
-    /**
-     * @Route("/chrome/import-from-app/")
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function addFeedItemFromAppAction(Request $request)
-    {
-        $this->postAsPeter = true;
-        $metaData = $this->metaService->getByUrl($request->get('url'));
-
-        if (!$metaData) {
-            return new JsonResponse([
-                'title' => 'fail',
-                'description' => 'No metadata found for url "' . $request->get('url') . '"',
-            ]);
-        }
-
-        try {
-            $this->createFeedItem($metaData);
-        } catch (\Exception $exception) {
-            return new JsonResponse([
-                'title' => 'error',
-                'description' => 'No metadata found for url "' . $request->get('url') . '"',
-            ]);
-        }
-
-        return new JsonResponse([
             'title' => $metaData->getTitle(),
             'description' => $metaData->getMetaDescription(),
             'url' => $metaData->getUrl(),
@@ -307,8 +277,8 @@ class FeedController extends Controller
         $userFeedItem->setFeedItem($feedItem);
 
         $user = $this->getUser();
-        if (!$user && $this->postAsPeter) {
-            $user = $this->userManager->findUserByEmail('peter@petervdam.nl');
+        if (!$user && strlen($this->postByEmail) > 0) {
+            $user = $this->userManager->findUserByEmail($this->postByEmail);
         }
 
         $userFeedItem->setUser($user);

@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable no-undef,no-param-reassign */
 /** global: chrome */
 
 const HEADER_BLACKLIST = [
@@ -33,10 +33,12 @@ chrome.browserAction.onClicked.addListener(() => {
 
 chrome.webRequest.onHeadersReceived.addListener(
   (details) => {
-    details.responseHeaders.filter((header) => {
+    const filteredHeaders = details.responseHeaders.filter((header) => {
       const sanitizedHeader = header.name.toLowerCase();
       return HEADER_BLACKLIST.indexOf(sanitizedHeader) < 0;
     });
+
+    return { responseHeaders: filteredHeaders };
   },
   { urls: ['<all_urls>'] },
   ['blocking', 'responseHeaders'],

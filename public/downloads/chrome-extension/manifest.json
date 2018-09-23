@@ -15,8 +15,12 @@
     "https://feednews.me/chrome/import/",
     "webRequest",
     "webRequestBlocking",
+    "contextMenus",
     "<all_urls>"
   ],
+  "icons": {
+    "16": "feednews.png"
+  },
   "web_accessible_resources": [
     "feednews.png"
   ],

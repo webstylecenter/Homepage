@@ -11,8 +11,7 @@ use App\Entity\Meta;
 class MetaService
 {
     /**
-     * @param $url
-     *
+     * @param string $url
      * @return Meta
      */
     public function getByUrl($url)
@@ -29,15 +28,15 @@ class MetaService
     }
 
     /**
-     * @param $url
-     * @return boolean|string
+     * @param string $url
+     * @return string
      */
     protected function loadContent($url)
     {
         $options = [
             'http' => [
                 'method' => 'GET',
-                'header' => 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36' . PHP_EOL
+                'header' => 'User-Agent: facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)' . PHP_EOL
             ]
         ];
 
@@ -47,7 +46,6 @@ class MetaService
 
     /**
      * @param \DOMDocument $doc
-     *
      * @return string|null
      */
     protected function findTitle(\DOMDocument $doc)

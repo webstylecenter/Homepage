@@ -82,7 +82,7 @@ class FeedController extends Controller
     /**
      * @Route("/chrome/import/{email}", defaults={"email"=0})
      * @param Request $request
-     * @param null $email
+     * @param null|string $email
      * @return JsonResponse
      */
     public function addFeedItemFromExtensionAction(Request $request, $email)

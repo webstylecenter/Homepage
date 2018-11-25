@@ -5,10 +5,13 @@
     </div>
 
     <div class="weather--forecast">
-        {% for weatherDay in  forecast.upcoming %}
+        {% for weatherDay in forecast.upcoming %}
             <div class="weather--forecast-day">
                 <div class="weather--icon-small icon_{{ weatherDay.type }}"></div>
-                <div class="max">{{ weatherDay.maxTemperature|number_format(0, '.', ',') }}&deg;C</div>
+                <div class="max">
+                    {{ weatherDay.maxTemperature|number_format(0, '.', ',') }}&deg;C <br />
+                    {{ "now"|date_modify('+' ~ loop.index0 ~ 'day')|date('D') }}
+                </div>
             </div>
         {% endfor %}
     </div>

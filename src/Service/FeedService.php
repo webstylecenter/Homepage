@@ -91,7 +91,8 @@ class FeedService
      */
     public function getUserFeeds(User $user)
     {
-        return $this->userFeedRepository->getAllForUser($user);
+        $userFeeds = $this->userFeedRepository->getAllForUser($user);
+        return $this->sortUserFeeds($userFeeds);
     }
 
     /**
@@ -129,5 +130,19 @@ class FeedService
         if (count($users) === 0) {
             $this->feedRepository->remove($userFeed->getFeed());
         }
+    }
+
+    /**
+     * @param $userFeeds
+     * @return mixed
+     */
+    private function sortUserFeeds($userFeeds)
+    {
+        usort($userFeeds, function($a, $b)
+        {
+            return strcmp($a->getFeed()->getName(), $b->getFeed()->getName());
+        });
+
+        return $userFeeds;
     }
 }

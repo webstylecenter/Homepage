@@ -38,14 +38,10 @@ class WelcomeController extends Controller
     public function index()
     {
         $device = new Mobile_Detect();
-        if ($device->isMobile() && !$device->isTablet()) {
-            return $this->render('welcome/mobile.html.twig', [
-                'bodyClass' => 'loading-screen'
-            ]);
-        }
 
         return $this->render('welcome/index.html.twig', [
             'bodyClass' => 'welcome',
+            'isMobile' => $device->isMobile(),
             'notes' => $this->noteService->getForUser($this->getUser()),
             'todos' => $this->checklistService->getUncheckedItemsForUser($this->getUser())
         ]);

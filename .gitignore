@@ -10,3 +10,4 @@ yarn-error.log
 /phpunit.xml
 /.web-server-pid
 /.build
+/public/.htaccess

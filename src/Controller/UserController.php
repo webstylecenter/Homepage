@@ -81,6 +81,13 @@ class UserController extends Controller
      */
     private function validateRegister(Request $request)
     {
+        if (strlen($request->get('username')) === 0 || strlen($request->get('password')) === 0 || strlen($request->get('email')) === 0) {
+            return $this->render('user/register.html.twig', [
+                'bodyClass' => 'register',
+                'error' => 'You need to enter all details to successfully register'
+            ]);
+        }
+
         $userManager = $this->get('fos_user.user_manager');
         if ($userManager->findUserByEmail(strtolower($request->get('email')))) {
             return $this->render('user/register.html.twig', [

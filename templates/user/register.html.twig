@@ -16,11 +16,11 @@
 
     <div class="registerBox">
         <form method="post">
-            <input type="text" name="username" id="username" placeholder="username" />
-            <input type="text" name="email" placeholder="Email address" />
-            <input type="password" name="password" id="password" placeholder="password" />
+            <input type="text" name="username" id="username" placeholder="username" required="required" />
+            <input type="text" name="email" placeholder="Email address" required="required" />
+            <input type="password" name="password" id="password" placeholder="password" required="required" />
 
-            <input type="checkbox" value="on" name="gdpr" id="gdpr" /><label for="gdpr">I agree that the above filled in data will be stored on Feednews servers for login purposes.</label><br />&nbsp;<br />
+            <input type="checkbox" value="on" name="gdpr" id="gdpr" required="required" /><label for="gdpr">I agree that the above filled in data will be stored on Feednews servers for login purposes as described in our <a href="/privacy-policy/">Privacy Policy</a>.</label><br />&nbsp;<br />
             <input type="submit" value="Create account" />
         </form>
     </div>

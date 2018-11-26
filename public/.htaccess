@@ -11,5 +11,11 @@
     </IfModule>
 </IfModule>
 
-#RewriteCond %{SERVER_PORT} 80
-#RewriteRule ^(.*)$ https://feednews.me/ [R=301,L]
+<If "%{HTTP_HOST} == 'feednews.me'">
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://feednews.me/ [R=301,L]
+</If>
+<If "%{HTTP_HOST} == 'www.feednews.me'">
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://feednews.me/ [R=301,L]
+</If>

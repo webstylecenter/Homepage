@@ -72,6 +72,11 @@ class UserController extends Controller
         $this->validateRegister($request);
         $this->createUser($request);
 
+        if ($user = $this->validateUser($request->get('username'), $request->get('password'))) {
+            $this->signInUser($user, $request);
+            return new RedirectResponse('/');
+        }
+
         return new RedirectResponse('/login');
     }
 

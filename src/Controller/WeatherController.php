@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Service\WeatherService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class WeatherController extends Controller
+class WeatherController extends AbstractController
 {
     /**
      * @Route("/weather/{type}/")

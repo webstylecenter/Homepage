@@ -5,11 +5,11 @@ namespace App\Controller;
 use App\Service\ChecklistService;
 use App\Service\NoteService;
 use Mobile_Detect;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class WelcomeController extends Controller
+class WelcomeController extends AbstractController
 {
     /**
      * @var ChecklistService

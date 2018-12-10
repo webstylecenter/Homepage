@@ -5,12 +5,12 @@ namespace App\Controller;
 use App\Entity\ChecklistItem;
 use App\Entity\UserFeedItem;
 use App\Service\ChecklistService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ChecklistController extends Controller
+class ChecklistController extends AbstractController
 {
     /**
      * @var ChecklistService

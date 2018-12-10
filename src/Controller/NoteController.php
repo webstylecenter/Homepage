@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Note;
 use App\Service\NoteService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class NoteController extends Controller
+class NoteController extends AbstractController
 {
     /**
      * @var NoteService

@@ -6,19 +6,18 @@ use App\Entity\Feed;
 use App\Entity\User;
 use App\Entity\UserFeed;
 use App\Repository\FeedItemRepository;
-use App\Repository\UserFeedItemRepository;
 use App\Repository\UserFeedRepository;
 use App\Service\FeedService;
 use App\Service\ImportService;
 use App\Service\UserService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class SettingsController extends Controller
+class SettingsController extends AbstractController
 {
     /**
      * @var FeedService

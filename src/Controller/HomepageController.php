@@ -2,20 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Feed;
-use App\Entity\FeedItem;
 use App\Entity\FeedListFilter;
-use App\Entity\User;
-use App\Entity\UserFeedItem;
 use App\Service\FeedService;
 use App\Service\WeatherService;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Detection\MobileDetect;
 
-class HomepageController extends Controller
+class HomepageController extends AbstractController
 {
     /**
      * @var FeedService

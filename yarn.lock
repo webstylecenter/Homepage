@@ -3021,6 +3021,10 @@ flow-parser@^0.*:
   version "0.79.1"
   resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.79.1.tgz#bd556bf1b0416e6a3ada6398df360c3747cecf3f"
 
+fluent-reveal-effect@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fluent-reveal-effect/-/fluent-reveal-effect-1.0.0.tgz#0c201c4bddd52aa009ecbd8b2ccb83c2c81677a6"
+
 flush-write-stream@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.0.3.tgz#c5d586ef38af6097650b49bc41b55fabb19f35bd"

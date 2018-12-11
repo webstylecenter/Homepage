@@ -40,6 +40,7 @@
   padding: 10px;
   border-left: 5px solid #ffbe3f;
   position: relative;
+  transition: all 200ms ease;
 
   &:nth-child(odd) {
     background: rgba(123, 123, 123, 0.05);

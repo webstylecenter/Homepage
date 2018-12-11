@@ -28,11 +28,11 @@
         <span data-balloon="Open settings" data-balloon-pos="down" data-url="/settings/" class="js-open-url hide-if-mobile"><span class="fa fa-cog fa-x4"></span></span>
 
         <div class="action-search--wrapper hide-if-mobile">
-            <input class="js-search-feed" type="text" name="q" placeholder="Search feeds or add items to checklist" autocomplete="off" />
+            <input class="js-search-feed fluent-light" type="text" name="q" placeholder="Search feeds or add items to checklist" autocomplete="off" />
             <div style="display: none;" class="js-search-list feed-list feed-list--type-search"></div>
         </div>
 
-        <div data-balloon="Click to open menu" data-balloon-pos="down" class="action-user js-open-profile-menu">
+        <div data-balloon="Click to open menu" data-balloon-pos="down" class="action-user js-open-profile-menu fluent-dark">
                 {{ app.user.username }}
             </div>
         {% if not app.request.server.get("DROP_LOCATION") == null and isAdmin  %}

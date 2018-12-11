@@ -9,6 +9,7 @@ window.Handlebars = require('handlebars/dist/handlebars.min.js');
 import { WOW } from 'wowjs';
 
 import 'handlebars/dist/handlebars.min.js';
+import './components/fluent';
 
 /** global: WOW */
 new WOW({

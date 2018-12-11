@@ -25,7 +25,7 @@
     display: inline-block;
 
     &:hover {
-      background-color: #8DC5FF;
+      transition: all 200ms ease;
       cursor: pointer;
     }
   }

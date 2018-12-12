@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,11 +16,26 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class UserController extends AbstractController
 {
+    /**
+     * @var EncoderFactoryInterface
+     */
     protected $encoderFactory;
 
-    public function __construct(EncoderFactoryInterface $encoderFactory)
+    /**
+     * @var UserManagerInterface
+     */
+    protected $userManager;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    public function __construct(EncoderFactoryInterface $encoderFactory, UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->encoderFactory = $encoderFactory;
+        $this->userManager = $userManager;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -93,7 +110,7 @@ class UserController extends AbstractController
             ]);
         }
 
-        $userManager = $this->get('fos_user.user_manager');
+        $userManager = $this->userManager;
         if ($userManager->findUserByEmail(strtolower($request->get('email')))) {
             return $this->render('user/register.html.twig', [
                 'bodyClass' => 'register',
@@ -107,7 +124,7 @@ class UserController extends AbstractController
      */
     private function createUser(Request $request)
     {
-        $userManager = $this->get('fos_user.user_manager');
+        $userManager = $this->userManager;
         $user = $userManager->createUser();
         $user->setUsername(strtolower($request->get('username')));
         $user->setEmail(strtolower($request->get('email')));
@@ -124,7 +141,7 @@ class UserController extends AbstractController
      */
     private function validateUser($username, $password)
     {
-        $userManager = $this->get('fos_user.user_manager');
+        $userManager = $this->userManager;
         $user = $userManager->findUserByUsername(strtolower($username));
 
         if (!$user) {
@@ -153,7 +170,7 @@ class UserController extends AbstractController
 
         $this->get('session')->set('_security_main', serialize($token));
         $event = new InteractiveLoginEvent($request, $token);
-        $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+        $this->eventDispatcher->dispatch("security.interactive_login", $event);
     }
 
     /**

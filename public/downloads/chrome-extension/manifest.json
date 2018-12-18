@@ -12,7 +12,7 @@
   "permissions": [
     "tabs",
     "notifications",
-    "https://feednews.me/chrome/import/",
+    "https://www.feednews.me/chrome/import/",
     "webRequest",
     "webRequestBlocking",
     "contextMenus",

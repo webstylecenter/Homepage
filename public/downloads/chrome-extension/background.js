@@ -8,7 +8,7 @@ const HEADER_BLACKLIST = [
 
 const pushLink = (link) => {
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'https://feednews.me/chrome/import', true);
+  xhr.open('POST', 'https://www.feednews.me/chrome/import', true);
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
   xhr.onreadystatechange = () => {

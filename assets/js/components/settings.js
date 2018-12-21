@@ -127,4 +127,24 @@ $(function () {
                 });
         }
     });
+
+    $('.js-follow-feed').on('click', function() {
+
+        let that = this;
+
+        $.post("/settings/feeds/follow/", {
+            feed_id: $(this).data('feed-id'),
+        })
+          .done(function (data) {
+              if (data.status === 'success') {
+                  $(that).html('Following').css('background-color', 'whitesmoke').css('color' , 'gray');
+                  $('.refreshNotice').show();
+              } else {
+                  showDialog('Cannot add Feed', 'An error occured while adding the feed:<br /><br />' + data.message.substr(0, 300));
+              }
+          })
+          .fail(function (data) {
+              showDialog('Cannot add Feed', 'An error occured while adding the feed:<br /><br />' + data.toString().substr(0, 300));
+          });
+    })
 });

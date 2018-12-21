@@ -1,7 +1,51 @@
 .page--settings {
 
+  .content-left {
+    float: left;
+    width: 39%;
+    box-sizing: border-box;
+
+    @include respond-to(mobile) {
+      display: block;
+      width: 100%;
+      float: none;
+    }
+  }
+
+  .content-right {
+    width: 59%;
+    box-sizing: border-box;
+    float: right;
+
+    @include respond-to(mobile) {
+      display: block;
+      float: none;
+      width: 100%;
+    }
+  }
+
+  .refreshNotice {
+    color: $blue;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: none;
+  }
+
   a {
     color: $blue;
+  }
+
+  .button {
+    background-color: $blue;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    padding: 3px 5px;
+    float: right;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .settingsContainer {
@@ -15,29 +59,25 @@
     overflow-y: auto;
   }
 
+  h1 {
+    color: $blue;
+    font-weight: lighter;
+    margin: 10px 0 0 0;
+    border: 0;
+    padding: 0;
+  }
+
   .forms, .userFeeds {
     display: block;
     clear: both;
   }
 
   .form {
-    border: 1px solid $blue;
     border-radius: 15px;
     padding: 10px;
-    width: 350px;
-    box-sizing: border-box;
     margin: 0 20px 50px 0;
-    display: inline-block;
-    height: 284px;
-    float: left;
+    display: block;
 
-    h1 {
-      color: $blue;
-      font-weight: lighter;
-      margin: 10px 0 0 0;
-      border: 0;
-      padding: 0;
-    }
 
     input {
       font-size: 12pt;
@@ -46,8 +86,8 @@
 
     input[type=text], select {
       border: 0;
-      border-bottom: 1px solid $blue;
-      padding: 3px;
+      background-color: #e5e5e5;
+      padding: 3px 5px;
       width:300px;
       margin-bottom: 20px;
       display: inline-block;
@@ -81,6 +121,11 @@
     td {
       margin: 0;
       padding: 5px 10px;
+      font-size: 12pt;
+
+      @include respond-to(mobile) {
+        font-size: 10pt;
+      }
     }
 
     tr:nth-child(even) {
@@ -139,7 +184,6 @@
 
     .feedName {
       width: 78%;
-      font-size: 12pt;
       padding: 8px;
     }
 

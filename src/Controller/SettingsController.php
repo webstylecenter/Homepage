@@ -68,12 +68,14 @@ class SettingsController extends AbstractController
         $userFeeds = $this->feedService->getUserFeeds($this->getUser());
         $users = $this->userService->getAllUsers();
         $feeds = $this->feedService->getFeeds();
+        $availableFeeds = $this->feedService->getAvailableFeeds($this->getUser());
 
         return $this->render('settings/index.html.twig', [
             'bodyClass' => 'settings',
             'userFeeds' => $userFeeds,
             'users' => $users,
-            'feeds' => $feeds
+            'feeds' => $feeds,
+            'availableFeeds' => $availableFeeds
         ]);
     }
 
@@ -116,6 +118,28 @@ class SettingsController extends AbstractController
 
         $userFeed = $this->createUserFeed($feed, $request);
 
+        return new JsonResponse([
+            'id' => $userFeed->getId(),
+            'status' => 'success'
+        ]);
+    }
+
+    /**
+     * @Route("/settings/feeds/follow/")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function followAction(Request $request)
+    {
+        $feed = $this->feedService->getFeedById($request->get('feed_id'));
+        if ($this->userFeedRepository->findOneBy(['user'=> $this->getUser(), 'feed'=> $feed])) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'This feed is already added to your account. Please refresh the browser if you\'re not seeing the feed. It might take some time before items show up, depending on feed updates.'
+            ]);
+        }
+
+        $userFeed = $this->createUserFeed($feed, $request);
         return new JsonResponse([
             'id' => $userFeed->getId(),
             'status' => 'success'
@@ -220,8 +244,8 @@ class SettingsController extends AbstractController
         $userFeed = new UserFeed();
         $userFeed->setFeed($feed);
         $userFeed->setUser($this->getUser());
-        $userFeed->setColor($request->get('color'));
-        $userFeed->setIcon($request->get('icon'));
+        $userFeed->setColor($request->get('color', $this->generateRandomColor()));
+        $userFeed->setIcon($request->get('icon', ''));
         $userFeed->setAutoPin(($request->get('autoPin') === "true"));
 
         $this->feedService->persistUserFeed($userFeed);
@@ -229,5 +253,18 @@ class SettingsController extends AbstractController
         $this->importService->addOldItems($feed, $userFeed);
         $this->importService->read($feed);
         return $userFeed;
+    }
+
+    /**
+     * @return string
+     */
+    protected function generateRandomColor()
+    {
+        return round(rand(0, 9)) .
+            round(rand(0, 9)) .
+            round(rand(0, 9)) .
+            round(rand(0, 9)) .
+            round(rand(0, 9)) .
+            round(rand(0, 9));           ;
     }
 }

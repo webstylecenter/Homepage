@@ -133,6 +133,42 @@ class FeedService
     }
 
     /**
+     * @param $feedId
+     * @return Feed|null
+     */
+    public function getFeedById($feedId)
+    {
+        return $this->feedRepository->findOneBy(['id' => $feedId]);
+    }
+
+    /**
+     * @param User $user
+     * @return array
+     */
+    public function getAvailableFeeds(User $user)
+    {
+        $userFeeds = $this->getUserFeeds($user);
+        $feeds = $this->getFeeds();
+
+        $availableFeeds = [];
+        foreach ($feeds as $feed) {
+            $found = false;
+            foreach ($userFeeds as $userFeed) {
+                if ($userFeed->getFeed() === $feed) {
+                    $found = true;
+                    break;
+                }
+            }
+
+            if (!$found) {
+                $availableFeeds[] = $feed;
+            }
+        }
+
+        return $availableFeeds;
+    }
+
+    /**
      * @param $userFeeds
      * @return mixed
      */

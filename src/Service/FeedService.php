@@ -48,6 +48,25 @@ class FeedService
     }
 
     /**
+     * @param User $user
+     * @param int $userFeedItemId
+     */
+    public function setOpenedItemsForUser(User $user, $userFeedItemId)
+    {
+        $userFeedItem = $this->userFeedItemRepository->findOneBy(['id' => $userFeedItemId, 'user' => $user]);
+        $this->userFeedItemRepository->setOpenedItemsForUser($userFeedItem);
+    }
+
+    /**
+     * @param User $user
+     * @return UserFeedItem[]
+     */
+    public function getOpenedItemsForUser(User $user)
+    {
+        return $this->userFeedItemRepository->getOpenedItemsForUser($user);
+    }
+
+    /**
      * @param UserFeedItem $userFeedItem
      */
     public function persistUserFeedItem(UserFeedItem $userFeedItem)

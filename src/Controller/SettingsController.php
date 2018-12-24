@@ -132,7 +132,7 @@ class SettingsController extends AbstractController
     public function followAction(Request $request)
     {
         $feed = $this->feedService->getFeedById($request->get('feed_id'));
-        if ($this->userFeedRepository->findOneBy(['user'=> $this->getUser(), 'feed'=> $feed])) {
+        if ($this->userFeedRepository->findOneBy(['user' => $this->getUser(), 'feed'=> $feed])) {
             return new JsonResponse([
                 'status' => 'error',
                 'message' => 'This feed is already added to your account. Please refresh the browser if you\'re not seeing the feed. It might take some time before items show up, depending on feed updates.'

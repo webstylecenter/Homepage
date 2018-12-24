@@ -2,29 +2,13 @@
   backdrop-filter: blur(10px);
   color: black;
   background: #f7f7f7;
-
-  @include respond-to(mobile) {
-    width: 100%;
-  }
-
-  @include respond-to(tablet) {
-    width: 100%;
-  }
+  width: 100%;
 
   &--separator {
     padding: 10px;
     text-align: center;
     border-left: 5px solid lightgray;
     color: $blue;
-  }
-
-  &--type-search {
-    position: fixed;
-    z-index: 1000;
-    width: $header-width-search;
-    margin-top: 4px;
-    opacity: 0.8;
-    border-radius: 15px;
   }
 
   .jscroll-next {

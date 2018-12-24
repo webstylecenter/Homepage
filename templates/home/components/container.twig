@@ -1,6 +1,20 @@
-<aside data-is-mobile="{{ device.isMobile }}" data-hideXframe="{{ app.user.hideXframeNotice }}" class="feed-list feed-list--type-sidebar {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
-        {% include 'home/components/newsfeed.html.twig' with {'userFeedItems': userFeedItems} %}
-</aside>
+<div class="tabs">
+    <div class="tab tab--recent">
+        <aside data-is-mobile="{{ device.isMobile }}" data-hideXframe="{{ app.user.hideXframeNotice }}" class="feed-list feed-list--type-sidebar {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
+            {% include 'home/components/newsfeed.html.twig' with {'userFeedItems': userFeedItems} %}
+        </aside>
+    </div>
+    <div class="tab tab--history"></div>
+    <div class="tab tab--search">
+        <input type="text" name="query" class="search-query js-search-feed" placeholder="Search feed items" />
+        <div class="js-search-list"></div>
+    </div>
+</div>
+<div class="tabBar">
+    <button class="active" data-open-tab="recent"><span class="fa fa-clock fa-x4"></span> Recent items</button>
+    <button data-open-tab="history"><span class="fa fa-history fa-x4"></span> Last opened</button>
+    <button data-open-tab="search"><span class="fa fa-search fa-x4"></span> Search</button>
+</div>
 
 <div class="content iFramesContainer hide-if-mobile" style="overflow:auto; -webkit-overflow-scrolling: touch;">
     <iframe

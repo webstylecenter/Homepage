@@ -8,6 +8,7 @@ require('./components/searchbox');
 require('./components/settings');
 require('./components/welcome');
 require('./components/register');
+require('./components/tabs');
 
 window.showDialog = function(title, description) {
     $('.dialog .title').html(title);

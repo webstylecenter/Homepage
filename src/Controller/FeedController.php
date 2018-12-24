@@ -263,6 +263,52 @@ class FeedController extends AbstractController
     }
 
     /**
+     * @Route("/feed/set-opened/")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function setOpenedItem(Request $request)
+    {
+        if ($request->get('userFeedItemId') === null) {
+            return new JsonResponse([
+                'status' => 'fail',
+                'message' => 'No user feed item id has been set'
+            ]);
+        }
+
+        $this->feedService->setOpenedItemsForUser($this->getUser(), (int) $request->get('userFeedItemId'));
+        return new JsonResponse([
+            'status' => 'success',
+            'message' => 'Set item to opened'
+        ]);
+    }
+
+    /**
+     * @Route("/feed/opened/")
+     * @return JsonResponse
+     */
+    public function getOpenedItems()
+    {
+        $userFeedItems = $this->feedService->getOpenedItemsForUser($this->getUser());
+        return new JsonResponse([
+            'status' => 'success',
+            'items' => array_map(function(UserFeedItem $userFeedItem) {
+                $feedItem = $userFeedItem->getFeedItem();
+                return [
+                    'id' => $userFeedItem->getId(),
+                    'title' => $feedItem->getTitle(),
+                    'description' => $feedItem->getDescription(),
+                    'url' => $feedItem->getUrl(),
+                    'color' => ($userFeedItem->getUserFeed() !== null ? $userFeedItem->getUserFeed()->getColor() : ''),
+                    'feedIcon' => ($userFeedItem->getUserFeed() !== null ? $userFeedItem->getUserFeed()->getIcon() : ''),
+                    'shareId' => ($userFeedItem->getUserFeed() !== null ? $userFeedItem->getUserFeed()->getFeed()->getName() : 'item') . '/' . $userFeedItem->getId() . '/',
+                    'pinned' => $userFeedItem->isPinned()
+                ];
+            }, $userFeedItems)
+        ]);
+    }
+
+    /**
      * @param Meta $meta
      */
     private function createFeedItem(Meta $meta)

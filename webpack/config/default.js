@@ -1,9 +1,6 @@
 const path = require('path');
-
 const BASE_PATH = path.resolve(__dirname, '../..');
-
 const PUBLIC_FOLDER = 'public';
-
 const DEFAULT_CONFIG = {
   /**
    * Debug mode (true|false). Should be disabled on production builds

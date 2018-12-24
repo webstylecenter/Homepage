@@ -56,6 +56,12 @@ class UserFeedItem
     protected $pinned = false;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @var boolean
+     */
+    protected $opened = false;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -149,5 +155,21 @@ class UserFeedItem
     public function setPinned(bool $pinned)
     {
         $this->pinned = $pinned;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOpened()
+    {
+        return $this->opened;
+    }
+
+    /**
+     * @param bool $opened
+     */
+    public function setOpened(bool $opened)
+    {
+        $this->opened = $opened;
     }
 }

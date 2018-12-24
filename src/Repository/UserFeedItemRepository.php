@@ -38,6 +38,34 @@ class UserFeedItemRepository extends ServiceEntityRepository
     /**
      * @param UserFeedItem $userFeedItem
      */
+    public function setOpenedItemsForUser(UserFeedItem $userFeedItem)
+    {
+        $this->createQueryBuilder('ufi')->update()
+            ->set('ufi.opened', 1)
+            ->where('ufi.id = :id')
+            ->setParameter('id', $userFeedItem->getId())
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * @param User $user
+     * @return UserFeedItem[]
+     */
+    public function getOpenedItemsForUser(User $user)
+    {
+        return $this->findBy([
+            'user' => $user,
+            'opened' => 1
+        ], [
+            'updatedAt' => 'DESC',
+            'id' => 'DESC'
+        ], 50);
+    }
+
+    /**
+     * @param UserFeedItem $userFeedItem
+     */
     public function persist(UserFeedItem $userFeedItem)
     {
         $this->getEntityManager()->persist($userFeedItem);

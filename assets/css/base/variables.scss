@@ -2,6 +2,9 @@ $header-height: 37px;
 $header-width-search: 380px;
 $sidebar-width: 450px;
 $footer-height: 55px;
+$tab-height: 37px;
+$tab-mobile-height: 55px;
+$mobile-bottom-height: $footer-height + $tab-mobile-height;
 
 $max-width-mobile: 870px;
 $min-width-tablet: $max-width-mobile + 1px;

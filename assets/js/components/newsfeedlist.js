@@ -27,13 +27,13 @@ $(function () {
     $(document)
         .on('click', '.js-open-url', function () {
             $('.header--bar, footer').css('backgroundColor', '#337dff');
-            openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'));
+            openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'), $(this).data('id'));
         })
         .on('click', '.js-action-feed-list-click', function () {
             $(this).addClass('animated pulse feed-list-item--state-selected');
             $('.feed-list-item').removeClass('feed-list-item--state-selected');
             $('.header--bar, footer').css('backgroundColor', $(this).css('borderLeftColor'));
-            openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'));
+            openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'), $(this).data('id'));
         })
         .on('click', '.js-return', function (e) {
             e.preventDefault();
@@ -120,7 +120,7 @@ global.requestNewFeedItems = function () {
     });
 };
 
-function openPage(url, shareId) {
+function openPage(url, shareId, userFeedItemId) {
     let isMobile = $('.feed-list--type-sidebar').attr('data-is-mobile');
     let disableXcheck = $('.feed-list--type-sidebar').attr('data-hideXframe');
     $('.profileMenu').slideUp();
@@ -134,6 +134,8 @@ function openPage(url, shareId) {
             hasXFrameHeader(url, shareId);
         }
     }
+
+    setItemToOpened(userFeedItemId);
 }
 
 function hasXFrameHeader(url, shareId) {
@@ -142,6 +144,16 @@ function hasXFrameHeader(url, shareId) {
             openInNewWindow(url);
         } else {
             openInFrame(url, shareId)
+        }
+    });
+}
+
+function setItemToOpened(userFeedItemId) {
+    $.post('/feed/set-opened/', {userFeedItemId: userFeedItemId}).then(function (data) {
+        if (data.status !== 'success') {
+            showDialog('Error', '<p>Something went wrong while opening your item.' +
+              ' Please check your internet connection if the issue continues.</p>' +
+              '<p>' + data.message + '</p>');
         }
     });
 }

@@ -7,7 +7,7 @@ module.exports = function (webpack, config) {
       'env',
       {
         targets: {
-          browsers: ['last 2 versions', 'ie >= 10'],
+          browsers: ['last 2 versions', 'ie >= 11'],
         },
         debug: true,
       },

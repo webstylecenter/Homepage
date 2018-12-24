@@ -1,6 +1,11 @@
-<div class="tabs">
+{% set darkTheme = '' %}
+{% if device.isMobile and (hour > 21 or hour < 8) %}
+    {% set darkTheme = 'darkTheme' %}
+{% endif %} %}
+
+<div class="tabs {{ darkTheme }}">
     <div class="tab tab--recent">
-        <aside data-is-mobile="{{ device.isMobile }}" data-hideXframe="{{ app.user.hideXframeNotice }}" class="feed-list feed-list--type-sidebar {% if device.isMobile and (hour > 21 or hour < 8) %}darkTheme{% endif %}">
+        <aside data-is-mobile="{{ device.isMobile }}" data-hideXframe="{{ app.user.hideXframeNotice }}" class="feed-list feed-list--type-sidebar {{ darkTheme }}">
             {% include 'home/components/newsfeed.html.twig' with {'userFeedItems': userFeedItems} %}
         </aside>
     </div>
@@ -10,7 +15,7 @@
         <div class="js-search-list"></div>
     </div>
 </div>
-<div class="tabBar">
+<div class="tabBar {{ darkTheme }}">
     <button class="active" data-open-tab="recent"><span class="fa fa-clock fa-x4"></span> Recent items</button>
     <button data-open-tab="history"><span class="fa fa-history fa-x4"></span> Last opened</button>
     <button data-open-tab="search"><span class="fa fa-search fa-x4"></span> Search</button>

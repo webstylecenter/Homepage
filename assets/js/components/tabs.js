@@ -30,6 +30,4 @@ function loadHistory() {
       feedItems: data.items
     }));
   });
-
-
 }

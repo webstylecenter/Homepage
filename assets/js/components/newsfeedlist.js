@@ -8,18 +8,16 @@ $(function () {
             $('.jscroll-added:last-of-type .js-action-feed-list-swipe').each(function() {
                 var mc = new Hammer(this);
                 var that = $(this);
-                mc.on('swiperight', function(ev) {
+                mc.on('swiperight', function() {
                     $(that).find('.pin').trigger('click');
                 });
             });
-
-
         }
     });
 
     $('.header--bar').each(function () {
         var mc = new Hammer(this);
-        mc.on('swiperight', function(ev) {
+        mc.on('swiperight', function() {
             $('.js-return').trigger('click');
         });
     });
@@ -44,7 +42,6 @@ $(function () {
             $('.Homepage').removeClass('pageOpen');
             $('footer .pageView').hide();
             $('footer .defaultView').show();
-
         })
         .on('click', '.js-reload-page', function () {
             event.preventDefault();
@@ -100,8 +97,7 @@ $(function () {
         .on('click', '.profileMenu', function() {
             $('.profileMenu').slideUp();
             $('.content-overlay').fadeOut();
-        })
-    ;
+        });
 
     $('.js-action-feed-list-swipe').each(function () {
         var mc = new Hammer(this);
@@ -149,13 +145,7 @@ function hasXFrameHeader(url, shareId) {
 }
 
 function setItemToOpened(userFeedItemId) {
-    $.post('/feed/set-opened/', {userFeedItemId: userFeedItemId}).then(function (data) {
-        if (data.status !== 'success') {
-            showDialog('Error', '<p>Something went wrong while opening your item.' +
-              ' Please check your internet connection if the issue continues.</p>' +
-              '<p>' + data.message + '</p>');
-        }
-    });
+    $.post('/feed/set-opened/', {userFeedItemId: userFeedItemId});
 }
 
 function openInFrame(url, shareId) {
@@ -216,14 +206,14 @@ function parseUrl(url, changeColors) {
     var videoId = url.replace('https://www.youtube.com/watch?v=', '');
     if (url !== videoId) {
         if (changeColors) {
-            $('.feed-list').addClass('darkTheme', 2000, 'easeInOutQuad');
+            $('.feed-list, .tabBar, .tabs').addClass('darkTheme', 2000, 'easeInOutQuad');
         }
         $('.header--bar, footer').css('backgroundColor', '#1a1a1a');
         return 'https://www.youtube.com/embed/' + videoId + '?autoplay=true';
     }
 
     if (changeColors) {
-        $('.feed-list').removeClass('darkTheme', '', 2000, 'easeInOutQuad');
+        $('.feed-list, .tabBar, .tabs').removeClass('darkTheme', '', 2000, 'easeInOutQuad');
     }
 
     if (location.protocol === 'https:') {

@@ -56,10 +56,10 @@ class UserFeedItem
     protected $pinned = false;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @var boolean
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
      */
-    protected $opened = false;
+    protected $opened;
 
     /**
      * @return mixed
@@ -158,17 +158,17 @@ class UserFeedItem
     }
 
     /**
-     * @return bool
+     * @return \DateTime|null
      */
-    public function isOpened()
+    public function getOpened()
     {
         return $this->opened;
     }
 
     /**
-     * @param bool $opened
+     * @param \DateTime $opened|null
      */
-    public function setOpened(bool $opened)
+    public function setOpened(\DateTime $opened)
     {
         $this->opened = $opened;
     }

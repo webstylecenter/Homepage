@@ -41,9 +41,11 @@ class UserFeedItemRepository extends ServiceEntityRepository
     public function setOpenedItemsForUser(UserFeedItem $userFeedItem)
     {
         $this->createQueryBuilder('ufi')->update()
-            ->set('ufi.opened', 1)
+            ->set('ufi.opened', ':opened')
             ->where('ufi.id = :id')
             ->setParameter('id', $userFeedItem->getId())
+            ->setParameter('opened', date('Y-m-d H:i:s'))
+            ->setMaxResults(50)
             ->getQuery()
             ->execute();
     }
@@ -54,13 +56,13 @@ class UserFeedItemRepository extends ServiceEntityRepository
      */
     public function getOpenedItemsForUser(User $user)
     {
-        return $this->findBy([
-            'user' => $user,
-            'opened' => 1
-        ], [
-            'updatedAt' => 'DESC',
-            'id' => 'DESC'
-        ], 50);
+        return $this->createQueryBuilder('ufi')->select()
+            ->where('ufi.user = :user')
+            ->andWhere('ufi.opened is not NULL')
+            ->orderBy('ufi.opened', 'DESC')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->execute();
     }
 
     /**

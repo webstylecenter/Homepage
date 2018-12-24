@@ -95,6 +95,30 @@
     button {
       padding: 10px 20px;
       font-size: 12pt;
+
+      @media only screen and (max-width: 500px) {
+        span {
+          display: none;
+        }
+
+        margin: 0px 5px;
+        padding: 10px 7px;
+      }
     }
   }
+}
+
+.tabBar.darkTheme {
+  background-color: #1a1a1a;
+
+  button {
+    color: #828282;
+  }
+
+  .active {
+    color: $blue;
+  }
+}
+.tabs.darkTheme {
+  background-color: #1a1a1a;
 }

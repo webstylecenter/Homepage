@@ -1,8 +1,11 @@
 .feed-list {
-  backdrop-filter: blur(10px);
   color: black;
   background: #f7f7f7;
-  width: 100%;
+  width: $sidebar-width;
+  position: fixed;
+  top: $header-height;
+  bottom: 0px;
+  overflow-y: auto;
 
   &--separator {
     padding: 10px;
@@ -17,6 +20,16 @@
 
   .noFeedItems {
     padding: 10px;
+  }
+
+  @include respond-to(mobile) {
+    top: $header-height;
+    bottom: $mobile-bottom-height;
+    width: 100%;
+  }
+
+  @include respond-to(tablet) {
+    width: 35%;
   }
 }
 

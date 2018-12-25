@@ -45,7 +45,6 @@ class UserFeedItemRepository extends ServiceEntityRepository
             ->where('ufi.id = :id')
             ->setParameter('id', $userFeedItem->getId())
             ->setParameter('opened', date('Y-m-d H:i:s'))
-            ->setMaxResults(50)
             ->getQuery()
             ->execute();
     }
@@ -61,6 +60,7 @@ class UserFeedItemRepository extends ServiceEntityRepository
             ->andWhere('ufi.opened is not NULL')
             ->orderBy('ufi.opened', 'DESC')
             ->setParameter('user', $user)
+            ->setMaxResults(50)
             ->getQuery()
             ->execute();
     }

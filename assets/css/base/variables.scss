@@ -1,9 +1,10 @@
+$tab-height: 37px;
+$tab-mobile-height: 55px;
 $header-height: 37px;
+$header-height-with-tabs: $header-height + $tab-height;
 $header-width-search: 380px;
 $sidebar-width: 450px;
 $footer-height: 55px;
-$tab-height: 37px;
-$tab-mobile-height: 55px;
 $mobile-bottom-height: $footer-height + $tab-mobile-height;
 
 $max-width-mobile: 870px;

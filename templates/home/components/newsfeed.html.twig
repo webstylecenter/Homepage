@@ -11,7 +11,7 @@
 
 {% for item in userFeedItems %}
     {% set hidePinnedItem = false %}
-    {% if 'now'|date_modify('- 14 days')|date('Y-m-d') > item.updatedAt|date('Y-m-d') %}
+    {% if 'now'|date_modify('- 14 days')|date('Y-m-d') > item.updatedAt|date('Y-m-d') or loop.index > 5 %}
         {% set hidePinnedItem = true %}
 
         {% if hadHiddenPinnedItem == false %}

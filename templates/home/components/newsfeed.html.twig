@@ -1,6 +1,7 @@
 {% set hadNewItems = false %}
 {% set showedEarlierTodayMessage = false %}
 {% set hadYesterdayBefore = false %}
+{% set hadHiddenPinnedItem = false %}
 
 {% if not userFeedItems and (searchQueryString is not defined or not searchQueryString) %}
     <div class="noFeedItems">
@@ -9,6 +10,19 @@
 {% endif %}
 
 {% for item in userFeedItems %}
+    {% set hidePinnedItem = false %}
+    {% if 'now'|date_modify('- 14 days')|date('Y-m-d') > item.updatedAt|date('Y-m-d') %}
+        {% set hidePinnedItem = true %}
+
+        {% if hadHiddenPinnedItem == false %}
+            <div class="hidden-feed-items js-show-hidden-pinned-items">
+                Show old pinned items
+            </div>
+        {% endif %}
+
+        {% set hadHiddenPinnedItem = true %}
+    {% endif %}
+
     {% if item.userFeed.icon is not defined %}
         {% set feedIcon = '' %}
     {% else %}
@@ -43,7 +57,7 @@
         {% set hadYesterdayBefore = true %}
     {% endif %}
 
-    <div class="feed-list-item js-action-feed-list-click js-action-feed-list-swipe fluent {% if not item.viewed %}feed-list-item--state-new{% endif %} {% if item.pinned %}feed-list-item--state-pinned{% endif %} {% if feedIcon %}hasIcon{% endif %}"
+    <div class="feed-list-item js-action-feed-list-click js-action-feed-list-swipe fluent {% if not item.viewed %}feed-list-item--state-new{% endif %} {% if item.pinned %}feed-list-item--state-pinned{% endif %} {% if feedIcon %}hasIcon{% endif %} {% if item.pinned and hidePinnedItem %}hidden-pinned-item{% endif %}"
          data-url="{{ item.feedItem.url }}" data-share-id="{{ feedName|slugify }}/{{ item.id }}/" data-id="{{ item.id }}" style="border-left-color:{{ feedColor }};">
         <div data-balloon="Pin item" data-balloon-pos="left" class="pin" data-pin-id="{{ item.id }}"><span class="fa fa-thumbtack"></span></div>
         <div data-balloon="Open in popup" data-balloon-pos="left" class="pip hide-if-mobile"><span class="fa fa-window-restore"></span></div>

@@ -97,7 +97,11 @@ $(function () {
         .on('click', '.profileMenu', function() {
             $('.profileMenu').slideUp();
             $('.content-overlay').fadeOut();
-        });
+        })
+      .on('click', '.js-show-hidden-pinned-items', function() {
+          $('.hidden-feed-items').hide();
+          $('.hidden-pinned-item').fadeIn();
+      });
 
     $('.js-action-feed-list-swipe').each(function () {
         var mc = new Hammer(this);

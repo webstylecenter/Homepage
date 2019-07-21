@@ -31,6 +31,23 @@
   @include respond-to(tablet) {
     width: 35%;
   }
+
+  .hidden-pinned-item {
+    display: none;
+  }
+
+  .hidden-feed-items {
+    border-left: 5px solid gray;
+    position: relative;
+    transition: all 200ms ease;
+    padding: 10px;
+    background-color: rgba(197, 197, 197, 0.5);
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(113, 113, 113, 0.5);
+    }
+  }
 }
 
 .feed-list-item {

@@ -62,5 +62,28 @@ a {
   }
 }
 
+/* TODO: Move to a better location */
+.icon_rain {
+  background-image: url('/images/rain.png');
+}
 
+.icon_cloud {
+  background-image: url('/images/cloud.png');
+}
+
+.icon_partly_cloud {
+  background-image: url('/images/partly_cloud.png');
+}
+
+.icon_snow {
+  background-image: url('/images/snow.png');
+}
+
+.icon_sun {
+  background-image: url('/images/sun.png');
+}
+
+.icon_thunderstorm {
+  background-image: url('/images/thunder.png');
+}
 

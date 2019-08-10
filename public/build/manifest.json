@@ -1,6 +1,10 @@
 {
-  "js-app.js": "/build/js/js-app.js?v=ee7c66",
-  "js-vendor.js": "/build/js/js-vendor.js?v=ee7c66",
-  "css-app.css": "/build/css/css-app.css?h=ee7c66",
-  "css-app.js": "/build/js/css-app.js?v=ee7c66"
+  "build/0.cd001f3d.js": "/build/0.cd001f3d.js",
+  "build/1.5ae15b07.js": "/build/1.5ae15b07.js",
+  "build/2.924f210c.js": "/build/2.924f210c.js",
+  "build/app.js": "/build/app.7b9a0a1d.js",
+  "build/css.css": "/build/css.8682e0c2.css",
+  "build/css.js": "/build/css.89fac397.js",
+  "build/runtime.js": "/build/runtime.e75311e7.js",
+  "build/vendor.js": "/build/vendor.955e98e1.js"
 }

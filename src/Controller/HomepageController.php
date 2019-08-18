@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\FeedListFilter;
 use App\Service\FeedService;
+use App\Service\UserSettingService;
 use App\Service\WeatherService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,13 +24,20 @@ class HomepageController extends AbstractController
     protected $weatherService;
 
     /**
+     * @var UserSettingService $userSettingService
+     */
+    protected $userSettingService;
+
+    /**
      * @param FeedService $feedService
      * @param WeatherService $weatherService
+     * @param UserSettingService $userSettingService
      */
-    public function __construct(FeedService $feedService, WeatherService $weatherService)
+    public function __construct(FeedService $feedService, WeatherService $weatherService, UserSettingService $userSettingService)
     {
         $this->feedService = $feedService;
         $this->weatherService = $weatherService;
+        $this->userSettingService = $userSettingService;
     }
 
     /**
@@ -49,6 +57,7 @@ class HomepageController extends AbstractController
             'bodyClass' => 'Homepage',
             'forecast' => $this->weatherService->getForecastList(),
             'userFeedItems' => $userFeedItems,
+            'settings' => $this->userSettingService->getAllSettings($this->getUser()),
             'device' => new MobileDetect(),
             'nextPageNumber' => 2,
         ]);

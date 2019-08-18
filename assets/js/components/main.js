@@ -32,10 +32,15 @@ $(function () {
             $('.content-overlay').fadeIn();
             $('.js-show-weather-radar').slideDown();
         })
+        .on('click', '.js-show-calendar', function () {
+            $('.content-overlay').fadeIn();
+            $('.header--bar-calendar-view').slideDown();
+        })
         .on('click', '.content-overlay, .feed-list', function () {
             $('.content-overlay').fadeOut();
             $('.js-show-weather-radar').slideUp();
             $('.profileMenu').slideUp();
+            $('.header--bar-calendar-view').slideUp();
         });
 
     $('.specialTxt').each(function () {

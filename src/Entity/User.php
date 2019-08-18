@@ -56,6 +56,12 @@ class User extends BaseUser
      */
     protected $userAgent;
 
+    /**
+     * @ORM\OneToMany(targetEntity="UserSetting", mappedBy="user", cascade={"persist", "remove"})
+     * @var UserSetting[]
+     */
+    protected $userSettings;
+
     public function __construct()
     {
         parent::__construct();
@@ -174,5 +180,23 @@ class User extends BaseUser
     public function setUserAgent(string $userAgent)
     {
         $this->userAgent = $userAgent;
+    }
+
+    /**
+     * @return UserSetting[]
+     */
+    public function getUserSettings()
+    {
+        return $this->userSettings;
+    }
+
+    /**
+     * @param UserSetting[] $userSettings
+     * @return User
+     */
+    public function setUserSettings(array $userSettings)
+    {
+        $this->userSettings = $userSettings;
+        return $this;
     }
 }

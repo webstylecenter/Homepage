@@ -17,8 +17,9 @@
     {% block header %}{% endblock %}
 </head>
 <body class="{% if bodyClass is defined %}{{ bodyClass }}{% endif %}" data-refresh-date="{{ "now"|date('Y-m-d H:i:s') }}">
-{% block body %}
-{% endblock %}
+
+<div id="like_button_container"></div>
+
 {% include 'modals/dialog.html.twig' %}
 {% block javascripts %}
     {{ encore_entry_script_tags('vendor') }}

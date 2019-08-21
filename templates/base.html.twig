@@ -15,7 +15,7 @@
     <meta name="Description" content="Read the news as it happens from different sources, watch YouTube and manage your todo's all in one place! Join us now on your Desktop, Tablet and phone">
     <meta name="keywords" content="online rss reader, feed, news">
     <meta name="theme-color" content="#f5f5f5">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ preload('https://use.fontawesome.com/releases/v5.0.13/css/all.css', { as: 'style'})}}" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     {% block header %}{% endblock %}
 </head>
 <body class="{% if bodyClass is defined %}{{ bodyClass }}{% endif %}" data-refresh-date="{{ "now"|date('Y-m-d H:i:s') }}">

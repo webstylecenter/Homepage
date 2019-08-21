@@ -110,6 +110,8 @@ $(function () {
             $(that).find('.pin').trigger('click');
         });
     });
+
+    $('.content-close-pip, .content-maximize-pip').hide();
 });
 
 global.requestNewFeedItems = function () {

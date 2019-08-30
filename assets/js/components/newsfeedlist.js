@@ -101,6 +101,10 @@ $(function () {
       .on('click', '.js-show-hidden-pinned-items', function() {
           $('.hidden-feed-items').hide();
           $('.hidden-pinned-item').fadeIn();
+      })
+      .on('click', '.js-refresh-feed-items', function() {
+          $('aside').scrollTop(0);
+          requestNewFeedItems();
       });
 
     $('.js-action-feed-list-swipe').each(function () {
@@ -115,7 +119,7 @@ $(function () {
 });
 
 global.requestNewFeedItems = function () {
-    $.getJSON('/feed/refresh/', function (html) {
+    $.get('/feed/refresh/', function (html) {
         $('.feed-list').prepend(html);
         $('.noFeedItems').html(html).addClass('feed-list').removeClass('noFeedItems');
         $('.js-form-feed').find("input[type=text], textarea").val("");

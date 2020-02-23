@@ -1,5 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/css/legacy.css": "/css/legacy.css",
+    "/js/legacy.js": "/js/legacy.js",
     "/js/vendor.js": "/js/vendor.js"
 }

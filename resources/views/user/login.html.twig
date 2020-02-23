@@ -1,0 +1,27 @@
+{% extends 'layouts/splitscreen' %}
+
+{% block title %}
+    {{ parent() }} - Read and manage News, Todo's and notes cross-platform
+{% endblock %}
+
+{% block leftContent %}
+    {% include '/user/leftcontent' %}
+{% endblock %}
+
+{% block rightContent %}
+    <div class="header">
+        <h1>Feednews.me</h1>
+    </div>
+    <h2>Public Beta</h2>
+
+    <p>Please sign in below</p>
+    <div class="signinBox">
+        <form method="post">
+            <input type="text" name="username" id="username" placeholder="username" />
+            <input type="password" name="password" id="password" placeholder="password" />
+            <input type="submit" value="Login" /> <a class="createAccount" href="{{ path('register') }}">Create account</a>
+        </form>
+    </div>
+
+    <p><a href="/privacy-policy/">Privacy Policy</a></p>
+{% endblock %}

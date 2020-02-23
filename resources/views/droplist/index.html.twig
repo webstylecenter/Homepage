@@ -1,0 +1,8 @@
+{% extends "base" %}
+
+{% block title %}{{ parent() }} - Droplist{% endblock %}
+
+{% block body %}
+    {% include 'droplist/list' with {imageList:imageList} %}
+    <button class="screenshot-list--switch-to-full-button js-more-droplist">Load all drops</button>
+{% endblock %}

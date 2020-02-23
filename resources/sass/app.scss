@@ -1,38 +1,8 @@
-@import "legacy/vendor/animate";
-@import "legacy/vendor/spectrum";
-@import "legacy/vendor/material-load";
-@import "legacy/vendor/jquery.modal";
-@import "~balloon-css";
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-@import "legacy/base/font-face";
-@import "legacy/base/variables";
-@import "legacy/base/form";
-@import "legacy/base/display";
-@import "legacy/base/base";
-@import "legacy/base/splitscreen";
+// Variables
+@import 'variables';
 
-@import "legacy/components/profile-menu";
-@import "legacy/components/modal";
-@import "legacy/components/header";
-@import "legacy/components/content";
-@import "legacy/components/feed-list";
-@import "legacy/components/weather";
-@import "legacy/components/checklist";
-@import "legacy/components/footer";
-
-@import "legacy/components/widget";
-@import "legacy/components/widget/note";
-@import "legacy/components/widget/custom-items";
-@import "legacy/components/widget/checklist";
-@import "legacy/components/widget/tabs";
-@import "legacy/components/screenshot-list";
-@import "legacy/components/icon-list";
-
-@import "legacy/pages/index";
-@import "legacy/pages/multitab";
-@import "legacy/pages/homepage";
-@import "legacy/pages/screensaver";
-@import "legacy/pages/iframe-nolink";
-@import "legacy/pages/settings";
-@import "legacy/pages/chrome-import";
-@import "legacy/pages/login";
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';

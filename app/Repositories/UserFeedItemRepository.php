@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Models\UserFeedItem;
 use App\Repositories\Interfaces\RepositoryInterface;
 use App\Models\Note;
 use Illuminate\Database\Eloquent\Model;

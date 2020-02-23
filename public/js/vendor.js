@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -27178,14 +27178,14 @@ new wowjs__WEBPACK_IMPORTED_MODULE_0__["WOW"]({
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!**************************************!*\
   !*** multi ./resources/js/vendor.js ***!
   \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/xampp/htdocs/feednews/resources/js/vendor.js */"./resources/js/vendor.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\feednews\resources\js\vendor.js */"./resources/js/vendor.js");
 
 
 /***/ })

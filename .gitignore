@@ -1,20 +1,12 @@
-/.env
-/.idea
-/public/bundles/
-/var/
-/vendor/
-/node_modules/
-!/public/build/
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
 npm-debug.log
 yarn-error.log
-.phpunit
-/phpunit.xml
-/.web-server-pid
-/.build
-/public/.htaccess
-
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-npm-debug.log
-yarn-error.log
-###< symfony/webpack-encore-bundle ###

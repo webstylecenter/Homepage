@@ -1,0 +1,26 @@
+.totalbar {
+  .searchResults {
+    position: fixed;
+    top:30px;
+    right:50px;
+    width:400px;
+    border:1px solid gray;
+    background-color:white;
+    border-radius:4px;
+    opacity: 0.8;
+    z-index:999;
+    display:none;
+    .used {
+      .title {
+        color:black;
+      }
+    }
+    .jscroll-next {
+      display:none;
+    }
+    .title {
+      width:350px;
+    }
+  }
+}
+

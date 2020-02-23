@@ -1,0 +1,14 @@
+/.env
+/.idea
+/public/bundles/
+/var/
+/vendor/
+/node_modules/
+!/public/build/
+npm-debug.log
+yarn-error.log
+.phpunit
+/phpunit.xml
+/.web-server-pid
+/.build
+/public/.htaccess

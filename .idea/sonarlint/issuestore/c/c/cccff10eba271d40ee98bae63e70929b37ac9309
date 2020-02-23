@@ -1,8 +1,0 @@
-
-2	php:S1116Œ"Remove this empty statement.(’úÑˆ
-[	php:S1192\"FDefine a constant instead of duplicating this literal "error" 4 times.(üë„¸
-\	php:S1192\"GDefine a constant instead of duplicating this literal "status" 9 times.(üë„¸
-`	php:S1192c"FDefine a constant instead of duplicating this literal "color" 4 times.(ÿÇÑÂøÿÿÿÿ
-d	php:S1142W"OReduce the number of returns of this function 4, down to the maximum allowed 3.(Ø•î÷
-]	php:S1192]"HDefine a constant instead of duplicating this literal "message" 5 times.(‹¿ğŠ
-]	php:S1192{"HDefine a constant instead of duplicating this literal "success" 4 times.(Èå‡İ

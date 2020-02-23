@@ -1,0 +1,63 @@
+html { box-sizing: border-box; }
+html *,
+html *:before,
+html *:after { box-sizing: inherit; }
+
+body {
+  font-size: 10pt;
+  font-family: $font-default;
+  font-weight: 300;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+
+.background {
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+  filter: blur(10px);
+  z-index: -2;
+}
+
+.js-settings-remove-feed {
+  border: 0;
+  background: transparent;
+}
+
+.hide {
+  display: none;
+}
+
+.wow {
+  visibility: hidden;
+}
+
+.show-if-mobile {
+  @include respond-to(mobile) {
+    display: inline-block !important;
+  }
+}
+
+.show-if-desktop {
+  @include respond-to(desktop) {
+    display: inline-block !important;
+  }
+}
+
+.show-if-tablet {
+  @include respond-to(tablet) {
+    display: inline-block !important;
+  }
+}

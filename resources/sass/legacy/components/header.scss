@@ -1,0 +1,138 @@
+.header--bar {
+  transition: background-color 1500ms;
+  background-color: $blue;
+  box-sizing: border-box;
+  height: $header-height;
+  z-index: 900;
+  color: rgba(255, 255, 255, 0.8);
+
+  .fa {
+    font-size: 1.5em;
+
+    @include  respond-to('mobile') {
+      font-size: 1.3em;
+    }
+  }
+
+  > div {
+    display: inline-block;
+  }
+
+  &-site {
+    .title {
+      padding: 10px;
+
+      &--back {
+        display: none;
+      }
+    }
+  }
+  &-actions {
+    float: right;
+
+    span {
+      display: inline-block;
+      margin-top: 8px;
+
+      span {
+        margin-top: 0;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: white;
+      }
+    }
+
+    > * {
+      margin-left: 30px;
+    }
+  }
+
+  &-calendar-icon {
+    display: inline-block;
+  }
+
+  &-calendar-view {
+    z-index: 9999999;
+    position: fixed;
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow:  2px 2px 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 5px;
+    margin-left: -400px;
+    display: none;
+  }
+
+  &-weather-icon {
+    display: inline-block;
+
+    .temperature {
+      position: relative;
+      top: -1px;
+      left: 10px;
+    }
+  }
+
+  &-weather-radar {
+    z-index: 9999999;
+    position: fixed;
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow:  2px 2px 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 3px 3px 0 3px;
+    margin-left: -200px;
+    display: none;
+
+    img {
+      border-radius: 15px;
+    }
+
+    &-overview{
+      color: $blue;
+
+      .weather--current {
+        display: none;
+      }
+      .weather--forecast {
+        text-align: center;
+        width: 100%;
+      }
+      .icon_rain {
+        background-image: url('/images/rain-blue.png');
+      }
+      .icon_cloud {
+        background-image: url('/images/cloud-blue.png');
+      }
+      .icon_partly_cloud {
+        background-image: url('/images/partly_cloud-blue.png');
+      }
+      .icon_snow {
+        background-image: url('/images/snow-blue.png');
+      }
+      .icon_sun {
+        background-image: url('/images/sun-blue.png');
+      }
+      .icon_thunderstorm {
+        background-image: url('/images/thunder-blue.png');
+      }
+
+    }
+  }
+
+  .action-user {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    margin-left: 20px;
+    padding: 12px 50px 9px 50px;
+    text-transform: capitalize;
+    display: inline-block;
+
+    &:hover {
+      cursor: pointer;
+     // background-color: rgba(0, 0, 0, 0.6);
+    }
+  }
+}

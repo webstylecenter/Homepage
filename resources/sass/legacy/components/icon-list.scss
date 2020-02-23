@@ -1,0 +1,24 @@
+.iconSelector {
+
+  .iconlist {
+    overflow-y: auto;
+    height: 250px;
+  }
+
+  span {
+    margin: 0;
+  }
+
+  button {
+    margin-top: 16px;
+  }
+
+  .fa {
+    font-size: 18pt;
+
+    &:hover {
+      cursor: pointer;
+      color: $blue;
+    }
+  }
+}

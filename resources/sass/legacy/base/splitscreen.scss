@@ -1,0 +1,57 @@
+.splitscreen {
+  font-size: 12pt;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+  grid-template-areas: "left right";
+  width: 100vw;
+  height: 100vh;
+
+  @include respond-to(mobile) {
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-template-areas: "right"
+    "left";
+    height: auto;
+  }
+
+  .side {
+    padding: 50px;
+    display: grid;
+    align-items: center;
+  }
+
+  .left {
+    grid-area: left;
+    background-color: $blue;
+    color: white;
+
+    img {
+      width: 100%;
+    }
+
+    a {
+      color: white;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .right {
+    z-index: 1;
+    grid-area: right;
+    background-color: white;
+    color: black;
+
+    overflow-y: auto;
+
+    a {
+      color: $blue;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,0 +1,120 @@
+.tabs {
+  position: fixed;
+  top: $header-height + $tab-height;
+  left: 0;
+  width: $sidebar-width;
+  bottom: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #f7f7f7;
+
+  .tab {
+    display: none;
+    transition: all 200ms ease;
+
+    &--recent {
+      display: block;
+    }
+
+    &--search {
+      input {
+        box-shadow: 1px 0 1px rgba(0, 0, 0, 0.3);
+        background-color: #e6e6e6;
+        border: 0;
+        border-radius: 0;
+        font-size: 14pt;
+        width: 100%;
+        padding: 10px 20px;
+        margin-bottom: 0;
+      }
+
+    }
+  }
+
+  @include respond-to(mobile) {
+    top: $header-height;
+    bottom: $mobile-bottom-height;
+    width: 100%;
+  }
+
+  @include respond-to(tablet) {
+    width: 35%;
+  }
+}
+
+.tabBar {
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  height: 37px;
+  box-sizing: border-box;
+  background-color: #e6e6e6;
+  text-align: center;
+  padding-top: 5px;
+  width: $sidebar-width;
+  box-shadow: 1px 0 1px rgba(0, 0, 0, 0.1);
+
+  button {
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    border-radius: 25px;
+    padding: 5px 10px;
+    margin: 0 10px;
+    color: rgba(0, 0, 0, 0.6);
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+    &:active {
+      background-color: rgba(0, 0, 0, 0.3);
+      color: white;
+    }
+  }
+  .active {
+    color: $blue;
+  }
+
+  @include respond-to(tablet) {
+    width: 35%;
+
+    button {
+      padding: 5px;
+      margin: 0 3px;
+    }
+  }
+
+  @include respond-to(mobile) {
+    width: 100%;
+    height: $tab-mobile-height;
+    top: auto;
+    bottom: $footer-height;
+    padding-top: 10px;
+
+    button {
+      padding: 10px 20px;
+      font-size: 12pt;
+
+      @media only screen and (max-width: 500px) {
+        margin: 0px 5px;
+        padding: 10px 7px;
+      }
+    }
+  }
+}
+
+.tabBar.darkTheme {
+  background-color: #1a1a1a;
+
+  button {
+    color: #828282;
+  }
+
+  .active {
+    color: $blue;
+  }
+}
+.tabs.darkTheme {
+  background-color: #1a1a1a;
+}

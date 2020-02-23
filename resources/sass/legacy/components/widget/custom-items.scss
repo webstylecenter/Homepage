@@ -1,0 +1,46 @@
+.widget-custom-items {
+  width: 30%;
+  display: inline-block;
+
+  h2 {
+    color: $blue;
+    margin-bottom: 10px;
+  }
+}
+.widget-custom-item {
+    width: 100%;
+    overflow: hidden;
+    height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 5px 5px;
+    margin: 2px 5px;
+    display: block;
+
+    &:hover {
+      background-color: rgba(256, 256, 256, 0.9);
+      cursor: pointer;
+    }
+
+    span {
+      font-weight: lighter;
+      color: #292929;
+      opacity: 0.5;
+    }
+}
+
+.quickjump {
+  display: block;
+  position: fixed;
+  top: 40vh;
+  right: 0;
+  width: 150px;
+  background-color: whitesmoke;
+  padding: 10px;
+
+  a {
+    color: $blue;
+    display:block;
+    margin-bottom: 5px;
+  }
+}

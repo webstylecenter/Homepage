@@ -1,0 +1,254 @@
+.page--settings {
+
+  .content-left {
+    float: left;
+    width: 39%;
+    box-sizing: border-box;
+
+    @include respond-to(mobile) {
+      display: block;
+      width: 100%;
+      float: none;
+    }
+  }
+
+  .content-right {
+    width: 59%;
+    box-sizing: border-box;
+    float: right;
+
+    @include respond-to(mobile) {
+      display: block;
+      float: none;
+      width: 100%;
+    }
+  }
+
+  .refreshNotice {
+    color: $blue;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: none;
+  }
+
+  a {
+    color: $blue;
+  }
+
+  .button {
+    background-color: $blue;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    padding: 3px 5px;
+    float: right;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .settingsContainer {
+    margin:auto;
+    padding: 20px 10% 20px 10%;
+    position: fixed;
+    top: 20vh;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+  }
+
+  h1 {
+    color: $blue;
+    font-weight: lighter;
+    margin: 10px 0 0 0;
+    border: 0;
+    padding: 0;
+  }
+
+  .forms, .userFeeds {
+    display: block;
+    clear: both;
+  }
+
+  .form {
+    border-radius: 15px;
+    padding: 10px;
+    margin: 0 20px 50px 0;
+    display: block;
+
+
+    input {
+      font-size: 12pt;
+      margin-bottom: 20px;
+    }
+
+    input[type=text], select {
+      border: 0;
+      background-color: #e5e5e5;
+      padding: 3px 5px;
+      width:300px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .websiteurl {
+      width: 286px !important;
+    }
+
+    input[type=submit] {
+      background-color: $blue;
+      border: 0;
+      border-radius: 15px;
+      padding: 10px 30px;
+      color: white;
+      margin-top: -40px;
+      margin-right: 10px;
+      float: right;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    margin-bottom: 50px;
+    border-spacing: 0;
+
+    td {
+      margin: 0;
+      padding: 5px 10px;
+      font-size: 12pt;
+
+      @include respond-to(mobile) {
+        font-size: 10pt;
+      }
+    }
+
+    tr:nth-child(even) {
+
+      td:first-child {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+      }
+      td:last-child {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+
+      background-color: rgba(215, 215, 215, 0.8);
+    }
+
+    tr:nth-child(odd) {
+      background-color: rgba(256, 256, 256, 0.9);
+    }
+
+    tr:hover {
+      background-color: rgba(127, 182, 255, 0.4);
+
+      td:first-child {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+      }
+      td:last-child {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+    }
+
+    .removed {
+      opacity: 0.2;
+    }
+
+    .feedColor {
+      width: 45px;
+    }
+
+    .feedIcon {
+      cursor: pointer;
+
+      &:hover {
+        color: $blue;
+      }
+    }
+
+    .emptyIcon {
+      color: #cecece;
+      &:hover {
+        color: $blue;
+      }
+    }
+
+    .feedName {
+      width: 78%;
+      padding: 8px;
+    }
+
+    .feedUrl {
+      color: gray;
+      font-style:italic;
+      overflow:hidden;
+      overflow-wrap: break-word;
+      max-width:400px;
+      white-space:nowrap;
+      text-overflow: ellipsis;
+
+      a {
+        color: gray;
+      }
+    }
+
+    .feedAmount {
+      width: 10%;
+      text-align: right;
+    }
+
+    .feedLastUpdate {
+      width: 10%;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .feedActions {
+      width: 10%;
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+
+  .admin {
+    table {
+      th {
+        text-align: left;
+        padding: 0 10px;
+      }
+    }
+  }
+}
+
+.preferences {
+  table {
+    max-width: 1000px;
+
+    tr {
+      td {
+        &:nth-child(1) {
+          width: 300px;
+        }
+        &:nth-child(2) {
+          width: 300px;
+        }
+        &:nth-child(3) {
+          width: 200px;
+        }
+
+        input {
+          font-size: 12pt;
+        }
+      }
+    }
+  }
+}

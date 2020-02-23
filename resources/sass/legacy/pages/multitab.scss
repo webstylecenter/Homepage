@@ -1,0 +1,107 @@
+.page--multi-tab {
+
+  .mainContent {
+    width: 80%;
+    margin: 30px auto;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height:20vh;
+    background-image: url('/screensaver/images/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #b1b1b1;
+    z-index:9;
+
+    @include  respond-to('mobile') {
+      .weather {
+        display: none;
+      }
+    }
+
+    h1 {
+      position: relative;
+      left: 10%;
+      right: 10%;
+      top: 4vh;
+      font-size: 38pt;
+      color: white;
+
+      @include  respond-to('mobile') {
+        top: -1vh;
+      }
+    }
+  }
+
+  nav {
+    position:fixed;
+    top: 20vh;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 14pt;
+    background-color: whitesmoke;
+    padding: 20px;
+    z-index: 5;
+
+    span {
+      margin:0 10px;
+
+      &:hover {
+        border-bottom: 1px solid $blue;
+        cursor: pointer;
+      }
+
+      &.active {
+        color: $blue;
+        border-bottom: 1px solid $blue;
+      }
+    }
+  }
+
+  .widgets {
+    position: fixed;
+    top: 20vh;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+    margin-top: 62px;
+  }
+
+  &-background {
+
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+    z-index: -2;
+  }
+
+  .view {
+    display:none;
+    position: fixed;
+    top: 20vh;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+    margin-top: 62px;
+    padding: 50px;
+
+    @include  respond-to('mobile') {
+      padding: 16px;
+    }
+  }
+
+  .active-view {
+    display: block;
+  }
+
+}

@@ -1,0 +1,51 @@
+.footer--bar {
+  color: whitesmoke;
+  text-align: center;
+  background: $blue;
+  font-size: 1.8em;
+  padding: 10px;
+  box-sizing: border-box;
+
+  .defaultView {
+    .grid-container {
+      display: grid;
+      grid-template-columns: 120px auto;
+      grid-template-areas: "large small";
+    }
+  }
+
+  .pageView {
+    display: none;
+    .grid-container {
+      display: grid;
+      grid-template-columns: 160px auto;
+      grid-template-areas: "large small";
+    }
+  }
+
+  .first {
+    grid-area: large;
+  }
+  .other {
+    grid-area: small;
+  }
+
+  span {
+    margin: 0 18px;
+    display: inline-block;
+  }
+
+  &-weather-icon {
+
+    margin: 0 0 0 10px !important;
+
+    span {
+      font-size: 16pt;
+      margin: 0;
+    }
+
+    .temperature {
+      left: 0;
+    }
+  }
+}

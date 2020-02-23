@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class FeedItem extends Model
+class FeedItem extends AbstractModel
 {
     /**
      * @var string $table

@@ -1,0 +1,35 @@
+.show-if-mobile {
+  @include respond-to(mobile) {
+    display: inline-block !important;
+  }
+}
+
+.show-if-desktop {
+  @include respond-to(desktop) {
+    display: inline-block !important;
+  }
+}
+
+.show-if-tablet {
+  @include respond-to(tablet) {
+    display: inline-block !important;
+  }
+}
+
+.hide-if-mobile {
+  @include respond-to(mobile) {
+    display: none !important;
+  }
+}
+
+.hide-if-desktop {
+  @include respond-to(desktop) {
+    display: none !important;
+  }
+}
+
+.hide-if-tablet {
+  @include respond-to(tablet) {
+    display: none !important;
+  }
+}

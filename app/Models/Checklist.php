@@ -3,10 +3,9 @@
 namespace App\Models;
 
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Checklist extends Model
+class Checklist extends AbstractModel
 {
     /**
      * @var string $table

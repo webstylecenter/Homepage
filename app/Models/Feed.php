@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Feed extends Model
+class Feed extends AbstractModel
 {
     /**
      * @var string $table

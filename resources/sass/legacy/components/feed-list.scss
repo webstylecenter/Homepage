@@ -1,0 +1,192 @@
+.feed-list {
+  color: black;
+  background: #f7f7f7;
+  width: $sidebar-width;
+  position: fixed;
+  top: $header-height-with-tabs;
+  bottom: 0px;
+  overflow-y: auto;
+
+  &--separator {
+    padding: 10px;
+    text-align: center;
+    border-left: 5px solid lightgray;
+    color: $blue;
+  }
+
+  .jscroll-next {
+    display: none;
+  }
+
+  .noFeedItems {
+    padding: 10px;
+  }
+
+  @include respond-to(mobile) {
+    top: $header-height;
+    bottom: $mobile-bottom-height;
+    width: 100%;
+  }
+
+  @include respond-to(tablet) {
+    width: 35%;
+  }
+
+  .hidden-pinned-item {
+    display: none;
+  }
+
+  .hidden-feed-items {
+    border-left: 5px solid gray;
+    position: relative;
+    transition: all 200ms ease;
+    padding: 10px;
+    background-color: rgba(197, 197, 197, 0.5);
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(113, 113, 113, 0.5);
+    }
+  }
+}
+
+.feed-list-item {
+  padding: 10px;
+  border-left: 5px solid #ffbe3f;
+  position: relative;
+  transition: all 200ms ease;
+
+  &:nth-child(odd) {
+    background: rgba(123, 123, 123, 0.05);
+  }
+
+  &:hover {
+    background-color: rgba(256, 256, 256, 0.6);
+    cursor: pointer;
+    .pin {
+      visibility: visible;
+      color: red;
+    }
+    .pip {
+      visibility: visible;
+      :hover {
+        color: red;
+      }
+    }
+  }
+
+  &--state-button {
+    border-left: 5px solid black;
+    padding: 10px;
+    background: linear-gradient(to right, #f5f5f5 0%, #e3e3e3 100%);
+    border-bottom: 1px solid gray;
+    cursor: pointer;
+
+    &:hover {
+      background-color: white;
+      background: linear-gradient(to right, #f5f5f5 0%, #f4f4f4 100%);
+      cursor: pointer;
+    }
+  }
+
+  &--state-pinned {
+    .pin {
+      visibility: visible !important;
+      transform: rotate(45deg);
+    }
+  }
+
+  &--state-selected {
+    background: linear-gradient(to right, #eeeeee 0%, #aad3e0 100%);
+  }
+
+  .title {
+    font-family: "Lato", "Arial";
+    font-weight: 400;
+    width: 93%;
+    font-size: 12pt;
+    margin: 0;
+  }
+
+  .description {
+    color: #454545;
+    margin: 0;
+    color: #000;
+  }
+
+  .pin {
+    color: black;
+    visibility: hidden;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 0;
+    right: 0;
+    float: right;
+    font-size: 12pt;
+  }
+
+  .pip {
+    color: #c5c5c5;
+    visibility: hidden;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: -2px;
+    right: 3px;
+    float: right;
+    font-size: 12pt;
+  }
+
+  .feed-icon {
+    position: absolute;
+    box-sizing: border-box;
+    top: 13px;
+    left: 5px;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.hasIcon {
+  padding-left: 50px;
+}
+
+.darkTheme {
+  color: #a2a2a2;
+  &.feed-list {
+    color: #828282;
+    background-color: #1a1a1a;
+  }
+  .description {
+    color: #828282;
+  }
+  .feed-list-item:hover {
+    color: white;
+
+    .description {
+      color: #cccccc;
+    }
+  }
+
+  .weather--temperature, .weather--content, textarea, input {
+    color: #cccccc;
+  }
+
+  .weather--icon-small {
+    filter: invert(100%);
+  }
+
+  .pin {
+    color: #a2a2a2;
+  }
+}

@@ -1,0 +1,13 @@
+{% extends "base" %}
+
+{% block title %}{{ parent() }} - Checklist{% endblock %}
+
+{% block header %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+{% block body %}
+    <div class="checklist--parent">
+        {% include 'checklist/widget' with {'finished': finished, 'todos': todos} %}
+    </div>
+{% endblock %}

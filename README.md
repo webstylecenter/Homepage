@@ -49,18 +49,14 @@ Until our 2.0 release, some functionality may be added, changed or removed. At i
 
 
 # Installation
-Use the config.php.dist file in the app directory to create your config file. You need to set your database config and enter you openWeatherMap API key. This is a required step for now. To setup your database, use the db-structure.sql file located in the database folder.
-
-After saving your config, make sure to run the following commands from your terminal. Currently all commands need to run on both dev and production env. This will probably change in the future.
-
-- fill .env file with server settings
+Copy the .env.example file to .env and enter your database credentials, your openWeatherMap API key.
+```
 - composer install
-- bin/console doctrine:schema:create
-- bin/console fos:user:create
-
-If you want to change styling, also run:
+- php artisan migrate
+- php artisan db:seed (optional)
 - yarn install
-- yarn build
+- yarn run production
+```
 
 
 You need to set one cronjobs so the feed data can be imported. For DirectAdmin I've used:

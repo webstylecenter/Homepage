@@ -1,0 +1,14 @@
+{% extends "base" %}
+{% set hour = "now"|date("H") %}
+
+{% block title %}Feednews.me{% endblock %}
+
+{% block body %}
+    <div class="content-overlay"></div>
+    {% include 'home/components/header' %}
+    {% include 'home/components/profile-menu' %}
+    {% include 'home/components/container' %}
+    {% include 'home/components/mobile-view' %}
+    {% include 'home/components/handlebars' %}
+    {% include 'modals/create' %}
+{% endblock %}

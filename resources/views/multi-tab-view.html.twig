@@ -1,0 +1,24 @@
+{% extends "base" %}
+{% block body %}
+    <div class="page--multi-tab">
+        <div class="page--multi-tab-background"></div>
+        <div class="page--multi-tab-background--overlay"></div>
+
+        <header>
+            <h1>{% block headerTitle %}{% endblock %}</h1>
+            <div class="weather">
+                {% include 'widgets/weather' %}
+            </div>
+        </header>
+
+        <div class="mainContent">
+            <nav>
+                {% block tabs %}{% endblock %}
+            </nav>
+
+            <div class="views">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

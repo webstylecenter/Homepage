@@ -1,0 +1,43 @@
+.profileMenu {
+  position: fixed;
+  top: $header-height;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.96);
+  color: black;
+  z-index: 6;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+  display: none;
+
+  ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+
+    li {
+      list-style: none;
+    }
+  }
+
+  .logout {
+    margin-top: 5px;
+    border-top: 1px solid lightgrey;
+  }
+
+  span {
+    margin-right: 10px;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+    padding: 25px 24px;
+    display: block;
+    width: 200px;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      transition: all 200ms ease;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{% extends "base" %}
+
+{% block title %}{{ parent() }} - Screensaver{% endblock %}
+
+{% block header %}
+    <script type="text/javascript">
+        /** global: newsItems */
+        var newsItems = [];
+        {% for item in feedItems %}
+        newsItems.push([
+            "{{ item.feed.name }}",
+            "{{ item.title|striptags|e('js')  }}",
+            "{{ item.description|e('js') }}",
+            "{{ item.feed.color }}"
+        ]);
+        {% endfor %}
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="screensaver--background notActive"></div>
+    <div class="screensaver--background active"></div>
+    <div class="weather wow rollIn"></div>
+
+    <div class="screensaver--newsticker hideOnStart">
+        <div class="screensaver--newsticker-source hideOnStart" style="background-color:{{ feedItems|first.feed.color }};">
+            {{ feedItems|first.feed.name }}
+        </div>
+        <div class="screensaver--newsticker-title hideOnStart">
+            {{ feedItems|first.title }}<br />
+            <span>{{ feedItems|first.description }}</span>
+        </div>
+    </div>
+    <div class="screensaver--time hideOnStart">
+        {{ "now"|date("H:i") }}
+    </div>
+{% endblock %}

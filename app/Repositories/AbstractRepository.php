@@ -114,13 +114,13 @@ abstract class AbstractRepository implements RepositoryInterface
     }
 
     /**
-     * @param array $where
+     * @param string $key
+     * @param $value
      * @return Collection
-     * @throws \Exception
      */
-    public function where(array $where): Collection
+    public function where(string $key, $value): Collection
     {
-        return $this->model->where($where[0], $where[1])->get();
+        return $this->model->where($key, $value)->get();
     }
 
     /**

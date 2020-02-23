@@ -9,5 +9,5 @@ use App\Http\Controllers\Controller;
  */
 class HomepageController extends Controller
 {
-    protected FeedService $feedService;
+    protected Feed $feedService;
 }

@@ -1,13 +1,24 @@
 <?php
 declare(strict_types=1);
 
-use App\Http\Controllers\Controller;
+namespace App\Controllers;
+
+use Illuminate\Routing\Controller;
+use Collective\Annotations\Routing\Annotations\Annotations\Get;
+use Collective\Annotations\Routing\Annotations\Annotations\Middleware;
+use Illuminate\View\View;
 
 /**
- * Class HomepageController
- * @\Collective\Annotations\Routing\Annotations\Annotations\Controller(prefix="/")
+ * @Controller(prefix="/")
  */
 class HomepageController extends Controller
 {
-    protected Feed $feedService;
+    /**
+     * @Get("/", as="homepage")
+     * @return View
+     */
+    public function index(): View
+    {
+        return view('index');
+    }
 }

@@ -10,3 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+
+//Route::get('/home', function() {
+//    return view('home');
+//})->name('home')->middleware('auth');

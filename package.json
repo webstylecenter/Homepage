@@ -1,9 +1,9 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.28.0",
-        "core-js": "^3.0.0",
-        "regenerator-runtime": "^0.13.2",
-        "webpack-notifier": "^1.6.0"
+        "@symfony/webpack-encore": "^0.30.2",
+        "core-js": "^3.6.5",
+        "regenerator-runtime": "^0.13.7",
+        "webpack-notifier": "^1.8.0"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -14,17 +14,17 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "balloon-css": "^1.0.3",
-        "fluent-reveal-effect": "^1.0.0",
-        "handlebars": "^4.3.0",
-        "jquery": "^3.5.0",
+        "balloon-css": "^1.2.0",
+        "fluent-reveal-effect": "^1.1.1",
+        "handlebars": "^4.7.6",
+        "jquery": "^3.5.1",
         "jquery-hammerjs": "^2.0.0",
         "jquery-jscroll": "^0.0.2",
         "jquery-modal": "^0.9.2",
         "jquery-ui": "^1.12.1",
-        "node-sass": "^4.12.0",
-        "sass-loader": "^7.2.0",
-        "spectrum-colorpicker": "^1.8.0",
+        "node-sass": "^4.14.1",
+        "sass-loader": "^10.0.1",
+        "spectrum-colorpicker": "^1.8.1",
         "wowjs": "^1.1.3"
     }
 }

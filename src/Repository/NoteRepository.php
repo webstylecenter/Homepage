@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Note;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -15,7 +16,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class NoteRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Note::class);
     }

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\UserFeedItem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,7 +18,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class UserFeedItemRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserFeedItem::class);
     }

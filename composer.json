@@ -7,7 +7,7 @@
         "cocur/slugify": "^3.1",
         "friendsofsymfony/user-bundle": "~2.0",
         "fzaninotto/faker": "^1.7",
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": "^7.1",
         "mobiledetect/mobiledetectlib": "^2.8",
         "sensio/framework-extra-bundle": "^5.1",
         "sentry/sentry": "^1.9",

@@ -1,4 +1,7 @@
 #  FeedNews.me
+
+### This project is currently transitioning to a Laravel based project. A migration files between this and that project will not be made, however, most of the data can be easily restored with a manual touch. Look for the FeedNews repository for the latest news.
+
 ![alt text](https://www.petervdam.nl/storage/app/media/FeedNewsPreview.png)
 A powerful dashboard tool to keep track of your favorite news sites, daily tasks, reminders, and so much more. FeedNews.me, previously called "It's my Homepage" brings you a site that you can set as startpage of your browser, or use Electron to run it as an app. I personally use it all day, with my news sources like Neowin, iDownloadblog and many more next to my Youtube subscriptions, todo-list and weather updates all in one place.
 
